@@ -19,7 +19,7 @@ cc_lookup <- .init_cc()
 
 #' Get ISO country code
 #'
-#' @param country vector of country names to retrieve ISO country codes for
+#' @param country vector of country names
 #' @return vector of ISO country codes (NA where not found)
 #' @export
 get_cc <- function(country) {
@@ -37,8 +37,8 @@ get_cc <- function(country) {
 
 #' Check ISO country code
 #'
-#' @param country vector of country codes to check
-#' @return logical vector flagging which records are valid ISO country codes
+#' @param country vector of ISO country codes
+#' @return logical vector flagging which elements are valid ISO country codes
 #' @export
 check_cc <- function(country) {
   country %in% cc_lookup

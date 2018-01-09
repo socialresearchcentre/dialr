@@ -23,4 +23,3 @@ logical vector flagging valid and invalid phone numbers
 \description{
 Check if a phone number is valid for a given region
 }
-

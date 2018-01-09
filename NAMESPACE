@@ -2,6 +2,7 @@
 
 export(check_cc)
 export(get_cc)
+export(ph_example)
 export(ph_format)
 export(ph_parse)
 export(ph_possible)
@@ -10,3 +11,4 @@ export(ph_type)
 export(ph_valid)
 import(rJava)
 import(stringr)
+import(xml2)

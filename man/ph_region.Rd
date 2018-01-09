@@ -2,7 +2,7 @@
 % Please edit documentation in R/phoneNumberUtil.R
 \name{ph_region}
 \alias{ph_region}
-\title{Retrieve rgion for phone number}
+\title{Retrieve region for phone number}
 \usage{
 ph_region(phone, country)
 }
@@ -16,6 +16,5 @@ region code is used for all phone numbers.}
 character vector containing the country code for each phone number.
 }
 \description{
-Retrieve rgion for phone number
+Retrieve region for phone number
 }
-

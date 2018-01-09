@@ -43,4 +43,3 @@ check than isValidNumber(PhoneNumber) in the following sense:
         subscriber-number-only version.
 }
 }
-
