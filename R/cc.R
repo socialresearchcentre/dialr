@@ -1,22 +1,4 @@
 
-#' Initialise country code lookup table
-#'
-#' @return Named vector of country names with corresponding ISO country code
-.init_cc <- function () {
-  cc_file <- system.file("extdata",
-                         "cc.csv",
-                         package="dialr")
-
-  cc_data <- read.csv(cc_file, stringsAsFactors = FALSE)
-
-  cc_lookup <- toupper(cc_data$code)
-  names(cc_lookup) <- toupper(cc_data$country)
-
-  cc_lookup
-}
-
-cc_lookup <- .init_cc()
-
 #' Get ISO country code
 #'
 #' @param country vector of country names
@@ -44,8 +26,8 @@ check_cc <- function(country) {
   country %in% cc_lookup
 }
 
-#' internal country code existence check
-.validate_cc <- function(country) {
+# internal country code existence check - throws error if not found
+validate_cc <- function(country) {
   chk <- check_cc(country)
   if (any(!chk)) stop("invalid country codes: ",
                       paste0(unique(country[!chk]), collapse = ", "),

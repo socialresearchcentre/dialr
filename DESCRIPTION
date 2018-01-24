@@ -1,7 +1,7 @@
 Package: dialr
 Title: Phone number validation in R
 Description: dialr is an R interface to Google's libphonenumber library.
-Version: 0.0.0.9004
+Version: 0.1.0
 Authors@R: c(
     person("Danny", "Smith", email="danny@gorcha.org", role=c("aut", "cre")),
     person("The Social Research Centre", role = "cph")
