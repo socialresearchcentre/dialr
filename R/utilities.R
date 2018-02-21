@@ -44,7 +44,7 @@
 #' @import rJava
 .onAttach <- function(libname, pkgname) {
   # check for libphonenumber updates
-  .update_libphonenumber()
+  # --disabled, not working-- .update_libphonenumber()
   
   .jpackage(pkgname)  # needed to load RInterface.java
   
