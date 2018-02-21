@@ -66,7 +66,7 @@ phone_reparse <- function(x) {
 #' @export
 print.phone <- function(x, ...) {
   cat("# Parsed phone numbers: ",
-      length(x), " total",
+      length(x), " total\n",
       # length(x), " total, ",
       # sum(is_valid(x)), " valid\n",
       sep = "")
