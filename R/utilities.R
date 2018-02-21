@@ -7,6 +7,7 @@
   jar_file <- list.files(system.file("java", package = "dialr"), ".*.jar$")
 
   current <- str_replace(jar_file, "^libphonenumber-(.*).jar$", "\\1")
+  if (length(current) == 0) current <- "none"
 
   latest <- read_xml("http://repo1.maven.org/maven2/com/googlecode/libphonenumber/libphonenumber/maven-metadata.xml") %>%
     xml_find_first("//latest") %>%
@@ -25,6 +26,19 @@
     message("dialr: up to date!")
   },
   error = function(e) { message("dialr: libphonenumber update failed, continuing with version ", current) })
+}
+
+.onLoad <- function(libname, pkgname) {
+  op <- options()
+  op.dialr <- list(
+    dialr.name = "DIALR",
+    dialr.home = "AU",
+    dialr.format = "NATIONAL"
+  )
+  toset <- !(names(op.dialr) %in% names(op))
+  if(any(toset)) options(op.dialr[toset])
+  
+  invisible()
 }
 
 #' @import rJava
