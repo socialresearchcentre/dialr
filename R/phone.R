@@ -7,47 +7,72 @@ phone <- function(phone, country) {
   phone_util <- .get_phoneNumberUtil()
   
   phone <- as.character(phone)
-
+  
   out <- structure(
-    phone,
-    country = country,
-    jobj = mapply(
+    mapply(
       function(p, c) {
         pn <- tryCatch({
           phone_util$parseAndKeepRawInput(p, c)
         }, error = function(e) {
           return(NULL)
         })
-        if (is.null(pn)) return(NA)
-        pn
+        if (is.null(pn))
+          pn <- NA
+        else
+          .jcache(pn)
+        
+        list(raw = p,
+             country = c,
+             jobj = pn)
       },
       phone, country,
-      SIMPLIFY = TRUE
+      SIMPLIFY = FALSE
     ),
     class = "phone"
   )
-
-  names(attr(out, "jobj")) <- NULL
+  
+  names(out) <- NULL
   out
 }
 
 #' @export
+phone_reparse <- function(x) {
+  if (!is.phone(x)) stop("Phone should be a vector of class `phone`")
+  phone_util <- .get_phoneNumberUtil()
+  
+  structure(
+    lapply(x, function(d) {
+      if (is.jnull(d$jobj)) {
+        phone_util <- .get_phoneNumberUtil()
+        pn <- tryCatch({
+          phone_util$parseAndKeepRawInput(d$raw, d$country)
+        }, error = function(e) {
+          return(NULL)
+        })
+        if (is.null(pn)) pn <- NA
+        d$jobj <- pn
+      }
+      d
+    }),
+    class = "phone"
+  )
+}
+
+#' @export
 `[.phone` <- function(x, ...) {
-  structure(NextMethod(),
-            country = `[`(attr(x, "country"), ...),
-            jobj = `[`(attr(x, "jobj"), ...),
-            class = "phone")
+  structure(NextMethod(), class = "phone")
 }
 
 #' @export
 print.phone <- function(x, ...) {
   cat("# Parsed phone numbers: ",
-      length(x), " total, ",
-      sum(is_valid(x)), " valid\n",
+      length(x), " total",
+      # length(x), " total, ",
+      # sum(is_valid(x)), " valid\n",
       sep = "")
   # print(table(get_region(x), get_type(x), useNA = "always"))
   
-  attributes(x) <- NULL
+  x <- vapply(x, function(x) { x$raw }, "")
   print.default(x, quote = FALSE)
   invisible()
 }
@@ -72,9 +97,13 @@ pillar_shaft.phone <- function(x, ...) {
 is.phone <- function(x) inherits(x, "phone")
 
 phone_apply <- function(x, fun) {
-  sapply(attr(x, "jobj"), function(d) {
-    if (!typeof(d) %in% "S4") return(NA)
-    fun(d)
+  sapply(x, function(d) {
+    # Re-parse if phone jobjs have expired (e.g. reloading a data frame from memory)
+    if (is.jnull(d$jobj)) stop("Your phone vector needs to be reparsed. ",
+                               "This is usually caused by loading a phone object from disk. ",
+                               "Please run `phone_reparse` on the vector to get it working again.")
+    if (!typeof(d$jobj) %in% "S4") return(NA)
+    fun(d$jobj)
   })
 }
 
