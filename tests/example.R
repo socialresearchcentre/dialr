@@ -9,6 +9,11 @@ x <- tibble(id = 1:4,
             phone2 = c("0393881234", 1234, "+12015550123", 0),
             country = c("AU", "AU", "AU", "AU"))
 
+z <- tibble(id = 1:1000,
+            phone1 = rep(c("0404753828", 0), times = 500),
+            country = rep("AU", times = 1000),
+            log = rep(c(TRUE, FALSE), times = 500))
+
 x %>%
   gather(col, val, phone1, phone2) %>%
   mutate(val = phone(val, country)) %>%
@@ -24,6 +29,7 @@ x %>%
 x %>% mutate_at(vars(matches("^phone")), funs(phone(., country))) %>% gather(col, val, phone1, phone2)
 
 x %<>% mutate_at(vars(matches("^phone")), funs(phone(., country)))
+z %<>% mutate_at(vars(matches("^phone")), funs(phone(., country)))
 
 save(x, file = "tests/pointer_test.RData")
 print(x$phone1)

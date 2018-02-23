@@ -8,9 +8,11 @@ phone <- function(phone, country) {
   
   phone <- as.character(phone)
   
+  pb <- progress_estimated(length(phone))
   out <- structure(
     mapply(
       function(p, c) {
+        pb$tick()$print()
         pn <- tryCatch({
           phone_util$parseAndKeepRawInput(p, c)
         }, error = function(e) {
@@ -30,6 +32,7 @@ phone <- function(phone, country) {
     ),
     class = "phone"
   )
+  pb$stop()$print()
   
   names(out) <- NULL
   out
@@ -40,10 +43,11 @@ phone_reparse <- function(x) {
   if (!is.phone(x)) stop("Phone should be a vector of class `phone`")
   phone_util <- .get_phoneNumberUtil()
   
-  structure(
+  pb <- progress_estimated(length(x))
+  out <- structure(
     lapply(x, function(d) {
+      pb$tick()$print()
       if (is.jnull(d$jobj)) {
-        phone_util <- .get_phoneNumberUtil()
         pn <- tryCatch({
           phone_util$parseAndKeepRawInput(d$raw, d$country)
         }, error = function(e) {
@@ -56,6 +60,8 @@ phone_reparse <- function(x) {
     }),
     class = "phone"
   )
+  pb$stop()$print()
+  out
 }
 
 #' @export
@@ -64,16 +70,23 @@ phone_reparse <- function(x) {
 }
 
 #' @export
-print.phone <- function(x, ...) {
+print.phone <- function(x, n = 10, ...) {
+  tot <- length(x)
+
   cat("# Parsed phone numbers: ",
-      length(x), " total\n",
-      # length(x), " total, ",
-      # sum(is_valid(x)), " valid\n",
+      tot, " total, ",
+      sum(is_parsed(x)), " successfully parsed",
       sep = "")
-  # print(table(get_region(x), get_type(x), useNA = "always"))
-  
+
   x <- vapply(x, function(x) { x$raw }, "")
-  print.default(x, quote = FALSE)
+  if (tot > n) {
+    cat(" (showing first ", n, ")\n")
+    print.default(head(x, n = n), quote = FALSE)
+  } else {
+    cat("\n")
+    print.default(x, quote = FALSE)
+  }
+  
   invisible()
 }
 
@@ -97,7 +110,9 @@ pillar_shaft.phone <- function(x, ...) {
 is.phone <- function(x) inherits(x, "phone")
 
 phone_apply <- function(x, fun) {
-  sapply(x, function(d) {
+  pb <- progress_estimated(length(x))
+  out <- sapply(x, function(d) {
+    pb$tick()$print()
     # Re-parse if phone jobjs have expired (e.g. reloading a data frame from memory)
     if (is.jnull(d$jobj)) stop("Your phone vector needs to be reparsed. ",
                                "This is usually caused by loading a phone object from disk. ",
@@ -105,6 +120,8 @@ phone_apply <- function(x, fun) {
     if (!typeof(d$jobj) %in% "S4") return(NA)
     fun(d$jobj)
   })
+  pb$stop()$print()
+  out
 }
 
 #' @export
@@ -124,26 +141,31 @@ format.phone <- function(x, format = "NATIONAL", home = NULL, clean = TRUE, stri
   out
 }
 
-# #' @export
-# summary.phone <- function(object, ...) {
-#   cat("<Parsed phone number field>\n", sep = "")
-#   out <- c(Numbers = length(object), Valid = sum(is_valid(object)))
-#   class(out) <- "table"
-#   print(out)
-# 
-#   print(table(get_region(x$phone1), get_type(x$phone1), useNA = "always"))
-#   
-#   invisible(NextMethod())
-# }
+#' @export
+summary.phone <- function(object, ...) {
+  out <- c(Class   = "dialr phone",
+           Numbers = length(object),
+           Parsed  = sum(is_parsed(object)))
+  class(out) <- c("table")
 
-# #' @export
-# as.character.phone <- function(x, raw = FALSE, ...) {
-#   if (raw) {
-#     NextMethod()
-#   } else {
-#     as.character.default(format(x, clean = T, ...))
-#   }
-# }
+  out
+}
+
+#' @export
+as.character.phone <- function(x, raw = TRUE, ...) {
+  if (raw) {
+    x <- vapply(x, function(x) { x$raw }, "")
+    NextMethod()
+  } else {
+    as.character.default(format(x, clean = T, ...))
+  }
+}
+
+#' @export
+is_parsed <- function(phone) {
+  if (!is.phone(phone)) stop("Phone should be a vector of class `phone`")
+  sapply(phone, function(pn) { typeof(pn$jobj) %in% "S4" })
+}
 
 #' @export
 is_valid <- function(phone) {
