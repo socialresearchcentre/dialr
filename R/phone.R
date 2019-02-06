@@ -70,6 +70,12 @@ phone_reparse <- function(x) {
 }
 
 #' @export
+`[<-.phone` <- function(x, i, value) {
+  if (!is.phone(value)) stop("Only `phone` class values can be inserted into a `phone` vector.")
+  NextMethod()
+}
+
+#' @export
 print.phone <- function(x, n = 10, ...) {
   tot <- length(x)
 
