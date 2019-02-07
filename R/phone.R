@@ -2,7 +2,7 @@
 #' @export
 phone <- function(phone, country) {
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
-  if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
+  if (length(phone) != length(country)) stop("`phone` and `country` vectors must be the same length.", call. = FALSE)
   validate_cc(country)
   phone_util <- .get_phoneNumberUtil()
   
@@ -40,7 +40,7 @@ phone <- function(phone, country) {
 
 #' @export
 phone_reparse <- function(x) {
-  if (!is.phone(x)) stop("Phone should be a vector of class `phone`")
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`.")
   phone_util <- .get_phoneNumberUtil()
   
   pb <- progress_estimated(length(x))
@@ -71,8 +71,19 @@ phone_reparse <- function(x) {
 
 #' @export
 `[<-.phone` <- function(x, i, value) {
-  if (!is.phone(value)) stop("Only `phone` class values can be inserted into a `phone` vector.")
+  if (!is.phone(value)) {
+    warning("Only `phone` class values can be inserted into a `phone` vector.\n",
+            "The value will be converted to `phone` class with default home country `", getOption("dialr.home"), "`.",
+            call. = FALSE)
+    value <- phone(value, getOption("dialr.home"))
+  }
+  
   NextMethod()
+}
+
+#' @export
+rep.phone <- function(x, ...) {
+  structure(NextMethod(), class = "phone")
 }
 
 #' @export
@@ -120,9 +131,9 @@ phone_apply <- function(x, fun) {
   out <- sapply(x, function(d) {
     pb$tick()$print()
     # Re-parse if phone jobjs have expired (e.g. reloading a data frame from memory)
-    if (is.jnull(d$jobj)) stop("Your phone vector needs to be reparsed. ",
-                               "This is usually caused by loading a phone object from disk. ",
-                               "Please run `phone_reparse` on the vector to get it working again.")
+    if (is.jnull(d$jobj)) stop("The `phone` vector in `x` needs to be reparsed. ",
+                               "This is usually caused by loading a `phone` object from disk. ",
+                               "Please run `phone_reparse()` on `x` to get it working again.")
     if (!typeof(d$jobj) %in% "S4") return(NA)
     fun(d$jobj)
   })
@@ -136,7 +147,7 @@ format.phone <- function(x, format = "NATIONAL", home = NULL, clean = TRUE, stri
   
   out <- phone_apply(x, function(pn) {
     if (is.null(home)) {
-      phone_util$format(pn, eval(parse(text=paste0("phone_util$PhoneNumberFormat$", format))))
+      phone_util$format(pn, eval(parse(text = paste0("phone_util$PhoneNumberFormat$", format))))
     } else {
       phone_util$formatOutOfCountryCallingNumber(pn, home)
     }
@@ -163,22 +174,22 @@ as.character.phone <- function(x, raw = TRUE, ...) {
     x <- vapply(x, function(x) { x$raw }, "")
     NextMethod()
   } else {
-    as.character.default(format(x, clean = T, ...))
+    as.character.default(format(x, clean = TRUE, ...))
   }
 }
 
 #' @export
-is_parsed <- function(phone) {
-  if (!is.phone(phone)) stop("Phone should be a vector of class `phone`")
-  sapply(phone, function(pn) { typeof(pn$jobj) %in% "S4" })
+is_parsed <- function(x) {
+  if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
+  sapply(x, function(pn) { typeof(pn$jobj) %in% "S4" })
 }
 
 #' @export
-is_valid <- function(phone) {
-  if (!is.phone(phone)) stop("Phone should be a vector of class `phone`")
+is_valid <- function(x) {
+  if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
   phone_util <- .get_phoneNumberUtil()
   
-  out <- phone_apply(phone, function(pn) {
+  out <- phone_apply(x, function(pn) {
     res <- phone_util$isValidNumber(pn)
   })
   out[is.na(out)] <- FALSE
@@ -187,11 +198,11 @@ is_valid <- function(phone) {
 }
 
 #' @export
-get_region <- function(phone) {
-  if (!is.phone(phone)) stop("Phone should be a vector of class `phone`")
+get_region <- function(x) {
+  if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
   phone_util <- .get_phoneNumberUtil()
   
-  out <- phone_apply(phone, function(pn) {
+  out <- phone_apply(x, function(pn) {
     res <- phone_util$getRegionCodeForNumber(pn)
     ifelse(is.null(res), NA, res)
   })
