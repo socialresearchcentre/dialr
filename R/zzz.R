@@ -1,12 +1,11 @@
 
 # check for updates to libphonenumber
-#' @import stringr
 #' @import xml2
 .update_libphonenumber <- function() {
   message("dialr: checking for latest version of libphonenumber")
   jar_file <- list.files(system.file("java", package = "dialr"), ".*.jar$")
 
-  current <- str_replace(jar_file, "^libphonenumber-(.*).jar$", "\\1")
+  current <- sub("^libphonenumber-(.*).jar$", "\\1", jar_file)
   if (length(current) == 0) current <- "none"
 
   latest <- read_xml("http://repo1.maven.org/maven2/com/googlecode/libphonenumber/libphonenumber/maven-metadata.xml") %>%
@@ -16,9 +15,9 @@
   tryCatch({
     if (current != latest) {
       message("dialr: updating libphonenumber from version ", current, " to ", latest)
-      download.file(str_c("http://repo1.maven.org/maven2/com/googlecode/libphonenumber/libphonenumber/",
-                          latest, "/libphonenumber-", latest, ".jar"),
-                    str_c(system.file("java", package = "dialr"), "/libphonenumber-", latest, ".jar"),
+      download.file(paste0("http://repo1.maven.org/maven2/com/googlecode/libphonenumber/libphonenumber/",
+                           latest, "/libphonenumber-", latest, ".jar"),
+                    paste0(system.file("java", package = "dialr"), "/libphonenumber-", latest, ".jar"),
                     quiet = TRUE)
       
       invisible(file.remove(system.file("java", jar_file, package = "dialr")))

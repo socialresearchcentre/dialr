@@ -157,7 +157,6 @@ ph_possible <- function(phone, country, detailed = FALSE) {
 
 
 #' @export
-#' @import stringr
 ph_format <- function(phone, country, format = "NATIONAL", home = NULL, clean = FALSE) {
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
@@ -182,7 +181,7 @@ ph_format <- function(phone, country, format = "NATIONAL", home = NULL, clean = 
   SIMPLIFY = TRUE)
 
   names(out) <- NULL
-  if (clean) out <- str_replace_all(out, "[^0-9]", "")
+  if (clean) out <- gsub("[^0-9]", "", out)
 
   out
 }
@@ -213,7 +212,6 @@ ph_type <- function(phone, country) {
 }
 
 #' @export
-#' @import stringr
 ph_example <- function(country, type = NULL, home = NULL, clean = FALSE) {
   if (length(type) > 1 & length(country) == 1) country <- rep(country, length(type))
   if (length(country) > 1 & length(type) == 1) type <- rep(type, length(country))
@@ -238,7 +236,7 @@ ph_example <- function(country, type = NULL, home = NULL, clean = FALSE) {
   SIMPLIFY = TRUE)
   
   names(out) <- NULL
-  if (clean) out <- str_replace_all(out, "[^0-9]", "")
+  if (clean) out <- gsub("[^0-9]", "", out)
   
   out
 }

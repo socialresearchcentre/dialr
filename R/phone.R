@@ -1,4 +1,5 @@
 
+#' @importFrom dplyr progress_estimated
 #' @export
 phone <- function(phone, country) {
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
@@ -152,7 +153,7 @@ format.phone <- function(x, format = "NATIONAL", home = NULL, clean = TRUE, stri
       phone_util$formatOutOfCountryCallingNumber(pn, home)
     }
   })
-  if (clean) out <- str_replace_all(out, "[^0-9]", "")
+  if (clean) out <- gsub("[^0-9]", "", out)
   if (strict) out[!is_valid(x)] <- NA
   
   out
