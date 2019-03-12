@@ -26,10 +26,10 @@ x %>%
   pull(val) %>%
   get_region
 
-x %>% mutate_at(vars(matches("^phone")), funs(phone(., country))) %>% gather(col, val, phone1, phone2)
+x %>% mutate_at(vars(matches("^phone")), ~phone(., country)) %>% gather(col, val, phone1, phone2)
 
-x %<>% mutate_at(vars(matches("^phone")), funs(phone(., country)))
-z %<>% mutate_at(vars(matches("^phone")), funs(phone(., country)))
+x %<>% mutate_at(vars(matches("^phone")), ~phone(., country))
+z %<>% mutate_at(vars(matches("^phone")), ~phone(., country))
 
 save(x, file = "tests/pointer_test.RData")
 print(x$phone1)
@@ -46,3 +46,4 @@ system.time(ph_valid(rep("0404753828", times = 10000), "AU"))
 system.time(get_region(y))
 system.time(get_type(y))
 system.time(format(y))
+
