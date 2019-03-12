@@ -46,7 +46,7 @@ phone_reparse <- function(x) {
   
   pb <- progress_estimated(length(x))
   out <- structure(
-    lapply(x, function(d) {
+    lapply(unclass(x), function(d) {
       pb$tick()$print()
       if (is.jnull(d$jobj)) {
         pn <- tryCatch({
@@ -71,6 +71,16 @@ phone_reparse <- function(x) {
 }
 
 #' @export
+`[[.phone` <- function(x, ...) {
+  `[`(x, ...)
+}
+
+#' @export
+`$.phone` <- function(x, ...) {
+  `[`(x, ...)
+}
+
+#' @export
 `[<-.phone` <- function(x, i, value) {
   if (!is.phone(value)) {
     warning("Only `phone` class values can be inserted into a `phone` vector.\n",
@@ -80,6 +90,38 @@ phone_reparse <- function(x) {
   }
   
   NextMethod()
+}
+
+#' @export
+`[[<-.phone` <- function(x, i, value) {
+  `[<-`(x, i, value)
+}
+
+#' @export
+`$<-.phone` <- function(x, i, value) {
+  `[<-`(x, i, value)
+}
+
+#' @export
+c.phone <- function(..., recursive = FALSE) {
+  out <- lapply(list(...), function(value) {
+    if (!is.phone(value)) {
+      warning("Only `phone` class values can be to a `phone` vector.\n",
+              "Atomic vectors will be converted to `phone` class with default home country `", getOption("dialr.home"), "`.\n",
+              "Other objects will be dropped.",
+              call. = FALSE)
+      
+      if (is.atomic(value))
+        value <- phone(value, getOption("dialr.home"))
+      else
+        value <- NULL
+      
+      value
+    }
+    value
+  })
+  
+  structure(unlist(c(lapply(out, unclass)), recursive = FALSE), class = "phone")
 }
 
 #' @export
@@ -96,7 +138,7 @@ print.phone <- function(x, n = 10, ...) {
       sum(is_parsed(x)), " successfully parsed",
       sep = "")
 
-  x <- vapply(x, function(x) { x$raw }, "")
+  x <- vapply(unclass(x), function(x) { x$raw }, "")
   if (tot > n) {
     cat(" (showing first ", n, ")\n")
     print.default(head(x, n = n), quote = FALSE)
@@ -129,7 +171,7 @@ is.phone <- function(x) inherits(x, "phone")
 
 phone_apply <- function(x, fun) {
   pb <- progress_estimated(length(x))
-  out <- sapply(x, function(d) {
+  out <- sapply(unclass(x), function(d) {
     pb$tick()$print()
     # Re-parse if phone jobjs have expired (e.g. reloading a data frame from memory)
     if (is.jnull(d$jobj)) stop("The `phone` vector in `x` needs to be reparsed. ",
@@ -172,7 +214,7 @@ summary.phone <- function(object, ...) {
 #' @export
 as.character.phone <- function(x, raw = TRUE, ...) {
   if (raw) {
-    x <- vapply(x, function(x) { x$raw }, "")
+    x <- vapply(unclass(x), function(x) { x$raw }, "")
     NextMethod()
   } else {
     as.character.default(format(x, clean = TRUE, ...))
@@ -182,7 +224,7 @@ as.character.phone <- function(x, raw = TRUE, ...) {
 #' @export
 is_parsed <- function(x) {
   if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
-  sapply(x, function(pn) { typeof(pn$jobj) %in% "S4" })
+  sapply(unclass(x), function(pn) { typeof(pn$jobj) %in% "S4" })
 }
 
 #' @export
@@ -212,11 +254,11 @@ get_region <- function(x) {
 }
 
 #' @export
-get_type <- function(phone) {
-  if (!is.phone(phone)) stop("Phone should be a vector of class `phone`")
+get_type <- function(x) {
+  if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
   phone_util <- .get_phoneNumberUtil()
   
-  out <- phone_apply(phone, function(pn) {
+  out <- phone_apply(x, function(pn) {
     .jcall(phone_util$getNumberType(pn), "S", "toString")
   })
   
