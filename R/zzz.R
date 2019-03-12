@@ -45,7 +45,8 @@
   # check for libphonenumber updates
   # --disabled, not working-- .update_libphonenumber()
   
-  .jpackage(pkgname)  # needed to load RInterface.java
+  rJava::.jpackage("dialrjars")
+  rJava::.jpackage(pkgname, lib.loc = libname)  # needed to load RInterface.java
   
   # what's your java  version?  Need > 1.5.0.
   jversion <- .jcall('java.lang.System','S','getProperty','java.version')
@@ -53,4 +54,6 @@
     stop(paste("Your java version is ", jversion,
                ".  Need 1.5.0 or higher.", sep=""))
   
+  # initialise PhoneNumberUtil singleton
+  invisible(.get_phoneNumberUtil())
 }
