@@ -69,7 +69,11 @@ validate_phone <- function(x) {
 }
 
 validate_country <- function(x) {
+<<<<<<< HEAD
   regions <- .getSupportedRegions()
+=======
+  regions <- .get_supportedRegions()
+>>>>>>> a0f29136aa0b486f3d32bb8c0e2c8a345ca7e8e4
   if (!all(x %in% regions)) {
     stop(
       "Some `x` values are unsupported regions: ",
