@@ -13,66 +13,54 @@
 
 # PhoneNumberUtil enums
 .get_leniency <- function() {
-  phone_util <- .get_phoneNumberUtil()
-  .jfields(phone_util$Leniency) %>% gsub("^.*\\.", "", .)
+  .jfields(.get_phoneNumberUtil()$Leniency) %>% gsub("^.*\\.", "", .)
 }
 
 .get_matchType <- function() {
-  phone_util <- .get_phoneNumberUtil()
-  .jfields(phone_util$MatchType) %>% gsub("^.*\\.", "", .)
+  .jfields(.get_phoneNumberUtil()$MatchType) %>% gsub("^.*\\.", "", .)
 }
 
 .get_phoneNumberFormat <- function() {
-  phone_util <- .get_phoneNumberUtil()
-  .jfields(phone_util$PhoneNumberFormat) %>% gsub("^.*\\.", "", .)
+  .jfields(.get_phoneNumberUtil()$PhoneNumberFormat) %>% gsub("^.*\\.", "", .)
 }
 
 .get_phoneNumberType <- function() {
-  phone_util <- .get_phoneNumberUtil()
-  .jfields(phone_util$PhoneNumberType) %>% gsub("^.*\\.", "", .)
+  .jfields(.get_phoneNumberUtil()$PhoneNumberType) %>% gsub("^.*\\.", "", .)
 }
 
 .get_validationResult <- function() {
-  phone_util <- .get_phoneNumberUtil()
-  .jfields(phone_util$ValidationResult) %>% gsub("^.*\\.", "", .)
+  .jfields(.get_phoneNumberUtil()$ValidationResult) %>% gsub("^.*\\.", "", .)
 }
 
 # PhoneNumberUtil "get" functions
 .getRegionCodeForCountryCode <- function(x) {
   x <- as.integer(x)
-  phone_util <- .get_phoneNumberUtil()
-  phone_util$getRegionCodeForCountryCode(x)
+  .get_phoneNumberUtil()$getRegionCodeForCountryCode(x)
 }
 
 .getRegionCodesForCountryCode <- function(x) {
   x <- as.integer(x)
-  phone_util <- .get_phoneNumberUtil()
-  .jset_to_str(phone_util$getRegionCodesForCountryCode(x))
+  .jset_to_str(.get_phoneNumberUtil()$getRegionCodesForCountryCode(x))
 }
 
 .getSupportedCallingCodes <- function() {
-  phone_util <- .get_phoneNumberUtil()
-  .jset_to_str(phone_util$getSupportedCallingCodes())
+  .jset_to_str(.get_phoneNumberUtil()$getSupportedCallingCodes())
 }
   
 .getSupportedRegions <- function() {
-  phone_util <- .get_phoneNumberUtil()
-  .jset_to_str(phone_util$getSupportedRegions())
+  .jset_to_str(.get_phoneNumberUtil()$getSupportedRegions())
 }
   
 .getSupportedGlobalNetworkCallingCodes <- function() {
-  phone_util <- .get_phoneNumberUtil()
-  .jset_to_str(phone_util$getSupportedGlobalNetworkCallingCodes())
+  .jset_to_str(.get_phoneNumberUtil()$getSupportedGlobalNetworkCallingCodes())
 }
 
 .getSupportedTypesForRegion <- function(x) {
   x <- as.character(x)
-  phone_util <- .get_phoneNumberUtil()
-  .jset_to_str(phone_util$getSupportedTypesForRegion(x))
+  .jset_to_str(.get_phoneNumberUtil()$getSupportedTypesForRegion(x))
 }
 
 .getSupportedTypesForNonGeoEntity <- function(x) {
   x <- as.integer(x)
-  phone_util <- .get_phoneNumberUtil()
-  .jset_to_str(phone_util$getSupportedTypesForNonGeoEntity(x))
+  .jset_to_str(.get_phoneNumberUtil()$getSupportedTypesForNonGeoEntity(x))
 }
