@@ -1,2 +1,4 @@
 library(testthat)
-# test_check("dialr")
+library(dialr)
+
+test_check("dialr")
