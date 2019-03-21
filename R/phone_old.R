@@ -3,7 +3,7 @@
 ph_parse <- function(phone, country, keep_raw = TRUE) {
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
-  validate_cc(country)
+  validate_country(country)
   phone_util <- .get_phoneNumberUtil()
   
   out <- mapply(function(p, c) {
@@ -35,7 +35,7 @@ ph_parse <- function(phone, country, keep_raw = TRUE) {
 ph_valid <- function(phone, country, strict = FALSE) {
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
-  validate_cc(country)
+  validate_country(country)
   phone_util <- .get_phoneNumberUtil()
   
   out <- mapply(function(p, c) {
@@ -69,7 +69,7 @@ ph_valid <- function(phone, country, strict = FALSE) {
 ph_region <- function(phone, country) {
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
-  validate_cc(country)
+  validate_country(country)
   phone_util <- .get_phoneNumberUtil()
   
   out <- mapply(function(p, c) {
@@ -126,7 +126,7 @@ ph_region <- function(phone, country) {
 ph_possible <- function(phone, country, detailed = FALSE) {
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
-  validate_cc(country)
+  validate_country(country)
   phone_util <- .get_phoneNumberUtil()
   
   out <- mapply(function(p, c) {
@@ -155,7 +155,7 @@ ph_possible <- function(phone, country, detailed = FALSE) {
 ph_format <- function(phone, country, format = "NATIONAL", home = NULL, clean = FALSE) {
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
-  validate_cc(country)
+  validate_country(country)
   phone_util <- .get_phoneNumberUtil()
   
   out <- mapply(function(p, c) {
@@ -167,7 +167,7 @@ ph_format <- function(phone, country, format = "NATIONAL", home = NULL, clean = 
     if (is.null(pn)) return(NA)
     
     if (is.null(home)) {
-      phone_util$format(pn, eval(parse(text=paste0("phone_util$PhoneNumberFormat$", format))))
+      phone_util$format(pn, eval(parse(text = paste0("phone_util$PhoneNumberFormat$", format))))
     } else {
       phone_util$formatOutOfCountryCallingNumber(pn, home)
     }
@@ -185,7 +185,7 @@ ph_format <- function(phone, country, format = "NATIONAL", home = NULL, clean = 
 ph_type <- function(phone, country) {
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
-  validate_cc(country)
+  validate_country(country)
   phone_util <- .get_phoneNumberUtil()
   
   out <- mapply(function(p, c) {
@@ -212,14 +212,14 @@ ph_example <- function(country, type = NULL, home = NULL, clean = FALSE) {
   if (length(country) > 1 & length(type) == 1) type <- rep(type, length(country))
   if (is.null(type)) type <- rep(NA, length(country))
   if (length(country) != length(type) & !is.null(type)) stop("Country and type vectors must be the same length")
-  validate_cc(country)
+  validate_country(country)
   phone_util <- .get_phoneNumberUtil()
   
   out <- mapply(function(c, t) {
     if (is.na(t)) {
       pn <- phone_util$getExampleNumber(c)
     } else {
-      pn <- phone_util$getExampleNumberForType(c, eval(parse(text=paste0("phone_util$PhoneNumberType$", t))))
+      pn <- phone_util$getExampleNumberForType(c, eval(parse(text = paste0("phone_util$PhoneNumberType$", t))))
     }
     
     if (is.null(home)) {
