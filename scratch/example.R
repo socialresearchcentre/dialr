@@ -68,3 +68,24 @@ phone_util_methods <-
          args = str_remove(method, "[^(]*"),
          method = tmp) %>%
   select(-tmp)
+
+#-------------------------------------------------------------------------------
+
+# Generate example numbers for a all valid phone types by region
+
+region_type <-
+  full_join(tibble(country = dialr:::.getSupportedRegions(), f = 1),
+            tibble(type = dialr:::.get_phoneNumberType(), f = 1)) %>%
+  select(-f)
+
+region_type %<>%
+  rowwise() %>%
+  mutate(valid = type %in% dialr:::.getSupportedTypesForRegion(country))
+  
+region_type %<>%
+  filter(valid) %>%
+  mutate(phone = ph_example(country, type))
+
+region_type %<>% mutate(phone = phone(phone, country))
+region_type %<>% mutate(validnum = is_valid(phone), regionnum = get_region(phone))
+region_type %<>% mutate(final = format(phone, clean = FALSE))

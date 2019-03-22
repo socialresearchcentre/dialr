@@ -1,23 +1,27 @@
 #' dialr phone class
+#'
+#' The phone class parses phone numbers and stores the java `Phonenumber` object
+#' alongside the original raw text.
 #' 
-#' The 
-#' 
-#' @param phone
-#' @param country
+#' @param x a character vector of phone numbers.
+#' @param country a character vector of ISO country codes.
 #' @return 
 #' 
 #' @examples
 #'   x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #'   is_parsed(x)
 #'   is_valid(x)
-#'   is.possible(x)
+#'   is_possible(x)
 #'   get_region(x)
 #'   get_type(x)
 #'   format(x)
 #'   format(x, home = "AU")
+#' @name dialr-phone
 #' @importFrom dplyr progress_estimated
 #' @export
 phone <- function(x, country) {
+  if (!is.atomic(x))  stop("`x` must be an atomic vector.", call. = FALSE)
+  if (length(x) == 0)  stop("`x` must not be empty.", call. = FALSE)
   if (length(x) > 1 & length(country) == 1) country <- rep(country, length(x))
   if (length(x) != length(country)) stop("`x` and `country` vectors must be the same length.", call. = FALSE)
 
@@ -81,6 +85,7 @@ validate_country <- function(x) {
   x
 }
 
+#' @rdname dialr-phone
 #' @export
 phone_reparse <- function(x) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`.")
@@ -122,6 +127,7 @@ phone_apply <- function(x, fun) {
   out
 }
 
+#' @rdname dialr-phone
 #' @export
 is.phone <- function(x) inherits(x, "phone")
 
@@ -142,11 +148,15 @@ is.phone <- function(x) inherits(x, "phone")
 
 #' @export
 `[<-.phone` <- function(x, i, value) {
-  if (!is.phone(value)) {
+  if (!is.phone(value) & is.atomic(value)) {
     warning("Only `phone` class values can be inserted into a `phone` vector.\n",
             "The value will be converted to `phone` class with default home country `", getOption("dialr.home"), "`.",
             call. = FALSE)
-    value <- phone(value, getOption("dialr.home"))
+    value <- new_phone(as.character(value), getOption("dialr.home"))
+  } else if (!is.phone(value) & !is.atomic(value)) {
+    stop("Only `phone` class values can be inserted into a `phone` vector.\n",
+         "The value provided can not be converted to `phone` class.",
+         call. = FALSE)
   }
   
   NextMethod()
@@ -166,13 +176,13 @@ is.phone <- function(x) inherits(x, "phone")
 c.phone <- function(..., recursive = FALSE) {
   out <- lapply(list(...), function(value) {
     if (!is.phone(value)) {
-      warning("Only `phone` class values can be to a `phone` vector.\n",
+      warning("Only `phone` class values can be added to a `phone` vector.\n",
               "Atomic vectors will be converted to `phone` class with default home country `", getOption("dialr.home"), "`.\n",
               "Other objects will be dropped.",
               call. = FALSE)
       
       if (is.atomic(value))
-        value <- phone(value, getOption("dialr.home"))
+        value <- new_phone(as.character(value), getOption("dialr.home"))
       else
         value <- NULL
       
@@ -189,6 +199,8 @@ rep.phone <- function(x, ...) {
   structure(NextMethod(), class = "phone")
 }
 
+#' @rdname dialr-phone
+#' @param n number of elements to print 
 #' @export
 print.phone <- function(x, n = 10, ...) {
   tot <- length(x)
@@ -228,8 +240,15 @@ pillar_shaft.phone <- function(x, ...) {
   pillar::new_pillar_shaft_simple(out, align = "right")
 }
 
+#' @rdname dialr-phone
+#' @param format phone number format to use.
+#' @param home ISO country code for home country. If provided, numbers will be formatted for dialing from the home country.
+#' @param clean should non-numeric characters be removed? If `TRUE`, keeps numbers and leading `+`
+#' @param strict should invalid phone numbers be removed? If `TRUE` invalid numbers are replaced with `NA`
 #' @export
 format.phone <- function(x, format = "NATIONAL", home = NULL, clean = TRUE, strict = FALSE, ...) {
+  validate_country(home)
+  
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply(x, function(pn) {
@@ -240,7 +259,7 @@ format.phone <- function(x, format = "NATIONAL", home = NULL, clean = TRUE, stri
     }
   })
   if (clean) out <- gsub("[^+0-9]", "", out)
-  if (strict) out[!is_valid(x)] <- NA
+  if (strict) out[!is_valid(x)] <- NA_character_
   
   out
 }
@@ -255,13 +274,15 @@ summary.phone <- function(object, ...) {
   out
 }
 
+#' @rdname dialr-phone
+#' @param raw if `TRUE`, the raw phone number is returned. Otherwise elements are cleaned with `format()`
 #' @export
 as.character.phone <- function(x, raw = TRUE, ...) {
   if (raw) {
     x <- vapply(unclass(x), function(x) { x$raw }, "")
     NextMethod()
   } else {
-    as.character.default(format(x, clean = TRUE, ...))
+    as.character.default(format(x, ...))
   }
 }
 
@@ -309,7 +330,7 @@ get_region <- function(x) {
   
   out <- phone_apply(x, function(pn) {
     res <- phone_util$getRegionCodeForNumber(pn)
-    ifelse(is.null(res), NA, res)
+    ifelse(is.null(res), NA_character_, res)
   })
   
   out
