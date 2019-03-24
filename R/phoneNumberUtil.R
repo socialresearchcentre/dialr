@@ -6,6 +6,12 @@
     vapply(.jstrVal, character(1))
 }
 
+.phoneNumberUtil_enum <-
+  new.env(parent = emptyenv())
+  # new_environment(phone_format = NULL,
+  #                 phone_type = NULL,
+  #                 phone_country = NULL)
+
 # Convenience function - get the current PhoneNumberUtil instance
 .get_phoneNumberUtil <- function() {
   .jcall("com/google/i18n/phonenumbers/PhoneNumberUtil", "Lcom/google/i18n/phonenumbers/PhoneNumberUtil;", "getInstance")
@@ -25,7 +31,10 @@
 }
 
 validate_phone_format <- function(x) {
-  formats <- .get_phoneNumberFormat()
+  if (is.null(.phoneNumberUtil_enum$phone_format)) {
+    .phoneNumberUtil_enum$phone_format <- .get_phoneNumberFormat()
+  }
+  formats <- .phoneNumberUtil_enum$phone_format
   if (!all(x %in% formats)) {
     stop(
       "Some `x` values are unsupported formats: ",
@@ -51,7 +60,10 @@ validate_phone_format <- function(x) {
 }
 
 validate_phone_type <- function(x) {
-  types <- .get_phoneNumberType()
+  if (is.null(.phoneNumberUtil_enum$phone_type)) {
+    .phoneNumberUtil_enum$phone_type <- .get_phoneNumberType()
+  }
+  types <- .phoneNumberUtil_enum$phone_type
   if (!all(x %in% types)) {
     stop(
       "Some `x` values are unsupported types: ",
@@ -96,7 +108,10 @@ validate_phone_type <- function(x) {
 }
 
 validate_phone_country <- function(x) {
-  regions <- .getSupportedRegions()
+  if (is.null(.phoneNumberUtil_enum$phone_country)) {
+    .phoneNumberUtil_enum$phone_country <- .getSupportedRegions()
+  }
+  regions <- .phoneNumberUtil_enum$phone_country
   if (!all(x %in% regions)) {
     stop(
       "Some `x` values are unsupported regions: ",
