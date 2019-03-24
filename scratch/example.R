@@ -31,11 +31,11 @@ x %>% mutate_at(vars(matches("^phone")), ~phone(., country)) %>% gather(col, val
 x %<>% mutate_at(vars(matches("^phone")), ~phone(., country))
 z %<>% mutate_at(vars(matches("^phone")), ~phone(., country))
 
-save(x, file = "tests/pointer_test.RData")
+save(x, file = "scratch/pointer_test.RData")
 print(x$phone1)
 
 rstudioapi::restartSession()
-load("tests/pointer_test.RData")
+load("scratch/pointer_test.RData")
 print(x$phone1)
 
 y <- phone(c(0, 0123, "0404 753 123", "61410123817"), "AU")

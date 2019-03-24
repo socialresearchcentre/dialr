@@ -72,7 +72,7 @@ get_type_old <- function(x) {
   out
 }
 
-y <- phone(rep("0412345678", times = 10000), "AU")
+y <- phone(rep("0412345678", times = 1000), "AU")
 get_type_bench <- bench::mark(get_type_new(y), get_type_old(y), get_type_new2(y), iterations = 5)
 
 #-------------------------------------------------------------------------------
@@ -85,13 +85,21 @@ new_phone_old <- function(x, country) {
   
   phone_util <- .get_phoneNumberUtil()
   
+  jfunc <- function(p, c) {
+    .jcall(phone_util,
+           "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
+           "parseAndKeepRawInput",
+           .jcast(.jnew("java/lang/String", p), "java/lang/CharSequence"),
+           c)
+  }
+  
   pb <- progress_estimated(length(x))
   out <- structure(
     mapply(
       function(p, c) {
         pb$tick()$print()
         pn <- tryCatch({
-          phone_util$parseAndKeepRawInput(p, c)
+          jfunc(p, c)
         }, error = function(e) {
           return(NULL)
         })
@@ -120,7 +128,16 @@ new_phone_new <- function(x, country) {
   stopifnot(is.character(country))
   stopifnot(length(x) == length(country))
   
-  jfunc <- .get_phoneNumberUtil()$parseAndKeepRawInput
+  phone_util <- .get_phoneNumberUtil()
+  
+  jfunc <- function(p, c) {
+    .jcall(phone_util,
+           "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
+           "parseAndKeepRawInput",
+           .jcast(.jnew("java/lang/String", p), "java/lang/CharSequence"),
+           c,
+           check = FALSE)
+  }
   
   pb <- progress_estimated(length(x))
   out <- structure(
@@ -154,10 +171,11 @@ new_phone_new <- function(x, country) {
 
 new_phone_bench <- 
   bench::press(
-    times = c(10, 100, 1000, 10000),
+    times = c(10, 100, 1000),
     {
-      bench::mark(new_phone_old(rep("0412345678", times = times), rep("AU", times = times)),
-                  new_phone_new(rep("0412345678", times = times), rep("AU", times = times)),
+      bench::mark(new_phone_old(rep(c("0412345678", NA), times = times / 2), rep("AU", times = times)),
+                  new_phone_new(rep(c("0412345678", NA), times = times / 2), rep("AU", times = times)),
+                  # new_phone(rep("0412345678", times = times), rep("AU", times = times)),
                   iterations = 5)
     }
   )
@@ -169,9 +187,9 @@ phone_apply_new <- function(x, fun, fun.value) {
   out <- vapply(unclass(x), function(d) {
     pb$tick()$print()
     # Re-parse if phone jobjs have expired (e.g. reloading a data frame from memory)
-    if (is.jnull(d$jobj)) stop("The `phone` vector in `x` needs to be reparsed. ",
-                               "This is usually caused by loading a `phone` object from disk. ",
-                               "Please run `phone_reparse()` on `x` to get it working again.")
+    # if (is.jnull(d$jobj)) stop("The `phone` vector in `x` needs to be reparsed. ",
+    #                            "This is usually caused by loading a `phone` object from disk. ",
+    #                            "Please run `phone_reparse()` on `x` to get it working again.")
     if (!typeof(d$jobj) %in% "S4") return(NA)
     fun(d$jobj)
   }, fun.value)
@@ -184,7 +202,7 @@ get_region_new <- function(x) {
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply_new(x, function(pn) {
-    res <- phone_util$getRegionCodeForNumber(pn)
+    res <- .jcall(phone_util, "S", "getRegionCodeForNumber", pn)
     ifelse(is.null(res), NA, res)
   }, "")
   
@@ -218,5 +236,5 @@ get_region_parallel <- function(x) {
   out
 }
 
-y <- phone(rep("0412345678", times = 10000), "AU")
-phone_apply_bench <- bench::mark(get_region(y), get_region_parallel(y), iterations = 5)
+y <- phone(rep("0412345678", times = 1000), "AU")
+phone_apply_bench <- bench::mark(get_region(y), get_region_new(y), iterations = 5)

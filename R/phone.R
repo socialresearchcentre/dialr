@@ -24,8 +24,7 @@ phone <- function(x, country) {
   if (length(x) == 0)  stop("`x` must not be empty.", call. = FALSE)
   if (length(x) > 1 & length(country) == 1) country <- rep(country, length(x))
   if (length(x) != length(country)) stop("`x` and `country` vectors must be the same length.", call. = FALSE)
-
-  validate_country(country)
+  validate_phone_country(country)
 
   x <- as.character(x)
   validate_phone(new_phone(x, country))
@@ -37,14 +36,21 @@ new_phone <- function(x, country) {
   stopifnot(length(x) == length(country))
 
   phone_util <- .get_phoneNumberUtil()
-
+  jfunc <- function(p, c) {
+    .jcall(phone_util,
+           "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
+           "parseAndKeepRawInput",
+           .jcast(.jnew("java/lang/String", p), "java/lang/CharSequence"),
+           c)
+  }
+  
   pb <- progress_estimated(length(x))
   out <- structure(
     mapply(
       function(p, c) {
         pb$tick()$print()
         pn <- tryCatch({
-          phone_util$parseAndKeepRawInput(p, c)
+          jfunc(p, c)
         }, error = function(e) {
           return(NULL)
         })
@@ -72,24 +78,19 @@ validate_phone <- function(x) {
   x
 }
 
-validate_country <- function(x) {
-  regions <- .getSupportedRegions()
-  if (!all(x %in% regions)) {
-    stop(
-      "Some `x` values are unsupported regions: ",
-      paste0(unique(x[!x %in% regions]), collapse = ", "),
-      call. = FALSE
-    )
-  }
-  
-  x
-}
-
 #' @rdname dialr-phone
 #' @export
 phone_reparse <- function(x) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`.")
+  
   phone_util <- .get_phoneNumberUtil()
+  jfunc <- function(p, c) {
+    .jcall(phone_util,
+           "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
+           "parseAndKeepRawInput",
+           .jcast(.jnew("java/lang/String", p), "java/lang/CharSequence"),
+           c)
+  }
   
   pb <- progress_estimated(length(x))
   out <- structure(
@@ -97,7 +98,7 @@ phone_reparse <- function(x) {
       pb$tick()$print()
       if (is.jnull(d$jobj)) {
         pn <- tryCatch({
-          phone_util$parseAndKeepRawInput(d$raw, d$country)
+          jfunc(d$raw, d$country)
         }, error = function(e) {
           return(NULL)
         })
@@ -108,21 +109,6 @@ phone_reparse <- function(x) {
     }),
     class = "phone"
   )
-  pb$stop()$print()
-  out
-}
-
-phone_apply <- function(x, fun) {
-  pb <- progress_estimated(length(x))
-  out <- sapply(unclass(x), function(d) {
-    pb$tick()$print()
-    # Re-parse if phone jobjs have expired (e.g. reloading a data frame from memory)
-    if (is.jnull(d$jobj)) stop("The `phone` vector in `x` needs to be reparsed. ",
-                               "This is usually caused by loading a `phone` object from disk. ",
-                               "Please run `phone_reparse()` on `x` to get it working again.")
-    if (!typeof(d$jobj) %in% "S4") return(NA)
-    fun(d$jobj)
-  })
   pb$stop()$print()
   out
 }
@@ -247,15 +233,17 @@ pillar_shaft.phone <- function(x, ...) {
 #' @param strict should invalid phone numbers be removed? If `TRUE` invalid numbers are replaced with `NA`
 #' @export
 format.phone <- function(x, format = "NATIONAL", home = NULL, clean = TRUE, strict = FALSE, ...) {
-  validate_country(home)
+  validate_phone_format(format)
+  validate_phone_country(home)
   
   phone_util <- .get_phoneNumberUtil()
+  format <- .get_phone_format_from_string(format)
   
   out <- phone_apply(x, function(pn) {
     if (is.null(home)) {
-      phone_util$format(pn, eval(parse(text = paste0("phone_util$PhoneNumberFormat$", format))))
+      .jcall(phone_util, "S", "format", pn, format)
     } else {
-      phone_util$formatOutOfCountryCallingNumber(pn, home)
+      .jcall(phone_util, "S", "formatOutOfCountryCallingNumber", pn, home)
     }
   })
   if (clean) out <- gsub("[^+0-9]", "", out)
@@ -286,6 +274,21 @@ as.character.phone <- function(x, raw = TRUE, ...) {
   }
 }
 
+phone_apply <- function(x, fun) {
+  pb <- progress_estimated(length(x))
+  out <- sapply(unclass(x), function(d) {
+    pb$tick()$print()
+    # # Re-parse if phone jobjs have expired (e.g. reloading a data frame from memory)
+    # if (is.jnull(d$jobj)) stop("The `phone` vector in `x` needs to be reparsed. ",
+    #                            "This is usually caused by loading a `phone` object from disk. ",
+    #                            "Please run `phone_reparse()` on `x` to get it working again.")
+    if (!typeof(d$jobj) %in% "S4") return(NA)
+    fun(d$jobj)
+  })
+  pb$stop()$print()
+  out
+}
+
 #' @export
 is_parsed <- function(x) {
   if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
@@ -298,7 +301,7 @@ is_valid <- function(x) {
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply(x, function(pn) {
-    phone_util$isValidNumber(pn)
+    .jcall(phone_util, "Z", "isValidNumber", pn)
   })
   out[is.na(out)] <- FALSE
   
@@ -308,13 +311,17 @@ is_valid <- function(x) {
 #' @export
 is_possible <- function(x, detailed = FALSE, type = NULL) {
   if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
+  validate_phone_type(type)
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply(x, function(pn) {
     if (detailed) {
-      .jstrVal(phone_util$isPossibleNumberWithReason(pn))
+      .jstrVal(.jcall(phone_util,
+                      "Lcom/google/i18n/phonenumbers/PhoneNumberUtil$ValidationResult;",
+                      "isPossibleNumberWithReason",
+                      pn))
     } else {
-      phone_util$isPossibleNumber(pn)
+      .jcall(phone_util, "Z", "isPossibleNumber", pn)
     }
   })
   
@@ -329,7 +336,7 @@ get_region <- function(x) {
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply(x, function(pn) {
-    res <- phone_util$getRegionCodeForNumber(pn)
+    res <- .jcall(phone_util, "S", "getRegionCodeForNumber", pn)
     ifelse(is.null(res), NA_character_, res)
   })
   
@@ -342,7 +349,10 @@ get_type <- function(x) {
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply(x, function(pn) {
-    .jstrVal(phone_util$getNumberType(pn))
+    .jstrVal(.jcall(phone_util,
+                    "Lcom/google/i18n/phonenumbers/PhoneNumberUtil$PhoneNumberType;",
+                    "getNumberType",
+                    pn))
   })
   
   out

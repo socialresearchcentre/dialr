@@ -24,8 +24,52 @@
   .jfields(.get_phoneNumberUtil()$PhoneNumberFormat) %>% gsub("^.*\\.", "", .)
 }
 
+validate_phone_format <- function(x) {
+  formats <- .get_phoneNumberFormat()
+  if (!all(x %in% formats)) {
+    stop(
+      "Some `x` values are unsupported formats: ",
+      paste0(unique(x[!x %in% formats]), collapse = ", "),
+      call. = FALSE
+    )
+  }
+  
+  x
+}
+
+.get_phone_format_from_string <- function(x) {
+  validate_phone_format(x)
+
+  .jcall("com/google/i18n/phonenumbers/PhoneNumberUtil$PhoneNumberFormat",
+         "Lcom/google/i18n/phonenumbers/PhoneNumberUtil$PhoneNumberFormat;",
+         "valueOf",
+         x)
+}
+
 .get_phoneNumberType <- function() {
   .jfields(.get_phoneNumberUtil()$PhoneNumberType) %>% gsub("^.*\\.", "", .)
+}
+
+validate_phone_type <- function(x) {
+  types <- .get_phoneNumberType()
+  if (!all(x %in% types)) {
+    stop(
+      "Some `x` values are unsupported types: ",
+      paste0(unique(x[!x %in% types]), collapse = ", "),
+      call. = FALSE
+    )
+  }
+  
+  x
+}
+
+.get_phone_type_from_string <- function(x) {
+  validate_phone_type(x)
+  
+  .jcall("com/google/i18n/phonenumbers/PhoneNumberUtil$PhoneNumberType",
+         "Lcom/google/i18n/phonenumbers/PhoneNumberUtil$PhoneNumberType;",
+         "valueOf",
+         x)
 }
 
 .get_validationResult <- function() {
@@ -50,7 +94,20 @@
 .getSupportedRegions <- function() {
   .jset_to_str(.get_phoneNumberUtil()$getSupportedRegions())
 }
+
+validate_phone_country <- function(x) {
+  regions <- .getSupportedRegions()
+  if (!all(x %in% regions)) {
+    stop(
+      "Some `x` values are unsupported regions: ",
+      paste0(unique(x[!x %in% regions]), collapse = ", "),
+      call. = FALSE
+    )
+  }
   
+  x
+}
+
 .getSupportedGlobalNetworkCallingCodes <- function() {
   .jset_to_str(.get_phoneNumberUtil()$getSupportedGlobalNetworkCallingCodes())
 }
