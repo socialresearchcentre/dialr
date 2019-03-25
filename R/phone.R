@@ -357,3 +357,45 @@ get_type <- function(x) {
   
   out
 }
+
+#' @export
+get_example <- function(country, type = NULL) {
+  if (length(type) > 1 & length(country) == 1) country <- rep(country, length(type))
+  if (length(country) > 1 & length(type) == 1) type <- rep(type, length(country))
+  if (is.null(type)) type <- rep(NA, length(country))
+  if (length(country) != length(type) & !is.null(type)) stop("`country` and `type` vectors must be the same length.", call. = FALSE)
+  validate_phone_country(country)
+  validate_phone_type(type)
+  
+  phone_util <- .get_phoneNumberUtil()
+  format <- .get_phone_format_from_string("NATIONAL")
+  
+  out <- structure(
+    mapply(function(c, t) {
+      if (is.na(t)) {
+        pn <- .jcall(phone_util,
+                     "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
+                     "getExampleNumber",
+                     c)
+      } else {
+        pn <- .jcall(phone_util,
+                     "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
+                     "getExampleNumberForType",
+                     c, .get_phone_type_from_string(t))
+      }
+      .jcache(pn)
+      
+      p <- .jcall(phone_util, "S", "format", pn, format)
+      
+      list(raw = p,
+           country = c,
+           jobj = pn)
+    },
+    country, type,
+    SIMPLIFY = FALSE),
+    class = "phone"
+  )
+  
+  names(out) <- NULL
+  out
+}

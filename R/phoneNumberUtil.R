@@ -37,7 +37,7 @@ validate_phone_format <- function(x) {
   formats <- .phoneNumberUtil_enum$phone_format
   if (!all(x %in% formats)) {
     stop(
-      "Some `x` values are unsupported formats: ",
+      "Some `x` values are unsupported phone formats: ",
       paste0(unique(x[!x %in% formats]), collapse = ", "),
       call. = FALSE
     )
@@ -66,7 +66,7 @@ validate_phone_type <- function(x) {
   types <- .phoneNumberUtil_enum$phone_type
   if (!all(x %in% types)) {
     stop(
-      "Some `x` values are unsupported types: ",
+      "Some `x` values are unsupported phone types: ",
       paste0(unique(x[!x %in% types]), collapse = ", "),
       call. = FALSE
     )
@@ -114,7 +114,7 @@ validate_phone_country <- function(x) {
   regions <- .phoneNumberUtil_enum$phone_country
   if (!all(x %in% regions)) {
     stop(
-      "Some `x` values are unsupported regions: ",
+      "Some `x` values are unsupported phone regions: ",
       paste0(unique(x[!x %in% regions]), collapse = ", "),
       call. = FALSE
     )

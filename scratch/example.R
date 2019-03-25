@@ -84,7 +84,7 @@ region_type %<>%
   
 region_type %<>%
   filter(valid) %>%
-  mutate(phone = ph_example(country, type))
+  mutate(phone = get_example(country, type))
 
 region_type %<>% mutate(phone = phone(phone, country))
 region_type %<>% mutate(validnum = is_valid(phone), regionnum = get_region(phone))
