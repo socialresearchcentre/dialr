@@ -275,9 +275,9 @@ as.character.phone <- function(x, raw = TRUE, ...) {
 }
 
 phone_apply <- function(x, fun) {
-  pb <- progress_estimated(length(x))
+  # pb <- progress_estimated(length(x))
   out <- sapply(unclass(x), function(d) {
-    pb$tick()$print()
+    # pb$tick()$print()
     # # Re-parse if phone jobjs have expired (e.g. reloading a data frame from memory)
     # if (is.jnull(d$jobj)) stop("The `phone` vector in `x` needs to be reparsed. ",
     #                            "This is usually caused by loading a `phone` object from disk. ",
@@ -285,7 +285,7 @@ phone_apply <- function(x, fun) {
     if (!typeof(d$jobj) %in% "S4") return(NA)
     fun(d$jobj)
   })
-  pb$stop()$print()
+  # pb$stop()$print()
   out
 }
 
