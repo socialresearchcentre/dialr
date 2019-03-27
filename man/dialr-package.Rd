@@ -8,6 +8,14 @@
 \description{
 dialr is an R interface to Google's libphonenumber library.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/socialresearchcentre/dialr}
+  \item Report bugs at \url{https://github.com/socialresearchcentre/dialr/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Danny Smith \email{danny@gorcha.org}
 
