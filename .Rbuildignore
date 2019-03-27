@@ -1,2 +1,4 @@
+^scratch$
+^data-raw$
 ^.*\.Rproj$
 ^\.Rproj\.user$

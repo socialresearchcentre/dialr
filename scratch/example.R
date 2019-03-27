@@ -80,12 +80,15 @@ region_type <-
 
 region_type %<>%
   rowwise() %>%
-  mutate(valid = type %in% dialr:::.getSupportedTypesForRegion(country))
+  mutate(valid = type %in% dialr:::.getSupportedTypesForRegion(country)) %>%
+  ungroup()
+
+region_type %<>% bind_rows(., ., ., ., ., ., ., ., ., ., ., ., ., ., ., .)
   
 region_type %<>%
   filter(valid) %>%
   mutate(phone = get_example(country, type))
 
-region_type %<>% mutate(phone = phone(phone, country))
+region_type %<>% mutate(phone = phone(as.character(phone), country))
 region_type %<>% mutate(validnum = is_valid(phone), regionnum = get_region(phone))
 region_type %<>% mutate(final = format(phone, clean = FALSE))
