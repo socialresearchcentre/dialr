@@ -13,7 +13,8 @@ Imports:
     dialrjars
 Suggests: 
     testthat,
-    pillar
+    pillar,
+    covr
 License: GPL-3
 NeedsCompilation: no
 SystemRequirements: java (>= 1.6)
