@@ -30,6 +30,8 @@ is.phone(x)
 
 \item{n}{number of elements to print}
 
+\item{...}{additional arguments for specific methods.}
+
 \item{format}{phone number format to use.}
 
 \item{home}{ISO country code for home country. If provided, numbers will be formatted for dialing from the home country.}
@@ -39,9 +41,6 @@ is.phone(x)
 \item{strict}{should invalid phone numbers be removed? If `TRUE` invalid numbers are replaced with `NA`}
 
 \item{raw}{if `TRUE`, the raw phone number is returned. Otherwise elements are cleaned with `format()`}
-}
-\value{
-
 }
 \description{
 The phone class parses phone numbers and stores the java `Phonenumber` object

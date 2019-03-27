@@ -84,7 +84,6 @@ new_phone_old <- function(x, country) {
   stopifnot(length(x) == length(country))
   
   phone_util <- .get_phoneNumberUtil()
-  
   jfunc <- function(p, c) {
     .jcall(phone_util,
            "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
@@ -129,21 +128,19 @@ new_phone_new <- function(x, country) {
   stopifnot(length(x) == length(country))
   
   phone_util <- .get_phoneNumberUtil()
-  
   jfunc <- function(p, c) {
     .jcall(phone_util,
            "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
            "parseAndKeepRawInput",
            .jcast(.jnew("java/lang/String", p), "java/lang/CharSequence"),
-           c,
-           check = FALSE)
+           c)
   }
   
-  pb <- progress_estimated(length(x))
+  pb <- txtProgressBar(min = 0, max = length(x), style = 3)
   out <- structure(
     mapply(
       function(p, c) {
-        pb$tick()$print()
+        setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
         pn <- tryCatch({
           jfunc(p, c)
         }, error = function(e) {
@@ -163,7 +160,7 @@ new_phone_new <- function(x, country) {
     ),
     class = "phone"
   )
-  pb$stop()$print()
+  close(pb)
   
   names(out) <- NULL
   out
@@ -171,7 +168,7 @@ new_phone_new <- function(x, country) {
 
 new_phone_bench <- 
   bench::press(
-    times = c(10, 100, 1000),
+    times = c(10, 100, 1000, 10000),
     {
       bench::mark(new_phone_old(rep(c("0412345678", NA), times = times / 2), rep("AU", times = times)),
                   new_phone_new(rep(c("0412345678", NA), times = times / 2), rep("AU", times = times)),

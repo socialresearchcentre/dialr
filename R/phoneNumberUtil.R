@@ -1,9 +1,8 @@
 
 # rJava helpers
 .jset_to_str <- function(o) {
-  o %>%
-    .jcall("[Ljava/lang/Object;", "toArray") %>%
-    vapply(.jstrVal, character(1))
+  vapply(.jcall(o, "[Ljava/lang/Object;", "toArray"),
+         .jstrVal, character(1))
 }
 
 .phoneNumberUtil <- new.env(parent = emptyenv())
@@ -21,15 +20,15 @@
 
 # PhoneNumberUtil enums
 .get_leniency <- function() {
-  .jfields(.get_phoneNumberUtil()$Leniency) %>% gsub("^.*\\.", "", .)
+  gsub("^.*\\.", "", .jfields(.get_phoneNumberUtil()$Leniency))
 }
 
 .get_matchType <- function() {
-  .jfields(.get_phoneNumberUtil()$MatchType) %>% gsub("^.*\\.", "", .)
+  gsub("^.*\\.", "", .jfields(.get_phoneNumberUtil()$MatchType))
 }
 
 .get_phoneNumberFormat <- function() {
-  .jfields(.get_phoneNumberUtil()$PhoneNumberFormat) %>% gsub("^.*\\.", "", .)
+  gsub("^.*\\.", "", .jfields(.get_phoneNumberUtil()$PhoneNumberFormat))
 }
 
 validate_phone_format <- function(x) {
@@ -64,7 +63,7 @@ validate_phone_format <- function(x) {
 }
 
 .get_phoneNumberType <- function() {
-  .jfields(.get_phoneNumberUtil()$PhoneNumberType) %>% gsub("^.*\\.", "", .)
+  gsub("^.*\\.", "", .jfields(.get_phoneNumberUtil()$PhoneNumberType))
 }
 
 validate_phone_type <- function(x) {
@@ -99,17 +98,17 @@ validate_phone_type <- function(x) {
 }
 
 .get_validationResult <- function() {
-  .jfields(.get_phoneNumberUtil()$ValidationResult) %>% gsub("^.*\\.", "", .)
+  gsub("^.*\\.", "", .jfields(.get_phoneNumberUtil()$ValidationResult))
 }
 
 # PhoneNumberUtil "get" functions
 .getRegionCodeForCountryCode <- function(x) {
-  x <- as.integer(x)
+  suppressWarnings(x <- as.integer(x))
   .get_phoneNumberUtil()$getRegionCodeForCountryCode(x)
 }
 
 .getRegionCodesForCountryCode <- function(x) {
-  x <- as.integer(x)
+  suppressWarnings(x <- as.integer(x))
   .jset_to_str(.get_phoneNumberUtil()$getRegionCodesForCountryCode(x))
 }
 
@@ -147,6 +146,6 @@ validate_phone_country <- function(x) {
 }
 
 .getSupportedTypesForNonGeoEntity <- function(x) {
-  x <- as.integer(x)
+  suppressWarnings(x <- as.integer(x))
   .jset_to_str(.get_phoneNumberUtil()$getSupportedTypesForNonGeoEntity(x))
 }

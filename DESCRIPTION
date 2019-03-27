@@ -10,11 +10,10 @@ Depends:
     R (>= 3.1.2)
 Imports: 
     rJava,
-    dialrjars,
-    pillar,
-    dplyr
+    dialrjars
 Suggests: 
-    testthat
+    testthat,
+    pillar
 License: GPL-3
 NeedsCompilation: no
 SystemRequirements: java (>= 1.6)

@@ -5,8 +5,6 @@
 #' 
 #' @param x a character vector of phone numbers.
 #' @param country a character vector of ISO country codes.
-#' @return 
-#' 
 #' @examples
 #'   x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #'   is_parsed(x)
@@ -17,7 +15,6 @@
 #'   format(x)
 #'   format(x, home = "AU")
 #' @name dialr-phone
-#' @importFrom dplyr progress_estimated
 #' @export
 phone <- function(x, country) {
   if (!is.atomic(x))  stop("`x` must be an atomic vector.", call. = FALSE)
@@ -30,6 +27,9 @@ phone <- function(x, country) {
   validate_phone(new_phone(x, country))
 }
 
+#' @importFrom utils txtProgressBar
+#' @importFrom utils getTxtProgressBar
+#' @importFrom utils setTxtProgressBar
 new_phone <- function(x, country) {
   stopifnot(is.character(x))
   stopifnot(is.character(country))
@@ -44,11 +44,11 @@ new_phone <- function(x, country) {
            c)
   }
   
-  pb <- progress_estimated(length(x))
+  pb <- txtProgressBar(min = 0, max = length(x), style = 3)
   out <- structure(
     mapply(
       function(p, c) {
-        pb$tick()$print()
+        setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
         pn <- tryCatch({
           jfunc(p, c)
         }, error = function(e) {
@@ -68,7 +68,7 @@ new_phone <- function(x, country) {
     ),
     class = "phone"
   )
-  pb$stop()$print()
+  close(pb)
   
   names(out) <- NULL
   out
@@ -92,10 +92,10 @@ phone_reparse <- function(x) {
            c)
   }
   
-  pb <- progress_estimated(length(x))
+  pb <- txtProgressBar(min = 0, max = length(x), style = 3)
   out <- structure(
     lapply(unclass(x), function(d) {
-      pb$tick()$print()
+      setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
       if (is.jnull(d$jobj)) {
         pn <- tryCatch({
           jfunc(d$raw, d$country)
@@ -109,7 +109,7 @@ phone_reparse <- function(x) {
     }),
     class = "phone"
   )
-  pb$stop()$print()
+  close(pb)
   out
 }
 
@@ -187,6 +187,7 @@ rep.phone <- function(x, ...) {
 
 #' @rdname dialr-phone
 #' @param n number of elements to print 
+#' @param ...	additional arguments for specific methods.
 #' @export
 print.phone <- function(x, n = 10, ...) {
   tot <- length(x)
@@ -208,14 +209,12 @@ print.phone <- function(x, n = 10, ...) {
   invisible()
 }
 
-#' @importFrom pillar type_sum
-#' @export
+# Dynamically exported, see zzz.R
 type_sum.phone <- function(x) {
   "phone"
 }
 
-#' @importFrom pillar pillar_shaft
-#' @export
+# Dynamically exported, see zzz.R
 pillar_shaft.phone <- function(x, ...) {
   out <- format(x)
   out[is.na(x)] <- NA
