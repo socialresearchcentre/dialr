@@ -1,6 +1,11 @@
 
 # dialr
 
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![CRAN status](https://www.r-pkg.org/badges/version/dialr)](https://cran.r-project.org/package=dialr)
+[![Travis build status](https://travis-ci.org/socialresearchcentre/dialr.svg?branch=master)](https://travis-ci.org/socialresearchcentre/dialr)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/socialresearchcentre/dialr?branch=master&svg=true)](https://ci.appveyor.com/project/socialresearchcentre/dialr)
+
 ## Overview
 
 dialr is an R port of [Google's libphonenumber library](https://github.com/googlei18n/libphonenumber).
