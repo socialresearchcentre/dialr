@@ -96,17 +96,37 @@ new_phone <- function(x, region) {
 }
 
 validate_phone <- function(x) {
+  stopifnot(is.phone(x))
+  
+  x_raw <- unclass(x)
+  
+  # check structure
+  if (!(all(sapply(x_raw, length) == 3) &
+        all(sapply(x_raw, function(x) { exists("raw", x) })) &
+        all(sapply(x_raw, function(x) { exists("region", x) })) &
+        all(sapply(x_raw, function(x) { exists("jobj", x) })))) {
+    stop(
+      "The structure of `x` is incorrect.\n",
+      "`x` should be a list.\n",
+      "All elements of `x` should be named lists with 3 elements:\n",
+      " * raw: a character vector of length 1\n",
+      " * region: a character vector of length 1\n",
+      " * jobj: an S4 `jobjRef` or `NULL`",
+      call. = FALSE
+    )
+  }
+      
   x
 }
 
 #' @rdname dialr-phone
 #' @export
 phone_reparse <- function(x) {
-  if (!is.phone(x)) stop("`x` must be a vector of class `phone`.")
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   
   x <- unclass(x)
   new_phone(sapply(x, function(x) { x$raw }),
-            sapply(x, function(x) { x$country }))
+            sapply(x, function(x) { x$region }))
 }
 
 #' @rdname dialr-phone
@@ -342,14 +362,14 @@ NULL
 #' @rdname dialr-valid
 #' @export
 is_parsed <- function(x) {
-  if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
   sapply(unclass(x), function(pn) { typeof(pn$jobj) %in% "S4" })
 }
 
 #' @rdname dialr-valid
 #' @export
 is_valid <- function(x) {
-  if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply(x, function(pn) {
@@ -447,7 +467,7 @@ is_possible <- function(x, detailed = FALSE, type = NULL) {
 #' @family phone functions
 #' @export
 get_region <- function(x) {
-  if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply(x, function(pn) {
@@ -519,7 +539,7 @@ get_regions_for_calling_code <- function(x) {
 #' @family phone functions
 #' @export
 get_type <- function(x) {
-  if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply(x, function(pn) {
