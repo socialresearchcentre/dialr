@@ -7,7 +7,7 @@
 get_cc(country)
 }
 \arguments{
-\item{country}{vector of country names}
+\item{country}{Vector of country names}
 }
 \value{
 vector of ISO country codes (NA where not found)

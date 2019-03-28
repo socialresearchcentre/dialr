@@ -18,41 +18,82 @@ is.phone(x)
 
 \method{print}{phone}(x, n = 10, ...)
 
-\method{format}{phone}(x, format = "NATIONAL", home = NULL,
-  clean = TRUE, strict = FALSE, ...)
+\method{format}{phone}(x, format = c("E164", "NATIONAL", "INTERNATIONAL",
+  "RFC3966"), home = NULL, clean = TRUE, strict = FALSE, ...)
 
 \method{as.character}{phone}(x, raw = TRUE, ...)
 }
 \arguments{
-\item{x}{a character vector of phone numbers.}
+\item{x}{A character vector of phone numbers.}
 
-\item{country}{a character vector of ISO country codes.}
+\item{country}{A character vector of \link[=dialr-region]{ISO country codes}.}
 
-\item{n}{number of elements to print}
+\item{n}{Number of elements to print}
 
-\item{...}{additional arguments for specific methods.}
+\item{...}{Additional arguments for specific methods.}
 
-\item{format}{phone number format to use.}
+\item{format}{Phone number format to use based on one of four standards:
+\itemize{
+\item "E164": general format for international telephone numbers from \href{https://en.wikipedia.org/wiki/E.164}{ITU-T Recommendation E.164}
+\item "NATIONAL": national notation from \href{https://en.wikipedia.org/wiki/E.123}{ITU-T Recommendation E.123}
+\item "INTERNATIONAL": international notation from \href{https://en.wikipedia.org/wiki/E.123}{ITU-T Recommendation E.123}
+\item "RFC3966": "tel" URI syntax from the IETF \href{https://datatracker.ietf.org/doc/rfc3966/}{tel URI for Telephone Numbers}
+}
 
-\item{home}{ISO country code for home country. If provided, numbers will be formatted for dialing from the home country.}
+see notes from the \href{https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.8/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html}{libphonenumber javadocs}
+for more details.}
 
-\item{clean}{should non-numeric characters be removed? If `TRUE`, keeps numbers and leading `+`}
+\item{home}{\link[=dialr-region]{ISO country code} for home country. If provided,
+numbers will be formatted for dialing from the home country.}
 
-\item{strict}{should invalid phone numbers be removed? If `TRUE` invalid numbers are replaced with `NA`}
+\item{clean}{Should non-numeric characters be removed? If \code{TRUE}, keeps
+numbers and leading \code{+}}
 
-\item{raw}{if `TRUE`, the raw phone number is returned. Otherwise elements are cleaned with `format()`}
+\item{strict}{Should invalid phone numbers be removed? If \code{TRUE} invalid
+numbers are replaced with \code{NA}}
+
+\item{raw}{If \code{TRUE}, the raw phone number is returned. Otherwise elements are cleaned with \code{format()}}
 }
 \description{
-The phone class parses phone numbers and stores the java `Phonenumber` object
-alongside the original raw text.
+The phone class parses phone numbers into java objects for further
+processing in libphonenumber.
 }
+\details{
+libphonenumber defines the \code{PhoneNumberUtil} class, with a set of functions
+for extracting information from and performing processing on a parsed
+\code{Phonenumber} object. A text phone number must be parsed before any other
+operations (e.g. checking phone number validity, formatting) can be
+performed. When parsing a phone number a "default region" is required to
+determine the processing context for non-international numbers.
+
+The \code{phone} class stores the raw phone number, the default region and a java
+phone object. The java object is cached so should persist between R sessions.
+In case of issues, use \code{phone_reparse()} to recreate the \code{phone} vector from
+the original phone number and region.
+}
+\section{libphonenumber reference}{
+
+
+\code{phone()}: Phone numbers are parsed using
+\code{PhoneNumberUtil.parseAndKeepRawInput()}. The \code{phone} class stores the
+returned \code{Phonenumber.PhoneNumber} object alongside the original raw text
+and country code for later reference.
+
+\code{format()}: \code{PhoneNumberUtil.format()} by default, or
+\code{PhoneNumberUtil.formatOutOfCountryCallingNumber()} if \code{home} is provided.
+}
+
 \examples{
   x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
-  is_parsed(x)
-  is_valid(x)
-  is_possible(x)
-  get_region(x)
-  get_type(x)
+  
+  is.phone(x)
+  print(x)
   format(x)
   format(x, home = "AU")
 }
+\seealso{
+Other phone functions: \code{\link{dialr-region}},
+  \code{\link{dialr-type}}, \code{\link{dialr-valid}},
+  \code{\link{dialr}}
+}
+\concept{phone functions}

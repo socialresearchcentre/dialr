@@ -1,5 +1,4 @@
 
-#' @export
 ph_parse <- function(phone, country, keep_raw = TRUE) {
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
@@ -23,16 +22,20 @@ ph_parse <- function(phone, country, keep_raw = TRUE) {
 
 #' Check if a phone number is valid for a given region
 #'
-#' @param phone character vector of phone numbers to check
-#' @param country character vector of region codes. If length = 1, the same
+#' **ph_valid is soft-deprecated and will be removed in a future release.**
+#'
+#' @param phone Character vector of phone numbers to check
+#' @param country Character vector of region codes. If length = 1, the same
 #'                region code is used for all phone numbers
-#' @param strict if strict = FALSE, ph_valid checks if the phone number is valid
+#' @param strict If strict = FALSE, ph_valid checks if the phone number is valid
 #'               to dial within the given region, including correctly specified
 #'               international numbers. If strict = TRUE, ph_valid checks if the
 #'               phone number is a domestic phone number for the given region.
 #' @return logical vector flagging valid and invalid phone numbers
 #' @export
 ph_valid <- function(phone, country, strict = FALSE) {
+  warning("ph_valid() is soft deprecated as of dialr 0.2.0\nplease use is_valid() instead", call. = FALSE)
+  
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
   validate_phone_country(country)
@@ -61,12 +64,16 @@ ph_valid <- function(phone, country, strict = FALSE) {
 
 #' Retrieve region for phone number
 #'
-#' @param phone character vector of phone numbers.
-#' @param country character vector of region codes. If length = 1, the same
+#' **ph_region is soft-deprecated and will be removed in a future release.**
+#'
+#' @param phone Character vector of phone numbers.
+#' @param country Character vector of region codes. If length = 1, the same
 #'                region code is used for all phone numbers.
 #' @return character vector containing the country code for each phone number.
 #' @export
 ph_region <- function(phone, country) {
+  warning("ph_region() is soft deprecated as of dialr 0.2.0\nplease use get_region() instead", call. = FALSE)
+  
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
   validate_phone_country(country)
@@ -92,6 +99,8 @@ ph_region <- function(phone, country) {
 
 #' Check if a phone number is possible for a given region
 #'
+#' **ph_possible is soft-deprecated and will be removed in a future release.**
+#'
 #' Check whether a phone number is a possible number. It provides a more lenient
 #' check than isValidNumber(PhoneNumber) in the following sense:
 #' \enumerate{
@@ -112,10 +121,10 @@ ph_region <- function(phone, country) {
 #'         subscriber-number-only version.
 #' }
 #'
-#' @param phone character vector of phone numbers to check
-#' @param country character vector of region codes. If length = 1, the same
+#' @param phone Character vector of phone numbers to check
+#' @param country Character vector of region codes. If length = 1, the same
 #'                region code is used for all phone numbers
-#' @param detailed if detailed = FALSE, ph_possible returns a logical vector
+#' @param detailed If detailed = FALSE, ph_possible returns a logical vector
 #'                 that indicates whether the number is possible or not.
 #'                 If detailed = TRUE, ph_possible returns more detailed
 #'                 information about FALSE numbers.
@@ -124,6 +133,8 @@ ph_region <- function(phone, country) {
 #'         failures.
 #' @export
 ph_possible <- function(phone, country, detailed = FALSE) {
+  warning("ph_possible() is soft deprecated as of dialr 0.2.0\nplease use is_possible() instead", call. = FALSE)
+  
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
   validate_phone_country(country)
@@ -150,9 +161,23 @@ ph_possible <- function(phone, country, detailed = FALSE) {
   out
 }
 
-
+#' Format a phone number.
+#'
+#' **ph_format is soft-deprecated and will be removed in a future release.**
+#'
+#' @param phone Character vector of phone numbers to check
+#' @param format Phone number format to use.
+#' @param country Character vector of region codes. If length = 1, the same
+#'                region code is used for all phone numbers
+#' @param home ISO country code for home country. If provided, numbers will be
+#'   formatted for dialing from the home country.
+#' @param clean Should non-numeric characters be removed? If `TRUE`, keeps
+#'   numbers
+#' @return a character vector of formatted phone numbers.
 #' @export
 ph_format <- function(phone, country, format = "NATIONAL", home = NULL, clean = FALSE) {
+  warning("ph_format() is soft deprecated as of dialr 0.2.0\nplease use format.phone() instead", call. = FALSE)
+  
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
   validate_phone_country(country)
@@ -181,8 +206,18 @@ ph_format <- function(phone, country, format = "NATIONAL", home = NULL, clean = 
   out
 }
 
+#' Retrieve type for phone number
+#'
+#' **ph_type is soft-deprecated and will be removed in a future release.**
+#'
+#' @param phone Character vector of phone numbers.
+#' @param country Character vector of region codes. If length = 1, the same
+#'                region code is used for all phone numbers.
+#' @return character vector containing the phone number type for each phone number.
 #' @export
 ph_type <- function(phone, country) {
+  warning("ph_type() is soft deprecated as of dialr 0.2.0\nplease use get_type() instead", call. = FALSE)
+  
   if (length(phone) > 1 & length(country) == 1) country <- rep(country, length(phone))
   if (length(phone) != length(country)) stop("Phone and country vectors must be the same length")
   validate_phone_country(country)
@@ -206,8 +241,23 @@ ph_type <- function(phone, country) {
   out
 }
 
+#' Get example phone numbers
+#'
+#' **ph_example is soft-deprecated and will be removed in a future release.**
+#'
+#' @param country Character vector of region codes. If length = 1, the same
+#'                region code is used for all phone numbers
+#' @param type A character vector of phone number types. If `NULL` (default),
+#'   returns an example "FIXED_LINE" number.
+#' @param home ISO country code for home country. If provided, numbers will be
+#'   formatted for dialing from the home country.
+#' @param clean Should non-numeric characters be removed? If `TRUE`, keeps
+#'   numbers
+#' @return a character vector of formatted example phone numbers.
 #' @export
 ph_example <- function(country, type = NULL, home = NULL, clean = FALSE) {
+  warning("ph_example() is soft deprecated as of dialr 0.2.0\nplease use get_example() instead", call. = FALSE)
+  
   if (length(type) > 1 & length(country) == 1) country <- rep(country, length(type))
   if (length(country) > 1 & length(type) == 1) type <- rep(type, length(country))
   if (is.null(type)) type <- rep(NA, length(country))

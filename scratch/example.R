@@ -76,18 +76,19 @@ phone_util_methods <-
 region_type <-
   full_join(tibble(country = dialr:::.getSupportedRegions(), f = 1),
             tibble(type = dialr:::.get_phoneNumberType(), f = 1)) %>%
+  full_join(tibble(valid = c(TRUE, FALSE), f = 1)) %>%
   select(-f)
 
 region_type %<>%
   rowwise() %>%
-  mutate(valid = type %in% dialr:::.getSupportedTypesForRegion(country)) %>%
+  mutate(keep = type %in% dialr:::.getSupportedTypesForRegion(country)) %>%
   ungroup()
 
 region_type %<>% bind_rows(., ., ., ., ., ., ., ., ., ., ., ., ., ., ., .)
   
 region_type %<>%
-  filter(valid) %>%
-  mutate(phone = get_example(country, type))
+  filter(keep) %>%
+  mutate(phone = get_example(country, type, valid))
 
 region_type %<>% mutate(phone = phone(as.character(phone), country))
 region_type %<>% mutate(validnum = is_valid(phone), regionnum = get_region(phone))

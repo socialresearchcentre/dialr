@@ -5,17 +5,17 @@
          .jstrVal, character(1))
 }
 
-.phoneNumberUtil <- new.env(parent = emptyenv())
+.pnu_cache <- new.env(parent = emptyenv())
 
 # Convenience function - get the current PhoneNumberUtil instance
 .get_phoneNumberUtil <- function() {
-  if (is.null(.phoneNumberUtil$phone_util)) {
-    .phoneNumberUtil$phone_util <-
+  if (is.null(.pnu_cache$phone_util)) {
+    .pnu_cache$phone_util <-
       .jcall("com/google/i18n/phonenumbers/PhoneNumberUtil",
              "Lcom/google/i18n/phonenumbers/PhoneNumberUtil;",
              "getInstance")
   }
-  .phoneNumberUtil$phone_util
+  .pnu_cache$phone_util
 }
 
 # PhoneNumberUtil enums
@@ -28,14 +28,15 @@
 }
 
 .get_phoneNumberFormat <- function() {
-  gsub("^.*\\.", "", .jfields(.get_phoneNumberUtil()$PhoneNumberFormat))
+  if (is.null(.pnu_cache$phone_format)) {
+    .pnu_cache$phone_format <-
+      gsub("^.*\\.", "", .jfields(.get_phoneNumberUtil()$PhoneNumberFormat))
+  }
+  .pnu_cache$phone_format
 }
 
 validate_phone_format <- function(x) {
-  if (is.null(.phoneNumberUtil$phone_format)) {
-    .phoneNumberUtil$phone_format <- .get_phoneNumberFormat()
-  }
-  formats <- .phoneNumberUtil$phone_format
+  formats <- .get_phoneNumberFormat()
   if (!all(x %in% formats)) {
     stop(
       "Some `x` values are unsupported phone formats: ",
@@ -49,28 +50,29 @@ validate_phone_format <- function(x) {
 
 .get_phone_format_from_string <- function(x) {
   validate_phone_format(x)
-  if (is.null(.phoneNumberUtil$phone_formats)) {
-    .phoneNumberUtil$phone_formats <-
+  if (is.null(.pnu_cache$phone_formats)) {
+    .pnu_cache$phone_formats <-
       .jcall("com/google/i18n/phonenumbers/PhoneNumberUtil$PhoneNumberFormat",
              "[Lcom/google/i18n/phonenumbers/PhoneNumberUtil$PhoneNumberFormat;",
              "values")
     
-    names(.phoneNumberUtil$phone_formats) <-
-      sapply(.phoneNumberUtil$phone_formats, .jstrVal)
+    names(.pnu_cache$phone_formats) <-
+      sapply(.pnu_cache$phone_formats, .jstrVal)
   }
   
-  .phoneNumberUtil$phone_formats[[x]]
+  .pnu_cache$phone_formats[[x]]
 }
 
 .get_phoneNumberType <- function() {
-  gsub("^.*\\.", "", .jfields(.get_phoneNumberUtil()$PhoneNumberType))
+  if (is.null(.pnu_cache$phone_type)) {
+    .pnu_cache$phone_type <-
+      gsub("^.*\\.", "", .jfields(.get_phoneNumberUtil()$PhoneNumberType))
+  }
+  .pnu_cache$phone_type
 }
 
 validate_phone_type <- function(x) {
-  if (is.null(.phoneNumberUtil$phone_type)) {
-    .phoneNumberUtil$phone_type <- .get_phoneNumberType()
-  }
-  types <- .phoneNumberUtil$phone_type
+  types <- .get_phoneNumberType()
   if (!all(x %in% types)) {
     stop(
       "Some `x` values are unsupported phone types: ",
@@ -84,17 +86,17 @@ validate_phone_type <- function(x) {
 
 .get_phone_type_from_string <- function(x) {
   validate_phone_type(x)
-  if (is.null(.phoneNumberUtil$phone_types)) {
-    .phoneNumberUtil$phone_types <-
+  if (is.null(.pnu_cache$phone_types)) {
+    .pnu_cache$phone_types <-
       .jcall("com/google/i18n/phonenumbers/PhoneNumberUtil$PhoneNumberType",
              "[Lcom/google/i18n/phonenumbers/PhoneNumberUtil$PhoneNumberType;",
              "values")
     
-    names(.phoneNumberUtil$phone_types) <-
-      sapply(.phoneNumberUtil$phone_types, .jstrVal)
+    names(.pnu_cache$phone_types) <-
+      sapply(.pnu_cache$phone_types, .jstrVal)
   }
   
-  .phoneNumberUtil$phone_types[[x]]
+  .pnu_cache$phone_types[[x]]
 }
 
 .get_validationResult <- function() {
@@ -102,6 +104,11 @@ validate_phone_type <- function(x) {
 }
 
 # PhoneNumberUtil "get" functions
+.getCountryCodeForRegion <- function(x) {
+  x <- as.character(x)
+  .get_phoneNumberUtil()$getCountryCodeForRegion(x)
+}
+
 .getRegionCodeForCountryCode <- function(x) {
   suppressWarnings(x <- as.integer(x))
   .get_phoneNumberUtil()$getRegionCodeForCountryCode(x)
@@ -113,21 +120,39 @@ validate_phone_type <- function(x) {
 }
 
 .getSupportedCallingCodes <- function() {
-  .jset_to_str(.get_phoneNumberUtil()$getSupportedCallingCodes())
+  if (is.null(.pnu_cache$phone_calling_code)) {
+    .pnu_cache$phone_calling_code <-
+      .jset_to_str(.get_phoneNumberUtil()$getSupportedCallingCodes())
+  }
+  .pnu_cache$phone_calling_code
 }
+
+validate_phone_calling_code <- function(x) {
+  codes <- .getSupportedCallingCodes()
+  if (!all(x %in% codes)) {
+    stop(
+      "Some `x` values are unsupported international calling codes: ",
+      paste0(unique(x[!x %in% codes]), collapse = ", "),
+      call. = FALSE
+    )
+  }
   
+  x
+}
+
 .getSupportedRegions <- function() {
-  .jset_to_str(.get_phoneNumberUtil()$getSupportedRegions())
+  if (is.null(.pnu_cache$phone_country)) {
+    .pnu_cache$phone_country <-
+      .jset_to_str(.get_phoneNumberUtil()$getSupportedRegions())
+  }
+  .pnu_cache$phone_country
 }
 
 validate_phone_country <- function(x) {
-  if (is.null(.phoneNumberUtil$phone_country)) {
-    .phoneNumberUtil$phone_country <- .getSupportedRegions()
-  }
-  regions <- .phoneNumberUtil$phone_country
+  regions <- .getSupportedRegions()
   if (!all(x %in% regions)) {
     stop(
-      "Some `x` values are unsupported phone regions: ",
+      "Some `x` values are not supported ISO country codes: ",
       paste0(unique(x[!x %in% regions]), collapse = ", "),
       call. = FALSE
     )
