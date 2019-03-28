@@ -19,6 +19,7 @@ platform: x64
 environment:
   global:
     R_CHECK_ARGS: --no-multiarch --no-manual
+    R_BUILD_ARGS: --no-multiarch --no-manual
     USE_RTOOLS: true
 
   matrix:
