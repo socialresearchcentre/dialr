@@ -17,16 +17,11 @@ and [javadocs](https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumb
 
 ## Installation
 
-A compiled version of dialr can be installed from srclib, or a development version from github.
-dialr also needs the dialrjars package to run. This is updated regularly with libphonenumber updates.
-
 ``` r
-# Install the current compiled version from srclib:
-devtools::install_url("socialresearchcentre/srclib/R/dialr.zip")
-devtools::install_url("socialresearchcentre/srclib/R/dialrjars.zip")
-
-# Or the the development version from GitHub:
+# Install the development version from GitHub:
 devtools::install_github("socialresearchcentre/dialr")
+
+# dialr also needs the dialrjars package to run:
 devtools::install_github("socialresearchcentre/dialrjars")
 ```
 
@@ -56,7 +51,6 @@ the spirit of the libphonenumber package.
 
 ``` r
 library(dialr)
-library(dplyr)
 
 # Parse phone number vector
 x <- c(0, 0123, "0404 753 123", "61410123817")
@@ -71,6 +65,8 @@ format(x)
 format(x, home = "AU")
 
 # Use with dplyr
+library(dplyr)
+
 y <- tibble(id = 1:4,
             phone1 = c(0, 0123, "0404 753 123", "61410123817"),
             phone2 = c("03 9388 1234", 1234, "+12015550123", 0),
