@@ -65,11 +65,13 @@ new_phone <- function(x, region) {
            r)
   }
   
-  pb <- txtProgressBar(min = 0, max = length(x), style = 3)
+  show_pb <- isTRUE(getOption("dialr.show_progress")) && interactive()
+  
+  if (show_pb) pb <- txtProgressBar(min = 0, max = length(x), style = 3)
   out <- structure(
     mapply(
       function(p, r) {
-        setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
+        if (show_pb) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
         pn <- tryCatch({
           jfunc(p, r)
         }, error = function(e) {
@@ -89,7 +91,7 @@ new_phone <- function(x, region) {
     ),
     class = "phone"
   )
-  close(pb)
+  if (show_pb) close(pb)
   
   names(out) <- NULL
   out
@@ -145,7 +147,7 @@ is.phone <- function(x) inherits(x, "phone")
 
 #' @export
 `$.phone` <- function(x, ...) {
-  `[`(x, ...)
+  stop("$ operator is invalid for phone vectors", call. = FALSE)
 }
 
 #' @export
@@ -154,7 +156,8 @@ is.phone <- function(x) inherits(x, "phone")
     warning("Only `phone` class values can be inserted into a `phone` vector.\n",
             "The value will be converted to `phone` class with default home region `", getOption("dialr.home"), "`.",
             call. = FALSE)
-    value <- new_phone(as.character(value), getOption("dialr.home"))
+    value <- new_phone(as.character(value),
+                       rep(getOption("dialr.home"), length(value)))
   } else if (!is.phone(value) & !is.atomic(value)) {
     stop("Only `phone` class values can be inserted into a `phone` vector.\n",
          "The value provided can not be converted to `phone` class.",
@@ -171,7 +174,12 @@ is.phone <- function(x) inherits(x, "phone")
 
 #' @export
 `$<-.phone` <- function(x, i, value) {
-  `[<-`(x, i, value)
+  stop("$ operator is invalid for phone vectors", call. = FALSE)
+}
+
+#' @export
+`length<-.phone` <- function(x, value) {
+  structure(NextMethod(), class = "phone")
 }
 
 #' @export
@@ -184,7 +192,8 @@ c.phone <- function(..., recursive = FALSE) {
               call. = FALSE)
       
       if (is.atomic(value))
-        value <- new_phone(as.character(value), getOption("dialr.home"))
+        value <- new_phone(as.character(value),
+                           rep(getOption("dialr.home"), length(value)))
       else
         value <- NULL
       
@@ -213,16 +222,16 @@ print.phone <- function(x, n = 10, ...) {
       sum(is_parsed(x)), " successfully parsed",
       sep = "")
 
-  x <- vapply(unclass(x), function(x) { x$raw }, "")
+  x_raw <- vapply(unclass(x), function(x) { x$raw }, "")
   if (tot > n) {
     cat(" (showing first ", n, ")\n", sep = "")
-    print.default(head(x, n = n), quote = FALSE)
+    print.default(head(x_raw, n = n), quote = FALSE)
   } else {
     cat("\n")
-    print.default(x, quote = FALSE)
+    print.default(x_raw, quote = FALSE)
   }
   
-  invisible()
+  invisible(x)
 }
 
 # Dynamically exported, see zzz.R

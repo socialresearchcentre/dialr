@@ -1,10 +1,11 @@
-
+# nocov start
 .onLoad <- function(libname, pkgname) {
   op <- options()
   op.dialr <- list(
     dialr.name = "DIALR",
     dialr.home = "AU",
-    dialr.format = "E164"
+    dialr.format = "E164",
+    dialr.show_progress = TRUE
   )
   toset <- !(names(op.dialr) %in% names(op))
   if (any(toset)) options(op.dialr[toset])
@@ -53,3 +54,5 @@ register_s3_method <- function(pkg, generic, class, fun = NULL) {
     }
   )
 }
+
+# nocov end
