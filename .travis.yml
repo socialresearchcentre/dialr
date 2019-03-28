@@ -3,7 +3,7 @@
 language: R
 cache: packages
 
-before_script:
+before_install:
   - java -version
   - echo PATH=$PATH
   - echo JAVA_HOME=$JAVA_HOME
