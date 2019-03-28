@@ -4,7 +4,7 @@
   op.dialr <- list(
     dialr.name = "DIALR",
     dialr.home = "AU",
-    dialr.format = "NATIONAL"
+    dialr.format = "E164"
   )
   toset <- !(names(op.dialr) %in% names(op))
   if (any(toset)) options(op.dialr[toset])

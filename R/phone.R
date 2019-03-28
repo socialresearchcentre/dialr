@@ -7,8 +7,8 @@
 #' for extracting information from and performing processing on a parsed
 #' `Phonenumber` object. A text phone number must be parsed before any other
 #' operations (e.g. checking phone number validity, formatting) can be
-#' performed. When parsing a phone number a "default region" is required to
-#' determine the processing context for non-international numbers.
+#' performed. When parsing a phone number a ["default region"][dialr-region] is
+#' required to determine the processing context for non-international numbers.
 #'
 #' The `phone` class stores the raw phone number, the default region and a java
 #' phone object. The java object is cached so should persist between R sessions.
@@ -20,13 +20,13 @@
 #'   `phone()`: Phone numbers are parsed using
 #'   `PhoneNumberUtil.parseAndKeepRawInput()`. The `phone` class stores the
 #'   returned `Phonenumber.PhoneNumber` object alongside the original raw text
-#'   and country code for later reference.
+#'   and default region for later reference.
 #'
 #'   `format()`: `PhoneNumberUtil.format()` by default, or
 #'   `PhoneNumberUtil.formatOutOfCountryCallingNumber()` if `home` is provided.
 #'   
 #' @param x A character vector of phone numbers.
-#' @param country A character vector of [ISO country codes][dialr-region].
+#' @param region A character vector of [ISO country codes][dialr-region].
 #' @examples
 #'   x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #'   
@@ -37,41 +37,41 @@
 #' @name dialr-phone
 #' @family phone functions
 #' @export
-phone <- function(x, country) {
+phone <- function(x, region) {
   if (!is.atomic(x))  stop("`x` must be an atomic vector.", call. = FALSE)
   if (length(x) == 0)  stop("`x` must not be empty.", call. = FALSE)
-  if (length(x) > 1 & length(country) == 1) country <- rep(country, length(x))
-  if (length(x) != length(country)) stop("`x` and `country` vectors must be the same length.", call. = FALSE)
-  validate_phone_country(country)
+  if (length(x) > 1 & length(region) == 1) region <- rep(region, length(x))
+  if (length(x) != length(region)) stop("`x` and `region` vectors must be the same length.", call. = FALSE)
+  validate_phone_region(region)
 
   x <- as.character(x)
-  validate_phone(new_phone(x, country))
+  validate_phone(new_phone(x, region))
 }
 
 #' @importFrom utils txtProgressBar
 #' @importFrom utils getTxtProgressBar
 #' @importFrom utils setTxtProgressBar
-new_phone <- function(x, country) {
+new_phone <- function(x, region) {
   stopifnot(is.character(x))
-  stopifnot(is.character(country))
-  stopifnot(length(x) == length(country))
+  stopifnot(is.character(region))
+  stopifnot(length(x) == length(region))
 
   phone_util <- .get_phoneNumberUtil()
-  jfunc <- function(p, c) {
+  jfunc <- function(p, r) {
     .jcall(phone_util,
            "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
            "parseAndKeepRawInput",
            .jcast(.jnew("java/lang/String", p), "java/lang/CharSequence"),
-           c)
+           r)
   }
   
   pb <- txtProgressBar(min = 0, max = length(x), style = 3)
   out <- structure(
     mapply(
-      function(p, c) {
+      function(p, r) {
         setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
         pn <- tryCatch({
-          jfunc(p, c)
+          jfunc(p, r)
         }, error = function(e) {
           return(NULL)
         })
@@ -81,10 +81,10 @@ new_phone <- function(x, country) {
           .jcache(pn)
         
         list(raw = p,
-             country = c,
+             region = r,
              jobj = pn)
       },
-      x, country,
+      x, region,
       SIMPLIFY = FALSE
     ),
     class = "phone"
@@ -132,7 +132,7 @@ is.phone <- function(x) inherits(x, "phone")
 `[<-.phone` <- function(x, i, value) {
   if (!is.phone(value) & is.atomic(value)) {
     warning("Only `phone` class values can be inserted into a `phone` vector.\n",
-            "The value will be converted to `phone` class with default home country `", getOption("dialr.home"), "`.",
+            "The value will be converted to `phone` class with default home region `", getOption("dialr.home"), "`.",
             call. = FALSE)
     value <- new_phone(as.character(value), getOption("dialr.home"))
   } else if (!is.phone(value) & !is.atomic(value)) {
@@ -159,7 +159,7 @@ c.phone <- function(..., recursive = FALSE) {
   out <- lapply(list(...), function(value) {
     if (!is.phone(value)) {
       warning("Only `phone` class values can be added to a `phone` vector.\n",
-              "Atomic vectors will be converted to `phone` class with default home country `", getOption("dialr.home"), "`.\n",
+              "Atomic vectors will be converted to `phone` class with default home region `", getOption("dialr.home"), "`.\n",
               "Other objects will be dropped.",
               call. = FALSE)
       
@@ -239,8 +239,8 @@ pillar_shaft.phone <- function(x, ...) {
 #'   see notes from the [libphonenumber javadocs](https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.8/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html)
 #'   for more details.
 #'   
-#' @param home [ISO country code][dialr-region] for home country. If provided,
-#'   numbers will be formatted for dialing from the home country.
+#' @param home [ISO country code][dialr-region] for home region. If provided,
+#'   numbers will be formatted for dialing from the home region.
 #' @param clean Should non-numeric characters be removed? If `TRUE`, keeps
 #'   numbers and leading `+`
 #' @param strict Should invalid phone numbers be removed? If `TRUE` invalid
@@ -251,7 +251,7 @@ format.phone <- function(x, format = c("E164", "NATIONAL", "INTERNATIONAL", "RFC
   format <- match.arg(format)
 
   validate_phone_format(format)
-  validate_phone_country(home)
+  validate_phone_region(home)
 
   phone_util <- .get_phoneNumberUtil()
   format <- .get_phone_format_from_string(format)
@@ -368,7 +368,7 @@ is_valid <- function(x) {
 #'   type.
 #' @export
 is_possible <- function(x, detailed = FALSE, type = NULL) {
-  if (!is.phone(x)) stop("`x` should be a vector of class `phone`")
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
   validate_phone_type(type)
   
   phone_util <- .get_phoneNumberUtil()
@@ -491,7 +491,7 @@ get_regions_for_calling_code <- function(x) {
 #' `get_type(x)` returns the phone number type for each element of a [phone]
 #' vector.
 #'
-#' Valid phone number types differ by country. `get_types_for_region(x)` returns
+#' Valid phone number types differ by region. `get_types_for_region(x)` returns
 #' a list of character vectors of valid types for each provided
 #' [ISO country code][dialr-region]. Use `get_supported_types()` to see a full
 #' list of supported types.
@@ -541,14 +541,14 @@ get_supported_types <- function() {
 #' @rdname dialr-type
 #' @export
 get_types_for_region <- function(x) {
-  validate_phone_country(x)
+  validate_phone_region(x)
   lapply(x, .getSupportedTypesForRegion)
 }
 
 #' Get an example phone number
 #'
-#' Produces example phone numbers for the given [`country`][dialr-region] and
-#' [`type`][dialr-type] combinations. The `country`, `type` and valid vectors
+#' Produces example phone numbers for the given [`region`][dialr-region] and
+#' [`type`][dialr-type] combinations. The `region`, `type` and valid vectors
 #' are recycled if a vector of length 1 is provided.
 #'
 #' @section libphonenumber reference:
@@ -557,7 +557,7 @@ get_types_for_region <- function(x) {
 #'   `PhoneNumberUtil.getExampleNumber()` if `type` is `NULL` or `NA`;
 #'   `PhoneNumberUtil.getInvalidExampleNumber()` if `valid` is `FALSE`.
 #'
-#' @param country A character vector of [ISO country codes][dialr-region].
+#' @param region A character vector of [ISO country codes][dialr-region].
 #' @param type A character vector of [phone number types][dialr-type]. If
 #'   `NULL` (default), returns an example "FIXED_LINE" number.
 #' @param valid A logical vector. For each `FALSE` entry, `get_example` returns
@@ -578,11 +578,11 @@ get_types_for_region <- function(x) {
 #'             c(NA,   "MOBILE", NA   ),
 #'             c(TRUE, TRUE,     FALSE))
 #' @export
-get_example <- function(country, type = NULL, valid = TRUE) {
-  vec_length <- max(length(country), length(type), length(valid))
+get_example <- function(region, type = NULL, valid = TRUE) {
+  vec_length <- max(length(region), length(type), length(valid))
   
-  if (vec_length > 1 & length(country) == 1) country <- rep(country, vec_length)
-  validate_phone_country(country)
+  if (vec_length > 1 & length(region) == 1) region <- rep(region, vec_length)
+  validate_phone_region(region)
   
   if (is.null(type)) {
     type <- rep(NA_character_, vec_length)
@@ -594,41 +594,41 @@ get_example <- function(country, type = NULL, valid = TRUE) {
   if (vec_length > 1 & length(valid) == 1) valid <- rep(valid, vec_length)
   stopifnot(is.logical(valid))
   
-  if (!all(length(country) == vec_length,
+  if (!all(length(region) == vec_length,
            length(type) == vec_length,
            length(valid) == vec_length))
-    stop("`country`, `type` and `valid` vectors must be the same length where provided.", call. = FALSE)
+    stop("`region`, `type` and `valid` vectors must be the same length where provided.", call. = FALSE)
   
   phone_util <- .get_phoneNumberUtil()
   format <- .get_phone_format_from_string("E164")
   
   out <- structure(
-    mapply(function(c, t, v) {
+    mapply(function(r, t, v) {
       if (!v) {
         pn <- .jcall(phone_util,
                      "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
                      "getInvalidExampleNumber",
-                     c)
+                     r)
       } else if (is.na(t)) {
         pn <- .jcall(phone_util,
                      "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
                      "getExampleNumber",
-                     c)
+                     r)
       } else {
         pn <- .jcall(phone_util,
                      "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
                      "getExampleNumberForType",
-                     c, .get_phone_type_from_string(t))
+                     r, .get_phone_type_from_string(t))
       }
       .jcache(pn)
       
       p <- .jcall(phone_util, "S", "format", pn, format)
       
       list(raw = p,
-           country = c,
+           region = r,
            jobj = pn)
     },
-    country, type, valid,
+    region, type, valid,
     SIMPLIFY = FALSE),
     class = "phone"
   )

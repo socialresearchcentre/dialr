@@ -27,7 +27,7 @@ Cost, VoIP, Personal Numbers, UAN, Pager, and Voicemail (whenever feasible).
 \code{get_type(x)} returns the phone number type for each element of a \link{phone}
 vector.
 
-Valid phone number types differ by country. \code{get_types_for_region(x)} returns
+Valid phone number types differ by region. \code{get_types_for_region(x)} returns
 a list of character vectors of valid types for each provided
 \link[=dialr-region]{ISO country code}. Use \code{get_supported_types()} to see a full
 list of supported types.

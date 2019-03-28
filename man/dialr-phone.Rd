@@ -10,7 +10,7 @@
 \alias{as.character.phone}
 \title{dialr phone class}
 \usage{
-phone(x, country)
+phone(x, region)
 
 phone_reparse(x)
 
@@ -26,7 +26,7 @@ is.phone(x)
 \arguments{
 \item{x}{A character vector of phone numbers.}
 
-\item{country}{A character vector of \link[=dialr-region]{ISO country codes}.}
+\item{region}{A character vector of \link[=dialr-region]{ISO country codes}.}
 
 \item{n}{Number of elements to print}
 
@@ -43,8 +43,8 @@ is.phone(x)
 see notes from the \href{https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.8/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html}{libphonenumber javadocs}
 for more details.}
 
-\item{home}{\link[=dialr-region]{ISO country code} for home country. If provided,
-numbers will be formatted for dialing from the home country.}
+\item{home}{\link[=dialr-region]{ISO country code} for home region. If provided,
+numbers will be formatted for dialing from the home region.}
 
 \item{clean}{Should non-numeric characters be removed? If \code{TRUE}, keeps
 numbers and leading \code{+}}
@@ -63,8 +63,8 @@ libphonenumber defines the \code{PhoneNumberUtil} class, with a set of functions
 for extracting information from and performing processing on a parsed
 \code{Phonenumber} object. A text phone number must be parsed before any other
 operations (e.g. checking phone number validity, formatting) can be
-performed. When parsing a phone number a "default region" is required to
-determine the processing context for non-international numbers.
+performed. When parsing a phone number a \link[=dialr-region]{"default region"} is
+required to determine the processing context for non-international numbers.
 
 The \code{phone} class stores the raw phone number, the default region and a java
 phone object. The java object is cached so should persist between R sessions.
@@ -77,7 +77,7 @@ the original phone number and region.
 \code{phone()}: Phone numbers are parsed using
 \code{PhoneNumberUtil.parseAndKeepRawInput()}. The \code{phone} class stores the
 returned \code{Phonenumber.PhoneNumber} object alongside the original raw text
-and country code for later reference.
+and default region for later reference.
 
 \code{format()}: \code{PhoneNumberUtil.format()} by default, or
 \code{PhoneNumberUtil.formatOutOfCountryCallingNumber()} if \code{home} is provided.

@@ -4,10 +4,10 @@
 \alias{get_example}
 \title{Get an example phone number}
 \usage{
-get_example(country, type = NULL, valid = TRUE)
+get_example(region, type = NULL, valid = TRUE)
 }
 \arguments{
-\item{country}{A character vector of \link[=dialr-region]{ISO country codes}.}
+\item{region}{A character vector of \link[=dialr-region]{ISO country codes}.}
 
 \item{type}{A character vector of \link[=dialr-type]{phone number types}. If
 \code{NULL} (default), returns an example "FIXED_LINE" number.}
@@ -19,8 +19,8 @@ an example invalid number, and \code{type} is ignored.}
 A \code{\link{phone}} vector
 }
 \description{
-Produces example phone numbers for the given \code{\link[=dialr-region]{country}} and
-\code{\link[=dialr-type]{type}} combinations. The \code{country}, \code{type} and valid vectors
+Produces example phone numbers for the given \code{\link[=dialr-region]{region}} and
+\code{\link[=dialr-type]{type}} combinations. The \code{region}, \code{type} and valid vectors
 are recycled if a vector of length 1 is provided.
 }
 \section{libphonenumber reference}{
