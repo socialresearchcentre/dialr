@@ -4,6 +4,9 @@ cc <- data.frame(country = names(dialr:::cc_lookup),
                  region  = dialr:::cc_lookup,
                  stringsAsFactors = FALSE)
 
+# filter out non-printable characters
+cc <- cc[grepl("^[[:print:]]*$", cc$country), ]
+
 test_that("get_cc", {
   expect_equal(get_cc(cc$country), cc$region)
   expect_equal(get_cc(tolower(cc$country)), cc$region)
