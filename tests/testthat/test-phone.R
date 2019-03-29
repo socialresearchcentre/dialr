@@ -8,11 +8,19 @@ test_that("phone vector created successfully", {
   expect_error(phone(ph_raw, c("AU", "AU")))
   expect_error(phone(ph_raw, "ERROR"))
   
+  expect_error(dialr:::validate_phone(structure(ph_raw, class = "phone")))
+  expect_error(dialr:::validate_phone(structure(as.list(ph_raw), class = "phone")))
+  
   skip_equal()
   expect_equal(phone(ph_raw, "AU"), ph)
   expect_equal(dialr:::validate_phone(ph), ph)
 })
 
+test_that("phone_reparse", {
+  expect_error(phone_reparse(FALSE))
+  expect_is(phone_reparse(ph), "phone")
+})
+  
 test_that("phone class objects are created correctly", {
   expect_true(is.phone(ph))
   expect_false(is.phone(ph_raw))
@@ -102,3 +110,17 @@ test_that("phone concatenation", {
   
   expect_equal(rep(ph, 5), c(ph, ph, ph, ph, ph))
 })
+
+test_that("length assignment", {
+  skip_equal()
+  expect_equal({length(ph) <- 3; ph}, ph[1:3])
+})
+
+
+test_that("phone print", {
+  expect_known_output(print(ph), file = "phone_print.txt")
+  expect_known_output(print(rep(ph, 5)), file = "phone_print_n10.txt")
+  expect_known_output(print(rep(ph, 5), n = 20), file = "phone_print_n20.txt")
+})
+
+

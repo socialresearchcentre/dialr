@@ -1,0 +1,3 @@
+# Parsed phone numbers: 6 total, 5 successfully parsed
+[1] 0            123          0412 345 678 61412987654  03 9123 4567
+[6] +12015550123

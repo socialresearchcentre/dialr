@@ -2,7 +2,7 @@
 # rJava helpers
 .jset_to_str <- function(o) {
   vapply(.jcall(o, "[Ljava/lang/Object;", "toArray"),
-         .jstrVal, character(1))
+         .jstrVal, "", USE.NAMES = FALSE)
 }
 
 .pnu_cache <- new.env(parent = emptyenv())
@@ -57,7 +57,7 @@ validate_phone_format <- function(x) {
              "values")
     
     names(.pnu_cache$formats) <-
-      sapply(.pnu_cache$formats, .jstrVal)
+      vapply(.pnu_cache$formats, .jstrVal, "", USE.NAMES = FALSE)
   }
   
   .pnu_cache$formats[[x]]
@@ -93,7 +93,7 @@ validate_phone_type <- function(x) {
              "values")
     
     names(.pnu_cache$types) <-
-      sapply(.pnu_cache$types, .jstrVal)
+      vapply(.pnu_cache$types, .jstrVal, "", USE.NAMES = FALSE)
   }
   
   .pnu_cache$types[[x]]

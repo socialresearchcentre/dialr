@@ -2,7 +2,7 @@ context("get functions")
 
 test_that("get_supported_regions", {
   expect_is(get_supported_regions(), "character")
-  expect_true(all(sapply(get_supported_regions(), nchar) == 2))
+  expect_match(get_supported_regions(), "^[A-Z]{2}$")
 })
 
 test_that("get_region", {
@@ -13,8 +13,25 @@ test_that("get_region", {
   expect_equal(get_region(get_example(region = regions)), regions)
 })
 
+cc <- c(1, 61, 84)
+  
+test_that("get_region_for_calling_code", {
+  expect_error(get_region_for_calling_code(FALSE))
+  expect_is(get_region_for_calling_code(cc), "character")
+  expect_match(get_region_for_calling_code(cc), "^[A-Z]{2}$")
+})
+
+test_that("get_regions_for_calling_code", {
+  expect_error(get_regions_for_calling_code(FALSE))
+  expect_is(get_regions_for_calling_code(cc), "list")
+  expect_equal(length(get_regions_for_calling_code(cc)), length(cc))
+  expect_true(all(sapply(get_regions_for_calling_code(cc),
+                         function(x) { all(grepl("^[A-Z]{2}$", x)) })))
+})
+
 test_that("get_supported_types", {
   expect_is(get_supported_types(), "character")
+  expect_match(get_supported_types(), "^[A-Z_]+$")
 })
 
 test_that("get_types_for_region", {

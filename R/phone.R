@@ -98,12 +98,14 @@ new_phone <- function(x, region) {
 }
 
 validate_phone <- function(x) {
-  stopifnot(is.phone(x))
+  if (!inherits(x, "phone"))
+    stop("`x` must be a vector of class `phone`", call. = FALSE)
   
   x_raw <- unclass(x)
   
   # check structure
-  if (!(all(sapply(x_raw, length) == 3) &
+  if (!(is.list(x_raw) &
+        all(sapply(x_raw, length) == 3) &
         all(sapply(x_raw, function(x) { exists("raw", x) })) &
         all(sapply(x_raw, function(x) { exists("region", x) })) &
         all(sapply(x_raw, function(x) { exists("jobj", x) })))) {
@@ -117,7 +119,7 @@ validate_phone <- function(x) {
       call. = FALSE
     )
   }
-      
+
   x
 }
 
@@ -127,8 +129,8 @@ phone_reparse <- function(x) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   
   x <- unclass(x)
-  new_phone(sapply(x, function(x) { x$raw }),
-            sapply(x, function(x) { x$region }))
+  new_phone(vapply(x, function(x) { x$raw }, "", USE.NAMES = FALSE),
+            vapply(x, function(x) { x$region }, "", USE.NAMES = FALSE))
 }
 
 #' @rdname dialr-phone
@@ -222,7 +224,7 @@ print.phone <- function(x, n = 10, ...) {
       sum(is_parsed(x)), " successfully parsed",
       sep = "")
 
-  x_raw <- vapply(unclass(x), function(x) { x$raw }, "")
+  x_raw <- vapply(unclass(x), function(x) { x$raw }, "", USE.NAMES = FALSE)
   if (tot > n) {
     cat(" (showing first ", n, ")\n", sep = "")
     print.default(head(x_raw, n = n), quote = FALSE)
@@ -313,7 +315,7 @@ summary.phone <- function(object, ...) {
 #' @export
 as.character.phone <- function(x, raw = TRUE, ...) {
   if (raw) {
-    x <- vapply(unclass(x), function(x) { x$raw }, "")
+    x <- vapply(unclass(x), function(x) { x$raw }, "", USE.NAMES = FALSE)
     NextMethod()
   } else {
     as.character.default(format(x, ...))
@@ -324,7 +326,7 @@ phone_apply <- function(x, fun) {
   sapply(unclass(x), function(d) {
     if (!typeof(d$jobj) %in% "S4") return(NA)
     fun(d$jobj)
-  })
+  }, USE.NAMES = FALSE)
 }
 
 #' Phone number validity checks
@@ -372,7 +374,7 @@ NULL
 #' @export
 is_parsed <- function(x) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
-  sapply(unclass(x), function(pn) { typeof(pn$jobj) %in% "S4" })
+  sapply(unclass(x), function(pn) { typeof(pn$jobj) %in% "S4" }, USE.NAMES = FALSE)
 }
 
 #' @rdname dialr-valid
@@ -497,7 +499,7 @@ get_supported_regions <- function() {
 #' @export
 get_region_for_calling_code <- function(x) {
   validate_phone_calling_code(x)
-  vapply(x, .getRegionCodeForCountryCode, "")
+  vapply(x, .getRegionCodeForCountryCode, "", USE.NAMES = FALSE)
 }
 
 #' @rdname dialr-region
