@@ -4,8 +4,8 @@ cc <- data.frame(country = names(dialr:::cc_lookup),
                  region  = dialr:::cc_lookup,
                  stringsAsFactors = FALSE)
 
-# filter out non-printable characters
-cc <- cc[grepl("^[[:print:]]*$", cc$country), ]
+# remove non-ASCII
+cc <- cc[!grepl("I_WAS_NOT_ASCII", iconv(cc$country, "UTF-8", "ASCII", sub = "I_WAS_NOT_ASCII")), ]
 
 test_that("get_cc", {
   expect_equal(get_cc(cc$country), cc$region)
