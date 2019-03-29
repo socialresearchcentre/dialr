@@ -1,11 +1,11 @@
 context("cc functions")
 
-cc <- data.frame(country = names(dialr:::cc_lookup),
-                 region  = dialr:::cc_lookup,
-                 stringsAsFactors = FALSE)
-
 # remove non-ASCII
-cc <- cc[!grepl("I_WAS_NOT_ASCII", iconv(cc$country, "UTF-8", "ASCII", sub = "I_WAS_NOT_ASCII")), ]
+cc_lkp <- dialr:::cc_lookup[!grepl("I_WAS_NOT_ASCII", iconv(names(dialr:::cc_lookup), "UTF-8", "ASCII", sub = "I_WAS_NOT_ASCII"))]
+
+cc <- data.frame(country = names(cc_lkp),
+                 region  = cc_lkp,
+                 stringsAsFactors = FALSE)
 
 test_that("get_cc", {
   expect_equal(get_cc(cc$country), cc$region)
