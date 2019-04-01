@@ -2,7 +2,7 @@
 #' Get ISO country code
 #'
 #' @param country A character vector of country names
-#' @return A vector of ISO country codes (NA where not found)
+#' @return A vector of ISO country codes (`NA` where not found)
 #' @export
 get_cc <- function(country) {
   country <- toupper(country)

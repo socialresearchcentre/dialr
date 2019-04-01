@@ -41,7 +41,10 @@ is.phone(x)
 }
 
 see notes from the \href{https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.8/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html}{libphonenumber javadocs}
-for more details.}
+for more details.
+
+\code{format} defaults to \code{"E164"}. The default can be set in option
+\code{dialr.format}.}
 
 \item{home}{\link[=dialr-region]{ISO country code} for home region. If provided,
 numbers will be formatted for dialing from the home region.}
@@ -70,6 +73,10 @@ The \code{phone} class stores the raw phone number, the default region and a jav
 phone object. The java object is cached so should persist between R sessions.
 In case of issues, use \code{phone_reparse()} to recreate the \code{phone} vector from
 the original phone number and region.
+
+Phone number parsing functions display a progress bar in interactive sessions
+by default. This can be disabled by setting option \code{dialr.show_progress} to
+\code{FALSE}.
 }
 \section{libphonenumber reference}{
 

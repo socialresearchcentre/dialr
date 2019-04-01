@@ -12,6 +12,14 @@
 #' [github](https://github.com/googlei18n/libphonenumber) and
 #' [javadocs](https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/).
 #'
+#' @section Options:
+#' - `dialr.home`: The default region used to process phone numbers where no
+#' region is provided. (default: `"AU"`).
+#' - `dialr.format`: The default format used to print clean phone numbers. See
+#' [format.phone()] for details. (default: `"E164"`).
+#' - `dialr.show_progress`: Should lengthy operations such as [phone()] show a
+#' progress bar? (default: `TRUE`).
+#'
 #' @examples
 #' library(dialr)
 #'

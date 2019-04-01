@@ -4,7 +4,7 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN status](https://www.r-pkg.org/badges/version/dialr)](https://cran.r-project.org/package=dialr)
 [![Travis build status](https://travis-ci.org/socialresearchcentre/dialr.svg?branch=master)](https://travis-ci.org/socialresearchcentre/dialr)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/socialresearchcentre/dialr?branch=master&svg=true)](https://ci.appveyor.com/project/socialresearchcentre/dialr)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/socialresearchcentre/dialr?branch=master&svg=true)](https://ci.appveyor.com/project/gorcha/dialr)
 [![Coverage status](https://codecov.io/gh/socialresearchcentre/dialr/branch/master/graph/badge.svg)](https://codecov.io/github/socialresearchcentre/dialr?branch=master)
 
 ## Overview
@@ -40,7 +40,8 @@ processing context for non-international numbers. A set of functions in the
 `PhoneNumberUtil` class can perform various operations on the resulting
 `Phonenumber` object.
 
-dialr provides an interface to these functions to easily parse and process phone numbers in R.
+dialr provides an interface to these functions to easily parse and process phone
+numbers in R.
 
 ### phone class
 

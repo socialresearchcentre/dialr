@@ -7,10 +7,10 @@
 check_cc(country)
 }
 \arguments{
-\item{country}{Vector of ISO country codes}
+\item{country}{A character vector of ISO country codes}
 }
 \value{
-logical vector flagging which elements are valid ISO country codes
+A logical vector flagging which elements are valid ISO country codes
 }
 \description{
 Check ISO country code

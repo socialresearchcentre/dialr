@@ -15,6 +15,10 @@
 #' In case of issues, use `phone_reparse()` to recreate the `phone` vector from
 #' the original phone number and region.
 #' 
+#' Phone number parsing functions display a progress bar in interactive sessions
+#' by default. This can be disabled by setting option `dialr.show_progress` to
+#' `FALSE`.
+#'
 #' @section libphonenumber reference:
 #'
 #'   `phone()`: Phone numbers are parsed using
@@ -103,9 +107,11 @@ validate_phone <- function(x) {
   
   x_raw <- unclass(x)
   
+  if ((!is.list(x_raw)) | (!all(sapply(x_raw, function(x) { is.list(x) }))))
+    stop("`x` must be a list of lists", call. = FALSE)
+
   # check structure
-  if (!(is.list(x_raw) &
-        all(sapply(x_raw, length) == 3) &
+  if (!(all(sapply(x_raw, length) == 3) &
         all(sapply(x_raw, function(x) { exists("raw", x) })) &
         all(sapply(x_raw, function(x) { exists("region", x) })) &
         all(sapply(x_raw, function(x) { exists("jobj", x) })))) {
@@ -270,6 +276,9 @@ pillar_shaft.phone <- function(x, ...) {
 #'   see notes from the [libphonenumber javadocs](https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.8/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html)
 #'   for more details.
 #'   
+#'   `format` defaults to `"E164"`. The default can be set in option
+#'   `dialr.format`.
+#'   
 #' @param home [ISO country code][dialr-region] for home region. If provided,
 #'   numbers will be formatted for dialing from the home region.
 #' @param clean Should non-numeric characters be removed? If `TRUE`, keeps
@@ -279,6 +288,9 @@ pillar_shaft.phone <- function(x, ...) {
 #' @export
 format.phone <- function(x, format = c("E164", "NATIONAL", "INTERNATIONAL", "RFC3966"),
                          home = NULL, clean = TRUE, strict = FALSE, ...) {
+  if (identical(format, eval(formals()$format)))
+    format <- getOption("dialr.format")
+  
   format <- match.arg(format)
 
   validate_phone_format(format)
@@ -526,7 +538,7 @@ get_regions_for_calling_code <- function(x) {
 #' a list of character vectors of valid types for each provided
 #' [ISO country code][dialr-region]. Use `get_supported_types()` to see a full
 #' list of supported types.
-#'
+#' 
 #' @section libphonenumber reference:
 #'
 #'   `get_type()`: `PhoneNumberUtil.getNumberType()`

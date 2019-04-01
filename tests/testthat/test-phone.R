@@ -8,8 +8,15 @@ test_that("phone vector created successfully", {
   expect_error(phone(ph_raw, c("AU", "AU")))
   expect_error(phone(ph_raw, "ERROR"))
   
+  expect_error(dialr:::validate_phone(ph_raw))
   expect_error(dialr:::validate_phone(structure(ph_raw, class = "phone")))
   expect_error(dialr:::validate_phone(structure(as.list(ph_raw), class = "phone")))
+  expect_error(dialr:::validate_phone(structure(lapply(unclass(ph),
+                                                       function(x) {
+                                                         x$jobj <- NULL
+                                                         x
+                                                       }),
+                                                class = "phone")))
   
   skip_equal()
   expect_equal(phone(ph_raw, "AU"), ph)

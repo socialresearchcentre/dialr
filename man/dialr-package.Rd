@@ -19,6 +19,18 @@ For a full rundown of libphonenumber see their
 \href{https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/}{javadocs}.
 }
 
+\section{Options}{
+
+\itemize{
+\item \code{dialr.home}: The default region used to process phone numbers where no
+region is provided. (default: \code{"AU"}).
+\item \code{dialr.format}: The default format used to print clean phone numbers. See
+\code{\link[=format.phone]{format.phone()}} for details. (default: \code{"E164"}).
+\item \code{dialr.show_progress}: Should lengthy operations such as \code{\link[=phone]{phone()}} show a
+progress bar? (default: \code{TRUE}).
+}
+}
+
 \examples{
 library(dialr)
 
