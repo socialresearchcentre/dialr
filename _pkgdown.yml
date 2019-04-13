@@ -1,0 +1,28 @@
+url: https://socialresearchcentre.github.io/dialr
+
+development:
+  mode: auto
+  
+reference:
+  - title: Phone class functions
+    desc: ~
+    contents:
+    - dialr-phone
+    - dialr-valid
+    - dialr-region
+    - dialr-type
+    - get_example
+  
+  - title: One-shot methods
+    - ph_example
+    - ph_format
+    - ph_possible
+    - ph_region
+    - ph_type
+    - ph_valid
+    
+  - title: Country code helpers
+    contents:
+    - get_cc
+    - check_cc
+    
