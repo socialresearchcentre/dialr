@@ -13,8 +13,8 @@ static values. Most operations are now approx. 10 times faster.
 
 * Improved function documentation.
 
-* More region and type functions implemented. See ``?`dialr-region``` or
-``?`dialr-type``` for details.
+* More region and type functions implemented. See `` ?`dialr-region` `` or
+`` ?`dialr-type` `` for details.
 
 * `get_example` expanded to offer more options.
 
