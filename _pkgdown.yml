@@ -14,6 +14,7 @@ reference:
     - get_example
   
   - title: One-shot methods
+    contents:
     - ph_example
     - ph_format
     - ph_possible
@@ -25,4 +26,4 @@ reference:
     contents:
     - get_cc
     - check_cc
-    
+
