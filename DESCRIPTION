@@ -25,6 +25,7 @@ Imports:
     rJava
 Suggests: 
     covr,
+    dplyr,
     knitr,
     pillar,
     rmarkdown,
