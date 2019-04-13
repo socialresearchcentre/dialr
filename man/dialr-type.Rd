@@ -5,7 +5,7 @@
 \alias{get_type}
 \alias{get_supported_types}
 \alias{get_types_for_region}
-\title{Phone number types}
+\title{Phone number type.}
 \usage{
 get_type(x)
 
@@ -14,12 +14,15 @@ get_supported_types()
 get_types_for_region(x)
 }
 \arguments{
-\item{x}{A \code{\link{phone}} vector, or a character vector of \link[=dialr-region]{ISO country codes}}
+\item{x}{A \code{\link{phone}} vector, or a character vector of \link[=dialr-region]{ISO country codes}.}
+}
+\value{
+A character vector of phone types.
+
+\code{get_types_for_region()} returns a list of character vectors for each
+provided country code.
 }
 \description{
-Functions for working with phone number types.
-}
-\details{
 In addition to validity, libphonenumber can identify phone number type - it
 is able to distinguish Fixed-line, Mobile, Toll-free, Premium Rate, Shared
 Cost, VoIP, Personal Numbers, UAN, Pager, and Voicemail (whenever feasible).
@@ -43,14 +46,17 @@ list of supported types.
 }
 
 \examples{
+  # Get phone types for a phone vector
   x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
   get_type(x)
   
+  # All supported phone types
   get_supported_types()
   
+  # Get supported types for specified regions
   get_types_for_region("AU")
   get_types_for_region(c("GB", "US"))
-  get_types_for_region(get_supported_regions())
+  get_types_for_region(get_supported_regions())[1:5]
   
 }
 \seealso{

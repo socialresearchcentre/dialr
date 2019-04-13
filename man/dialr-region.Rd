@@ -6,7 +6,7 @@
 \alias{get_supported_regions}
 \alias{get_region_for_calling_code}
 \alias{get_regions_for_calling_code}
-\title{Phone number regions}
+\title{Phone number region.}
 \usage{
 get_region(x)
 
@@ -17,12 +17,15 @@ get_region_for_calling_code(x)
 get_regions_for_calling_code(x)
 }
 \arguments{
-\item{x}{A \code{\link{phone}} vector}
+\item{x}{A \code{\link{phone}} vector, or a vector of calling codes.}
+}
+\value{
+A character vector of country codes.
+
+\code{get_regions_for_calling_code()} returns a list of character vectors for
+each provided calling code.
 }
 \description{
-Functions for working with phone number regions.
-}
-\details{
 In libphonenumber a phone number region is represented by a 2 digit ISO
 country code. \code{get_region(x)} returns the ISO country code for each element
 of a \link{phone} vector.
@@ -50,12 +53,17 @@ regions for each.
 }
 
 \examples{
+  # Get regions for a phone vector
   x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
   get_region(x)
 
+  # All supported region codes
   get_supported_regions()
   
+  # Primary region for a calling code
   get_region_for_calling_code(c(1, 61, 84))
+  
+  # All regions for a calling code
   get_regions_for_calling_code(c(1, 61, 84))
   
 }

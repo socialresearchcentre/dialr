@@ -12,6 +12,8 @@
   
   register_s3_method("pillar", "pillar_shaft", "phone")
   register_s3_method("pillar", "type_sum", "phone")
+  register_s3_method("pillar", "is_vector_s3", "phone")
+  register_s3_method("pillar", "obj_sum", "phone")
   
   invisible()
 }

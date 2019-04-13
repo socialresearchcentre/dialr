@@ -8,7 +8,7 @@
 \alias{print.phone}
 \alias{format.phone}
 \alias{as.character.phone}
-\title{dialr phone class}
+\title{Phone number parsing and formatting.}
 \usage{
 phone(x, region)
 
@@ -28,19 +28,19 @@ is.phone(x)
 
 \item{region}{A character vector of \link[=dialr-region]{ISO country codes}.}
 
-\item{n}{Number of elements to print}
+\item{n}{Number of elements to print.}
 
 \item{...}{Additional arguments for specific methods.}
 
 \item{format}{Phone number format to use based on one of four standards:
 \itemize{
-\item "E164": general format for international telephone numbers from \href{https://en.wikipedia.org/wiki/E.164}{ITU-T Recommendation E.164}
-\item "NATIONAL": national notation from \href{https://en.wikipedia.org/wiki/E.123}{ITU-T Recommendation E.123}
-\item "INTERNATIONAL": international notation from \href{https://en.wikipedia.org/wiki/E.123}{ITU-T Recommendation E.123}
-\item "RFC3966": "tel" URI syntax from the IETF \href{https://datatracker.ietf.org/doc/rfc3966/}{tel URI for Telephone Numbers}
+\item \code{"E164"}: general format for international telephone numbers from \href{https://en.wikipedia.org/wiki/E.164}{ITU-T Recommendation E.164}
+\item \code{"NATIONAL"}: national notation from \href{https://en.wikipedia.org/wiki/E.123}{ITU-T Recommendation E.123}
+\item \code{"INTERNATIONAL"}: international notation from \href{https://en.wikipedia.org/wiki/E.123}{ITU-T Recommendation E.123}
+\item \code{"RFC3966"}: "tel" URI syntax from the IETF \href{https://datatracker.ietf.org/doc/rfc3966/}{tel URI for Telephone Numbers}
 }
 
-see notes from the \href{https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.8/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html}{libphonenumber javadocs}
+See notes from the \href{https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.9/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html}{libphonenumber javadocs}
 for more details.
 
 \code{format} defaults to \code{"E164"}. The default can be set in option
@@ -50,16 +50,17 @@ for more details.
 numbers will be formatted for dialing from the home region.}
 
 \item{clean}{Should non-numeric characters be removed? If \code{TRUE}, keeps
-numbers and leading \code{+}}
+numbers and leading \code{+}.}
 
 \item{strict}{Should invalid phone numbers be removed? If \code{TRUE} invalid
-numbers are replaced with \code{NA}}
+numbers are replaced with \code{NA}.}
 
-\item{raw}{If \code{TRUE}, the raw phone number is returned. Otherwise elements are cleaned with \code{format()}}
+\item{raw}{If \code{TRUE}, the raw phone number is returned. Otherwise elements
+are cleaned with \code{format()}.}
 }
 \description{
-The phone class parses phone numbers into java objects for further
-processing in libphonenumber.
+A phone vector stores phone numbers parsed with libphonenumber for formatting
+and further processing.
 }
 \details{
 libphonenumber defines the \code{PhoneNumberUtil} class, with a set of functions

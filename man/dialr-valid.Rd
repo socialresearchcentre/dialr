@@ -5,7 +5,7 @@
 \alias{is_parsed}
 \alias{is_valid}
 \alias{is_possible}
-\title{Phone number validity checks}
+\title{Phone number validity checks.}
 \usage{
 is_parsed(x)
 
@@ -18,21 +18,33 @@ is_possible(x, detailed = FALSE, type = NULL)
 
 \item{detailed}{If \code{FALSE}, \code{is_possible} returns a logical vector. If
 \code{TRUE}, it returns a character vector with "IS_POSSIBLE" or the reason for
-failure.}
+failure. See details for possible return values.}
 
-\item{type}{If provided, checks if \code{x} is possible for the given phone number
-type.}
+\item{type}{If provided, checks if \code{x} is possible for the given \link[=dialr-region]{phone number type}.}
 }
 \description{
-These functions check the validity of phone numbers.
-}
-\details{
 For each element of \code{x}:
 \itemize{
 \item \code{is_parsed(x)}: was this successfully parsed?
 \item \code{is_valid(x)}: is this a valid phone number?
 \item \code{is_possible(x)}: is this a possible phone number? Return type depends on
 \code{detailed}.
+}
+}
+\details{
+Possible return values for \code{is_possible(x, detailed = TRUE)}:
+\itemize{
+\item \code{"INVALID_COUNTRY_CODE"}: The number has an invalid country calling code.
+\item \code{"INVALID_LENGTH"}: The number is longer than the shortest valid numbers
+for this region, shorter than the longest valid numbers for this region,
+and does not itself have a number length that matches valid numbers for
+this region.
+\item \code{"IS_POSSIBLE"}: The number length matches that of valid numbers for this
+region.
+\item \code{"IS_POSSIBLE_LOCAL_ONLY"}: The number length matches that of local numbers
+for this region only (i.e.
+\item \code{"TOO_LONG"}: The number is longer than all valid numbers for this region.
+\item \code{"TOO_SHORT"}: The number is shorter than all valid numbers for this region
 }
 }
 \section{libphonenumber reference}{

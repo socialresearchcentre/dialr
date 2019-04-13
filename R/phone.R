@@ -1,8 +1,8 @@
-#' dialr phone class
+#' Phone number parsing and formatting.
 #'
-#' The phone class parses phone numbers into java objects for further
-#' processing in libphonenumber.
-#' 
+#' A phone vector stores phone numbers parsed with libphonenumber for formatting
+#' and further processing.
+#'
 #' libphonenumber defines the `PhoneNumberUtil` class, with a set of functions
 #' for extracting information from and performing processing on a parsed
 #' `Phonenumber` object. A text phone number must be parsed before any other
@@ -14,7 +14,7 @@
 #' phone object. The java object is cached so should persist between R sessions.
 #' In case of issues, use `phone_reparse()` to recreate the `phone` vector from
 #' the original phone number and region.
-#' 
+#'
 #' Phone number parsing functions display a progress bar in interactive sessions
 #' by default. This can be disabled by setting option `dialr.show_progress` to
 #' `FALSE`.
@@ -219,7 +219,7 @@ rep.phone <- function(x, ...) {
 }
 
 #' @rdname dialr-phone
-#' @param n Number of elements to print 
+#' @param n Number of elements to print.
 #' @param ...	Additional arguments for specific methods.
 #' @export
 print.phone <- function(x, n = 10, ...) {
@@ -243,9 +243,7 @@ print.phone <- function(x, n = 10, ...) {
 }
 
 # Dynamically exported, see zzz.R
-type_sum.phone <- function(x) {
-  "phone"
-}
+type_sum.phone <- function(x) "phone"
 
 # Dynamically exported, see zzz.R
 pillar_shaft.phone <- function(x, ...) {
@@ -258,22 +256,30 @@ pillar_shaft.phone <- function(x, ...) {
   pillar::new_pillar_shaft_simple(out, align = "right")
 }
 
+# Dynamically exported, see zzz.R
+is_vector_s3.phone <- function(x) TRUE
+
+# Dynamically exported, see zzz.R
+obj_sum.phone <- function(x) {
+  rep("phone", length(x))
+}
+
 #' @rdname dialr-phone
 #' @param format Phone number format to use based on one of four standards:
 #'
-#'   * "E164": general format for international telephone numbers from [ITU-T
+#'   * `"E164"`: general format for international telephone numbers from [ITU-T
 #'   Recommendation E.164](https://en.wikipedia.org/wiki/E.164)
 #'
-#'   * "NATIONAL": national notation from [ITU-T Recommendation
+#'   * `"NATIONAL"`: national notation from [ITU-T Recommendation
 #'   E.123](https://en.wikipedia.org/wiki/E.123)
 #'
-#'   * "INTERNATIONAL": international notation from [ITU-T Recommendation
+#'   * `"INTERNATIONAL"`: international notation from [ITU-T Recommendation
 #'   E.123](https://en.wikipedia.org/wiki/E.123)
 #'
-#'   * "RFC3966": "tel" URI syntax from the IETF [tel URI for Telephone
+#'   * `"RFC3966"`: "tel" URI syntax from the IETF [tel URI for Telephone
 #'   Numbers](https://datatracker.ietf.org/doc/rfc3966/)
 #'   
-#'   see notes from the [libphonenumber javadocs](https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.8/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html)
+#'   See notes from the [libphonenumber javadocs](https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.9/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html)
 #'   for more details.
 #'   
 #'   `format` defaults to `"E164"`. The default can be set in option
@@ -282,9 +288,9 @@ pillar_shaft.phone <- function(x, ...) {
 #' @param home [ISO country code][dialr-region] for home region. If provided,
 #'   numbers will be formatted for dialing from the home region.
 #' @param clean Should non-numeric characters be removed? If `TRUE`, keeps
-#'   numbers and leading `+`
+#'   numbers and leading `+`.
 #' @param strict Should invalid phone numbers be removed? If `TRUE` invalid
-#'   numbers are replaced with `NA`
+#'   numbers are replaced with `NA`.
 #' @export
 format.phone <- function(x, format = c("E164", "NATIONAL", "INTERNATIONAL", "RFC3966"),
                          home = NULL, clean = TRUE, strict = FALSE, ...) {
@@ -323,7 +329,8 @@ summary.phone <- function(object, ...) {
 }
 
 #' @rdname dialr-phone
-#' @param raw If `TRUE`, the raw phone number is returned. Otherwise elements are cleaned with `format()`
+#' @param raw If `TRUE`, the raw phone number is returned. Otherwise elements
+#'   are cleaned with `format()`.
 #' @export
 as.character.phone <- function(x, raw = TRUE, ...) {
   if (raw) {
@@ -341,11 +348,9 @@ phone_apply <- function(x, fun) {
   }, USE.NAMES = FALSE)
 }
 
-#' Phone number validity checks
+#' Phone number validity checks.
 #'
-#' These functions check the validity of phone numbers.
-#'
-#' @details
+#' @description
 #'
 #' For each element of `x`:
 #'
@@ -355,6 +360,27 @@ phone_apply <- function(x, fun) {
 #'
 #' * `is_possible(x)`: is this a possible phone number? Return type depends on
 #' `detailed`.
+#' 
+#' @details
+#' 
+#' Possible return values for `is_possible(x, detailed = TRUE)`:
+#'
+#' * `"INVALID_COUNTRY_CODE"`: The number has an invalid country calling code.
+#
+#' * `"INVALID_LENGTH"`: The number is longer than the shortest valid numbers
+#' for this region, shorter than the longest valid numbers for this region,
+#' and does not itself have a number length that matches valid numbers for
+#' this region.
+#'
+#' * `"IS_POSSIBLE"`: The number length matches that of valid numbers for this
+#' region.
+#'
+#' * `"IS_POSSIBLE_LOCAL_ONLY"`: The number length matches that of local numbers
+#' for this region only (i.e.
+#'
+#' * `"TOO_LONG"`: The number is longer than all valid numbers for this region.
+#'
+#' * `"TOO_SHORT"`: The number is shorter than all valid numbers for this region
 #'
 #' @section libphonenumber reference:
 #'
@@ -406,9 +432,9 @@ is_valid <- function(x) {
 #' @rdname dialr-valid
 #' @param detailed If `FALSE`, `is_possible` returns a logical vector. If
 #'   `TRUE`, it returns a character vector with "IS_POSSIBLE" or the reason for
-#'   failure.
-#' @param type If provided, checks if `x` is possible for the given phone number
-#'   type.
+#'   failure. See details for possible return values.
+#' @param type If provided, checks if `x` is possible for the given [phone
+#'   number type][dialr-region].
 #' @export
 is_possible <- function(x, detailed = FALSE, type = NULL) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
@@ -446,11 +472,9 @@ is_possible <- function(x, detailed = FALSE, type = NULL) {
   out
 }
 
-#' Phone number regions
+#' Phone number region.
 #'
-#' Functions for working with phone number regions.
-#'
-#' @details
+#' @description
 #'
 #' In libphonenumber a phone number region is represented by a 2 digit ISO
 #' country code. `get_region(x)` returns the ISO country code for each element
@@ -476,14 +500,23 @@ is_possible <- function(x, detailed = FALSE, type = NULL) {
 #'   `get_regions_for_calling_code()`:
 #'   `PhoneNumberUtil.getRegionCodesForCountryCode()`
 #'   
-#' @param x A [`phone`] vector
+#' @param x A [`phone`] vector, or a vector of calling codes.
+#' @return A character vector of country codes.
+#' 
+#'   `get_regions_for_calling_code()` returns a list of character vectors for
+#'   each provided calling code.
 #' @examples
+#'   # Get regions for a phone vector
 #'   x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #'   get_region(x)
 #'
+#'   # All supported region codes
 #'   get_supported_regions()
 #'   
+#'   # Primary region for a calling code
 #'   get_region_for_calling_code(c(1, 61, 84))
+#'   
+#'   # All regions for a calling code
 #'   get_regions_for_calling_code(c(1, 61, 84))
 #'   
 #' @name dialr-region
@@ -521,11 +554,9 @@ get_regions_for_calling_code <- function(x) {
   lapply(x, .getRegionCodesForCountryCode)
 }
 
-#' Phone number types
+#' Phone number type.
 #'
-#' Functions for working with phone number types.
-#'
-#' @details
+#' @description
 #'
 #' In addition to validity, libphonenumber can identify phone number type - it
 #' is able to distinguish Fixed-line, Mobile, Toll-free, Premium Rate, Shared
@@ -547,16 +578,23 @@ get_regions_for_calling_code <- function(x) {
 #'   
 #'   `get_types_for_region()`: `PhoneNumberUtil.getSupportedTypesForRegion()`
 #'   
-#' @param x A [`phone`] vector, or a character vector of [ISO country codes][dialr-region]
+#' @param x A [`phone`] vector, or a character vector of [ISO country codes][dialr-region].
+#' @return A character vector of phone types.
+#' 
+#'   `get_types_for_region()` returns a list of character vectors for each
+#'   provided country code.
 #' @examples
+#'   # Get phone types for a phone vector
 #'   x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #'   get_type(x)
 #'   
+#'   # All supported phone types
 #'   get_supported_types()
 #'   
+#'   # Get supported types for specified regions
 #'   get_types_for_region("AU")
 #'   get_types_for_region(c("GB", "US"))
-#'   get_types_for_region(get_supported_regions())
+#'   get_types_for_region(get_supported_regions())[1:5]
 #'   
 #' @name dialr-type
 #' @family phone functions
@@ -590,9 +628,9 @@ get_types_for_region <- function(x) {
 
 #' Get an example phone number
 #'
-#' Produces example phone numbers for the given [`region`][dialr-region] and
-#' [`type`][dialr-type] combinations. The `region`, `type` and valid vectors
-#' are recycled if a vector of length 1 is provided.
+#' Produces example phone numbers for the given [`region`][dialr-region],
+#' [`type`][dialr-type] and `valid` combinations. Input vectors are recycled as
+#' necessary if a vector of length 1 is provided.
 #'
 #' @section libphonenumber reference:
 #'
@@ -605,7 +643,7 @@ get_types_for_region <- function(x) {
 #'   `NULL` (default), returns an example "FIXED_LINE" number.
 #' @param valid A logical vector. For each `FALSE` entry, `get_example` returns
 #'   an example invalid number, and `type` is ignored.
-#' @return A [`phone`] vector
+#' @return A [`phone`] vector.
 #' @examples
 #' # Get a basic example number
 #' get_example("AU")

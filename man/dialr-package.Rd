@@ -4,26 +4,18 @@
 \name{dialr-package}
 \alias{dialr}
 \alias{dialr-package}
-\title{Phone number validation in R}
+\title{dialr: Parse, format, and validate international phone numbers
+    in R}
 \description{
-dialr is an R interface to Google's libphonenumber library.
+Parse, format, and validate international phone
+    numbers in R using Google's 'libphonenumber' java library,
+    <https://github.com/googlei18n/libphonenumber>.
 }
-\section{Overview}{
-
-
-dialr is an R port of \href{https://github.com/googlei18n/libphonenumber}{Google's libphonenumber library}. It uses the java
-implementation of libphonenumber via rJava for all phone number processing.
-
-For a full rundown of libphonenumber see their
-\href{https://github.com/googlei18n/libphonenumber}{github} and
-\href{https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/}{javadocs}.
-}
-
 \section{Options}{
 
 \itemize{
-\item \code{dialr.home}: The default region used to process phone numbers where no
-region is provided. (default: \code{"AU"}).
+\item \code{dialr.home}: The default \link[=dialr-region]{region} used to process phone
+numbers where no region is provided. (default: \code{"AU"}).
 \item \code{dialr.format}: The default format used to print clean phone numbers. See
 \code{\link[=format.phone]{format.phone()}} for details. (default: \code{"E164"}).
 \item \code{dialr.show_progress}: Should lengthy operations such as \code{\link[=phone]{phone()}} show a
@@ -31,25 +23,13 @@ progress bar? (default: \code{TRUE}).
 }
 }
 
-\examples{
-library(dialr)
-
-# Parse phone number vector
-x <- c(0, 0123, "0404 753 123", "61410123817")
-x <- phone(x, "AU")
-
-is_parsed(x)    # Was the phone number successfully parsed?
-is_valid(x)     # Is the phone number valid?
-is_possible(x)  # Is the phone number possible?
-get_region(x)   # What region (ISO country code) is the phone number from?
-get_type(x)     # Is the phone number a fixed line, mobile etc.
-format(x)
-format(x, home = "AU")
-}
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://socialresearchcentre.github.io/dialr}
   \item \url{https://github.com/socialresearchcentre/dialr}
+  \item \url{https://github.com/socialresearchcentre/dialrjars}
+  \item \url{https://github.com/googlei18n/libphonenumber}
   \item Report bugs at \url{https://github.com/socialresearchcentre/dialr/issues}
 }
 

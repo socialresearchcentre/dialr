@@ -16,12 +16,12 @@ get_example(region, type = NULL, valid = TRUE)
 an example invalid number, and \code{type} is ignored.}
 }
 \value{
-A \code{\link{phone}} vector
+A \code{\link{phone}} vector.
 }
 \description{
-Produces example phone numbers for the given \code{\link[=dialr-region]{region}} and
-\code{\link[=dialr-type]{type}} combinations. The \code{region}, \code{type} and valid vectors
-are recycled if a vector of length 1 is provided.
+Produces example phone numbers for the given \code{\link[=dialr-region]{region}},
+\code{\link[=dialr-type]{type}} and \code{valid} combinations. Input vectors are recycled as
+necessary if a vector of length 1 is provided.
 }
 \section{libphonenumber reference}{
 
