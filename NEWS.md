@@ -16,7 +16,8 @@ static values. Most operations are now approx. 10 times faster.
 * More region and type functions implemented. See `` ?`dialr-region` `` or
 `` ?`dialr-type` `` for details.
 
-* `get_example` expanded to offer more options.
+* New `get_example` function generates example phone numbers for provided
+regions and types.
 
 # dialr 0.2.0
 

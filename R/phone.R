@@ -376,11 +376,14 @@ phone_apply <- function(x, fun) {
 #' region.
 #'
 #' * `"IS_POSSIBLE_LOCAL_ONLY"`: The number length matches that of local numbers
-#' for this region only (i.e.
+#' for this region only (i.e. numbers that may be able to be dialled within an
+#' area, but do not have all the information to be dialled from anywhere inside
+#' or outside the country).
 #'
 #' * `"TOO_LONG"`: The number is longer than all valid numbers for this region.
 #'
-#' * `"TOO_SHORT"`: The number is shorter than all valid numbers for this region
+#' * `"TOO_SHORT"`: The number is shorter than all valid numbers for this
+#' region.
 #'
 #' @section libphonenumber reference:
 #'
