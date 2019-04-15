@@ -78,102 +78,85 @@ get_type_bench <- bench::mark(get_type_new(y), get_type_old(y), get_type_new2(y)
 #-------------------------------------------------------------------------------
 
 # Store function signature on phone parse
-new_phone_old <- function(x, country) {
+new_phone_new <- function(x, region) {
   stopifnot(is.character(x))
-  stopifnot(is.character(country))
-  stopifnot(length(x) == length(country))
+  stopifnot(is.character(region))
+  stopifnot(length(x) == length(region))
   
   phone_util <- .get_phoneNumberUtil()
-  jfunc <- function(p, c) {
+  jfunc <- function(p, r) {
     .jcall(phone_util,
            "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
            "parseAndKeepRawInput",
            .jcast(.jnew("java/lang/String", p), "java/lang/CharSequence"),
-           c)
+           r)
   }
   
-  pb <- progress_estimated(length(x))
+  show_pb <- isTRUE(getOption("dialr.show_progress")) && interactive()
+  
+  if (show_pb) pb <- txtProgressBar(min = 0, max = length(x), style = 3)
   out <- structure(
     mapply(
-      function(p, c) {
-        pb$tick()$print()
+      function(p, r) {
+        if (show_pb) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
         pn <- tryCatch({
-          jfunc(p, c)
+          jfunc(p, r)
         }, error = function(e) {
-          return(NULL)
+          return(e$jobj)
         })
-        if (is.null(pn))
+        
+        if (.jclass(pn) == "com.google.i18n.phonenumbers.NumberParseException") {
+          e <- pn
           pn <- NA
-        else
+        } else {
+          e <- NA
           .jcache(pn)
+        }
         
         list(raw = p,
-             country = c,
-             jobj = pn)
+             region = r,
+             jobj = pn,
+             err = e)
       },
-      x, country,
+      x, region,
       SIMPLIFY = FALSE
     ),
     class = "phone"
   )
-  pb$stop()$print()
+  if (show_pb) close(pb)
   
   names(out) <- NULL
   out
 }
 
-new_phone_new <- function(x, country) {
-  stopifnot(is.character(x))
-  stopifnot(is.character(country))
-  stopifnot(length(x) == length(country))
+is_parsed <- function(x, detailed = FALSE) {
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
   
-  phone_util <- .get_phoneNumberUtil()
-  jfunc <- function(p, c) {
-    .jcall(phone_util,
-           "Lcom/google/i18n/phonenumbers/Phonenumber$PhoneNumber;",
-           "parseAndKeepRawInput",
-           .jcast(.jnew("java/lang/String", p), "java/lang/CharSequence"),
-           c)
-  }
-  
-  pb <- txtProgressBar(min = 0, max = length(x), style = 3)
-  out <- structure(
-    mapply(
-      function(p, c) {
-        setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
-        pn <- tryCatch({
-          jfunc(p, c)
-        }, error = function(e) {
-          return(NULL)
-        })
-        if (is.null(pn))
-          pn <- NA
-        else
-          .jcache(pn)
-        
-        list(raw = p,
-             country = c,
-             jobj = pn)
-      },
-      x, country,
-      SIMPLIFY = FALSE
-    ),
-    class = "phone"
-  )
-  close(pb)
-  
-  names(out) <- NULL
-  out
+  if (detailed)
+    sapply(unclass(x), function(pn) {
+      if (typeof(pn$jobj) %in% "S4")
+        "IS_PARSED"
+      else
+        .jstrVal(.jcall(pn$err,
+                        "Lcom/google/i18n/phonenumbers/NumberParseException$ErrorType;",
+                        "getErrorType"))
+    }, USE.NAMES = FALSE)
+  else
+    sapply(unclass(x), function(pn) { typeof(pn$jobj) %in% "S4" }, USE.NAMES = FALSE)
 }
 
 new_phone_bench <- 
   bench::press(
-    times = c(10, 100, 1000, 10000),
+    times = c(10, 100, 1000),
     {
-      bench::mark(new_phone_old(rep(c("0412345678", NA), times = times / 2), rep("AU", times = times)),
+      bench::mark(#new_phone_old(rep(c("0412345678", NA), times = times / 2), rep("AU", times = times)),
                   new_phone_new(rep(c("0412345678", NA), times = times / 2), rep("AU", times = times)),
-                  # new_phone(rep("0412345678", times = times), rep("AU", times = times)),
-                  iterations = 5)
+                  new_phone(rep(c("0412345678", NA), times = times / 2), rep("AU", times = times)),
+                  new_phone_new(rep("0412345678", times = times), rep("AU", times = times)),
+                  new_phone(rep("0412345678", times = times), rep("AU", times = times)),
+                  new_phone_new(rep(NA_character_, times = times), rep("AU", times = times)),
+                  new_phone(rep(NA_character_, times = times), rep("AU", times = times)),
+                  iterations = 5, check = FALSE)
     }
   )
 
