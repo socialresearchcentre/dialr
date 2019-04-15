@@ -25,9 +25,9 @@
   
   # what's your java  version?  Need > 1.5.0.
   jversion <- .jcall('java.lang.System','S','getProperty','java.version')
-  if (jversion < "1.5.0")
+  if (jversion < "1.6.0")
     stop(paste("Your java version is ", jversion,
-               ".  Need 1.5.0 or higher.", sep = ""))
+               ".  Need 1.6.0 or higher.", sep = ""))
   
   # initialise PhoneNumberUtil singleton
   invisible(.get_phoneNumberUtil())

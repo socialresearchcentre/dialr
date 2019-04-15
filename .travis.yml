@@ -23,8 +23,8 @@ matrix:
     os: osx
     # only install binaries on osx to avoid issues with rJava source install
     install:
-    - R -e 'install.packages("devtools")'
-    - R -e 'devtools::install_deps(dep = T, type = "binary")'
+    - R -e 'install.packages("remotes")'
+    - R -e 'remotes::install_deps(dep = T, type = "binary")'
   - r: oldrel
   - r: 3.3
   - r: 3.2
