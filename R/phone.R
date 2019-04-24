@@ -107,14 +107,14 @@ validate_phone <- function(x) {
   
   x_raw <- unclass(x)
   
-  if ((!is.list(x_raw)) | (!all(sapply(x_raw, function(x) { is.list(x) }))))
+  if ((!is.list(x_raw)) | (!all(vapply(x_raw, is.list, logical(1)))))
     stop("`x` must be a list of lists", call. = FALSE)
 
   # check structure
-  if (!(all(sapply(x_raw, length) == 3) &
-        all(sapply(x_raw, function(x) { exists("raw", x) })) &
-        all(sapply(x_raw, function(x) { exists("region", x) })) &
-        all(sapply(x_raw, function(x) { exists("jobj", x) })))) {
+  if (!(all(vapply(x_raw, length, integer(1)) == 3L) &
+        all(vapply(x_raw, function(x) { exists("raw", x, mode = "character", inherits = FALSE) }, logical(1))) &
+        all(vapply(x_raw, function(x) { exists("region", x, mode = "character", inherits = FALSE) }, logical(1))) &
+        all(vapply(x_raw, function(x) { exists("jobj", x, inherits = FALSE) }, logical(1))))) {
     stop(
       "The structure of `x` is incorrect.\n",
       "`x` should be a list.\n",
@@ -135,8 +135,8 @@ phone_reparse <- function(x) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   
   x <- unclass(x)
-  new_phone(vapply(x, function(x) { x$raw }, "", USE.NAMES = FALSE),
-            vapply(x, function(x) { x$region }, "", USE.NAMES = FALSE))
+  new_phone(vapply(x, function(x) { x$raw }, character(1), USE.NAMES = FALSE),
+            vapply(x, function(x) { x$region }, character(1), USE.NAMES = FALSE))
 }
 
 #' @rdname dialr-phone
@@ -230,7 +230,7 @@ print.phone <- function(x, n = 10, ...) {
       sum(is_parsed(x)), " successfully parsed",
       sep = "")
 
-  x_raw <- vapply(unclass(x), function(x) { x$raw }, "", USE.NAMES = FALSE)
+  x_raw <- vapply(unclass(x), function(x) { x$raw }, character(1), USE.NAMES = FALSE)
   if (tot > n) {
     cat(" (showing first ", n, ")\n", sep = "")
     print.default(head(x_raw, n = n), quote = FALSE)
@@ -311,7 +311,7 @@ format.phone <- function(x, format = c("E164", "NATIONAL", "INTERNATIONAL", "RFC
     } else {
       .jcall(phone_util, "S", "formatOutOfCountryCallingNumber", pn, home)
     }
-  })
+  }, character(1))
   if (clean) out <- gsub("[^+0-9]", "", out)
   if (strict) out[!is_valid(x)] <- NA_character_
 
@@ -334,18 +334,18 @@ summary.phone <- function(object, ...) {
 #' @export
 as.character.phone <- function(x, raw = TRUE, ...) {
   if (raw) {
-    x <- vapply(unclass(x), function(x) { x$raw }, "", USE.NAMES = FALSE)
+    x <- vapply(unclass(x), function(x) { x$raw }, character(1), USE.NAMES = FALSE)
     NextMethod()
   } else {
     as.character.default(format(x, ...))
   }
 }
 
-phone_apply <- function(x, fun) {
-  sapply(unclass(x), function(d) {
-    if (!typeof(d$jobj) %in% "S4") return(NA)
+phone_apply <- function(x, fun, fun.value) {
+  vapply(unclass(x), function(d) {
+    if (!typeof(d$jobj) %in% "S4") return(fun.value[NA])
     fun(d$jobj)
-  }, USE.NAMES = FALSE)
+  }, fun.value, USE.NAMES = FALSE)
 }
 
 #' Phone number validity checks.
@@ -415,7 +415,7 @@ NULL
 #' @export
 is_parsed <- function(x) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
-  sapply(unclass(x), function(pn) { typeof(pn$jobj) %in% "S4" }, USE.NAMES = FALSE)
+  vapply(unclass(x), function(pn) { typeof(pn$jobj) %in% "S4" }, logical(1), USE.NAMES = FALSE)
 }
 
 #' @rdname dialr-valid
@@ -426,7 +426,7 @@ is_valid <- function(x) {
   
   out <- phone_apply(x, function(pn) {
     .jcall(phone_util, "Z", "isValidNumber", pn)
-  })
+  }, logical(1))
   out[is.na(out)] <- FALSE
   
   out
@@ -446,30 +446,34 @@ is_possible <- function(x, detailed = FALSE, type = NULL) {
   phone_util <- .get_phoneNumberUtil()
   
   if (is.null(type)) {
-    out <- phone_apply(x, function(pn) {
-      if (detailed) {
+    if (detailed) {
+      out <- phone_apply(x, function(pn) {
         .jstrVal(.jcall(phone_util,
                         "Lcom/google/i18n/phonenumbers/PhoneNumberUtil$ValidationResult;",
                         "isPossibleNumberWithReason",
                         pn))
-      } else {
+      }, character(1))
+    } else {
+      out <- phone_apply(x, function(pn) {
         .jcall(phone_util, "Z", "isPossibleNumber", pn)
-      }
-    })
+      }, logical(1))
+    }
   } else {
     type <- .get_phone_type_from_string(type)
-    out <- phone_apply(x, function(pn) {
-      if (detailed) {
+    if (detailed) {
+      out <- phone_apply(x, function(pn) {
         .jstrVal(.jcall(phone_util,
                         "Lcom/google/i18n/phonenumbers/PhoneNumberUtil$ValidationResult;",
                         "isPossibleNumberForTypeWithReason",
                         pn, type))
-      } else {
+      }, character(1))
+    } else {
+      out <- phone_apply(x, function(pn) {
         .jcall(phone_util, "Z", "isPossibleNumberForType", pn, type)
-      }
-    })
+      }, logical(1))
+    }
   }
-  
+    
   if (!detailed) out[is.na(out)] <- FALSE
   
   out
@@ -532,7 +536,7 @@ get_region <- function(x) {
   out <- phone_apply(x, function(pn) {
     res <- .jcall(phone_util, "S", "getRegionCodeForNumber", pn)
     ifelse(is.null(res), NA_character_, res)
-  })
+  }, character(1))
   
   out
 }
@@ -547,7 +551,7 @@ get_supported_regions <- function() {
 #' @export
 get_region_for_calling_code <- function(x) {
   validate_phone_calling_code(x)
-  vapply(x, .getRegionCodeForCountryCode, "", USE.NAMES = FALSE)
+  vapply(x, .getRegionCodeForCountryCode, character(1), USE.NAMES = FALSE)
 }
 
 #' @rdname dialr-region
@@ -611,7 +615,7 @@ get_type <- function(x) {
                     "Lcom/google/i18n/phonenumbers/PhoneNumberUtil$PhoneNumberType;",
                     "getNumberType",
                     pn))
-  })
+  }, character(1))
   
   out
 }
