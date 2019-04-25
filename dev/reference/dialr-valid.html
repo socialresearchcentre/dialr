@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Phone number validity checks. — dialr-valid • dialr</title>
+<title>Phone number validity checks — dialr-valid • dialr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,12 @@
 
 
 
-<meta property="og:title" content="Phone number validity checks. — dialr-valid" />
+<meta property="og:title" content="Phone number validity checks — dialr-valid" />
 
 <meta property="og:description" content="For each element of x:
-is_parsed(x): was this successfully parsed?
-is_valid(x): is this a valid phone number?
-is_possible(x): is this a possible phone number? Return type depends on
+is_parsed(x): Was this successfully parsed?
+is_valid(x): Is this a valid phone number?
+is_possible(x): Is this a possible phone number? Return type depends on
 detailed.
 " />
 <meta name="twitter:card" content="summary" />
@@ -68,7 +68,7 @@ detailed.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9004</span>
       </span>
     </div>
 
@@ -110,7 +110,7 @@ detailed.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Phone number validity checks.</h1>
+    <h1>Phone number validity checks</h1>
     <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/phone.R'><code>R/phone.R</code></a></small>
     <div class="hidden name"><code>dialr-valid.Rd</code></div>
     </div>
@@ -118,9 +118,9 @@ detailed.
     <div class="ref-description">
     
     <p>For each element of <code>x</code>:</p><ul>
-<li><p><code>is_parsed(x)</code>: was this successfully parsed?</p></li>
-<li><p><code>is_valid(x)</code>: is this a valid phone number?</p></li>
-<li><p><code>is_possible(x)</code>: is this a possible phone number? Return type depends on
+<li><p><code>is_parsed(x)</code>: Was this successfully parsed?</p></li>
+<li><p><code>is_valid(x)</code>: Is this a valid phone number?</p></li>
+<li><p><code>is_possible(x)</code>: Is this a possible phone number? Return type depends on
 <code>detailed</code>.</p></li>
 </ul>
     
@@ -137,13 +137,13 @@ detailed.
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code><a href='dialr-phone.html'>phone</a></code> vector</p></td>
+      <td><p>A <a href='dialr-phone.html'>phone</a> vector.</p></td>
     </tr>
     <tr>
       <th>detailed</th>
       <td><p>If <code>FALSE</code>, <code>is_possible</code> returns a logical vector. If
-<code>TRUE</code>, it returns a character vector with "IS_POSSIBLE" or the reason for
-failure. See details for possible return values.</p></td>
+<code>TRUE</code>, it returns a character vector with <code>"IS_POSSIBLE"</code> or the reason
+for failure. See Details section for possible return values.</p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -162,20 +162,22 @@ this region.</p></li>
 <li><p><code>"IS_POSSIBLE"</code>: The number length matches that of valid numbers for this
 region.</p></li>
 <li><p><code>"IS_POSSIBLE_LOCAL_ONLY"</code>: The number length matches that of local numbers
-for this region only (i.e.</p></li>
+for this region only (i.e. numbers that may be able to be dialled within an
+area, but do not have all the information to be dialled from anywhere inside
+or outside the country).</p></li>
 <li><p><code>"TOO_LONG"</code>: The number is longer than all valid numbers for this region.</p></li>
-<li><p><code>"TOO_SHORT"</code>: The number is shorter than all valid numbers for this region</p></li>
+<li><p><code>"TOO_SHORT"</code>: The number is shorter than all valid numbers for this
+region.</p></li>
 </ul>
     
     <h2 class="hasAnchor" id="libphonenumber-reference"><a class="anchor" href="#libphonenumber-reference"></a>libphonenumber reference</h2>
 
     
     <p><code>is_valid()</code>: <code>PhoneNumberUtil.isValidNumber()</code></p>
-<p><code>is_possible()</code>: <code>PhoneNumberUtil.isPossibleNumber()</code>,
-<code>PhoneNumberUtil.isPossibleNumberWithReason()</code>,
-<code>PhoneNumberUtil.isPossibleNumberForType()</code> or
-<code>PhoneNumberUtil.isPossibleNumberForTypeWthReason()</code> depending on the
-provided arguments.</p>
+<p><code>is_possible()</code>: <code>PhoneNumberUtil.isPossibleNumber()</code></p>
+<p><code>is_possible(detailed = TRUE)</code>: <code>PhoneNumberUtil.isPossibleNumberWithReason()</code></p>
+<p><code>is_possible(type = type)</code>: <code>PhoneNumberUtil.isPossibleNumberForType()</code></p>
+<p><code>is_possible(detailed = TRUE, type = type)</code>: <code>PhoneNumberUtil.sPossibleNumberForTypeWthReason()</code></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 

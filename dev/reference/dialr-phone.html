@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Phone number parsing and formatting. — dialr-phone • dialr</title>
+<title>Phone number parsing and formatting — dialr-phone • dialr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Phone number parsing and formatting. — dialr-phone" />
+<meta property="og:title" content="Phone number parsing and formatting — dialr-phone" />
 
 <meta property="og:description" content="A phone vector stores phone numbers parsed with libphonenumber for formatting
 and further processing." />
@@ -64,7 +64,7 @@ and further processing." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9003</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9004</span>
       </span>
     </div>
 
@@ -106,7 +106,7 @@ and further processing." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Phone number parsing and formatting.</h1>
+    <h1>Phone number parsing and formatting</h1>
     <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/phone.R'><code>R/phone.R</code></a></small>
     <div class="hidden name"><code>dialr-phone.Rd</code></div>
     </div>
@@ -155,14 +155,14 @@ and further processing.</p>
     </tr>
     <tr>
       <th>format</th>
-      <td><p>Phone number format to use based on one of four standards:</p><ul>
+      <td><p>Phone number format to use from one of four standards:</p><ul>
 <li><p><code>"E164"</code>: general format for international telephone numbers from <a href='https://en.wikipedia.org/wiki/E.164'>ITU-T Recommendation E.164</a></p></li>
 <li><p><code>"NATIONAL"</code>: national notation from <a href='https://en.wikipedia.org/wiki/E.123'>ITU-T Recommendation E.123</a></p></li>
 <li><p><code>"INTERNATIONAL"</code>: international notation from <a href='https://en.wikipedia.org/wiki/E.123'>ITU-T Recommendation E.123</a></p></li>
 <li><p><code>"RFC3966"</code>: "tel" URI syntax from the IETF <a href='https://datatracker.ietf.org/doc/rfc3966/'>tel URI for Telephone Numbers</a></p></li>
 </ul>
 
-<p>See notes from the <a href='https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.9/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html'>libphonenumber javadocs</a>
+<p>See notes from the <a href='https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.10/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html'>libphonenumber javadocs</a>
 for more details.</p>
 <p><code>format</code> defaults to <code>"E164"</code>. The default can be set in option
 <code>dialr.format</code>.</p></td>
@@ -175,12 +175,12 @@ numbers will be formatted for dialing from the home region.</p></td>
     <tr>
       <th>clean</th>
       <td><p>Should non-numeric characters be removed? If <code>TRUE</code>, keeps
-numbers and leading <code>+</code>.</p></td>
+numbers and leading <code>"+"</code>.</p></td>
     </tr>
     <tr>
       <th>strict</th>
-      <td><p>Should invalid phone numbers be removed? If <code>TRUE</code> invalid
-numbers are replaced with <code>NA</code>.</p></td>
+      <td><p>Should invalid phone numbers be removed? If <code>TRUE</code>, invalid
+phone numbers are replaced with <code>NA</code>.</p></td>
     </tr>
     <tr>
       <th>raw</th>
@@ -197,10 +197,10 @@ for extracting information from and performing processing on a parsed
 operations (e.g. checking phone number validity, formatting) can be
 performed. When parsing a phone number a <a href='dialr-region.html'>"default region"</a> is
 required to determine the processing context for non-international numbers.</p>
-<p>The <code>phone</code> class stores the raw phone number, the default region and a java
-phone object. The java object is cached so should persist between R sessions.
-In case of issues, use <code>phone_reparse()</code> to recreate the <code>phone</code> vector from
-the original phone number and region.</p>
+<p>A phone vector stores the raw phone number, the default region and a java
+<code>Phonenumber</code> object for each element. The java object is cached so should
+persist between R sessions. In case of issues, use <code>phone_reparse()</code> to
+recreate the phone vector from the original phone number and region.</p>
 <p>Phone number parsing functions display a progress bar in interactive sessions
 by default. This can be disabled by setting option <code>dialr.show_progress</code> to
 <code>FALSE</code>.</p>
@@ -209,7 +209,7 @@ by default. This can be disabled by setting option <code>dialr.show_progress</co
 
     
     <p><code>phone()</code>: Phone numbers are parsed using
-<code>PhoneNumberUtil.parseAndKeepRawInput()</code>. The <code>phone</code> class stores the
+<code>PhoneNumberUtil.parseAndKeepRawInput()</code>. A phone vector stores the
 returned <code>Phonenumber.PhoneNumber</code> object alongside the original raw text
 and default region for later reference.</p>
 <p><code><a href='https://www.rdocumentation.org/packages/base/topics/format'>format()</a></code>: <code>PhoneNumberUtil.format()</code> by default, or
