@@ -5,6 +5,13 @@
          .jstrVal, "", USE.NAMES = FALSE)
 }
 
+.jstr_to_char <- function(o) {
+  if (is.na(o))
+    NULL
+  else
+    .jcast(.jnew("java/lang/String", o), "java/lang/CharSequence")
+}
+
 .pnu_cache <- new.env(parent = emptyenv())
 
 # Convenience function - get the current PhoneNumberUtil instance

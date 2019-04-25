@@ -9,11 +9,13 @@
 
 ## Overview
 
-dialr is an R port of [Google's libphonenumber library](https://github.com/googlei18n/libphonenumber).
-It uses the java implementation of libphonenumber via rJava for all phone number processing.
+dialr is an R port of [Google's libphonenumber
+library](https://github.com/googlei18n/libphonenumber). It uses the java
+implementation of libphonenumber via rJava for all phone number processing.
 
-For a full rundown of libphonenumber see their [github](https://github.com/googlei18n/libphonenumber)
-and [javadocs](https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/).
+For a full rundown of libphonenumber see their
+[github](https://github.com/googlei18n/libphonenumber) and
+[javadocs](https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/).
 
 ## Installation
 
@@ -29,11 +31,11 @@ devtools::install_github("socialresearchcentre/dialrjars")
 
 ### Conceptual basis
 
-dialr is an R interface to Google's libphonenumber java library.
-libphonenumber defines the `PhoneNumberUtil` class, with a set of functions for
-extracting information from and performing processing on a parsed `Phonenumber`
-object. A phone number must be parsed before any other operations (e.g.
-checking phone number validity, formatting) can be performed.
+dialr is an R interface to Google's libphonenumber java library. libphonenumber
+defines the `PhoneNumberUtil` class, with a set of functions for extracting
+information from and performing processing on a parsed `Phonenumber` object. A
+phone number must be parsed before any other operations (e.g. checking phone
+number validity, formatting) can be performed.
 
 When parsing a phone number a "default region" is required to determine the
 processing context for non-international numbers. A set of functions in the

@@ -14,7 +14,7 @@ get_supported_types()
 get_types_for_region(x)
 }
 \arguments{
-\item{x}{A \code{\link{phone}} vector, or a character vector of \link[=dialr-region]{ISO country codes}.}
+\item{x}{A \link{phone} vector, or a character vector of \link[=dialr-region]{ISO country codes}.}
 }
 \value{
 A character vector of phone types.

@@ -40,7 +40,7 @@ is.phone(x)
 \item \code{"RFC3966"}: "tel" URI syntax from the IETF \href{https://datatracker.ietf.org/doc/rfc3966/}{tel URI for Telephone Numbers}
 }
 
-See notes from the \href{https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.9/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html}{libphonenumber javadocs}
+See notes from the \href{https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.10/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html}{libphonenumber javadocs}
 for more details.
 
 \code{format} defaults to \code{"E164"}. The default can be set in option
@@ -50,9 +50,9 @@ for more details.
 numbers will be formatted for dialing from the home region.}
 
 \item{clean}{Should non-numeric characters be removed? If \code{TRUE}, keeps
-numbers and leading \code{+}.}
+numbers and leading \code{"+"}.}
 
-\item{strict}{Should invalid phone numbers be removed? If \code{TRUE} invalid
+\item{strict}{Should invalid phone numbers be removed? If \code{TRUE}, invalid
 phone numbers are replaced with \code{NA}.}
 
 \item{raw}{If \code{TRUE}, the raw phone number is returned. Otherwise elements
@@ -70,10 +70,10 @@ operations (e.g. checking phone number validity, formatting) can be
 performed. When parsing a phone number a \link[=dialr-region]{"default region"} is
 required to determine the processing context for non-international numbers.
 
-The \code{phone} class stores the raw phone number, the default region and a java
-phone object. The java object is cached so should persist between R sessions.
-In case of issues, use \code{phone_reparse()} to recreate the \code{phone} vector from
-the original phone number and region.
+A phone vector stores the raw phone number, the default region and a java
+\code{Phonenumber} object for each element. The java object is cached so should
+persist between R sessions. In case of issues, use \code{phone_reparse()} to
+recreate the phone vector from the original phone number and region.
 
 Phone number parsing functions display a progress bar in interactive sessions
 by default. This can be disabled by setting option \code{dialr.show_progress} to
@@ -83,7 +83,7 @@ by default. This can be disabled by setting option \code{dialr.show_progress} to
 
 
 \code{phone()}: Phone numbers are parsed using
-\code{PhoneNumberUtil.parseAndKeepRawInput()}. The \code{phone} class stores the
+\code{PhoneNumberUtil.parseAndKeepRawInput()}. A phone vector stores the
 returned \code{Phonenumber.PhoneNumber} object alongside the original raw text
 and default region for later reference.
 

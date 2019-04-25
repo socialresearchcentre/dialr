@@ -14,20 +14,20 @@ is_valid(x)
 is_possible(x, detailed = FALSE, type = NULL)
 }
 \arguments{
-\item{x}{A \code{\link{phone}} vector.}
+\item{x}{A \link{phone} vector.}
 
 \item{detailed}{If \code{FALSE}, \code{is_possible} returns a logical vector. If
-\code{TRUE}, it returns a character vector with "IS_POSSIBLE" or the reason for
-failure. See details for possible return values.}
+\code{TRUE}, it returns a character vector with \code{"IS_POSSIBLE"} or the reason
+for failure. See Details section for possible return values.}
 
 \item{type}{If provided, checks if \code{x} is possible for the given \link[=dialr-region]{phone number type}.}
 }
 \description{
 For each element of \code{x}:
 \itemize{
-\item \code{is_parsed(x)}: was this successfully parsed?
-\item \code{is_valid(x)}: is this a valid phone number?
-\item \code{is_possible(x)}: is this a possible phone number? Return type depends on
+\item \code{is_parsed(x)}: Was this successfully parsed?
+\item \code{is_valid(x)}: Is this a valid phone number?
+\item \code{is_possible(x)}: Is this a possible phone number? Return type depends on
 \code{detailed}.
 }
 }

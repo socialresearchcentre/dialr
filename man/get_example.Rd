@@ -16,7 +16,7 @@ get_example(region, type = NULL, valid = TRUE)
 an example invalid number, and \code{type} is ignored.}
 }
 \value{
-A \code{\link{phone}} vector.
+A \link{phone} vector.
 }
 \description{
 Produces example phone numbers for the given \code{\link[=dialr-region]{region}},

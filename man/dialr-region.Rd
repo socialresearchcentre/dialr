@@ -17,7 +17,7 @@ get_region_for_calling_code(x)
 get_regions_for_calling_code(x)
 }
 \arguments{
-\item{x}{A \code{\link{phone}} vector, or a vector of calling codes.}
+\item{x}{A \link{phone} vector, or a vector of calling codes.}
 }
 \value{
 A character vector of country codes.
