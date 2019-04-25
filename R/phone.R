@@ -1,4 +1,4 @@
-#' Phone number parsing and formatting.
+#' Phone number parsing and formatting
 #'
 #' A phone vector stores phone numbers parsed with libphonenumber for formatting
 #' and further processing.
@@ -103,12 +103,12 @@ new_phone <- function(x, region) {
 
 validate_phone <- function(x) {
   if (!inherits(x, "phone"))
-    stop("`x` must be a vector of class `phone`", call. = FALSE)
+    stop("`x` must be a vector of class `phone`.", call. = FALSE)
   
   x_raw <- unclass(x)
   
   if ((!is.list(x_raw)) | (!all(vapply(x_raw, is.list, logical(1)))))
-    stop("`x` must be a list of lists", call. = FALSE)
+    stop("`x` must be a list of lists.", call. = FALSE)
 
   # check structure
   if (!(all(vapply(x_raw, length, integer(1)) == 3L) &
@@ -155,19 +155,19 @@ is.phone <- function(x) inherits(x, "phone")
 
 #' @export
 `$.phone` <- function(x, ...) {
-  stop("$ operator is invalid for phone vectors", call. = FALSE)
+  stop("$ operator is invalid for `phone` vectors.", call. = FALSE)
 }
 
 #' @export
 `[<-.phone` <- function(x, i, value) {
   if (!is.phone(value) & is.atomic(value)) {
-    warning("Only `phone` class values can be inserted into a `phone` vector.\n",
-            "The value will be converted to `phone` class with default home region `", getOption("dialr.home"), "`.",
+    warning("Only `phone` class objects can be inserted into a `phone` vector.\n",
+            "The value provided will be converted to `phone` class with default home region `", getOption("dialr.home"), "`.",
             call. = FALSE)
     value <- new_phone(as.character(value),
                        rep(getOption("dialr.home"), length(value)))
   } else if (!is.phone(value) & !is.atomic(value)) {
-    stop("Only `phone` class values can be inserted into a `phone` vector.\n",
+    stop("Only `phone` class objects can be inserted into a `phone` vector.\n",
          "The value provided can not be converted to `phone` class.",
          call. = FALSE)
   }
@@ -182,7 +182,7 @@ is.phone <- function(x) inherits(x, "phone")
 
 #' @export
 `$<-.phone` <- function(x, i, value) {
-  stop("$ operator is invalid for phone vectors", call. = FALSE)
+  stop("$ operator is invalid for `phone` vectors.", call. = FALSE)
 }
 
 #' @export
@@ -194,7 +194,7 @@ is.phone <- function(x) inherits(x, "phone")
 c.phone <- function(..., recursive = FALSE) {
   out <- lapply(list(...), function(value) {
     if (!is.phone(value)) {
-      warning("Only `phone` class values can be added to a `phone` vector.\n",
+      warning("Only `phone` class objects can be added to a `phone` vector.\n",
               "Atomic vectors will be converted to `phone` class with default home region `", getOption("dialr.home"), "`.\n",
               "Other objects will be dropped.",
               call. = FALSE)
@@ -265,7 +265,7 @@ obj_sum.phone <- function(x) {
 }
 
 #' @rdname dialr-phone
-#' @param format Phone number format to use based on one of four standards:
+#' @param format Phone number format to use from one of four standards:
 #'
 #'   * `"E164"`: general format for international telephone numbers from [ITU-T
 #'   Recommendation E.164](https://en.wikipedia.org/wiki/E.164)
@@ -290,7 +290,7 @@ obj_sum.phone <- function(x) {
 #' @param clean Should non-numeric characters be removed? If `TRUE`, keeps
 #'   numbers and leading `+`.
 #' @param strict Should invalid phone numbers be removed? If `TRUE` invalid
-#'   numbers are replaced with `NA`.
+#'   phone numbers are replaced with `NA`.
 #' @export
 format.phone <- function(x, format = c("E164", "NATIONAL", "INTERNATIONAL", "RFC3966"),
                          home = NULL, clean = TRUE, strict = FALSE, ...) {
@@ -348,7 +348,7 @@ phone_apply <- function(x, fun, fun.value) {
   }, fun.value, USE.NAMES = FALSE)
 }
 
-#' Phone number validity checks.
+#' Phone number validity checks
 #'
 #' @description
 #'
@@ -389,13 +389,15 @@ phone_apply <- function(x, fun, fun.value) {
 #'
 #'   `is_valid()`: `PhoneNumberUtil.isValidNumber()`
 #'
-#'   `is_possible()`: `PhoneNumberUtil.isPossibleNumber()`,
-#'   `PhoneNumberUtil.isPossibleNumberWithReason()`,
-#'   `PhoneNumberUtil.isPossibleNumberForType()` or
-#'   `PhoneNumberUtil.isPossibleNumberForTypeWthReason()` depending on the
-#'   provided arguments.
+#'   `is_possible()`: `PhoneNumberUtil.isPossibleNumber()`
 #'   
-#' @param x A [`phone`] vector
+#'   `is_possible(detailed = TRUE)`: `PhoneNumberUtil.isPossibleNumberWithReason()`
+#'   
+#'   `is_possible(type = type)`: `PhoneNumberUtil.isPossibleNumberForType()`
+#'   
+#'   `is_possible(detailed = TRUE, type = type)`: `PhoneNumberUtil.sPossibleNumberForTypeWthReason()`
+#'   
+#' @param x A [`phone`] vector.
 #' @examples
 #'   x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #'
@@ -414,14 +416,14 @@ NULL
 #' @rdname dialr-valid
 #' @export
 is_parsed <- function(x) {
-  if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   vapply(unclass(x), function(pn) { typeof(pn$jobj) %in% "S4" }, logical(1), USE.NAMES = FALSE)
 }
 
 #' @rdname dialr-valid
 #' @export
 is_valid <- function(x) {
-  if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply(x, function(pn) {
@@ -440,7 +442,7 @@ is_valid <- function(x) {
 #'   number type][dialr-region].
 #' @export
 is_possible <- function(x, detailed = FALSE, type = NULL) {
-  if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   validate_phone_type(type)
   
   phone_util <- .get_phoneNumberUtil()
@@ -479,7 +481,7 @@ is_possible <- function(x, detailed = FALSE, type = NULL) {
   out
 }
 
-#' Phone number region.
+#' Phone number region
 #'
 #' @description
 #'
@@ -530,7 +532,7 @@ is_possible <- function(x, detailed = FALSE, type = NULL) {
 #' @family phone functions
 #' @export
 get_region <- function(x) {
-  if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply(x, function(pn) {
@@ -561,7 +563,7 @@ get_regions_for_calling_code <- function(x) {
   lapply(x, .getRegionCodesForCountryCode)
 }
 
-#' Phone number type.
+#' Phone number type
 #'
 #' @description
 #'
@@ -585,7 +587,8 @@ get_regions_for_calling_code <- function(x) {
 #'   
 #'   `get_types_for_region()`: `PhoneNumberUtil.getSupportedTypesForRegion()`
 #'   
-#' @param x A [`phone`] vector, or a character vector of [ISO country codes][dialr-region].
+#' @param x A [`phone`] vector, or a character vector of [ISO country
+#'   codes][dialr-region].
 #' @return A character vector of phone types.
 #' 
 #'   `get_types_for_region()` returns a list of character vectors for each
@@ -607,7 +610,7 @@ get_regions_for_calling_code <- function(x) {
 #' @family phone functions
 #' @export
 get_type <- function(x) {
-  if (!is.phone(x)) stop("`x` must be a vector of class `phone`", call. = FALSE)
+  if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   phone_util <- .get_phoneNumberUtil()
   
   out <- phone_apply(x, function(pn) {

@@ -6,7 +6,7 @@
 \alias{get_supported_regions}
 \alias{get_region_for_calling_code}
 \alias{get_regions_for_calling_code}
-\title{Phone number region.}
+\title{Phone number region}
 \usage{
 get_region(x)
 

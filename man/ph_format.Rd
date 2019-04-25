@@ -2,7 +2,7 @@
 % Please edit documentation in R/deprec-phone_old.R
 \name{ph_format}
 \alias{ph_format}
-\title{Format a phone number.}
+\title{Format a phone number}
 \usage{
 ph_format(phone, country, format = "NATIONAL", home = NULL,
   clean = FALSE)

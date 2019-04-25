@@ -8,7 +8,7 @@
 \alias{print.phone}
 \alias{format.phone}
 \alias{as.character.phone}
-\title{Phone number parsing and formatting.}
+\title{Phone number parsing and formatting}
 \usage{
 phone(x, region)
 
@@ -32,7 +32,7 @@ is.phone(x)
 
 \item{...}{Additional arguments for specific methods.}
 
-\item{format}{Phone number format to use based on one of four standards:
+\item{format}{Phone number format to use from one of four standards:
 \itemize{
 \item \code{"E164"}: general format for international telephone numbers from \href{https://en.wikipedia.org/wiki/E.164}{ITU-T Recommendation E.164}
 \item \code{"NATIONAL"}: national notation from \href{https://en.wikipedia.org/wiki/E.123}{ITU-T Recommendation E.123}
@@ -53,7 +53,7 @@ numbers will be formatted for dialing from the home region.}
 numbers and leading \code{+}.}
 
 \item{strict}{Should invalid phone numbers be removed? If \code{TRUE} invalid
-numbers are replaced with \code{NA}.}
+phone numbers are replaced with \code{NA}.}
 
 \item{raw}{If \code{TRUE}, the raw phone number is returned. Otherwise elements
 are cleaned with \code{format()}.}

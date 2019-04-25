@@ -161,7 +161,7 @@ ph_possible <- function(phone, country, detailed = FALSE) {
   out
 }
 
-#' Format a phone number.
+#' Format a phone number
 #'
 #' **ph_format is soft-deprecated and will be removed in a future release.**
 #'

@@ -5,7 +5,7 @@
 \alias{get_type}
 \alias{get_supported_types}
 \alias{get_types_for_region}
-\title{Phone number type.}
+\title{Phone number type}
 \usage{
 get_type(x)
 

@@ -5,7 +5,7 @@
 \alias{is_parsed}
 \alias{is_valid}
 \alias{is_possible}
-\title{Phone number validity checks.}
+\title{Phone number validity checks}
 \usage{
 is_parsed(x)
 
@@ -14,7 +14,7 @@ is_valid(x)
 is_possible(x, detailed = FALSE, type = NULL)
 }
 \arguments{
-\item{x}{A \code{\link{phone}} vector}
+\item{x}{A \code{\link{phone}} vector.}
 
 \item{detailed}{If \code{FALSE}, \code{is_possible} returns a logical vector. If
 \code{TRUE}, it returns a character vector with "IS_POSSIBLE" or the reason for
@@ -42,9 +42,12 @@ this region.
 \item \code{"IS_POSSIBLE"}: The number length matches that of valid numbers for this
 region.
 \item \code{"IS_POSSIBLE_LOCAL_ONLY"}: The number length matches that of local numbers
-for this region only (i.e.
+for this region only (i.e. numbers that may be able to be dialled within an
+area, but do not have all the information to be dialled from anywhere inside
+or outside the country).
 \item \code{"TOO_LONG"}: The number is longer than all valid numbers for this region.
-\item \code{"TOO_SHORT"}: The number is shorter than all valid numbers for this region
+\item \code{"TOO_SHORT"}: The number is shorter than all valid numbers for this
+region.
 }
 }
 \section{libphonenumber reference}{
@@ -52,11 +55,13 @@ for this region only (i.e.
 
 \code{is_valid()}: \code{PhoneNumberUtil.isValidNumber()}
 
-\code{is_possible()}: \code{PhoneNumberUtil.isPossibleNumber()},
-\code{PhoneNumberUtil.isPossibleNumberWithReason()},
-\code{PhoneNumberUtil.isPossibleNumberForType()} or
-\code{PhoneNumberUtil.isPossibleNumberForTypeWthReason()} depending on the
-provided arguments.
+\code{is_possible()}: \code{PhoneNumberUtil.isPossibleNumber()}
+
+\code{is_possible(detailed = TRUE)}: \code{PhoneNumberUtil.isPossibleNumberWithReason()}
+
+\code{is_possible(type = type)}: \code{PhoneNumberUtil.isPossibleNumberForType()}
+
+\code{is_possible(detailed = TRUE, type = type)}: \code{PhoneNumberUtil.sPossibleNumberForTypeWthReason()}
 }
 
 \examples{
