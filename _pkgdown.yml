@@ -9,6 +9,7 @@ reference:
     contents:
     - dialr-phone
     - dialr-valid
+    - dialr-match
     - dialr-region
     - dialr-type
     - get_example
