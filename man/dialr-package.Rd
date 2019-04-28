@@ -4,7 +4,7 @@
 \name{dialr-package}
 \alias{dialr}
 \alias{dialr-package}
-\title{dialr: Parse, format, and validate international phone numbers
+\title{dialr: Parse, Format, and Validate International Phone Numbers
     in R}
 \description{
 Parse, format, and validate international phone

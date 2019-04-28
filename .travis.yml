@@ -26,6 +26,6 @@ matrix:
     - R -e 'install.packages("remotes")'
     - R -e 'remotes::install_deps(dep = T, type = "binary")'
   - r: oldrel
+  - r: 3.4
   - r: 3.3
   - r: 3.2
-  - r: 3.1

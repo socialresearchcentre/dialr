@@ -7,6 +7,10 @@ Code calling libphonenumber methods via rJava has been tweaked for performance,
 including using more efficient rJava acess methods and caching commonly used
 static values. Most operations are now approx. 10 times faster.
 
+## Major changes
+
+* Updated R dependency to R >= 3.2.3. R 3.6.0 just came out and highr, a dependency of knitr, requires >= 3.2.3 so build fails on 3.1.x.
+
 ## Minor changes
 
 * New introductory `vignette("dialr")`.
