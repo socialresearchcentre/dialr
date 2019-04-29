@@ -1,17 +1,27 @@
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 # dialr
 
+<!-- badges: start -->
+
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![CRAN status](https://www.r-pkg.org/badges/version/dialr)](https://cran.r-project.org/package=dialr)
-[![Travis build status](https://travis-ci.org/socialresearchcentre/dialr.svg?branch=master)](https://travis-ci.org/socialresearchcentre/dialr)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/socialresearchcentre/dialr?branch=master&svg=true)](https://ci.appveyor.com/project/gorcha/dialr)
-[![Coverage status](https://codecov.io/gh/socialresearchcentre/dialr/branch/master/graph/badge.svg)](https://codecov.io/github/socialresearchcentre/dialr?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/dialr)](https://cran.r-project.org/package=dialr)
+[![Travis build
+status](https://travis-ci.org/socialresearchcentre/dialr.svg?branch=master)](https://travis-ci.org/socialresearchcentre/dialr)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/socialresearchcentre/dialr?branch=master&svg=true)](https://ci.appveyor.com/project/gorcha/dialr)
+[![Coverage
+status](https://codecov.io/gh/socialresearchcentre/dialr/branch/master/graph/badge.svg)](https://codecov.io/github/socialresearchcentre/dialr?branch=master)
+<!-- badges: end -->
 
 ## Overview
 
-dialr is an R port of [Google's libphonenumber
+dialr is an R port of [Google’s libphonenumber
 library](https://github.com/googlei18n/libphonenumber). It uses the java
-implementation of libphonenumber via rJava for all phone number processing.
+implementation of libphonenumber via rJava for all phone number
+processing.
 
 For a full rundown of libphonenumber see their
 [github](https://github.com/googlei18n/libphonenumber) and
@@ -19,53 +29,46 @@ For a full rundown of libphonenumber see their
 
 ## Installation
 
-``` r
-# Install the development version from GitHub:
-devtools::install_github("socialresearchcentre/dialr")
+You can install the released version of dialr from
+[CRAN](https://CRAN.R-project.org) with:
 
-# dialr also needs the dialrjars package to run:
-devtools::install_github("socialresearchcentre/dialrjars")
+``` r
+install.packages("dialr")
+```
+
+And the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("socialresearchcentre/dialr")
 ```
 
 ## Usage
 
-### Conceptual basis
-
-dialr is an R interface to Google's libphonenumber java library. libphonenumber
-defines the `PhoneNumberUtil` class, with a set of functions for extracting
-information from and performing processing on a parsed `Phonenumber` object. A
-phone number must be parsed before any other operations (e.g. checking phone
-number validity, formatting) can be performed.
-
-When parsing a phone number a "default region" is required to determine the
-processing context for non-international numbers. A set of functions in the
-`PhoneNumberUtil` class can perform various operations on the resulting
-`Phonenumber` object.
-
-dialr provides an interface to these functions to easily parse and process phone
-numbers in R.
-
-### phone class
-
-The phone class parses phone numbers and stores the java `Phonenumber` object
-alongside the original raw text. This removes unnecessary re-parsing time when
-performing multiple operations on a vector of phone numbers, and is closer to
-the spirit of the libphonenumber package.
-
 ``` r
 library(dialr)
 
-# Parse phone number vector
-x <- c(0, 0123, "0404 753 123", "61410123817")
+# Parse a character phone number vector
+x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
 x <- phone(x, "AU")
 
 is_parsed(x)    # Was the phone number successfully parsed?
+#> [1] FALSE  TRUE  TRUE  TRUE  TRUE
 is_valid(x)     # Is the phone number valid?
+#> [1] FALSE FALSE  TRUE  TRUE  TRUE
 is_possible(x)  # Is the phone number possible?
+#> [1] FALSE FALSE  TRUE  TRUE  TRUE
 get_region(x)   # What region (ISO country code) is the phone number from?
+#> [1] NA   NA   "AU" "AU" "US"
 get_type(x)     # Is the phone number a fixed line, mobile etc.
+#> [1] NA                     "UNKNOWN"              "MOBILE"              
+#> [4] "MOBILE"               "FIXED_LINE_OR_MOBILE"
 format(x)
+#> [1] NA             "+61123"       "+61404753123" "+61410123817"
+#> [5] "+12015550123"
 format(x, home = "AU")
+#> [1] NA                "123"             "0404753123"      "0410123817"     
+#> [5] "001112015550123"
 
 # Use with dplyr
 library(dplyr)
@@ -82,25 +85,14 @@ y %>%
                  region = get_region,
                  type = get_type,
                  clean = format))
-
-```
-
-### One-shot methods
-
-The one shot methods parse the provided phone number during the function call.
-A country code must be provided in all cases to parse the provided numbers.
-
-The one-shot functions are likely to be deprecated in future.
-
-``` r
-library(dialr)
-
-x <- c(0, 0123, "0404 753 123", "61410123817")
-
-ph_valid(x, "AU")    # Is the phone number valid?
-ph_possible(x, "AU") # Is the phone number possible?
-ph_region(x, "AU")   # What region (ISO country code) is the phone number from?
-ph_type(x, "AU")     # Is the phone number a fixed line, mobile etc.
-ph_format(x, "AU")
-ph_format(x, "AU", home = "AU")
+#> # A tibble: 4 x 12
+#>      id       phone1       phone2 country phone1_valid phone2_valid
+#>   <int>      <phone>      <phone> <chr>   <lgl>        <lgl>       
+#> 1     1           NA +61393881234 AU      FALSE        TRUE        
+#> 2     2       +61123      +611234 AU      FALSE        FALSE       
+#> 3     3 +61404753123 +12015550123 AU      TRUE         TRUE        
+#> 4     4 +61410123817           NA AU      TRUE         FALSE       
+#> # … with 6 more variables: phone1_region <chr>, phone2_region <chr>,
+#> #   phone1_type <chr>, phone2_type <chr>, phone1_clean <chr>,
+#> #   phone2_clean <chr>
 ```

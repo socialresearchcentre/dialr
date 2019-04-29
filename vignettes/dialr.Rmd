@@ -12,18 +12,100 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+# load dplyr here to avoid mask warnings
+library(dplyr, warn.conflicts = FALSE)
 ```
 
-Welcome to dialr!
+Very happy to anounce that dialr is now on [CRAN](https://cran.r-project.org/package=dialr)!
+
+dialr is an R port of [Google's libphonenumber library](https://github.com/googlei18n/libphonenumber). It uses the java implementation of libphonenumber via rJava for all phone number processing, but with an interface that should be much more natural for R users.
+
+## Conceptual basis
+
+dialr is an R interface to Google's libphonenumber java library. libphonenumber defines the `PhoneNumberUtil` class, with a set of functions for extracting information from and performing processing on a parsed `Phonenumber` object. A phone number must be parsed before any other operations (e.g. checking phone number validity, formatting) can be performed.
+
+When parsing a phone number a "default region" is required to determine the processing context for non-international numbers. A set of functions in the `PhoneNumberUtil` class can perform various operations on the resulting `Phonenumber` object.
+
+dialr provides an interface to these functions to easily parse and process phone numbers in R.
+
+## Parsing phone numbers
+
+The phone class parses phone numbers and stores the java `Phonenumber` object alongside the original raw text. This removes unnecessary re-parsing time when performing multiple operations on a vector of phone numbers, and is closer to the spirit of the libphonenumber package.
+
+To parse a phone number, use the `phone()` function. This takes a character vector of phone numbers to parse and a default region for phone numbers not stored in an international format (i.e. with a leading "+").
 
 ```{r}
 library(dialr)
+
+# Parse phone number vector
+x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+x <- phone(x, "AU")
+
+print(x)
+```
+
+## Basic phone functions
+
+```{r}
+is_parsed(x)    # Was the phone number successfully parsed?
+is_valid(x)     # Is the phone number valid?
+is_possible(x)  # Is the phone number possible?
+get_region(x)   # What region (ISO country code) is the phone number from?
+get_type(x)     # Is the phone number a fixed line, mobile etc.
+format(x)
+format(x, home = "AU")
+```
+
+## Comparing phone numbers
+
+Equality comparisons for phone numbers ignore formatting differences
+
+```{r}
+phone("0404 753 123", "AU") == phone("+61404753123", "US")
+phone("0404 753 123", "AU") == phone("0404 753 123", "US")
+```
+
+## Formatting phone numbers
+
+libphonenumber allows for a variety of different phone number formats.
+
+```{r}
+
+```
+
+```{r}
+# Use with dplyr
 library(dplyr)
 
-x <- tibble(id = 1:4,
-            phone1 = c(0, 0123, "0404753123", "61410123817"),
-            phone2 = c("0393881234", 1234, "+12015550123", 0),
+y <- tibble(id = 1:4,
+            phone1 = c(0, 0123, "0404 753 123", "61410123817"),
+            phone2 = c("03 9388 1234", 1234, "+12015550123", 0),
             country = c("AU", "AU", "AU", "AU"))
 
-x %>% mutate_at(vars(matches("^phone")), ~phone(., country))
+y %>%
+  mutate_at(vars(matches("^phone")), ~phone(., country)) %>%
+  mutate_at(vars(matches("^phone")),
+            list(valid = is_valid,
+                 region = get_region,
+                 type = get_type,
+                 clean = format))
+```
+
+## One-shot methods
+
+The one shot methods parse the provided phone number during the function call. A country code must be provided in all cases to parse the provided numbers.
+
+The one-shot functions will be deprecated in future.
+
+```{r, warning = FALSE}
+library(dialr)
+
+x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+
+ph_valid(x, "AU")    # Is the phone number valid?
+ph_possible(x, "AU") # Is the phone number possible?
+ph_region(x, "AU")   # What region (ISO country code) is the phone number from?
+ph_type(x, "AU")     # Is the phone number a fixed line, mobile etc.
+ph_format(x, "AU")
+ph_format(x, "AU", home = "AU")
 ```

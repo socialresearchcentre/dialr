@@ -16,7 +16,7 @@ static values. Most operations are now approx. 10 times faster.
 * New introductory `vignette("dialr")`.
 
 * New `is_match()` function supports proper `phone` equality checks. `==` and
-`!=` now use `is_match()` for `phone` vectors.
+`!=` now use `is_match()` for `phone` vectors. (#1)
 
 * More region and type functions implemented. See `` ?`dialr-region` `` or
 `` ?`dialr-type` `` for details.
