@@ -1,5 +1,5 @@
 
-# dialr (development version)
+# dialr 0.2.1
 
 ## Performance improvements
 

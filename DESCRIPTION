@@ -1,7 +1,7 @@
 Package: dialr
 Title: Parse, Format, and Validate International Phone Numbers
     in R
-Version: 0.2.0.9004
+Version: 0.2.1
 Authors@R: 
     c(person(given = "Danny",
              family = "Smith",
