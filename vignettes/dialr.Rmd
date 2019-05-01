@@ -28,7 +28,7 @@ dialr provides an interface to these functions to easily parse and process phone
 
 ## Parsing phone numbers
 
-A phone class vector stores the a parsed java `Phonenumber` object for further processing alongside the original raw text phone number and default region. This "default region" is required to determine the processing context for non-international numbers.
+A phone class vector stores a parsed java `Phonenumber` object for further processing alongside the original raw text phone number and default region. This "default region" is required to determine the processing context for non-international numbers.
 
 To create a phone vector, use the `phone()` function. This takes a character vector of phone numbers to parse and a default region for phone numbers not stored in an international format (i.e. with a leading "+").
 
