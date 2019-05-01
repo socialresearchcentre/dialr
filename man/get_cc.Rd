@@ -7,11 +7,11 @@
 get_cc(country)
 }
 \arguments{
-\item{country}{A character vector of country names}
+\item{country}{A character vector of country names.}
 }
 \value{
-A vector of ISO country codes (\code{NA} where not found)
+A vector of \link[=dialr-region]{ISO country codes} (\code{NA} where not found).
 }
 \description{
-Get ISO country code
+Get \link[=dialr-region]{ISO country code} from a country name.
 }

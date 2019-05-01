@@ -1,8 +1,10 @@
 
 #' Get ISO country code
+#' 
+#' Get [ISO country code][dialr-region] from a country name.
 #'
-#' @param country A character vector of country names
-#' @return A vector of ISO country codes (`NA` where not found)
+#' @param country A character vector of country names.
+#' @return A vector of [ISO country codes][dialr-region] (`NA` where not found).
 #' @export
 get_cc <- function(country) {
   country <- toupper(country)
@@ -18,9 +20,11 @@ get_cc <- function(country) {
 }
 
 #' Check ISO country code
+#' 
+#' Check whether an [ISO country code][dialr-region] is valid.
 #'
-#' @param country A character vector of ISO country codes
-#' @return A logical vector flagging which elements are valid ISO country codes
+#' @param country A character vector of [ISO country codes][dialr-region].
+#' @return A logical vector flagging which elements are valid codes.
 #' @export
 check_cc <- function(country) {
   country %in% cc_lookup

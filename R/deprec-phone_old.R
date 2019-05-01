@@ -169,8 +169,8 @@ ph_possible <- function(phone, country, detailed = FALSE) {
 #' @param format Phone number format to use.
 #' @param country Character vector of region codes. If length = 1, the same
 #'                region code is used for all phone numbers
-#' @param home ISO country code for home country. If provided, numbers will be
-#'   formatted for dialing from the home country.
+#' @param home [ISO country code][dialr-region] for home country. If provided,
+#'   numbers will be formatted for dialing from the home country.
 #' @param clean Should non-numeric characters be removed? If `TRUE`, keeps
 #'   numbers
 #' @return a character vector of formatted phone numbers.
@@ -249,8 +249,8 @@ ph_type <- function(phone, country) {
 #'                region code is used for all phone numbers
 #' @param type A character vector of phone number types. If `NULL` (default),
 #'   returns an example "FIXED_LINE" number.
-#' @param home ISO country code for home country. If provided, numbers will be
-#'   formatted for dialing from the home country.
+#' @param home [ISO country code][dialr-region] for home country. If provided,
+#'   numbers will be formatted for dialing from the home country.
 #' @param clean Should non-numeric characters be removed? If `TRUE`, keeps
 #'   numbers
 #' @return a character vector of formatted example phone numbers.

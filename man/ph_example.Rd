@@ -13,8 +13,8 @@ region code is used for all phone numbers}
 \item{type}{A character vector of phone number types. If \code{NULL} (default),
 returns an example "FIXED_LINE" number.}
 
-\item{home}{ISO country code for home country. If provided, numbers will be
-formatted for dialing from the home country.}
+\item{home}{\link[=dialr-region]{ISO country code} for home country. If provided,
+numbers will be formatted for dialing from the home country.}
 
 \item{clean}{Should non-numeric characters be removed? If \code{TRUE}, keeps
 numbers}

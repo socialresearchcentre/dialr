@@ -18,13 +18,13 @@ status](https://codecov.io/gh/socialresearchcentre/dialr/branch/master/graph/bad
 
 ## Overview
 
-dialr is an R port of [Google’s libphonenumber
+dialr is an R interface to [Google’s libphonenumber
 library](https://github.com/googlei18n/libphonenumber). It uses the java
 implementation of libphonenumber via rJava for all phone number
 processing.
 
 For a full rundown of libphonenumber see their
-[github](https://github.com/googlei18n/libphonenumber) and
+[GitHub](https://github.com/googlei18n/libphonenumber) and
 [javadocs](https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/).
 
 ## Installation

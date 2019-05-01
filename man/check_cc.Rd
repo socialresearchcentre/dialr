@@ -7,11 +7,11 @@
 check_cc(country)
 }
 \arguments{
-\item{country}{A character vector of ISO country codes}
+\item{country}{A character vector of \link[=dialr-region]{ISO country codes}.}
 }
 \value{
-A logical vector flagging which elements are valid ISO country codes
+A logical vector flagging which elements are valid codes.
 }
 \description{
-Check ISO country code
+Check whether an \link[=dialr-region]{ISO country code} is valid.
 }

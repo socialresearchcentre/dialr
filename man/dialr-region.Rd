@@ -27,8 +27,8 @@ each provided calling code.
 }
 \description{
 In libphonenumber a phone number region is represented by a 2 digit ISO
-country code. \code{get_region(x)} returns the ISO country code for each element
-of a \link{phone} vector.
+country code. \code{get_region(x)} returns the 2-digit \href{https://en.wikipedia.org/wiki/ISO_3166-1}{ISO country code} for each element of a \link{phone}
+vector.
 
 Use \code{get_supported_regions()} to see a full list of supported regions.
 

@@ -1,0 +1,36 @@
+---
+title: "dialr One Shot Methods"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{dialr One Shot Methods}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, include = FALSE}
+library(dialr)
+```
+
+This set of methods is a relic of the early development of dialr, and will be deprecated in future. They are significantly slower than the current approach.
+
+The one shot methods parse the provided phone number during the processing function call. A country code must be provided in all cases to parse the provided numbers.
+
+```{r, warning = FALSE}
+library(dialr)
+
+x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+
+ph_valid(x, "AU")    # Is the phone number valid?
+ph_possible(x, "AU") # Is the phone number possible?
+ph_region(x, "AU")   # What region (ISO country code) is the phone number from?
+ph_type(x, "AU")     # Is the phone number a fixed line, mobile etc.
+ph_format(x, "AU")
+ph_format(x, "AU", home = "AU")
+```

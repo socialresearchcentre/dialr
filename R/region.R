@@ -3,8 +3,9 @@
 #' @description
 #'
 #' In libphonenumber a phone number region is represented by a 2 digit ISO
-#' country code. `get_region(x)` returns the ISO country code for each element
-#' of a [phone] vector.
+#' country code. `get_region(x)` returns the 2-digit [ISO country
+#' code](https://en.wikipedia.org/wiki/ISO_3166-1) for each element of a [phone]
+#' vector.
 #' 
 #' Use `get_supported_regions()` to see a full list of supported regions.
 #' 

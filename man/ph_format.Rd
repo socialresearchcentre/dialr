@@ -15,8 +15,8 @@ region code is used for all phone numbers}
 
 \item{format}{Phone number format to use.}
 
-\item{home}{ISO country code for home country. If provided, numbers will be
-formatted for dialing from the home country.}
+\item{home}{\link[=dialr-region]{ISO country code} for home country. If provided,
+numbers will be formatted for dialing from the home country.}
 
 \item{clean}{Should non-numeric characters be removed? If \code{TRUE}, keeps
 numbers}
