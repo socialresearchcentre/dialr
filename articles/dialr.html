@@ -99,7 +99,7 @@
 <div id="parsing-phone-numbers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#parsing-phone-numbers" class="anchor"></a>Parsing phone numbers</h2>
-<p>A phone class vector stores the a parsed java <code>Phonenumber</code> object for further processing alongside the original raw text phone number and default region. This “default region” is required to determine the processing context for non-international numbers.</p>
+<p>A phone class vector stores a parsed java <code>Phonenumber</code> object for further processing alongside the original raw text phone number and default region. This “default region” is required to determine the processing context for non-international numbers.</p>
 <p>To create a phone vector, use the <code><a href="../reference/dialr-phone.html">phone()</a></code> function. This takes a character vector of phone numbers to parse and a default region for phone numbers not stored in an international format (i.e. with a leading “+”).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dialr)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
