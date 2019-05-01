@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Format a phone number. — ph_format • dialr</title>
+<title>Format a phone number — ph_format • dialr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,7 +30,7 @@
 
 
 
-<meta property="og:title" content="Format a phone number. — ph_format" />
+<meta property="og:title" content="Format a phone number — ph_format" />
 
 <meta property="og:description" content="ph_format is soft-deprecated and will be removed in a future release." />
 <meta name="twitter:card" content="summary" />
@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -76,7 +76,22 @@
   </a>
 </li>
 <li>
+  <a href="../articles/dialr.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/oneshot.html">dialr One Shot Methods</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -102,7 +117,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Format a phone number.</h1>
+    <h1>Format a phone number</h1>
     <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/deprec-phone_old.R'><code>R/deprec-phone_old.R</code></a></small>
     <div class="hidden name"><code>ph_format.Rd</code></div>
     </div>
@@ -134,8 +149,8 @@ region code is used for all phone numbers</p></td>
     </tr>
     <tr>
       <th>home</th>
-      <td><p>ISO country code for home country. If provided, numbers will be
-formatted for dialing from the home country.</p></td>
+      <td><p><a href='dialr-region.html'>ISO country code</a> for home country. If provided,
+numbers will be formatted for dialing from the home country.</p></td>
     </tr>
     <tr>
       <th>clean</th>

@@ -32,9 +32,9 @@
 
 <meta property="og:title" content="Get an example phone number — get_example" />
 
-<meta property="og:description" content="Produces example phone numbers for the given region and
-type combinations. The region, type and valid vectors
-are recycled if a vector of length 1 is provided." />
+<meta property="og:description" content="Produces example phone numbers for the given region,
+type and valid combinations. Input vectors are recycled as
+necessary if a vector of length 1 is provided." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,7 +65,7 @@ are recycled if a vector of length 1 is provided." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -78,7 +78,22 @@ are recycled if a vector of length 1 is provided." />
   </a>
 </li>
 <li>
+  <a href="../articles/dialr.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/oneshot.html">dialr One Shot Methods</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -105,15 +120,15 @@ are recycled if a vector of length 1 is provided." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get an example phone number</h1>
-    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/phone.R'><code>R/phone.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/example.R'><code>R/example.R</code></a></small>
     <div class="hidden name"><code>get_example.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Produces example phone numbers for the given <code><a href='dialr-region.html'>region</a></code> and
-<code><a href='dialr-type.html'>type</a></code> combinations. The <code>region</code>, <code>type</code> and valid vectors
-are recycled if a vector of length 1 is provided.</p>
+    <p>Produces example phone numbers for the given <code><a href='dialr-region.html'>region</a></code>,
+<code><a href='dialr-type.html'>type</a></code> and <code>valid</code> combinations. Input vectors are recycled as
+necessary if a vector of length 1 is provided.</p>
     
     </div>
 
@@ -140,7 +155,7 @@ an example invalid number, and <code>type</code> is ignored.</p></td>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <code><a href='dialr-phone.html'>phone</a></code> vector</p>
+    <p>A <a href='dialr-phone.html'>phone</a> vector.</p>
     
     <h2 class="hasAnchor" id="libphonenumber-reference"><a class="anchor" href="#libphonenumber-reference"></a>libphonenumber reference</h2>
 

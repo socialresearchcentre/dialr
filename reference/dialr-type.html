@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Phone number types — dialr-type • dialr</title>
+<title>Phone number type — dialr-type • dialr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,17 @@
 
 
 
-<meta property="og:title" content="Phone number types — dialr-type" />
+<meta property="og:title" content="Phone number type — dialr-type" />
 
-<meta property="og:description" content="Functions for working with phone number types." />
+<meta property="og:description" content="In addition to validity, libphonenumber can identify phone number type - it
+is able to distinguish Fixed-line, Mobile, Toll-free, Premium Rate, Shared
+Cost, VoIP, Personal Numbers, UAN, Pager, and Voicemail (whenever feasible).
+get_type(x) returns the phone number type for each element of a phone
+vector.
+Valid phone number types differ by region. get_types_for_region(x) returns
+a list of character vectors of valid types for each provided
+ISO country code. Use get_supported_types() to see a full
+list of supported types." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -63,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -76,7 +84,22 @@
   </a>
 </li>
 <li>
+  <a href="../articles/dialr.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/oneshot.html">dialr One Shot Methods</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -102,14 +125,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Phone number types</h1>
-    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/phone.R'><code>R/phone.R</code></a></small>
+    <h1>Phone number type</h1>
+    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/type.R'><code>R/type.R</code></a></small>
     <div class="hidden name"><code>dialr-type.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Functions for working with phone number types.</p>
+    <p>In addition to validity, libphonenumber can identify phone number type - it
+is able to distinguish Fixed-line, Mobile, Toll-free, Premium Rate, Shared
+Cost, VoIP, Personal Numbers, UAN, Pager, and Voicemail (whenever feasible).</p>
+<p><code>get_type(x)</code> returns the phone number type for each element of a <a href='dialr-phone.html'>phone</a>
+vector.</p>
+<p>Valid phone number types differ by region. <code>get_types_for_region(x)</code> returns
+a list of character vectors of valid types for each provided
+<a href='dialr-region.html'>ISO country code</a>. Use <code>get_supported_types()</code> to see a full
+list of supported types.</p>
     
     </div>
 
@@ -124,21 +155,15 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A <code><a href='dialr-phone.html'>phone</a></code> vector, or a character vector of <a href='dialr-region.html'>ISO country codes</a></p></td>
+      <td><p>A <a href='dialr-phone.html'>phone</a> vector, or a character vector of <a href='dialr-region.html'>ISO country codes</a>.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>In addition to validity, libphonenumber can identify phone number type - it
-is able to distinguish Fixed-line, Mobile, Toll-free, Premium Rate, Shared
-Cost, VoIP, Personal Numbers, UAN, Pager, and Voicemail (whenever feasible).</p>
-<p><code>get_type(x)</code> returns the phone number type for each element of a <a href='dialr-phone.html'>phone</a>
-vector.</p>
-<p>Valid phone number types differ by region. <code>get_types_for_region(x)</code> returns
-a list of character vectors of valid types for each provided
-<a href='dialr-region.html'>ISO country code</a>. Use <code>get_supported_types()</code> to see a full
-list of supported types.</p>
+    <p>A character vector of phone types.</p>
+<p><code>get_types_for_region()</code> returns a list of character vectors for each
+provided country code.</p>
     
     <h2 class="hasAnchor" id="libphonenumber-reference"><a class="anchor" href="#libphonenumber-reference"></a>libphonenumber reference</h2>
 
@@ -155,13 +180,16 @@ list of supported types.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dialr-phone.html'>phone</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0123</span>, <span class='st'>"0412 345 678"</span>, <span class='st'>"61412987654"</span>, <span class='st'>"03 9123 4567"</span>, <span class='st'>"+12015550123"</span>), <span class='st'>"AU"</span>)
+    <pre class="examples"><div class='input'>  <span class='co'># Get phone types for a phone vector</span>
+  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dialr-phone.html'>phone</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0123</span>, <span class='st'>"0412 345 678"</span>, <span class='st'>"61412987654"</span>, <span class='st'>"03 9123 4567"</span>, <span class='st'>"+12015550123"</span>), <span class='st'>"AU"</span>)
   <span class='fu'>get_type</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] NA                     "UNKNOWN"              "MOBILE"              
 #&gt; [4] "MOBILE"               "FIXED_LINE"           "FIXED_LINE_OR_MOBILE"</div><div class='input'>
+  <span class='co'># All supported phone types</span>
   <span class='fu'>get_supported_types</span>()</div><div class='output co'>#&gt;  [1] "FIXED_LINE"           "MOBILE"               "FIXED_LINE_OR_MOBILE"
 #&gt;  [4] "TOLL_FREE"            "PREMIUM_RATE"         "SHARED_COST"         
 #&gt;  [7] "VOIP"                 "PERSONAL_NUMBER"      "PAGER"               
 #&gt; [10] "UAN"                  "VOICEMAIL"            "UNKNOWN"             </div><div class='input'>
+  <span class='co'># Get supported types for specified regions</span>
   <span class='fu'>get_types_for_region</span>(<span class='st'>"AU"</span>)</div><div class='output co'>#&gt; [[1]]
 #&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
 #&gt; [6] "VOIP"         "PAGER"       
@@ -172,7 +200,7 @@ list of supported types.</p>
 #&gt; [[2]]
 #&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
 #&gt; [5] "PERSONAL_NUMBER" "UAN"            
-#&gt; </div><div class='input'>  <span class='fu'>get_types_for_region</span>(<span class='fu'><a href='dialr-region.html'>get_supported_regions</a></span>())</div><div class='output co'>#&gt; [[1]]
+#&gt; </div><div class='input'>  <span class='fu'>get_types_for_region</span>(<span class='fu'><a href='dialr-region.html'>get_supported_regions</a></span>())[<span class='fl'>1</span>:<span class='fl'>5</span>]</div><div class='output co'>#&gt; [[1]]
 #&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
 #&gt; [5] "PERSONAL_NUMBER"
 #&gt; 
@@ -189,820 +217,6 @@ list of supported types.</p>
 #&gt; 
 #&gt; [[5]]
 #&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"       "UAN"       
-#&gt; 
-#&gt; [[6]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "PAGER"     
-#&gt; 
-#&gt; [[7]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "UAN"       
-#&gt; 
-#&gt; [[8]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[9]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "UAN"         
-#&gt; 
-#&gt; [[10]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[11]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER" "PAGER"          
-#&gt; 
-#&gt; [[12]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[13]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[14]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"        
-#&gt; 
-#&gt; [[15]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[16]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "UAN"         
-#&gt; 
-#&gt; [[17]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[18]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"        
-#&gt; 
-#&gt; [[19]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; 
-#&gt; [[20]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"         "PAGER"       
-#&gt; 
-#&gt; [[21]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[22]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "UAN"         
-#&gt; 
-#&gt; [[23]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[24]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "UAN"         
-#&gt; 
-#&gt; [[25]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "UAN"         
-#&gt; 
-#&gt; [[26]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER" "UAN"            
-#&gt; 
-#&gt; [[27]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "UAN"         
-#&gt; 
-#&gt; [[28]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "VOIP"      
-#&gt; 
-#&gt; [[29]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[30]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "UAN"         
-#&gt; 
-#&gt; [[31]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[32]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[33]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[34]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; 
-#&gt; [[35]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[36]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"       "UAN"       
-#&gt; 
-#&gt; [[37]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[38]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[39]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[40]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[41]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "UAN"         
-#&gt; 
-#&gt; [[42]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[43]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "VOIP"      
-#&gt; 
-#&gt; [[44]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; 
-#&gt; [[45]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "VOIP"      
-#&gt; 
-#&gt; [[46]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER" "UAN"            
-#&gt; 
-#&gt; [[47]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[48]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "PERSONAL_NUMBER" "PAGER"           "VOICEMAIL"      
-#&gt; 
-#&gt; [[49]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[50]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; [6] "UAN"         
-#&gt; 
-#&gt; [[51]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[52]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"      
-#&gt; 
-#&gt; [[53]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[54]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "VOIP"            "PERSONAL_NUMBER" "UAN"            
-#&gt; [9] "VOICEMAIL"      
-#&gt; 
-#&gt; [[55]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[56]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"         "PAGER"        "UAN"         
-#&gt; 
-#&gt; [[57]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[58]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[59]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[60]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"        
-#&gt; 
-#&gt; [[61]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[62]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[63]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"      
-#&gt; 
-#&gt; [[64]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"        
-#&gt; 
-#&gt; [[65]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[66]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[67]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[68]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "PREMIUM_RATE"
-#&gt; 
-#&gt; [[69]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[70]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "PREMIUM_RATE"
-#&gt; 
-#&gt; [[71]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[72]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "PERSONAL_NUMBER" "PAGER"           "UAN"            
-#&gt; [9] "VOICEMAIL"      
-#&gt; 
-#&gt; [[73]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[74]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[75]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[76]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[77]]
-#&gt; [1] "FIXED_LINE"  "MOBILE"      "TOLL_FREE"   "SHARED_COST" "VOIP"       
-#&gt; 
-#&gt; [[78]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[79]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; 
-#&gt; [[80]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[81]]
-#&gt; [1] "FIXED_LINE"
-#&gt; 
-#&gt; [[82]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[83]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[84]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[85]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[86]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[87]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[88]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[89]]
-#&gt; [1] "FIXED_LINE"  "MOBILE"      "SHARED_COST" "PAGER"      
-#&gt; 
-#&gt; [[90]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"        
-#&gt; 
-#&gt; [[91]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "PERSONAL_NUMBER" "UAN"            
-#&gt; 
-#&gt; [[92]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[93]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[94]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "VOIP"            "PERSONAL_NUMBER" "UAN"            
-#&gt; [9] "VOICEMAIL"      
-#&gt; 
-#&gt; [[95]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[96]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[97]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; 
-#&gt; [[98]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[99]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER" "PAGER"           "UAN"            
-#&gt; 
-#&gt; [[100]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER" "VOICEMAIL"      
-#&gt; 
-#&gt; [[101]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "PERSONAL_NUMBER" "PAGER"           "UAN"            
-#&gt; [9] "VOICEMAIL"      
-#&gt; 
-#&gt; [[102]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[103]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER" "UAN"            
-#&gt; 
-#&gt; [[104]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[105]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"        
-#&gt; 
-#&gt; [[106]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[107]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[108]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[109]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[110]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[111]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"        
-#&gt; 
-#&gt; [[112]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER" "UAN"            
-#&gt; 
-#&gt; [[113]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "VOIP"      
-#&gt; 
-#&gt; [[114]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[115]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[116]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[117]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[118]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[119]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "VOIP"            "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[120]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[121]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[122]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "PERSONAL_NUMBER" "UAN"            
-#&gt; 
-#&gt; [[123]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[124]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[125]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[126]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[127]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; [6] "UAN"         
-#&gt; 
-#&gt; [[128]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"       "UAN"       
-#&gt; 
-#&gt; [[129]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "UAN"         
-#&gt; 
-#&gt; [[130]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[131]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[132]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[133]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[134]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"         "UAN"         
-#&gt; 
-#&gt; [[135]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOICEMAIL" 
-#&gt; 
-#&gt; [[136]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[137]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER" "PAGER"           "UAN"            
-#&gt; 
-#&gt; [[138]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[139]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[140]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "VOIP"      
-#&gt; 
-#&gt; [[141]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[142]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER" "PAGER"           "UAN"            
-#&gt; 
-#&gt; [[143]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[144]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[145]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "VOIP"      
-#&gt; 
-#&gt; [[146]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[147]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"      
-#&gt; 
-#&gt; [[148]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[149]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[150]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[151]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[152]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[153]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"      
-#&gt; 
-#&gt; [[154]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[155]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[156]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER" "PAGER"           "UAN"            
-#&gt; 
-#&gt; [[157]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[158]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER" "UAN"            
-#&gt; 
-#&gt; [[159]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[160]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "VOIP"      
-#&gt; 
-#&gt; [[161]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; [6] "UAN"         
-#&gt; 
-#&gt; [[162]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "UAN"         
-#&gt; 
-#&gt; [[163]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[164]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "VOIP"            "PERSONAL_NUMBER" "UAN"            
-#&gt; [9] "VOICEMAIL"      
-#&gt; 
-#&gt; [[165]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"         "UAN"          "VOICEMAIL"   
-#&gt; 
-#&gt; [[166]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER" "UAN"            
-#&gt; 
-#&gt; [[167]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "UAN"         
-#&gt; 
-#&gt; [[168]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[169]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"         "UAN"         
-#&gt; 
-#&gt; [[170]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[171]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"       "UAN"       
-#&gt; 
-#&gt; [[172]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; [6] "UAN"          "VOICEMAIL"   
-#&gt; 
-#&gt; [[173]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "VOIP"            "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[174]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[175]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER" "PAGER"           "UAN"            
-#&gt; 
-#&gt; [[176]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "VOIP"      
-#&gt; 
-#&gt; [[177]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[178]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "PERSONAL_NUMBER" "PAGER"           "UAN"            
-#&gt; 
-#&gt; [[179]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER" "PAGER"           "UAN"            
-#&gt; 
-#&gt; [[180]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[181]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[182]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[183]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"      
-#&gt; 
-#&gt; [[184]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "PREMIUM_RATE"
-#&gt; 
-#&gt; [[185]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[186]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[187]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER" "PAGER"           "UAN"            
-#&gt; 
-#&gt; [[188]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[189]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER" "PAGER"          
-#&gt; 
-#&gt; [[190]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "VOIP"            "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[191]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "UAN"       
-#&gt; 
-#&gt; [[192]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "PREMIUM_RATE" "SHARED_COST" 
-#&gt; 
-#&gt; [[193]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[194]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "UAN"         
-#&gt; [6] "VOICEMAIL"   
-#&gt; 
-#&gt; [[195]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "UAN"       
-#&gt; 
-#&gt; [[196]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "PREMIUM_RATE"
-#&gt; 
-#&gt; [[197]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[198]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "PERSONAL_NUMBER" "UAN"            
-#&gt; 
-#&gt; [[199]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"        
-#&gt; 
-#&gt; [[200]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; 
-#&gt; [[201]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[202]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[203]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[204]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"         "UAN"         
-#&gt; 
-#&gt; [[205]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; [6] "UAN"         
-#&gt; 
-#&gt; [[206]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[207]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"      
-#&gt; 
-#&gt; [[208]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"      
-#&gt; 
-#&gt; [[209]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; 
-#&gt; [[210]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[211]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "VOIP"      
-#&gt; 
-#&gt; [[212]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"      
-#&gt; 
-#&gt; [[213]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[214]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[215]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[216]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[217]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[218]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; [6] "PAGER"        "UAN"         
-#&gt; 
-#&gt; [[219]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[220]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "UAN"         
-#&gt; 
-#&gt; [[221]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "VOIP"      
-#&gt; 
-#&gt; [[222]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[223]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[224]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[225]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; 
-#&gt; [[226]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "PREMIUM_RATE"
-#&gt; 
-#&gt; [[227]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[228]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[229]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "UAN"       
-#&gt; 
-#&gt; [[230]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[231]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "VOIP"        
-#&gt; [6] "PAGER"        "UAN"         
-#&gt; 
-#&gt; [[232]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "VOIP"            "PERSONAL_NUMBER" "UAN"            
-#&gt; [9] "VOICEMAIL"      
-#&gt; 
-#&gt; [[233]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[234]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[235]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[236]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER" "PAGER"          
-#&gt; 
-#&gt; [[237]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[238]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE"
-#&gt; 
-#&gt; [[239]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "SHARED_COST"     "PERSONAL_NUMBER"
-#&gt; 
-#&gt; [[240]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
-#&gt; 
-#&gt; [[241]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE"  "VOIP"      
-#&gt; 
-#&gt; [[242]]
-#&gt; [1] "FIXED_LINE" "MOBILE"     "TOLL_FREE" 
-#&gt; 
-#&gt; [[243]]
-#&gt; [1] "FIXED_LINE"      "MOBILE"          "TOLL_FREE"       "PREMIUM_RATE"   
-#&gt; [5] "PERSONAL_NUMBER" "UAN"            
-#&gt; 
-#&gt; [[244]]
-#&gt; [1] "FIXED_LINE"   "MOBILE"       "TOLL_FREE"    "PREMIUM_RATE" "SHARED_COST" 
-#&gt; [6] "VOIP"         "PAGER"        "UAN"         
-#&gt; 
-#&gt; [[245]]
-#&gt; [1] "FIXED_LINE" "MOBILE"    
 #&gt; </div><div class='input'>  
 </div></pre>
   </div>
@@ -1011,7 +225,7 @@ list of supported types.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#details">Details</a></li>
+      <li><a href="#value">Value</a></li>
 
       <li><a href="#libphonenumber-reference">libphonenumber reference</a></li>
 

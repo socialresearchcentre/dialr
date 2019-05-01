@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9003</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -73,7 +73,22 @@
   </a>
 </li>
 <li>
+  <a href="../articles/dialr.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/oneshot.html">dialr One Shot Methods</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -103,6 +118,33 @@
       <small>Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="dialr-0-2-1" class="section level1">
+<h1 class="page-header">
+<a href="#dialr-0-2-1" class="anchor"></a>dialr 0.2.1</h1>
+<div id="performance-improvements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#performance-improvements" class="anchor"></a>Performance improvements</h2>
+<p>Code calling libphonenumber methods via rJava has been tweaked for performance, including using more efficient rJava acess methods and caching commonly used static values. Most operations are now approx. 10 times faster.</p>
+</div>
+<div id="major-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-changes" class="anchor"></a>Major changes</h2>
+<ul>
+<li>Updated R dependency to R &gt;= 3.2.3. R 3.6.0 just came out and highr, a dependency of knitr, requires &gt;= 3.2.3 so build fails on 3.1.x.</li>
+</ul>
+</div>
+<div id="minor-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes" class="anchor"></a>Minor changes</h2>
+<ul>
+<li><p>New introductory <code><a href="../articles/dialr.html">vignette("dialr")</a></code>.</p></li>
+<li><p>New <code><a href="../reference/dialr-match.html">is_match()</a></code> function supports proper <code>phone</code> equality checks. <code>==</code> and <code>!=</code> now use <code><a href="../reference/dialr-match.html">is_match()</a></code> for <code>phone</code> vectors. (<a href='https://github.com/socialresearchcentre/dialr/issues/1'>#1</a>)</p></li>
+<li><p>More region and type functions implemented. See <code><a href="../reference/dialr-region.html">?`dialr-region`</a></code> or <code><a href="../reference/dialr-type.html">?`dialr-type`</a></code> for details.</p></li>
+<li><p>New <code><a href="../reference/get_example.html">get_example()</a></code> function generates example phone numbers for provided regions and types.</p></li>
+<li><p>Improved function documentation.</p></li>
+</ul>
+</div>
+</div>
     <div id="dialr-0-2-0" class="section level1">
 <h1 class="page-header">
 <a href="#dialr-0-2-0" class="anchor"></a>dialr 0.2.0</h1>
@@ -114,8 +156,8 @@
 </div>
 <div id="addition-of-the-phone-class" class="section level2">
 <h2 class="hasAnchor">
-<a href="#addition-of-the-phone-class" class="anchor"></a>Addition of the <code>phone</code> class</h2>
-<p>In addition to the one-shot phone processing functions, dialr now has a <code>phone</code> S3 class to reduce the processing load from re-parsing phone numbers for every operation. See <code><a href="../reference/dialr-phone.html">?phone</a></code> for details.</p>
+<a href="#addition-of-the-phone-class" class="anchor"></a>Addition of the phone class</h2>
+<p>In addition to the one-shot phone processing functions, dialr now has a “phone” S3 class to reduce the processing load from re-parsing phone numbers for every operation. This is a fundamental package change with a full set of replacement functions, for details see <code><a href="../reference/dialr-phone.html">?phone</a></code>.</p>
 </div>
 </div>
     <div id="dialr-0-1-0" class="section level1">
@@ -129,6 +171,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#dialr-0-2-1">0.2.1</a></li>
         <li><a href="#dialr-0-2-0">0.2.0</a></li>
         <li><a href="#dialr-0-1-0">0.1.0</a></li>
       </ul>
