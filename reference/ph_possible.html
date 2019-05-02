@@ -179,6 +179,10 @@ subscriber-number-only version.</p></li>
 </ol>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0123</span>, <span class='st'>"0404 753 123"</span>, <span class='st'>"61410123817"</span>, <span class='st'>"+12015550123"</span>)
+<span class='fu'>ph_possible</span>(<span class='no'>x</span>, <span class='st'>"AU"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: ph_possible() is soft deprecated as of dialr 0.2.0</span>
+#&gt; <span class='warning'>please use is_possible() instead</span></div><div class='output co'>#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -188,7 +192,9 @@ subscriber-number-only version.</p></li>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
