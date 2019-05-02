@@ -96,6 +96,7 @@ and default region for later reference.
   
   is.phone(x)
   print(x)
+  as.character(x)
   format(x)
   format(x, home = "AU")
 }

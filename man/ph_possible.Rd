@@ -46,3 +46,7 @@ for fixed line numbers), it will return false for the
 subscriber-number-only version.
 }
 }
+\examples{
+x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+ph_possible(x, "AU")
+}

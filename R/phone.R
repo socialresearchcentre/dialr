@@ -36,6 +36,7 @@
 #'   
 #'   is.phone(x)
 #'   print(x)
+#'   as.character(x)
 #'   format(x)
 #'   format(x, home = "AU")
 #' @name dialr-phone

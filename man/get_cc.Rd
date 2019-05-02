@@ -15,3 +15,7 @@ A vector of \link[=dialr-region]{ISO country codes} (\code{NA} where not found).
 \description{
 Get \link[=dialr-region]{ISO country code} from a country name.
 }
+\examples{
+get_cc("Australia")
+get_cc(c("Australia", "China", "United states"))
+}

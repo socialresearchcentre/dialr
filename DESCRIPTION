@@ -1,6 +1,5 @@
 Package: dialr
 Title: Parse, Format, and Validate International Phone Numbers
-    in R
 Version: 0.2.1
 Authors@R: 
     c(person(given = "Danny",
@@ -10,7 +9,7 @@ Authors@R:
       person(given = "The Social Research Centre",
              role = "cph"))
 Description: Parse, format, and validate international phone
-    numbers in R using Google's 'libphonenumber' java library,
+    numbers using Google's 'libphonenumber' java library,
     <https://github.com/googlei18n/libphonenumber>.
 License: GPL-3
 URL: https://socialresearchcentre.github.io/dialr,

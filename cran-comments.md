@@ -1,3 +1,11 @@
+## Resubmission
+
+This is a resubmission. In this version I have:
+
+* removed redundant "in R" in the Description and Title fields
+
+* added examples for all exported functions that didn't already have them
+
 ## Test environments
 * local: win install, R 3.5.1
 * local: ubuntu 18.04 install, R 3.6.0

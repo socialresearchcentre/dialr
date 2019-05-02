@@ -4,11 +4,10 @@
 \name{dialr-package}
 \alias{dialr}
 \alias{dialr-package}
-\title{dialr: Parse, Format, and Validate International Phone Numbers
-    in R}
+\title{dialr: Parse, Format, and Validate International Phone Numbers}
 \description{
 Parse, format, and validate international phone
-    numbers in R using Google's 'libphonenumber' java library,
+    numbers using Google's 'libphonenumber' java library,
     <https://github.com/googlei18n/libphonenumber>.
 }
 \section{Options}{

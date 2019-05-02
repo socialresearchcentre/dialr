@@ -15,3 +15,6 @@ A logical vector flagging which elements are valid codes.
 \description{
 Check whether an \link[=dialr-region]{ISO country code} is valid.
 }
+\examples{
+check_cc(c("AU", "US", "CN", "WRONG", NA))
+}

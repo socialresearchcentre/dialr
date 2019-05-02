@@ -32,6 +32,9 @@ ph_parse <- function(phone, country, keep_raw = TRUE) {
 #'               international numbers. If strict = TRUE, ph_valid checks if the
 #'               phone number is a domestic phone number for the given region.
 #' @return logical vector flagging valid and invalid phone numbers
+#' @examples
+#' x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+#' ph_valid(x, "AU")
 #' @export
 ph_valid <- function(phone, country, strict = FALSE) {
   warning("ph_valid() is soft deprecated as of dialr 0.2.0\nplease use is_valid() instead", call. = FALSE)
@@ -70,6 +73,9 @@ ph_valid <- function(phone, country, strict = FALSE) {
 #' @param country Character vector of region codes. If length = 1, the same
 #'                region code is used for all phone numbers.
 #' @return character vector containing the country code for each phone number.
+#' @examples
+#' x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+#' ph_region(x, "AU")
 #' @export
 ph_region <- function(phone, country) {
   warning("ph_region() is soft deprecated as of dialr 0.2.0\nplease use get_region() instead", call. = FALSE)
@@ -131,6 +137,9 @@ ph_region <- function(phone, country) {
 #' @return if detailed = FALSE, logical vector flagging possible phone numbers.
 #'         If detailed = TRUE, character vector with detailed information about
 #'         failures.
+#' @examples
+#' x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+#' ph_possible(x, "AU")
 #' @export
 ph_possible <- function(phone, country, detailed = FALSE) {
   warning("ph_possible() is soft deprecated as of dialr 0.2.0\nplease use is_possible() instead", call. = FALSE)
@@ -174,6 +183,10 @@ ph_possible <- function(phone, country, detailed = FALSE) {
 #' @param clean Should non-numeric characters be removed? If `TRUE`, keeps
 #'   numbers
 #' @return a character vector of formatted phone numbers.
+#' @examples
+#' x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+#' ph_format(x, "AU")
+#' ph_format(x, "AU", home = "AU") 
 #' @export
 ph_format <- function(phone, country, format = "NATIONAL", home = NULL, clean = FALSE) {
   warning("ph_format() is soft deprecated as of dialr 0.2.0\nplease use format.phone() instead", call. = FALSE)
@@ -214,6 +227,9 @@ ph_format <- function(phone, country, format = "NATIONAL", home = NULL, clean = 
 #' @param country Character vector of region codes. If length = 1, the same
 #'                region code is used for all phone numbers.
 #' @return character vector containing the phone number type for each phone number.
+#' @examples
+#' x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+#' ph_type(x, "AU")
 #' @export
 ph_type <- function(phone, country) {
   warning("ph_type() is soft deprecated as of dialr 0.2.0\nplease use get_type() instead", call. = FALSE)
@@ -254,6 +270,11 @@ ph_type <- function(phone, country) {
 #' @param clean Should non-numeric characters be removed? If `TRUE`, keeps
 #'   numbers
 #' @return a character vector of formatted example phone numbers.
+#' @examples
+#' ph_example("AU")
+#' ph_example("AU", type = "MOBILE")
+#' ph_example("AU", home = "US")
+#' ph_example("AU", clean = TRUE)
 #' @export
 ph_example <- function(country, type = NULL, home = NULL, clean = FALSE) {
   warning("ph_example() is soft deprecated as of dialr 0.2.0\nplease use get_example() instead", call. = FALSE)
@@ -275,7 +296,7 @@ ph_example <- function(country, type = NULL, home = NULL, clean = FALSE) {
     if (is.null(home)) {
       home <- c
     }
-    phone_util$formatOutOfCountryCallingNumber(pn, c)
+    phone_util$formatOutOfCountryCallingNumber(pn, home)
   },
   country, type,
   SIMPLIFY = TRUE)

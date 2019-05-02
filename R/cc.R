@@ -5,6 +5,9 @@
 #'
 #' @param country A character vector of country names.
 #' @return A vector of [ISO country codes][dialr-region] (`NA` where not found).
+#' @examples
+#' get_cc("Australia")
+#' get_cc(c("Australia", "China", "United states"))
 #' @export
 get_cc <- function(country) {
   country <- toupper(country)
@@ -25,6 +28,8 @@ get_cc <- function(country) {
 #'
 #' @param country A character vector of [ISO country codes][dialr-region].
 #' @return A logical vector flagging which elements are valid codes.
+#' @examples
+#' check_cc(c("AU", "US", "CN", "WRONG", NA))
 #' @export
 check_cc <- function(country) {
   country %in% cc_lookup

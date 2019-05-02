@@ -18,3 +18,7 @@ character vector containing the phone number type for each phone number.
 \description{
 \strong{ph_type is soft-deprecated and will be removed in a future release.}
 }
+\examples{
+x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+ph_type(x, "AU")
+}

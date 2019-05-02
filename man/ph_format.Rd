@@ -27,3 +27,8 @@ a character vector of formatted phone numbers.
 \description{
 \strong{ph_format is soft-deprecated and will be removed in a future release.}
 }
+\examples{
+x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+ph_format(x, "AU")
+ph_format(x, "AU", home = "AU") 
+}

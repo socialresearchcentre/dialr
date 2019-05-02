@@ -65,6 +65,9 @@ For example, the numbers \code{+1 345 657 1234} and \code{657 1234} are a
 \examples{
 is_match(phone("0412 345 678", "AU"), phone("+61412345678", "AU"))
 
+phone("0412 345 678", "AU") == phone("+61412345678", "AU")
+phone("0412 345 678", "AU") != phone("+61412345678", "AU")
+
 # character vectors are only fully specified with a country calling code
 is_match("0412345678", "0412345678", detailed = TRUE)
 is_match("+61412345678", "+61412345678", detailed = TRUE)

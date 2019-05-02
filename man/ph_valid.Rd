@@ -23,3 +23,7 @@ logical vector flagging valid and invalid phone numbers
 \description{
 \strong{ph_valid is soft-deprecated and will be removed in a future release.}
 }
+\examples{
+x <- c(0, 0123, "0404 753 123", "61410123817", "+12015550123")
+ph_valid(x, "AU")
+}

@@ -25,3 +25,9 @@ a character vector of formatted example phone numbers.
 \description{
 \strong{ph_example is soft-deprecated and will be removed in a future release.}
 }
+\examples{
+ph_example("AU")
+ph_example("AU", type = "MOBILE")
+ph_example("AU", home = "US")
+ph_example("AU", clean = TRUE)
+}
