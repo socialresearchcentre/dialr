@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.0.9004</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9000</span>
       </span>
     </div>
 
@@ -80,6 +80,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/oneshot.html">dialr One Shot Methods</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -133,8 +145,8 @@ returns an example "FIXED_LINE" number.</p></td>
     </tr>
     <tr>
       <th>home</th>
-      <td><p>ISO country code for home country. If provided, numbers will be
-formatted for dialing from the home country.</p></td>
+      <td><p><a href='dialr-region.html'>ISO country code</a> for home country. If provided,
+numbers will be formatted for dialing from the home country.</p></td>
     </tr>
     <tr>
       <th>clean</th>
@@ -148,6 +160,12 @@ numbers</p></td>
     <p>a character vector of formatted example phone numbers.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>ph_example</span>(<span class='st'>"AU"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: ph_example() is soft deprecated as of dialr 0.2.0</span>
+#&gt; <span class='warning'>please use get_example() instead</span></div><div class='output co'>#&gt; [1] "(02) 1234 5678"</div><div class='input'><span class='fu'>ph_example</span>(<span class='st'>"AU"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"MOBILE"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: ph_example() is soft deprecated as of dialr 0.2.0</span>
+#&gt; <span class='warning'>please use get_example() instead</span></div><div class='output co'>#&gt; [1] "0412 345 678"</div><div class='input'><span class='fu'>ph_example</span>(<span class='st'>"AU"</span>, <span class='kw'>home</span> <span class='kw'>=</span> <span class='st'>"US"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: ph_example() is soft deprecated as of dialr 0.2.0</span>
+#&gt; <span class='warning'>please use get_example() instead</span></div><div class='output co'>#&gt; [1] "011 61 2 1234 5678"</div><div class='input'><span class='fu'>ph_example</span>(<span class='st'>"AU"</span>, <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: ph_example() is soft deprecated as of dialr 0.2.0</span>
+#&gt; <span class='warning'>please use get_example() instead</span></div><div class='output co'>#&gt; [1] "0212345678"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -155,7 +173,9 @@ numbers</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
