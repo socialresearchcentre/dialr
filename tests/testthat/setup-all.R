@@ -3,6 +3,22 @@ ph_raw <- c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+1201555012
 ph_raw_regions <- c(NA, NA, "AU", "AU", "AU", "US")
 ph_raw_types <- c(NA, "UNKNOWN", "MOBILE", "MOBILE", "FIXED_LINE", "FIXED_LINE_OR_MOBILE")
 
+ph_raw_timezone <-
+  c(NA,
+    "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos",
+    "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos",
+    "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos",
+    "Australia/Sydney",
+    "America/New_York")
+
+ph_raw_timezone_strict <-
+  c(NA,
+    "Etc/Unknown",
+    "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos",
+    "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos",
+    "Australia/Sydney",
+    "America/New_York")
+
 regions <- get_supported_regions()
 # BL and MF have a weird phone relationship, exclude from test
 regions <- regions[regions != "MF"]

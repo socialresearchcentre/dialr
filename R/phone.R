@@ -320,11 +320,20 @@ as.character.phone <- function(x, raw = TRUE, ...) {
   }
 }
 
-phone_apply <- function(x, fun, fun.value) {
-  vapply(unclass(x), function(d) {
+phone_apply <- function(x, fun, fun.value, progress = FALSE) {
+  show_pb <- isTRUE(progress) && isTRUE(getOption("dialr.show_progress")) && interactive()
+  if (show_pb) pb <- txtProgressBar(min = 0, max = length(x), style = 3)
+  
+  out <- vapply(unclass(x), function(d) {
+    if (show_pb) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
+    
     if (!typeof(d$jobj) %in% "S4") return(fun.value[NA])
     fun(d$jobj)
   }, fun.value, USE.NAMES = FALSE)
+  
+  if (show_pb) close(pb)
+  
+  out
 }
 
 #' Phone number validity checks
