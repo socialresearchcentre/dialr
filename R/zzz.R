@@ -5,6 +5,7 @@
     dialr.name = "DIALR",
     dialr.home = "AU",
     dialr.format = "E164",
+    dialr.locale = "en",
     dialr.show_progress = TRUE
   )
   toset <- !(names(op.dialr) %in% names(op))
