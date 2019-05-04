@@ -1,5 +1,10 @@
 # dialr (development version)
 
+## New functions
+
+* Retrieve carrier name with `get_carrier()` (#6).
+
+* Add geocoding functions `get_geocode()` and `get_timezone()` (#5).
 
 # dialr 0.2.1
 
