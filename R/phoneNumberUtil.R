@@ -12,9 +12,17 @@
     .jcast(.jnew("java/lang/String", o), "java/lang/CharSequence")
 }
 
+.jstr_to_locale <- function(o) {
+  if (is.na(o))
+    NULL
+  else
+    .jnew("java/util/Locale", o)
+}
+
+# Retrieve and cache singletons
+
 .pnu_cache <- new.env(parent = emptyenv())
 
-# Convenience function - get the current PhoneNumberUtil instance
 .get_phoneNumberUtil <- function() {
   if (is.null(.pnu_cache$phone_util)) {
     .pnu_cache$phone_util <-
@@ -23,6 +31,36 @@
              "getInstance")
   }
   .pnu_cache$phone_util
+}
+
+.get_phoneNumberToCarrierMapper <- function() {
+  if (is.null(.pnu_cache$carrier_mapper)) {
+    .pnu_cache$carrier_mapper <-
+      .jcall("com/google/i18n/phonenumbers/PhoneNumberToCarrierMapper",
+             "Lcom/google/i18n/phonenumbers/PhoneNumberToCarrierMapper;",
+             "getInstance")
+  }
+  .pnu_cache$carrier_mapper
+}
+
+.get_phoneNumberOfflineGeocoder <- function() {
+  if (is.null(.pnu_cache$offline_geocoder)) {
+    .pnu_cache$offline_geocoder <-
+      .jcall("com/google/i18n/phonenumbers/geocoding/PhoneNumberOfflineGeocoder",
+             "Lcom/google/i18n/phonenumbers/geocoding/PhoneNumberOfflineGeocoder;",
+             "getInstance")
+  }
+  .pnu_cache$offline_geocoder
+}
+
+.get_phoneNumberToTimeZonesMapper <- function() {
+  if (is.null(.pnu_cache$timezone_mapper)) {
+    .pnu_cache$timezone_mapper <-
+      .jcall("com/google/i18n/phonenumbers/PhoneNumberToTimeZonesMapper",
+             "Lcom/google/i18n/phonenumbers/PhoneNumberToTimeZonesMapper;",
+             "getInstance")
+  }
+  .pnu_cache$timezone_mapper
 }
 
 # PhoneNumberUtil enums
