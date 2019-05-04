@@ -14,7 +14,7 @@ invalid phone numbers return the default unknown time zone \code{"Etc/Unknown"}.
 }
 \value{
 A character vector of time zones to which each phone number belongs,
-separated by \code{;}, or the default unknown time zone \code{"Etc/Unknown} if no
+separated by \code{;}, or the default unknown time zone \code{"Etc/Unknown"} if no
 other time zone was found or if the number was invalid.
 }
 \description{

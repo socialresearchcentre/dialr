@@ -22,7 +22,7 @@
 #' @param check Should the validity of the phone number be checked? If `TRUE`,
 #'   invalid phone numbers return the default unknown time zone `"Etc/Unknown"`.
 #' @return A character vector of time zones to which each phone number belongs,
-#'   separated by `;`, or the default unknown time zone `"Etc/Unknown` if no
+#'   separated by `;`, or the default unknown time zone `"Etc/Unknown"` if no
 #'   other time zone was found or if the number was invalid.
 #' @examples
 #' x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
@@ -45,7 +45,6 @@ get_timezone <- function(x, check = FALSE) {
                    "Ljava/util/List;",
                    "getTimeZonesForNumber",
                    pn)
-            
           ),
           collapse = ";")
       ifelse(is.null(res), NA_character_, res)
