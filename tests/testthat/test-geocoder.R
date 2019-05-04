@@ -12,5 +12,7 @@ test_that("get_geocode", {
                c(NA, "", "Australia", "Australia", "Australia", "New Jersey"))
   expect_equal(get_geocode(phone(ph_raw, "AU"), locale = "de", home = "DE"),
                c(NA, "", "Australien", "Australien", "Australien", "Vereinigte Staaten"))
-  # TODO - find an example for "strict"
+  # TODO - find a better example for `check`
+  expect_equal(get_geocode(phone(ph_raw, "AU"), check = TRUE),
+               c(NA, "", "", "", "Melbourne", "New Jersey"))
 })

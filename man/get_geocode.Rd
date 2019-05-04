@@ -4,21 +4,45 @@
 \alias{get_geocode}
 \title{Phone number geographical information}
 \usage{
-get_geocode(x, locale = getOption("dialr.locale"), home = NULL,
-  strict = FALSE)
+get_geocode(x, home = NULL, check = FALSE,
+  locale = getOption("dialr.locale"))
 }
 \arguments{
 \item{x}{A \link{phone} vector.}
 
-\item{strict}{Should the validity of the phone number be checked? If \code{TRUE},
+\item{home}{\link[=dialr-region]{ISO country code} for home region. See Details.}
+
+\item{check}{Should the validity of the phone numbers be checked? If \code{TRUE},
 invalid phone numbers return \code{""}.}
+
+\item{locale}{The \href{https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html}{Java locale}
+used to retrieve localised results. The default is set in option
+\code{dialr.locale}.}
 }
 \value{
-A character vector of text descriptions for each phone number for the
-given language code.
+A text description for each phone number for the given locale, or
+\code{""} if the number is invalid or could belong to multiple
+countries.
 }
 \description{
-Retrieve geographical information related to a phone number.
+Returns a text description for each phone number, in the language provided in
+\code{locale}.
+}
+\details{
+The description might consist of the name of the country where the phone
+number is from, or the name of the geographical area the phone number is from
+if more detailed information is available.
+
+If a phone number is from the region specified in \code{home}, only a
+lower-level description will be returned, if one exists. Otherwise, the phone
+number's region will be returned, with optionally some more detailed
+information.
+
+For example, for a user from the region \code{"US"} (United States), we would show
+\code{"Mountain View, CA"} for a particular number, omitting the United States
+from the description. For a user from the United Kingdom (region \code{"GB"}), for
+the same number we may show \code{"Mountain View, CA, United States"} or even just
+\code{"United States"}.
 }
 \section{libphonenumber reference}{
 
@@ -26,18 +50,18 @@ Retrieve geographical information related to a phone number.
 \code{get_geocode()}:
 \code{PhoneNumberOfflineGeocoder.getDescriptionForValidNumber()} by
 default, or \code{PhoneNumberOfflineGeocoder.getDescriptionForNumber()} if
-\code{strict = TRUE}.
+\code{check = TRUE}.
 }
 
 \examples{
 x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 get_geocode(x)
-get_geocode(x, strict = TRUE)
+get_geocode(x, check = TRUE)
 
 # Specify a home country
 get_geocode(x, home = "AU")
 get_geocode(x, home = "US")
 
 # Specify a language
-get_geocode(x, locale = "de", home = "DE")
+get_geocode(x, home = "DE", locale = "de")
 }

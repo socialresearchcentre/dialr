@@ -11,7 +11,7 @@ ph_raw_timezone <-
     "Australia/Sydney",
     "America/New_York")
 
-ph_raw_timezone_strict <-
+ph_raw_timezone_check <-
   c(NA,
     "Etc/Unknown",
     "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos",
