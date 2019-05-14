@@ -4,7 +4,7 @@
 \alias{get_geocode}
 \title{Phone number geographical information}
 \usage{
-get_geocode(x, home = NULL, check = FALSE,
+get_geocode(x, home = NULL, strict = FALSE,
   locale = getOption("dialr.locale"))
 }
 \arguments{
@@ -12,8 +12,8 @@ get_geocode(x, home = NULL, check = FALSE,
 
 \item{home}{\link[=dialr-region]{ISO country code} for home region. See Details.}
 
-\item{check}{Should the validity of the phone numbers be checked? If \code{TRUE},
-invalid phone numbers return \code{""}.}
+\item{strict}{Should invalid phone numbers be removed? If \code{TRUE}, invalid
+phone numbers are replaced with \code{NA}.}
 
 \item{locale}{The \href{https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html}{Java locale}
 used to retrieve localised results. The default is set in option
@@ -50,13 +50,13 @@ the same number we may show \code{"Mountain View, CA, United States"} or even ju
 \code{get_geocode()}:
 \code{PhoneNumberOfflineGeocoder.getDescriptionForValidNumber()} by
 default, or \code{PhoneNumberOfflineGeocoder.getDescriptionForNumber()} if
-\code{check = TRUE}.
+\code{strict = TRUE}.
 }
 
 \examples{
 x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 get_geocode(x)
-get_geocode(x, check = TRUE)
+get_geocode(x, strict = TRUE)
 
 # Specify a home country
 get_geocode(x, home = "AU")

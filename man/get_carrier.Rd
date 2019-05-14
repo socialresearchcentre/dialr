@@ -4,16 +4,16 @@
 \alias{get_carrier}
 \title{Phone number carrier information}
 \usage{
-get_carrier(x, check = FALSE, strict = FALSE,
+get_carrier(x, strict = FALSE, safe = FALSE,
   locale = getOption("dialr.locale"))
 }
 \arguments{
 \item{x}{A \link{phone} vector.}
 
-\item{check}{Should the validity of each phone number be checked? If \code{TRUE},
-invalid phone numbers return \code{""}.}
+\item{strict}{Should invalid phone numbers be removed? If \code{TRUE}, invalid
+phone numbers are replaced with \code{NA}.}
 
-\item{strict}{If \code{TRUE}, gets the name of the carrier for a given phone
+\item{safe}{If \code{TRUE}, gets the name of the carrier for a given phone
 number only when it is 'safe' to display to users. A carrier name is
 considered safe if the number is valid and for a region that doesn't
 support mobile number portability. All other phone numbers return \code{""}.}
@@ -39,12 +39,12 @@ to the returned carrier anymore. If no mapping is found \code{""} is returned.
 
 
 \code{get_geocode()}: \code{PhoneNumberToCarrierMapper.getNameForValidNumber()} by
-default, \code{PhoneNumberToCarrierMapper.getNameForNumber()} if \code{check = TRUE},
-or \code{PhoneNumberToCarrierMapper.getSafeDisplayName()} if \code{strict = TRUE}.
+default, \code{PhoneNumberToCarrierMapper.getNameForNumber()} if \code{strict = TRUE},
+or \code{PhoneNumberToCarrierMapper.getSafeDisplayName()} if \code{safe = TRUE}.
 }
 
 \examples{
 x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 get_carrier(x)
-get_carrier(x, strict = TRUE)
+get_carrier(x, safe = TRUE)
 }

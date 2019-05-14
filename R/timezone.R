@@ -16,53 +16,39 @@
 #'   `get_timezone()`:
 #'   `PhoneNumberToTimeZonesMapper.getTimeZonesForGeographicalNumber()` by
 #'   default, or `PhoneNumberToTimeZonesMapper.getTimeZonesForNumber()` if
-#'   `check = TRUE`.
+#'   `strict = TRUE`.
 #' 
 #' @param x A [phone] vector.
-#' @param check Should the validity of the phone number be checked? If `TRUE`,
-#'   invalid phone numbers return the default unknown time zone `"Etc/Unknown"`.
+#' @param strict Should invalid phone numbers be removed? If `TRUE`, invalid
+#'   phone numbers are replaced with `NA`.
 #' @return A character vector of time zones to which each phone number belongs,
 #'   separated by `;`, or the default unknown time zone `"Etc/Unknown"` if no
-#'   other time zone was found or if the number was invalid.
+#'   other time zone was found.
 #' @examples
 #' x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #' get_timezone(x)
-#' get_timezone(x, check = TRUE)
+#' get_timezone(x, strict = TRUE)
 #' 
 #' # Return a list
 #' strsplit(get_timezone(x), ";")
 #' @export
-get_timezone <- function(x, check = FALSE) {
+get_timezone <- function(x, strict = FALSE) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   timezone_mapper <- .get_phoneNumberToTimeZonesMapper()
   
-  if (check) {
-    out <- phone_apply(x, function(pn) {
-      res <-
-        paste0(
-          .jset_to_str(
-            .jcall(timezone_mapper,
-                   "Ljava/util/List;",
-                   "getTimeZonesForNumber",
-                   pn)
-          ),
-          collapse = ";")
-      ifelse(is.null(res), NA_character_, res)
-    }, character(1), progress = TRUE)
-  } else {
-    out <- phone_apply(x, function(pn) {
-      res <-
-        paste0(
-          .jset_to_str(
-            .jcall(timezone_mapper,
-                   "Ljava/util/List;",
-                   "getTimeZonesForGeographicalNumber",
-                   pn)
-          ),
-          collapse = ";")
-      ifelse(is.null(res), NA_character_, res)
-    }, character(1), progress = TRUE)
-  }
+  out <- phone_apply(x, function(pn) {
+    res <-
+      paste0(
+        .jset_to_str(
+          .jcall(timezone_mapper,
+                 "Ljava/util/List;",
+                 "getTimeZonesForGeographicalNumber",
+                 pn)
+        ),
+        collapse = ";")
+    ifelse(is.null(res), NA_character_, res)
+  }, character(1), progress = TRUE)
+  if (strict) out[!is_valid(x)] <- NA_character_
   
   out
 }

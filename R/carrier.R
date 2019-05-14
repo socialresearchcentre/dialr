@@ -14,13 +14,13 @@
 #' @section libphonenumber reference:
 #'
 #'   `get_geocode()`: `PhoneNumberToCarrierMapper.getNameForValidNumber()` by
-#'   default, `PhoneNumberToCarrierMapper.getNameForNumber()` if `check = TRUE`,
-#'   or `PhoneNumberToCarrierMapper.getSafeDisplayName()` if `strict = TRUE`.
+#'   default, `PhoneNumberToCarrierMapper.getNameForNumber()` if `strict = TRUE`,
+#'   or `PhoneNumberToCarrierMapper.getSafeDisplayName()` if `safe = TRUE`.
 #' 
 #' @param x A [phone] vector.
-#' @param check Should the validity of each phone number be checked? If `TRUE`,
-#'   invalid phone numbers return `""`.
-#' @param strict If `TRUE`, gets the name of the carrier for a given phone
+#' @param strict Should invalid phone numbers be removed? If `TRUE`, invalid
+#'   phone numbers are replaced with `NA`.
+#' @param safe If `TRUE`, gets the name of the carrier for a given phone
 #'   number only when it is 'safe' to display to users. A carrier name is
 #'   considered safe if the number is valid and for a region that doesn't
 #'   support mobile number portability. All other phone numbers return `""`.
@@ -33,16 +33,15 @@
 #' @examples
 #' x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #' get_carrier(x)
-#' get_carrier(x, strict = TRUE)
+#' get_carrier(x, safe = TRUE)
 #' @export
-get_carrier <- function(x, check = FALSE, strict = FALSE, locale = getOption("dialr.locale")) {
+get_carrier <- function(x, strict = FALSE, safe = FALSE, locale = getOption("dialr.locale")) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
-  if (check && strict) warning("`strict = TRUE` overrides `check`. Ignoring `check = TRUE`.", call. = FALSE)
   
   carrier_mapper <- .get_phoneNumberToCarrierMapper()
   locale <- .jstr_to_locale(locale) 
   
-  if (strict) {
+  if (safe) {
     region <- get_region(x)
   
     out <- NA
@@ -50,15 +49,12 @@ get_carrier <- function(x, check = FALSE, strict = FALSE, locale = getOption("di
       phone_apply(x[!is.na(region)], function(pn) {
         .jcall(carrier_mapper, "S", "getSafeDisplayName", pn, locale)
       }, character(1))
-  } else if (check) {
-    out <- phone_apply(x, function(pn) {
-      .jcall(carrier_mapper, "S", "getNameForNumber", pn, locale)
-    }, character(1))
   } else {
     out <- phone_apply(x, function(pn) {
       .jcall(carrier_mapper, "S", "getNameForValidNumber", pn, locale)
     }, character(1))
   }
+  if (strict) out[!is_valid(x)] <- NA_character_
   
   out
 }

@@ -27,12 +27,12 @@
 #'   `get_geocode()`:
 #'   `PhoneNumberOfflineGeocoder.getDescriptionForValidNumber()` by
 #'   default, or `PhoneNumberOfflineGeocoder.getDescriptionForNumber()` if
-#'   `check = TRUE`.
+#'   `strict = TRUE`.
 #' 
 #' @param x A [phone] vector.
 #' @param home [ISO country code][dialr-region] for home region. See Details.
-#' @param check Should the validity of the phone numbers be checked? If `TRUE`,
-#'   invalid phone numbers return `""`.
+#' @param strict Should invalid phone numbers be removed? If `TRUE`, invalid
+#'   phone numbers are replaced with `NA`.
 #' @param locale The [Java
 #'   locale](https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html)
 #'   used to retrieve localised results. The default is set in option
@@ -43,7 +43,7 @@
 #' @examples
 #' x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #' get_geocode(x)
-#' get_geocode(x, check = TRUE)
+#' get_geocode(x, strict = TRUE)
 #' 
 #' # Specify a home country
 #' get_geocode(x, home = "AU")
@@ -52,7 +52,7 @@
 #' # Specify a language
 #' get_geocode(x, home = "DE", locale = "de")
 #' @export
-get_geocode <- function(x, home = NULL, check = FALSE, locale = getOption("dialr.locale")) {
+get_geocode <- function(x, home = NULL, strict = FALSE, locale = getOption("dialr.locale")) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   
   validate_phone_region(home)
@@ -60,15 +60,10 @@ get_geocode <- function(x, home = NULL, check = FALSE, locale = getOption("dialr
   offline_geocoder <- .get_phoneNumberOfflineGeocoder()
   locale <- .jstr_to_locale(locale) 
   
-  if (check) {
-    out <- phone_apply(x, function(pn) {
-      .jcall(offline_geocoder, "S", "getDescriptionForNumber", pn, locale, home)
-    }, character(1))
-  } else {
-    out <- phone_apply(x, function(pn) {
-      .jcall(offline_geocoder, "S", "getDescriptionForValidNumber", pn, locale, home)
-    }, character(1))
-  }
+  out <- phone_apply(x, function(pn) {
+    .jcall(offline_geocoder, "S", "getDescriptionForValidNumber", pn, locale, home)
+  }, character(1))
+  if (strict) out[!is_valid(x)] <- NA_character_
   
   out
 }

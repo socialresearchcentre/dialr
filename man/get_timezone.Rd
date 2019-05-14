@@ -4,18 +4,18 @@
 \alias{get_timezone}
 \title{Phone number time zone}
 \usage{
-get_timezone(x, check = FALSE)
+get_timezone(x, strict = FALSE)
 }
 \arguments{
 \item{x}{A \link{phone} vector.}
 
-\item{check}{Should the validity of the phone number be checked? If \code{TRUE},
-invalid phone numbers return the default unknown time zone \code{"Etc/Unknown"}.}
+\item{strict}{Should invalid phone numbers be removed? If \code{TRUE}, invalid
+phone numbers are replaced with \code{NA}.}
 }
 \value{
 A character vector of time zones to which each phone number belongs,
 separated by \code{;}, or the default unknown time zone \code{"Etc/Unknown"} if no
-other time zone was found or if the number was invalid.
+other time zone was found.
 }
 \description{
 Retrieve a list of \href{http://www.unicode.org/cldr/charts/latest/supplemental/zone_tzid.html}{CLDR time zones}
@@ -31,13 +31,13 @@ mobile numbers are considered possible candidates for geo-localization.
 \code{get_timezone()}:
 \code{PhoneNumberToTimeZonesMapper.getTimeZonesForGeographicalNumber()} by
 default, or \code{PhoneNumberToTimeZonesMapper.getTimeZonesForNumber()} if
-\code{check = TRUE}.
+\code{strict = TRUE}.
 }
 
 \examples{
 x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 get_timezone(x)
-get_timezone(x, check = TRUE)
+get_timezone(x, strict = TRUE)
 
 # Return a list
 strsplit(get_timezone(x), ";")
