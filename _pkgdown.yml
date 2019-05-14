@@ -13,6 +13,9 @@ reference:
     - dialr-region
     - dialr-type
     - get_example
+    - get_carrier
+    - get_geocode
+    - get_timezone
   
   - title: One shot methods
     contents:
