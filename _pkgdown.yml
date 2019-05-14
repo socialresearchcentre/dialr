@@ -14,7 +14,7 @@ reference:
     - dialr-type
     - get_example
   
-  - title: One-shot methods
+  - title: One shot methods
     contents:
     - ph_example
     - ph_format

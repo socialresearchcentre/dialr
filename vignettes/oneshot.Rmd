@@ -1,8 +1,8 @@
 ---
-title: "dialr One Shot Methods"
+title: "One shot methods"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{dialr One Shot Methods}
+  %\VignetteIndexEntry{One shot methods}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
