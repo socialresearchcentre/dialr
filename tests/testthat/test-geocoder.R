@@ -10,8 +10,8 @@ test_that("get_geocode", {
                c(NA, "", "", "", "Melbourne", "United States"))
   expect_equal(get_geocode(phone(ph_raw, "AU"), home = "US"),
                c(NA, "", "Australia", "Australia", "Australia", "New Jersey"))
-  expect_equal(get_geocode(phone(ph_raw, "AU"), locale = "de", home = "DE"),
-               c(NA, "", "Australien", "Australien", "Australien", "Vereinigte Staaten"))
+  expect_equal(get_geocode(phone(ph_raw, "AU"), locale = "in", home = "IN"),
+               c(NA, "", "Australia", "Australia", "Australia", "Amerika Serikat"))
   # TODO - find a better example for `strict`
   expect_equal(get_geocode(phone(ph_raw, "AU"), strict = TRUE),
                c(NA, NA, "", "", "Melbourne", "New Jersey"))
