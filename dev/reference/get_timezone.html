@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check if a phone number is possible for a given region — ph_possible • dialr</title>
+<title>Phone number time zone — get_timezone • dialr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Check if a phone number is possible for a given region — ph_possible" />
+<meta property="og:title" content="Phone number time zone — get_timezone" />
 
-<meta property="og:description" content="ph_possible is soft-deprecated and will be removed in a future release." />
+<meta property="og:description" content="Retrieve a list of CLDR time zones
+to which a phone number belongs." />
 <meta name="twitter:card" content="summary" />
 
 <meta name="robots" content="noindex">
@@ -117,72 +118,92 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check if a phone number is possible for a given region</h1>
-    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/deprec-phone_old.R'><code>R/deprec-phone_old.R</code></a></small>
-    <div class="hidden name"><code>ph_possible.Rd</code></div>
+    <h1>Phone number time zone</h1>
+    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/timezone.R'><code>R/timezone.R</code></a></small>
+    <div class="hidden name"><code>get_timezone.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><strong>ph_possible is soft-deprecated and will be removed in a future release.</strong></p>
+    <p>Retrieve a list of <a href='http://www.unicode.org/cldr/charts/latest/supplemental/zone_tzid.html'>CLDR time zones</a>
+to which a phone number belongs.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ph_possible</span>(<span class='no'>phone</span>, <span class='no'>country</span>, <span class='kw'>detailed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_timezone</span>(<span class='no'>x</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>phone</th>
-      <td><p>Character vector of phone numbers to check</p></td>
+      <th>x</th>
+      <td><p>A <a href='dialr-phone.html'>phone</a> vector.</p></td>
     </tr>
     <tr>
-      <th>country</th>
-      <td><p>Character vector of region codes. If length = 1, the same
-region code is used for all phone numbers</p></td>
-    </tr>
-    <tr>
-      <th>detailed</th>
-      <td><p>If detailed = FALSE, ph_possible returns a logical vector
-that indicates whether the number is possible or not.
-If detailed = TRUE, ph_possible returns more detailed
-information about FALSE numbers.</p></td>
+      <th>strict</th>
+      <td><p>Should invalid phone numbers be removed? If <code>TRUE</code>, invalid
+phone numbers are replaced with <code>NA</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>if detailed = FALSE, logical vector flagging possible phone numbers.
-If detailed = TRUE, character vector with detailed information about
-failures.</p>
+    <p>A character vector of time zones to which each phone number belongs,
+separated by <code>;</code>, or the default unknown time zone <code>"Etc/Unknown"</code> if no
+other time zone was found.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Check whether a phone number is a possible number. It provides a more lenient
-check than isValidNumber(PhoneNumber) in the following sense:</p><ol>
-<li><p>It only checks the length of phone numbers. In particular, it doesn't
-check starting digits of the number.</p></li>
-<li><p>It doesn't attempt to figure out the type of the number, but uses
-general rules which applies to all types of phone numbers in a
-region. Therefore, it is much faster than isValidNumber.</p></li>
-<li><p>For fixed line numbers, many regions have the concept of area code,
-which together with subscriber number constitute the national
-significant number. It is sometimes okay to dial the subscriber
-number only when dialing in the same area. This function will return
-true if the subscriber-number-only version is passed in. On the other
-hand, because isValidNumber validates using information on both
-starting digits (for fixed line numbers, that would most likely be
-area codes) and length (obviously includes the length of area codes
-for fixed line numbers), it will return false for the
-subscriber-number-only version.</p></li>
-</ol>
+    <p>This function assumes the phone number is geo-localizable. Fixed-line and
+mobile numbers are considered possible candidates for geo-localization.</p>
+    
+    <h2 class="hasAnchor" id="libphonenumber-reference"><a class="anchor" href="#libphonenumber-reference"></a>libphonenumber reference</h2>
+
+    
+    <p><code>get_timezone()</code>:
+<code>PhoneNumberToTimeZonesMapper.getTimeZonesForGeographicalNumber()</code> by
+default, or <code>PhoneNumberToTimeZonesMapper.getTimeZonesForNumber()</code> if
+<code>strict = TRUE</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0123</span>, <span class='st'>"0404 753 123"</span>, <span class='st'>"61410123817"</span>, <span class='st'>"+12015550123"</span>)
-<span class='fu'>ph_possible</span>(<span class='no'>x</span>, <span class='st'>"AU"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: ph_possible() is soft deprecated as of dialr 0.2.0</span>
-#&gt; <span class='warning'>please use is_possible() instead</span></div><div class='output co'>#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dialr-phone.html'>phone</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0123</span>, <span class='st'>"0412 345 678"</span>, <span class='st'>"61412987654"</span>, <span class='st'>"03 9123 4567"</span>, <span class='st'>"+12015550123"</span>), <span class='st'>"AU"</span>)
+<span class='fu'>get_timezone</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] NA                                                                                                                     
+#&gt; [2] "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos"
+#&gt; [3] "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos"
+#&gt; [4] "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos"
+#&gt; [5] "Australia/Sydney"                                                                                                     
+#&gt; [6] "America/New_York"                                                                                                     </div><div class='input'><span class='fu'>get_timezone</span>(<span class='no'>x</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] NA                                                                                                                     
+#&gt; [2] NA                                                                                                                     
+#&gt; [3] "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos"
+#&gt; [4] "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos"
+#&gt; [5] "Australia/Sydney"                                                                                                     
+#&gt; [6] "America/New_York"                                                                                                     </div><div class='input'>
+<span class='co'># Return a list</span>
+<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/strsplit'>strsplit</a></span>(<span class='fu'>get_timezone</span>(<span class='no'>x</span>), <span class='st'>";"</span>)</div><div class='output co'>#&gt; [[1]]
+#&gt; [1] NA
+#&gt; 
+#&gt; [[2]]
+#&gt; [1] "Australia/Adelaide"  "Australia/Eucla"     "Australia/Lord_Howe"
+#&gt; [4] "Australia/Perth"     "Australia/Sydney"    "Indian/Christmas"   
+#&gt; [7] "Indian/Cocos"       
+#&gt; 
+#&gt; [[3]]
+#&gt; [1] "Australia/Adelaide"  "Australia/Eucla"     "Australia/Lord_Howe"
+#&gt; [4] "Australia/Perth"     "Australia/Sydney"    "Indian/Christmas"   
+#&gt; [7] "Indian/Cocos"       
+#&gt; 
+#&gt; [[4]]
+#&gt; [1] "Australia/Adelaide"  "Australia/Eucla"     "Australia/Lord_Howe"
+#&gt; [4] "Australia/Perth"     "Australia/Sydney"    "Indian/Christmas"   
+#&gt; [7] "Indian/Cocos"       
+#&gt; 
+#&gt; [[5]]
+#&gt; [1] "Australia/Sydney"
+#&gt; 
+#&gt; [[6]]
+#&gt; [1] "America/New_York"
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -192,6 +213,8 @@ subscriber-number-only version.</p></li>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#libphonenumber-reference">libphonenumber reference</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

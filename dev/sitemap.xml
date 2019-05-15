@@ -25,10 +25,19 @@
     <loc>https://socialresearchcentre.github.io/dialr/reference/dialr-valid.html</loc>
   </url>
   <url>
+    <loc>https://socialresearchcentre.github.io/dialr/reference/get_carrier.html</loc>
+  </url>
+  <url>
     <loc>https://socialresearchcentre.github.io/dialr/reference/get_cc.html</loc>
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/dialr/reference/get_example.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/dialr/reference/get_geocode.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/dialr/reference/get_timezone.html</loc>
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/dialr/reference/ph_example.html</loc>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get an example phone number — get_example • dialr</title>
+<title>Phone number geographical information — get_geocode • dialr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,10 @@
 
 
 
-<meta property="og:title" content="Get an example phone number — get_example" />
+<meta property="og:title" content="Phone number geographical information — get_geocode" />
 
-<meta property="og:description" content="Produces example phone numbers for the given region,
-type and valid combinations. Input vectors are recycled as
-necessary if a vector of length 1 is provided." />
+<meta property="og:description" content="Returns a text description for each phone number, in the language provided in
+locale." />
 <meta name="twitter:card" content="summary" />
 
 <meta name="robots" content="noindex">
@@ -119,67 +118,88 @@ necessary if a vector of length 1 is provided." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get an example phone number</h1>
-    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/example.R'><code>R/example.R</code></a></small>
-    <div class="hidden name"><code>get_example.Rd</code></div>
+    <h1>Phone number geographical information</h1>
+    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/geocoder.R'><code>R/geocoder.R</code></a></small>
+    <div class="hidden name"><code>get_geocode.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Produces example phone numbers for the given <code><a href='dialr-region.html'>region</a></code>,
-<code><a href='dialr-type.html'>type</a></code> and <code>valid</code> combinations. Input vectors are recycled as
-necessary if a vector of length 1 is provided.</p>
+    <p>Returns a text description for each phone number, in the language provided in
+<code>locale</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_example</span>(<span class='no'>region</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>valid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_geocode</span>(<span class='no'>x</span>, <span class='kw'>home</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>locale</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"dialr.locale"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>region</th>
-      <td><p>A character vector of <a href='dialr-region.html'>ISO country codes</a>.</p></td>
+      <th>x</th>
+      <td><p>A <a href='dialr-phone.html'>phone</a> vector.</p></td>
     </tr>
     <tr>
-      <th>type</th>
-      <td><p>A character vector of <a href='dialr-type.html'>phone number types</a>. If
-<code>NULL</code> (default), returns an example "FIXED_LINE" number.</p></td>
+      <th>home</th>
+      <td><p><a href='dialr-region.html'>ISO country code</a> for home region. See Details.</p></td>
     </tr>
     <tr>
-      <th>valid</th>
-      <td><p>A logical vector. For each <code>FALSE</code> entry, <code>get_example</code> returns
-an example invalid number, and <code>type</code> is ignored.</p></td>
+      <th>strict</th>
+      <td><p>Should invalid phone numbers be removed? If <code>TRUE</code>, invalid
+phone numbers are replaced with <code>NA</code>.</p></td>
+    </tr>
+    <tr>
+      <th>locale</th>
+      <td><p>The <a href='https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html'>Java locale</a>
+used to retrieve localised results. The default is set in option
+<code>dialr.locale</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A <a href='dialr-phone.html'>phone</a> vector.</p>
+    <p>A text description for each phone number for the given locale, or
+<code>""</code> if the number is invalid or could belong to multiple
+countries.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The description might consist of the name of the country where the phone
+number is from, or the name of the geographical area the phone number is from
+if more detailed information is available.</p>
+<p>If a phone number is from the region specified in <code>home</code>, only a
+lower-level description will be returned, if one exists. Otherwise, the phone
+number's region will be returned, with optionally some more detailed
+information.</p>
+<p>For example, for a user from the region <code>"US"</code> (United States), we would show
+<code>"Mountain View, CA"</code> for a particular number, omitting the United States
+from the description. For a user from the United Kingdom (region <code>"GB"</code>), for
+the same number we may show <code>"Mountain View, CA, United States"</code> or even just
+<code>"United States"</code>.</p>
     
     <h2 class="hasAnchor" id="libphonenumber-reference"><a class="anchor" href="#libphonenumber-reference"></a>libphonenumber reference</h2>
 
     
-    <p><code>get_example()</code>: <code>PhoneNumberUtil.getExampleNumberForType()</code>;
-<code>PhoneNumberUtil.getExampleNumber()</code> if <code>type</code> is <code>NULL</code> or <code>NA</code>;
-<code>PhoneNumberUtil.getInvalidExampleNumber()</code> if <code>valid</code> is <code>FALSE</code>.</p>
+    <p><code>get_geocode()</code>:
+<code>PhoneNumberOfflineGeocoder.getDescriptionForValidNumber()</code> by
+default, or <code>PhoneNumberOfflineGeocoder.getDescriptionForNumber()</code> if
+<code>strict = TRUE</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Get a basic example number</span>
-<span class='fu'>get_example</span>(<span class='st'>"AU"</span>)</div><div class='output co'>#&gt; # Parsed phone numbers: 1 total, 1 successfully parsed
-#&gt; [1] +61212345678</div><div class='input'>
-<span class='co'># Get an example mobile number</span>
-<span class='fu'>get_example</span>(<span class='st'>"AU"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"MOBILE"</span>)</div><div class='output co'>#&gt; # Parsed phone numbers: 1 total, 1 successfully parsed
-#&gt; [1] +61412345678</div><div class='input'>
-<span class='co'># Get an example invalid number</span>
-<span class='fu'>get_example</span>(<span class='st'>"AU"</span>, <span class='kw'>valid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # Parsed phone numbers: 1 total, 1 successfully parsed
-#&gt; [1] +6121234567</div><div class='input'>
-<span class='co'># Get a combination of the previous examples</span>
-<span class='fu'>get_example</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"AU"</span>, <span class='st'>"AU"</span>,     <span class='st'>"AU"</span> ),
-            <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>NA</span>,   <span class='st'>"MOBILE"</span>, <span class='fl'>NA</span>   ),
-            <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>,     <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; # Parsed phone numbers: 3 total, 3 successfully parsed
-#&gt; [1] +61212345678 +61412345678 +6121234567 </div></pre>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dialr-phone.html'>phone</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0123</span>, <span class='st'>"0412 345 678"</span>, <span class='st'>"61412987654"</span>, <span class='st'>"03 9123 4567"</span>, <span class='st'>"+12015550123"</span>), <span class='st'>"AU"</span>)
+<span class='fu'>get_geocode</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] NA           ""           ""           ""           "Melbourne" 
+#&gt; [6] "New Jersey"</div><div class='input'><span class='fu'>get_geocode</span>(<span class='no'>x</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] NA           NA           ""           ""           "Melbourne" 
+#&gt; [6] "New Jersey"</div><div class='input'>
+<span class='co'># Specify a home country</span>
+<span class='fu'>get_geocode</span>(<span class='no'>x</span>, <span class='kw'>home</span> <span class='kw'>=</span> <span class='st'>"AU"</span>)</div><div class='output co'>#&gt; [1] NA              ""              ""              ""             
+#&gt; [5] "Melbourne"     "United States"</div><div class='input'><span class='fu'>get_geocode</span>(<span class='no'>x</span>, <span class='kw'>home</span> <span class='kw'>=</span> <span class='st'>"US"</span>)</div><div class='output co'>#&gt; [1] NA           ""           "Australia"  "Australia"  "Australia" 
+#&gt; [6] "New Jersey"</div><div class='input'>
+<span class='co'># Specify a language</span>
+<span class='fu'>get_geocode</span>(<span class='no'>x</span>, <span class='kw'>home</span> <span class='kw'>=</span> <span class='st'>"DE"</span>, <span class='kw'>locale</span> <span class='kw'>=</span> <span class='st'>"de"</span>)</div><div class='output co'>#&gt; [1] NA                               ""                              
+#&gt; [3] "Australien"                     "Australien"                    
+#&gt; [5] "Australien"                     "Vereinigte Staaten von Amerika"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -187,6 +207,8 @@ an example invalid number, and <code>type</code> is ignored.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
 
       <li><a href="#libphonenumber-reference">libphonenumber reference</a></li>
       

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>dialr: Parse, Format, and Validate International Phone Numbers — dialr-package • dialr</title>
+<title>Phone number carrier information — get_carrier • dialr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,10 @@
 
 
 
-<meta property="og:title" content="dialr: Parse, Format, and Validate International Phone Numbers — dialr-package" />
+<meta property="og:title" content="Phone number carrier information — get_carrier" />
 
-<meta property="og:description" content="Parse, format, and validate international phone
-    numbers using Google's 'libphonenumber' java library,
-    &amp;lt;https://github.com/googlei18n/libphonenumber&amp;gt;." />
+<meta property="og:description" content="Returns a carrier name for each phone number, in the language provided
+in locale." />
 <meta name="twitter:card" content="summary" />
 
 <meta name="robots" content="noindex">
@@ -119,65 +118,84 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>dialr: Parse, Format, and Validate International Phone Numbers</h1>
-    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/dialr.R'><code>R/dialr.R</code></a></small>
-    <div class="hidden name"><code>dialr-package.Rd</code></div>
+    <h1>Phone number carrier information</h1>
+    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/carrier.R'><code>R/carrier.R</code></a></small>
+    <div class="hidden name"><code>get_carrier.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Parse, format, and validate international phone
-    numbers using Google's 'libphonenumber' java library,
-    &lt;https://github.com/googlei18n/libphonenumber&gt;.</p>
+    <p>Returns a carrier name for each phone number, in the language provided
+in <code>locale</code>.</p>
     
     </div>
 
-        
-    <h2 class="hasAnchor" id="options"><a class="anchor" href="#options"></a>Options</h2>
+    <pre class="usage"><span class='fu'>get_carrier</span>(<span class='no'>x</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>safe</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>locale</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"dialr.locale"</span>))</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>A <a href='dialr-phone.html'>phone</a> vector.</p></td>
+    </tr>
+    <tr>
+      <th>strict</th>
+      <td><p>Should invalid phone numbers be removed? If <code>TRUE</code>, invalid
+phone numbers are replaced with <code>NA</code>.</p></td>
+    </tr>
+    <tr>
+      <th>safe</th>
+      <td><p>If <code>TRUE</code>, gets the name of the carrier for a given phone
+number only when it is 'safe' to display to users. A carrier name is
+considered safe if the number is valid and for a region that doesn't
+support mobile number portability. All other phone numbers return <code>""</code>.</p></td>
+    </tr>
+    <tr>
+      <th>locale</th>
+      <td><p>The <a href='https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html'>Java locale</a>
+used to retrieve localised results. The default is set in option
+<code>dialr.locale</code>.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A carrier name for each phone number for the given locale, or <code>""</code> if
+the number is invalid.</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The carrier name is the one the number was originally allocated to, however
+if the country supports mobile number portability the number might not belong
+to the returned carrier anymore. If no mapping is found <code>""</code> is returned.</p>
+    
+    <h2 class="hasAnchor" id="libphonenumber-reference"><a class="anchor" href="#libphonenumber-reference"></a>libphonenumber reference</h2>
 
     
-    <ul>
-<li><p><code>dialr.home</code>: The default <a href='dialr-region.html'>region</a> used to process phone
-numbers where no region is provided. (default: <code>"AU"</code>).</p></li>
-<li><p><code>dialr.format</code>: The default format used to print clean phone numbers. See
-<code><a href='dialr-phone.html'>format.phone()</a></code> for details. (default: <code>"E164"</code>).</p></li>
-<li><p><code>dialr.locale</code>: The default <a href='https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html'>Java locale</a> used
-to retrieve localised results in <a href='get_geocode.html'>geographical</a> and
-<a href='get_carrier.html'>carrier</a> information (default: <code>"en"</code>).</p></li>
-<li><p><code>dialr.show_progress</code>: Should lengthy operations such as <code><a href='dialr-phone.html'>phone()</a></code> show a
-progress bar? (default: <code>TRUE</code>).</p></li>
-</ul>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://socialresearchcentre.github.io/dialr'>https://socialresearchcentre.github.io/dialr</a></p></li>
-<li><p><a href='https://github.com/socialresearchcentre/dialr'>https://github.com/socialresearchcentre/dialr</a></p></li>
-<li><p><a href='https://github.com/socialresearchcentre/dialrjars'>https://github.com/socialresearchcentre/dialrjars</a></p></li>
-<li><p><a href='https://github.com/googlei18n/libphonenumber'>https://github.com/googlei18n/libphonenumber</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/socialresearchcentre/dialr/issues'>https://github.com/socialresearchcentre/dialr/issues</a></p></li>
-</ul></div>
-    <div class='dont-index'><p>Other phone functions: <code><a href='dialr-phone.html'>dialr-phone</a></code>,
-  <code><a href='dialr-region.html'>dialr-region</a></code>, <code><a href='dialr-type.html'>dialr-type</a></code>,
-  <code><a href='dialr-valid.html'>dialr-valid</a></code></p></div>
+    <p><code><a href='get_geocode.html'>get_geocode()</a></code>: <code>PhoneNumberToCarrierMapper.getNameForValidNumber()</code> by
+default, <code>PhoneNumberToCarrierMapper.getNameForNumber()</code> if <code>strict = TRUE</code>,
+or <code>PhoneNumberToCarrierMapper.getSafeDisplayName()</code> if <code>safe = TRUE</code>.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dialr-phone.html'>phone</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0123</span>, <span class='st'>"0412 345 678"</span>, <span class='st'>"61412987654"</span>, <span class='st'>"03 9123 4567"</span>, <span class='st'>"+12015550123"</span>), <span class='st'>"AU"</span>)
+<span class='fu'>get_carrier</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] NA      ""      "Optus" "Optus" ""      ""     </div><div class='input'><span class='fu'>get_carrier</span>(<span class='no'>x</span>, <span class='kw'>safe</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] NA NA "" "" "" ""</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#options">Options</a></li>
+      <li><a href="#value">Value</a></li>
 
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+      <li><a href="#details">Details</a></li>
 
-    <h2>Author</h2>
-    <p><strong>Maintainer</strong>: Danny Smith <a href='mailto:danny@gorcha.org'>danny@gorcha.org</a></p>
-<p>Other contributors:</p><ul>
-<li><p>The Social Research Centre [copyright holder]</p></li>
-</ul>
-
+      <li><a href="#libphonenumber-reference">libphonenumber reference</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
