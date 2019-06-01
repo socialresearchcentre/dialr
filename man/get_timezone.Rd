@@ -29,9 +29,7 @@ mobile numbers are considered possible candidates for geo-localization.
 
 
 \code{get_timezone()}:
-\code{PhoneNumberToTimeZonesMapper.getTimeZonesForGeographicalNumber()} by
-default, or \code{PhoneNumberToTimeZonesMapper.getTimeZonesForNumber()} if
-\code{strict = TRUE}.
+\code{PhoneNumberToTimeZonesMapper.getTimeZonesForGeographicalNumber()}.
 }
 
 \examples{

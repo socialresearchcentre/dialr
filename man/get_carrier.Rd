@@ -39,8 +39,7 @@ to the returned carrier anymore. If no mapping is found \code{""} is returned.
 
 
 \code{get_geocode()}: \code{PhoneNumberToCarrierMapper.getNameForValidNumber()} by
-default, \code{PhoneNumberToCarrierMapper.getNameForNumber()} if \code{strict = TRUE},
-or \code{PhoneNumberToCarrierMapper.getSafeDisplayName()} if \code{safe = TRUE}.
+default, or \code{PhoneNumberToCarrierMapper.getSafeDisplayName()} if \code{safe = TRUE}.
 }
 
 \examples{

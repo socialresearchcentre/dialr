@@ -14,9 +14,7 @@
 #' @section libphonenumber reference:
 #'
 #'   `get_timezone()`:
-#'   `PhoneNumberToTimeZonesMapper.getTimeZonesForGeographicalNumber()` by
-#'   default, or `PhoneNumberToTimeZonesMapper.getTimeZonesForNumber()` if
-#'   `strict = TRUE`.
+#'   `PhoneNumberToTimeZonesMapper.getTimeZonesForGeographicalNumber()`.
 #' 
 #' @param x A [phone] vector.
 #' @param strict Should invalid phone numbers be removed? If `TRUE`, invalid

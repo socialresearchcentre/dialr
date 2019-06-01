@@ -116,7 +116,8 @@ and default region for later reference.
   phone(c("+61412345678", "0412345678"), c(NA, "AU"))
 }
 \seealso{
-Other phone functions: \code{\link{dialr-region}},
+Other phone functions: \code{\link{dialr-example}},
+  \code{\link{dialr-match}}, \code{\link{dialr-region}},
   \code{\link{dialr-type}}, \code{\link{dialr-valid}},
   \code{\link{dialr}}
 }

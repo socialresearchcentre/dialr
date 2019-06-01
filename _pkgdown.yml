@@ -12,7 +12,7 @@ reference:
     - dialr-match
     - dialr-region
     - dialr-type
-    - get_example
+    - dialr-example
     - get_carrier
     - get_geocode
     - get_timezone

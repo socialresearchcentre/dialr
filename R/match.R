@@ -61,6 +61,7 @@
 #' 
 #' is_match(phone("0412345678", "AU"), "0412345678", detailed = TRUE)
 #' is_match(phone("+61412345678", "AU"), "+61412345678", detailed = TRUE)
+#' @family phone functions
 #' @name dialr-match
 NULL
 

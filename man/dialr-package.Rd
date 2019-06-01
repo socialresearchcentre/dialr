@@ -36,7 +36,8 @@ Useful links:
 }
 
 
-Other phone functions: \code{\link{dialr-phone}},
+Other phone functions: \code{\link{dialr-example}},
+  \code{\link{dialr-match}}, \code{\link{dialr-phone}},
   \code{\link{dialr-region}}, \code{\link{dialr-type}},
   \code{\link{dialr-valid}}
 }

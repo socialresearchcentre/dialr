@@ -37,6 +37,8 @@
 #'             c(TRUE, TRUE,     TRUE,        FALSE))
 #' @seealso [get_supported_regions()] for valid region codes,
 #'   [get_types_for_region()] to get valid phone types for a region.
+#' @family phone functions
+#' @name dialr-example
 #' @export
 get_example <- function(region, type = NULL, valid = TRUE) {
   vec_length <- max(length(region), length(type), length(valid))

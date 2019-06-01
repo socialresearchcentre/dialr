@@ -85,7 +85,7 @@ validate_phone_format <- function(x) {
   if (!all(x %in% formats)) {
     stop(
       "Some `x` values are unsupported phone formats: ",
-      paste0(unique(x[!x %in% formats]), collapse = ", "),
+      paste0('"', unique(x[!x %in% formats]), '"', collapse = ", "),
       call. = FALSE
     )
   }
@@ -121,7 +121,7 @@ validate_phone_type <- function(x) {
   if (!all(x %in% types)) {
     stop(
       "Some `x` values are unsupported phone types: ",
-      paste0(unique(x[!x %in% types]), collapse = ", "),
+      paste0('"', unique(x[!x %in% types]), '"', collapse = ", "),
       call. = FALSE
     )
   }
@@ -177,7 +177,7 @@ validate_phone_calling_code <- function(x) {
   if (!all(x %in% codes)) {
     stop(
       "Some `x` values are unsupported international calling codes: ",
-      paste0(unique(x[!x %in% codes]), collapse = ", "),
+      paste0('"', unique(x[!x %in% codes]), '"', collapse = ", "),
       call. = FALSE
     )
   }
@@ -198,7 +198,7 @@ validate_phone_region <- function(x) {
   if (!all(x %in% regions)) {
     stop(
       "Some `x` values are not supported ISO country codes: ",
-      paste0(unique(x[!x %in% regions]), collapse = ", "),
+      paste0('"', unique(x[!x %in% regions]), '"', collapse = ", "),
       call. = FALSE
     )
   }

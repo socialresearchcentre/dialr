@@ -25,9 +25,7 @@
 #' @section libphonenumber reference:
 #'
 #'   `get_geocode()`:
-#'   `PhoneNumberOfflineGeocoder.getDescriptionForValidNumber()` by
-#'   default, or `PhoneNumberOfflineGeocoder.getDescriptionForNumber()` if
-#'   `strict = TRUE`.
+#'   `PhoneNumberOfflineGeocoder.getDescriptionForValidNumber()`.
 #' 
 #' @param x A [phone] vector.
 #' @param home [ISO country code][dialr-region] for home region. See Details.
@@ -38,8 +36,7 @@
 #'   used to retrieve localised results. The default is set in option
 #'   `dialr.locale`.
 #' @return A text description for each phone number for the given locale, or
-#'   `""` if the number is invalid or could belong to multiple
-#'   countries.
+#'   `""` if the number is invalid or could belong to multiple countries.
 #' @examples
 #' x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #' get_geocode(x)
@@ -52,7 +49,8 @@
 #' # Specify a language
 #' get_geocode(x, home = "DE", locale = "de")
 #' @export
-get_geocode <- function(x, home = NULL, strict = FALSE, locale = getOption("dialr.locale")) {
+get_geocode <- function(x, home = NULL, strict = FALSE,
+                        locale = getOption("dialr.locale")) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   
   validate_phone_region(home)

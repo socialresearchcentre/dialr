@@ -14,8 +14,8 @@
 #' @section libphonenumber reference:
 #'
 #'   `get_geocode()`: `PhoneNumberToCarrierMapper.getNameForValidNumber()` by
-#'   default, `PhoneNumberToCarrierMapper.getNameForNumber()` if `strict = TRUE`,
-#'   or `PhoneNumberToCarrierMapper.getSafeDisplayName()` if `safe = TRUE`.
+#'   default, or `PhoneNumberToCarrierMapper.getSafeDisplayName()` if `safe =
+#'   TRUE`.
 #' 
 #' @param x A [phone] vector.
 #' @param strict Should invalid phone numbers be removed? If `TRUE`, invalid
@@ -35,7 +35,8 @@
 #' get_carrier(x)
 #' get_carrier(x, safe = TRUE)
 #' @export
-get_carrier <- function(x, strict = FALSE, safe = FALSE, locale = getOption("dialr.locale")) {
+get_carrier <- function(x, strict = FALSE, safe = FALSE,
+                        locale = getOption("dialr.locale")) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   
   carrier_mapper <- .get_phoneNumberToCarrierMapper()

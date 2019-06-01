@@ -1,4 +1,4 @@
-context("test-is_match")
+context("phone equality checks")
 
 test_that("matches correctly", {
   expect_equal(is_match(phone("0412345678", "AU"),

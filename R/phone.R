@@ -275,7 +275,8 @@ print.phone <- function(x, n = 10, ...) {
 #'   * `"RFC3966"`: "tel" URI syntax from the IETF [tel URI for Telephone
 #'   Numbers](https://datatracker.ietf.org/doc/rfc3966/)
 #'   
-#'   See notes from the [libphonenumber javadocs](https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.10/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html)
+#'   See notes from the [libphonenumber
+#'   javadocs](https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.10/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html)
 #'   for more details.
 #'   
 #'   `format` defaults to `"E164"`. The default can be set in option

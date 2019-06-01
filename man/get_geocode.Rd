@@ -21,8 +21,7 @@ used to retrieve localised results. The default is set in option
 }
 \value{
 A text description for each phone number for the given locale, or
-\code{""} if the number is invalid or could belong to multiple
-countries.
+\code{""} if the number is invalid or could belong to multiple countries.
 }
 \description{
 Returns a text description for each phone number, in the language provided in
@@ -48,9 +47,7 @@ the same number we may show \code{"Mountain View, CA, United States"} or even ju
 
 
 \code{get_geocode()}:
-\code{PhoneNumberOfflineGeocoder.getDescriptionForValidNumber()} by
-default, or \code{PhoneNumberOfflineGeocoder.getDescriptionForNumber()} if
-\code{strict = TRUE}.
+\code{PhoneNumberOfflineGeocoder.getDescriptionForValidNumber()}.
 }
 
 \examples{

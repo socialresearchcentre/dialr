@@ -75,3 +75,10 @@ is_match("+61412345678", "+61412345678", detailed = TRUE)
 is_match(phone("0412345678", "AU"), "0412345678", detailed = TRUE)
 is_match(phone("+61412345678", "AU"), "+61412345678", detailed = TRUE)
 }
+\seealso{
+Other phone functions: \code{\link{dialr-example}},
+  \code{\link{dialr-phone}}, \code{\link{dialr-region}},
+  \code{\link{dialr-type}}, \code{\link{dialr-valid}},
+  \code{\link{dialr}}
+}
+\concept{phone functions}
