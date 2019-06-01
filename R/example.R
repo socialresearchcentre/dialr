@@ -11,8 +11,10 @@
 #'   `PhoneNumberUtil.getInvalidExampleNumber()` if `valid` is `FALSE`.
 #'
 #' @param region A character vector of [ISO country codes][dialr-region].
-#' @param type A character vector of [phone number types][dialr-type]. If
-#'   `NULL` (default), returns an example "FIXED_LINE" number.
+#' @param type A character vector of [phone number types][dialr-type] for each
+#'   region. If `NULL` (default), returns an example "FIXED_LINE" number.
+#'   Returns an empty phone number if `type` is not valid for the provided
+#'   `region`.
 #' @param valid A logical vector. For each `FALSE` entry, `get_example` returns
 #'   an example invalid number, and `type` is ignored.
 #' @return A [phone] vector.
@@ -23,13 +25,18 @@
 #' # Get an example mobile number
 #' get_example("AU", type = "MOBILE")
 #' 
+#' # Example phone number for an invalid type
+#' get_example("AU", type = "VOICEMAIL")
+#' 
 #' # Get an example invalid number
 #' get_example("AU", valid = FALSE)
 #' 
 #' # Get a combination of the previous examples
-#' get_example(c("AU", "AU",     "AU" ),
-#'             c(NA,   "MOBILE", NA   ),
-#'             c(TRUE, TRUE,     FALSE))
+#' get_example(c("AU", "AU",     "AU",        "AU" ),
+#'             c(NA,   "MOBILE", "VOICEMAIL", NA   ),
+#'             c(TRUE, TRUE,     TRUE,        FALSE))
+#' @seealso [get_supported_regions()] for valid region codes,
+#'   [get_types_for_region()] to get valid phone types for a region.
 #' @export
 get_example <- function(region, type = NULL, valid = TRUE) {
   vec_length <- max(length(region), length(type), length(valid))
@@ -73,9 +80,13 @@ get_example <- function(region, type = NULL, valid = TRUE) {
                      "getExampleNumberForType",
                      r, .get_phone_type_from_string(t))
       }
-      .jcache(pn)
-      
-      p <- .jcall(phone_util, "S", "format", pn, format)
+      if (is.null(pn)) {
+        pn <- NA
+        p <- NA_character_
+      } else {
+        .jcache(pn)
+        p <- .jcall(phone_util, "S", "format", pn, format)
+      }
       
       list(raw = p,
            region = r,

@@ -10,6 +10,8 @@
 
 * Rename "One shot methods" vignette to remove redundant "dialr".
 
+* `get_example()` returns an empty phone number if the provided type is invalid for the provided region (#8).
+
 # dialr 0.2.1
 
 ## Performance improvements

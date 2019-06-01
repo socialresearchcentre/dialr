@@ -9,8 +9,10 @@ get_example(region, type = NULL, valid = TRUE)
 \arguments{
 \item{region}{A character vector of \link[=dialr-region]{ISO country codes}.}
 
-\item{type}{A character vector of \link[=dialr-type]{phone number types}. If
-\code{NULL} (default), returns an example "FIXED_LINE" number.}
+\item{type}{A character vector of \link[=dialr-type]{phone number types} for each
+region. If \code{NULL} (default), returns an example "FIXED_LINE" number.
+Returns an empty phone number if \code{type} is not valid for the provided
+\code{region}.}
 
 \item{valid}{A logical vector. For each \code{FALSE} entry, \code{get_example} returns
 an example invalid number, and \code{type} is ignored.}
@@ -38,11 +40,18 @@ get_example("AU")
 # Get an example mobile number
 get_example("AU", type = "MOBILE")
 
+# Example phone number for an invalid type
+get_example("AU", type = "VOICEMAIL")
+
 # Get an example invalid number
 get_example("AU", valid = FALSE)
 
 # Get a combination of the previous examples
-get_example(c("AU", "AU",     "AU" ),
-            c(NA,   "MOBILE", NA   ),
-            c(TRUE, TRUE,     FALSE))
+get_example(c("AU", "AU",     "AU",        "AU" ),
+            c(NA,   "MOBILE", "VOICEMAIL", NA   ),
+            c(TRUE, TRUE,     TRUE,        FALSE))
+}
+\seealso{
+\code{\link[=get_supported_regions]{get_supported_regions()}} for valid region codes,
+\code{\link[=get_types_for_region]{get_types_for_region()}} to get valid phone types for a region.
 }
