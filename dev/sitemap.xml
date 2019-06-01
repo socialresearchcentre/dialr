@@ -7,6 +7,9 @@
     <loc>https://socialresearchcentre.github.io/dialr/reference/check_cc.html</loc>
   </url>
   <url>
+    <loc>https://socialresearchcentre.github.io/dialr/reference/dialr-example.html</loc>
+  </url>
+  <url>
     <loc>https://socialresearchcentre.github.io/dialr/reference/dialr-match.html</loc>
   </url>
   <url>
@@ -29,9 +32,6 @@
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/dialr/reference/get_cc.html</loc>
-  </url>
-  <url>
-    <loc>https://socialresearchcentre.github.io/dialr/reference/get_example.html</loc>
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/dialr/reference/get_geocode.html</loc>
