@@ -12,6 +12,8 @@
 
 * `get_example()` returns an empty phone number if the provided type is invalid for the provided region (#8).
 
+* `phone()` constructor now supports parsing phone numbers in international format without a default region by specifying `NA` or `""` in the `region` argument (#4).
+
 # dialr 0.2.1
 
 ## Performance improvements

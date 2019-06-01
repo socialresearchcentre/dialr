@@ -30,8 +30,14 @@
 #'   `PhoneNumberUtil.formatOutOfCountryCallingNumber()` if `home` is provided.
 #'   
 #' @param x A character vector of phone numbers.
-#' @param region A character vector of [ISO country codes][dialr-region].
+#' @param region A character vector of [ISO country codes][dialr-region] with
+#'   the default region for each phone number in `x`. A `region` vector of
+#'   length 1 will be recycled to the length of `x`.
+#'   
+#'   If `NA` or `""`, numbers written in international format (with a leading
+#'   `+`) will be parsed without a default region.
 #' @examples
+#'   # Create a phone vector
 #'   x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #'   
 #'   is.phone(x)
@@ -39,6 +45,15 @@
 #'   as.character(x)
 #'   format(x)
 #'   format(x, home = "AU")
+#'   
+#'   # Parse international number with no default region
+#'   phone("+61412345678", NA)
+#'   
+#'   # Will fail to parse if number is not in international format
+#'   phone("0412345678", NA)
+#'   
+#'   # A combination can be used
+#'   phone(c("+61412345678", "0412345678"), c(NA, "AU"))
 #' @name dialr-phone
 #' @family phone functions
 #' @export
@@ -47,7 +62,9 @@ phone <- function(x, region) {
   if (length(x) == 0)  stop("`x` must not be empty.", call. = FALSE)
   if (length(x) > 1 & length(region) == 1) region <- rep(region, length(x))
   if (length(x) != length(region)) stop("`x` and `region` vectors must be the same length.", call. = FALSE)
-  validate_phone_region(region)
+  
+  region[!is.na(region) & region == ""] <- NA_character_
+  validate_phone_region(region[!is.na(region)])
 
   x <- as.character(x)
   validate_phone(new_phone(x, region))

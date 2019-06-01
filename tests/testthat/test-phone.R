@@ -23,6 +23,19 @@ test_that("phone vector created successfully", {
   expect_equal(dialr:::validate_phone(ph), ph)
 })
 
+test_that("empty region parses correctly", {
+  expect_true(is_parsed(phone("+61412345678", NA)))
+  expect_true(is_possible(phone("+61412345678", NA)))
+  expect_true(is_valid(phone("+61412345678", NA)))
+  
+  expect_false(is_parsed(phone("0412345678", NA)))
+  expect_false(is_possible(phone("0412345678", NA)))
+  expect_false(is_valid(phone("0412345678", NA)))
+  
+  expect_equal(phone("+61412345678", NA),
+               phone("+61412345678", ""))
+})
+
 test_that("phone_reparse", {
   expect_error(phone_reparse(FALSE))
   expect_is(phone_reparse(ph), "phone")
