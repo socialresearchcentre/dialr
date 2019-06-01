@@ -14,6 +14,8 @@
 
 * `phone()` constructor now supports parsing phone numbers in international format without a default region by specifying `NA` or `""` in the `region` argument (#4).
 
+* `get_type()` gets a `strict` argument. If `TRUE`, invalid phone numbers return `NA` instead of `"UNKNOWN"`.
+
 # dialr 0.2.1
 
 ## Performance improvements

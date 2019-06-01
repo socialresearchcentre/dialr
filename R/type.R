@@ -24,6 +24,7 @@
 #'   
 #' @param x A [phone] vector, or a character vector of [ISO country
 #'   codes][dialr-region].
+#' @param strict If `TRUE`, invalid phone numbers return `NA`.
 #' @return A character vector of phone types.
 #' 
 #'   `get_types_for_region()` returns a list of character vectors for each
@@ -44,7 +45,7 @@
 #' @name dialr-type
 #' @family phone functions
 #' @export
-get_type <- function(x) {
+get_type <- function(x, strict = FALSE) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   phone_util <- .get_phoneNumberUtil()
   
@@ -54,6 +55,7 @@ get_type <- function(x) {
                     "getNumberType",
                     pn))
   }, character(1))
+  if (strict) out[!is_valid(x)] <- NA_character_
   
   out
 }

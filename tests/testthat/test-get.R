@@ -50,6 +50,9 @@ test_that("get_type", {
   expect_equal(get_type(phone(ph_raw, "AU")), ph_raw_types)
   expect_equal(get_type(get_example(region = c("AU"), type = types$AU)),
                types$AU)
+  
+  expect_equal(get_type(phone("123", "AU")), "UNKNOWN")
+  expect_equal(get_type(phone("123", "AU"), strict = TRUE), NA_character_)
 })
 
 
