@@ -21,3 +21,13 @@ sticker(imgurl,
         s_x = 1.27, s_y = 0.5, s_width = 0.4,
         h_fill = "#5BB1F8", h_color = "#000000",
         p_color = "#000000", spotlight = T, white_around_sticker = T)
+
+
+img <- "~/Downloads/Bell_telephone_magazine_(1922)_(14569733868).jpg"
+
+sticker(img,
+        package = "dialr",
+        p_x = 0.6, p_y = 1.31, p_size = 30, p_family = "serif",
+        s_x = 1, s_y = 1, s_width = 1,
+        h_fill = "#5BB1F8", h_color = "#000000",
+        p_color = "#DDDDDD", spotlight = F, white_around_sticker = T)
