@@ -6,6 +6,8 @@
 \alias{dialr-package}
 \title{dialr: Parse, Format, and Validate International Phone Numbers}
 \description{
+\if{html}{\figure{logo.png}{options: align='right'}}
+
 Parse, format, and validate international phone
     numbers using Google's 'libphonenumber' java library,
     <https://github.com/googlei18n/libphonenumber>.

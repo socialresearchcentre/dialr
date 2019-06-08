@@ -33,6 +33,7 @@
 #' @examples
 #' x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
 #' get_carrier(x)
+#' get_carrier(x, strict = TRUE)
 #' get_carrier(x, safe = TRUE)
 #' @export
 get_carrier <- function(x, strict = FALSE, safe = FALSE,
