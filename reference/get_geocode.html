@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Check if a phone number is possible for a given region — ph_possible • dialr</title>
+<title>Phone number geographical information — get_geocode • dialr</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Check if a phone number is possible for a given region — ph_possible" />
+<meta property="og:title" content="Phone number geographical information — get_geocode" />
 
-<meta property="og:description" content="ph_possible is soft-deprecated and will be removed in a future release." />
+<meta property="og:description" content="Returns a text description for each phone number, in the language provided in
+locale." />
 
 <meta property="og:image" content="https://socialresearchcentre.github.io/dialr/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -119,72 +120,85 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check if a phone number is possible for a given region</h1>
-    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/deprec-phone_old.R'><code>R/deprec-phone_old.R</code></a></small>
-    <div class="hidden name"><code>ph_possible.Rd</code></div>
+    <h1>Phone number geographical information</h1>
+    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/geocoder.R'><code>R/geocoder.R</code></a></small>
+    <div class="hidden name"><code>get_geocode.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><strong>ph_possible is soft-deprecated and will be removed in a future release.</strong></p>
+    <p>Returns a text description for each phone number, in the language provided in
+<code>locale</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>ph_possible</span>(<span class='no'>phone</span>, <span class='no'>country</span>, <span class='kw'>detailed</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_geocode</span>(<span class='no'>x</span>, <span class='kw'>home</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>locale</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"dialr.locale"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>phone</th>
-      <td><p>Character vector of phone numbers to check</p></td>
+      <th>x</th>
+      <td><p>A <a href='dialr-phone.html'>phone</a> vector.</p></td>
     </tr>
     <tr>
-      <th>country</th>
-      <td><p>Character vector of region codes. If length = 1, the same
-region code is used for all phone numbers</p></td>
+      <th>home</th>
+      <td><p><a href='dialr-region.html'>ISO country code</a> for home region. See Details.</p></td>
     </tr>
     <tr>
-      <th>detailed</th>
-      <td><p>If detailed = FALSE, ph_possible returns a logical vector
-that indicates whether the number is possible or not.
-If detailed = TRUE, ph_possible returns more detailed
-information about FALSE numbers.</p></td>
+      <th>strict</th>
+      <td><p>Should invalid phone numbers be removed? If <code>TRUE</code>, invalid
+phone numbers are replaced with <code>NA</code>.</p></td>
+    </tr>
+    <tr>
+      <th>locale</th>
+      <td><p>The <a href='https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html'>Java locale</a>
+used to retrieve localised results. The default is set in option
+<code>dialr.locale</code>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>if detailed = FALSE, logical vector flagging possible phone numbers.
-If detailed = TRUE, character vector with detailed information about
-failures.</p>
+    <p>A text description for each phone number for the given locale, or
+<code>""</code> if the number is invalid or could belong to multiple countries.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Check whether a phone number is a possible number. It provides a more lenient
-check than isValidNumber(PhoneNumber) in the following sense:</p><ol>
-<li><p>It only checks the length of phone numbers. In particular, it doesn't
-check starting digits of the number.</p></li>
-<li><p>It doesn't attempt to figure out the type of the number, but uses
-general rules which applies to all types of phone numbers in a
-region. Therefore, it is much faster than isValidNumber.</p></li>
-<li><p>For fixed line numbers, many regions have the concept of area code,
-which together with subscriber number constitute the national
-significant number. It is sometimes okay to dial the subscriber
-number only when dialing in the same area. This function will return
-true if the subscriber-number-only version is passed in. On the other
-hand, because isValidNumber validates using information on both
-starting digits (for fixed line numbers, that would most likely be
-area codes) and length (obviously includes the length of area codes
-for fixed line numbers), it will return false for the
-subscriber-number-only version.</p></li>
-</ol>
+    <p>The description might consist of the name of the country where the phone
+number is from, or the name of the geographical area the phone number is from
+if more detailed information is available.</p>
+<p>If a phone number is from the region specified in <code>home</code>, only a
+lower-level description will be returned, if one exists. Otherwise, the phone
+number's region will be returned, with optionally some more detailed
+information.</p>
+<p>For example, for a user from the region <code>"US"</code> (United States), we would show
+<code>"Mountain View, CA"</code> for a particular number, omitting the United States
+from the description. For a user from the United Kingdom (region <code>"GB"</code>), for
+the same number we may show <code>"Mountain View, CA, United States"</code> or even just
+<code>"United States"</code>.</p>
+    
+    <h2 class="hasAnchor" id="libphonenumber-reference"><a class="anchor" href="#libphonenumber-reference"></a>libphonenumber reference</h2>
+
+    
+    <p><code>get_geocode()</code>:
+<code>PhoneNumberOfflineGeocoder.getDescriptionForValidNumber()</code>.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0123</span>, <span class='st'>"0404 753 123"</span>, <span class='st'>"61410123817"</span>, <span class='st'>"+12015550123"</span>)
-<span class='fu'>ph_possible</span>(<span class='no'>x</span>, <span class='st'>"AU"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: ph_possible() is soft deprecated as of dialr 0.2.0</span>
-#&gt; <span class='warning'>please use is_possible() instead</span></div><div class='output co'>#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</div></pre>
+    <pre class="examples"><div class='input'><span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='dialr-phone.html'>phone</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0123</span>, <span class='st'>"0412 345 678"</span>, <span class='st'>"61412987654"</span>, <span class='st'>"03 9123 4567"</span>, <span class='st'>"+12015550123"</span>), <span class='st'>"AU"</span>)
+<span class='fu'>get_geocode</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; [1] NA           ""           ""           ""           "Melbourne" 
+#&gt; [6] "New Jersey"</div><div class='input'><span class='fu'>get_geocode</span>(<span class='no'>x</span>, <span class='kw'>strict</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; [1] NA           NA           ""           ""           "Melbourne" 
+#&gt; [6] "New Jersey"</div><div class='input'>
+<span class='co'># Specify a home country</span>
+<span class='fu'>get_geocode</span>(<span class='no'>x</span>, <span class='kw'>home</span> <span class='kw'>=</span> <span class='st'>"AU"</span>)</div><div class='output co'>#&gt; [1] NA              ""              ""              ""             
+#&gt; [5] "Melbourne"     "United States"</div><div class='input'><span class='fu'>get_geocode</span>(<span class='no'>x</span>, <span class='kw'>home</span> <span class='kw'>=</span> <span class='st'>"US"</span>)</div><div class='output co'>#&gt; [1] NA           ""           "Australia"  "Australia"  "Australia" 
+#&gt; [6] "New Jersey"</div><div class='input'>
+<span class='co'># Specify a language</span>
+<span class='fu'>get_geocode</span>(<span class='no'>x</span>, <span class='kw'>home</span> <span class='kw'>=</span> <span class='st'>"DE"</span>, <span class='kw'>locale</span> <span class='kw'>=</span> <span class='st'>"de"</span>)</div><div class='output co'>#&gt; [1] NA                               ""                              
+#&gt; [3] "Australien"                     "Australien"                    
+#&gt; [5] "Australien"                     "Vereinigte Staaten von Amerika"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -194,6 +208,8 @@ subscriber-number-only version.</p></li>
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#libphonenumber-reference">libphonenumber reference</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

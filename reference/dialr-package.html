@@ -32,9 +32,12 @@
 
 <meta property="og:title" content="dialr: Parse, Format, and Validate International Phone Numbers — dialr-package" />
 
-<meta property="og:description" content="Parse, format, and validate international phone
+<meta property="og:description" content="
+Parse, format, and validate international phone
     numbers using Google's 'libphonenumber' java library,
     &amp;lt;https://github.com/googlei18n/libphonenumber&amp;gt;." />
+
+<meta property="og:image" content="https://socialresearchcentre.github.io/dialr/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -65,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -91,7 +94,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/oneshot.html">dialr One Shot Methods</a>
+      <a href="../articles/oneshot.html">One shot methods</a>
     </li>
   </ul>
 </li>
@@ -126,7 +129,8 @@
 
     <div class="ref-description">
     
-    <p>Parse, format, and validate international phone
+    <p><img src='figures/logo.png' align='right' /></p>
+<p>Parse, format, and validate international phone
     numbers using Google's 'libphonenumber' java library,
     &lt;https://github.com/googlei18n/libphonenumber&gt;.</p>
     
@@ -141,6 +145,9 @@
 numbers where no region is provided. (default: <code>"AU"</code>).</p></li>
 <li><p><code>dialr.format</code>: The default format used to print clean phone numbers. See
 <code><a href='dialr-phone.html'>format.phone()</a></code> for details. (default: <code>"E164"</code>).</p></li>
+<li><p><code>dialr.locale</code>: The default <a href='https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html'>Java locale</a> used
+to retrieve localised results in <a href='get_geocode.html'>geographical</a> and
+<a href='get_carrier.html'>carrier</a> information (default: <code>"en"</code>).</p></li>
 <li><p><code>dialr.show_progress</code>: Should lengthy operations such as <code><a href='dialr-phone.html'>phone()</a></code> show a
 progress bar? (default: <code>TRUE</code>).</p></li>
 </ul>
@@ -154,7 +161,8 @@ progress bar? (default: <code>TRUE</code>).</p></li>
 <li><p><a href='https://github.com/googlei18n/libphonenumber'>https://github.com/googlei18n/libphonenumber</a></p></li>
 <li><p>Report bugs at <a href='https://github.com/socialresearchcentre/dialr/issues'>https://github.com/socialresearchcentre/dialr/issues</a></p></li>
 </ul></div>
-    <div class='dont-index'><p>Other phone functions: <code><a href='dialr-phone.html'>dialr-phone</a></code>,
+    <div class='dont-index'><p>Other phone functions: <code><a href='dialr-example.html'>dialr-example</a></code>,
+  <code><a href='dialr-match.html'>dialr-match</a></code>, <code><a href='dialr-phone.html'>dialr-phone</a></code>,
   <code><a href='dialr-region.html'>dialr-region</a></code>, <code><a href='dialr-type.html'>dialr-type</a></code>,
   <code><a href='dialr-valid.html'>dialr-valid</a></code></p></div>
     

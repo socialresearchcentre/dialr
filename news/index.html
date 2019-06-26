@@ -32,6 +32,9 @@
 
 <meta property="og:title" content="Changelog" />
 
+<meta property="og:image" content="https://socialresearchcentre.github.io/dialr/logo.png" />
+<meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -60,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -86,7 +89,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/oneshot.html">dialr One Shot Methods</a>
+      <a href="../articles/oneshot.html">One shot methods</a>
     </li>
   </ul>
 </li>
@@ -118,9 +121,33 @@
       <small>Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="dialr-0-3-0" class="section level1">
+<h1 class="page-header">
+<a href="#dialr-0-3-0" class="anchor"></a>dialr 0.3.0<small> Unreleased </small>
+</h1>
+<div id="new-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-functions" class="anchor"></a>New functions</h2>
+<ul>
+<li><p>Retrieve carrier name with <code><a href="../reference/get_carrier.html">get_carrier()</a></code> (<a href='https://github.com/socialresearchcentre/dialr/issues/6'>#6</a>).</p></li>
+<li><p>Add geocoding functions <code><a href="../reference/get_geocode.html">get_geocode()</a></code> and <code><a href="../reference/get_timezone.html">get_timezone()</a></code> (<a href='https://github.com/socialresearchcentre/dialr/issues/5'>#5</a>).</p></li>
+</ul>
+</div>
+<div id="minor-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes" class="anchor"></a>Minor changes</h2>
+<ul>
+<li><p><code><a href="../reference/dialr-example.html">get_example()</a></code> returns an empty phone number if the provided type is invalid for the provided region (<a href='https://github.com/socialresearchcentre/dialr/issues/8'>#8</a>).</p></li>
+<li><p><code><a href="../reference/dialr-phone.html">phone()</a></code> constructor now supports parsing phone numbers in international format without a default region by specifying <code>NA</code> or <code>""</code> in the <code>region</code> argument (<a href='https://github.com/socialresearchcentre/dialr/issues/4'>#4</a>).</p></li>
+<li><p><code><a href="../reference/dialr-type.html">get_type()</a></code> gets a <code>strict</code> argument. If <code>TRUE</code>, invalid phone numbers return <code>NA</code> instead of <code>"UNKNOWN"</code>.</p></li>
+<li><p>Rename “One shot methods” vignette to remove redundant “dialr”.</p></li>
+</ul>
+</div>
+</div>
     <div id="dialr-0-2-1" class="section level1">
 <h1 class="page-header">
-<a href="#dialr-0-2-1" class="anchor"></a>dialr 0.2.1</h1>
+<a href="#dialr-0-2-1" class="anchor"></a>dialr 0.2.1<small> 2019-05-03 </small>
+</h1>
 <div id="performance-improvements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#performance-improvements" class="anchor"></a>Performance improvements</h2>
@@ -133,21 +160,22 @@
 <li>Updated R dependency to R &gt;= 3.2.3. R 3.6.0 just came out and highr, a dependency of knitr, requires &gt;= 3.2.3 so build fails on 3.1.x.</li>
 </ul>
 </div>
-<div id="minor-changes" class="section level2">
+<div id="minor-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-1" class="anchor"></a>Minor changes</h2>
 <ul>
 <li><p>New introductory <code><a href="../articles/dialr.html">vignette("dialr")</a></code>.</p></li>
 <li><p>New <code><a href="../reference/dialr-match.html">is_match()</a></code> function supports proper <code>phone</code> equality checks. <code>==</code> and <code>!=</code> now use <code><a href="../reference/dialr-match.html">is_match()</a></code> for <code>phone</code> vectors. (<a href='https://github.com/socialresearchcentre/dialr/issues/1'>#1</a>)</p></li>
 <li><p>More region and type functions implemented. See <code><a href="../reference/dialr-region.html">?`dialr-region`</a></code> or <code><a href="../reference/dialr-type.html">?`dialr-type`</a></code> for details.</p></li>
-<li><p>New <code><a href="../reference/get_example.html">get_example()</a></code> function generates example phone numbers for provided regions and types.</p></li>
+<li><p>New <code><a href="../reference/dialr-example.html">get_example()</a></code> function generates example phone numbers for provided regions and types.</p></li>
 <li><p>Improved function documentation.</p></li>
 </ul>
 </div>
 </div>
     <div id="dialr-0-2-0" class="section level1">
 <h1 class="page-header">
-<a href="#dialr-0-2-0" class="anchor"></a>dialr 0.2.0</h1>
+<a href="#dialr-0-2-0" class="anchor"></a>dialr 0.2.0<small> Unreleased </small>
+</h1>
 <div id="introduction-of-dialrjars" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction-of-dialrjars" class="anchor"></a>Introduction of <code>dialrjars</code>
@@ -162,7 +190,8 @@
 </div>
     <div id="dialr-0-1-0" class="section level1">
 <h1 class="page-header">
-<a href="#dialr-0-1-0" class="anchor"></a>dialr 0.1.0</h1>
+<a href="#dialr-0-1-0" class="anchor"></a>dialr 0.1.0<small> Unreleased </small>
+</h1>
 <p>Initial release.</p>
 </div>
   </div>
@@ -171,6 +200,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#dialr-0-3-0">0.3.0</a></li>
         <li><a href="#dialr-0-2-1">0.2.1</a></li>
         <li><a href="#dialr-0-2-0">0.2.0</a></li>
         <li><a href="#dialr-0-1-0">0.1.0</a></li>

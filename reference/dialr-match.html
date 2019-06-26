@@ -40,6 +40,8 @@ character for comparison. Note that although they can contain formatting
 character vectors are not parsed with a default region, so they will only
 ever be an &quot;EXACT_MATCH&quot; if a country calling code is specified with + at
 the start. See Examples." />
+
+<meta property="og:image" content="https://socialresearchcentre.github.io/dialr/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -70,7 +72,7 @@ the start. See Examples." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
@@ -96,7 +98,7 @@ the start. See Examples." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/oneshot.html">dialr One Shot Methods</a>
+      <a href="../articles/oneshot.html">One shot methods</a>
     </li>
   </ul>
 </li>
@@ -201,6 +203,13 @@ and the other does not.</p></li>
     
     <p><code>is_match()</code>: <code>PhoneNumberUtil.isNumberMatch()</code></p>
     
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other phone functions: <code><a href='dialr-example.html'>dialr-example</a></code>,
+  <code><a href='dialr-phone.html'>dialr-phone</a></code>, <code><a href='dialr-region.html'>dialr-region</a></code>,
+  <code><a href='dialr-type.html'>dialr-type</a></code>, <code><a href='dialr-valid.html'>dialr-valid</a></code>,
+  <code><a href='dialr-package.html'>dialr</a></code></p></div>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>is_match</span>(<span class='fu'><a href='dialr-phone.html'>phone</a></span>(<span class='st'>"0412 345 678"</span>, <span class='st'>"AU"</span>), <span class='fu'><a href='dialr-phone.html'>phone</a></span>(<span class='st'>"+61412345678"</span>, <span class='st'>"AU"</span>))</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
@@ -219,6 +228,8 @@ and the other does not.</p></li>
       <li><a href="#details">Details</a></li>
 
       <li><a href="#libphonenumber-reference">libphonenumber reference</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
