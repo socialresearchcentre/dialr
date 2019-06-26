@@ -1,6 +1,6 @@
 Package: dialr
 Title: Parse, Format, and Validate International Phone Numbers
-Version: 0.2.1.9000
+Version: 0.3.0
 Authors@R: 
     c(person(given = "Danny",
              family = "Smith",
@@ -20,7 +20,7 @@ BugReports: https://github.com/socialresearchcentre/dialr/issues
 Depends:
     R (>= 3.2.3)
 Imports: 
-    dialrjars,
+    dialrjars (>= 8.10.11.1),
     rJava
 Suggests: 
     covr,

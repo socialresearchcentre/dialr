@@ -1,11 +1,3 @@
-## Resubmission
-
-This is a resubmission. In this version I have:
-
-* removed redundant "in R" in the Description and Title fields
-
-* added examples for all exported functions that didn't already have them
-
 ## Test environments
 * local: win install, R 3.5.1
 * local: ubuntu 18.04 install, R 3.6.0
@@ -15,13 +7,7 @@ This is a resubmission. In this version I have:
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
-
-* checking CRAN incoming feasibility ... NOTE
-Maintainer: 'Danny Smith <danny@gorcha.org>'
-New submission
+0 errors | 0 warnings | 0 note
 
 ## devtools::check()
 
@@ -30,4 +16,4 @@ R CMD check results
 
 ## Reverse dependencies
 
-This is a new release, so there are no reverse dependencies.
+There are no reverse dependencies.

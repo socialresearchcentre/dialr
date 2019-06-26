@@ -1,4 +1,4 @@
-# dialr (development version)
+# dialr 0.3.0
 
 ## New functions
 
@@ -8,13 +8,13 @@
 
 ## Minor changes
 
-* Rename "One shot methods" vignette to remove redundant "dialr".
-
 * `get_example()` returns an empty phone number if the provided type is invalid for the provided region (#8).
 
 * `phone()` constructor now supports parsing phone numbers in international format without a default region by specifying `NA` or `""` in the `region` argument (#4).
 
 * `get_type()` gets a `strict` argument. If `TRUE`, invalid phone numbers return `NA` instead of `"UNKNOWN"`.
+
+* Rename "One shot methods" vignette to remove redundant "dialr".
 
 # dialr 0.2.1
 
