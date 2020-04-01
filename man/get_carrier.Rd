@@ -4,8 +4,12 @@
 \alias{get_carrier}
 \title{Phone number carrier information}
 \usage{
-get_carrier(x, strict = FALSE, safe = FALSE,
-  locale = getOption("dialr.locale"))
+get_carrier(
+  x,
+  strict = FALSE,
+  safe = FALSE,
+  locale = getOption("dialr.locale")
+)
 }
 \arguments{
 \item{x}{A \link{phone} vector.}

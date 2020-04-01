@@ -6,7 +6,7 @@
 \alias{dialr-package}
 \title{dialr: Parse, Format, and Validate International Phone Numbers}
 \description{
-\if{html}{\figure{logo.png}{options: align='right'}}
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
 Parse, format, and validate international phone
     numbers using Google's 'libphonenumber' java library,
@@ -38,10 +38,13 @@ Useful links:
 }
 
 
-Other phone functions: \code{\link{dialr-example}},
-  \code{\link{dialr-match}}, \code{\link{dialr-phone}},
-  \code{\link{dialr-region}}, \code{\link{dialr-type}},
-  \code{\link{dialr-valid}}
+Other phone functions: 
+\code{\link{dialr-example}},
+\code{\link{dialr-match}},
+\code{\link{dialr-phone}},
+\code{\link{dialr-region}},
+\code{\link{dialr-type}},
+\code{\link{dialr-valid}}
 }
 \author{
 \strong{Maintainer}: Danny Smith \email{danny@gorcha.org}

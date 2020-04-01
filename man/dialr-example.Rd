@@ -56,9 +56,12 @@ get_example(c("AU", "AU",     "AU",        "AU" ),
 \code{\link[=get_supported_regions]{get_supported_regions()}} for valid region codes,
 \code{\link[=get_types_for_region]{get_types_for_region()}} to get valid phone types for a region.
 
-Other phone functions: \code{\link{dialr-match}},
-  \code{\link{dialr-phone}}, \code{\link{dialr-region}},
-  \code{\link{dialr-type}}, \code{\link{dialr-valid}},
-  \code{\link{dialr}}
+Other phone functions: 
+\code{\link{dialr-match}},
+\code{\link{dialr-phone}},
+\code{\link{dialr-region}},
+\code{\link{dialr-type}},
+\code{\link{dialr-valid}},
+\code{\link{dialr}}
 }
 \concept{phone functions}

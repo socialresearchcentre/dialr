@@ -18,8 +18,14 @@ is.phone(x)
 
 \method{print}{phone}(x, n = 10, ...)
 
-\method{format}{phone}(x, format = c("E164", "NATIONAL", "INTERNATIONAL",
-  "RFC3966"), home = NULL, clean = TRUE, strict = FALSE, ...)
+\method{format}{phone}(
+  x,
+  format = c("E164", "NATIONAL", "INTERNATIONAL", "RFC3966"),
+  home = NULL,
+  clean = TRUE,
+  strict = FALSE,
+  ...
+)
 
 \method{as.character}{phone}(x, raw = TRUE, ...)
 }
@@ -116,9 +122,12 @@ and default region for later reference.
   phone(c("+61412345678", "0412345678"), c(NA, "AU"))
 }
 \seealso{
-Other phone functions: \code{\link{dialr-example}},
-  \code{\link{dialr-match}}, \code{\link{dialr-region}},
-  \code{\link{dialr-type}}, \code{\link{dialr-valid}},
-  \code{\link{dialr}}
+Other phone functions: 
+\code{\link{dialr-example}},
+\code{\link{dialr-match}},
+\code{\link{dialr-region}},
+\code{\link{dialr-type}},
+\code{\link{dialr-valid}},
+\code{\link{dialr}}
 }
 \concept{phone functions}

@@ -62,9 +62,12 @@ list of supported types.
   
 }
 \seealso{
-Other phone functions: \code{\link{dialr-example}},
-  \code{\link{dialr-match}}, \code{\link{dialr-phone}},
-  \code{\link{dialr-region}}, \code{\link{dialr-valid}},
-  \code{\link{dialr}}
+Other phone functions: 
+\code{\link{dialr-example}},
+\code{\link{dialr-match}},
+\code{\link{dialr-phone}},
+\code{\link{dialr-region}},
+\code{\link{dialr-valid}},
+\code{\link{dialr}}
 }
 \concept{phone functions}

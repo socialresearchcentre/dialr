@@ -4,8 +4,7 @@
 \alias{ph_format}
 \title{Format a phone number}
 \usage{
-ph_format(phone, country, format = "NATIONAL", home = NULL,
-  clean = FALSE)
+ph_format(phone, country, format = "NATIONAL", home = NULL, clean = FALSE)
 }
 \arguments{
 \item{phone}{Character vector of phone numbers to check}

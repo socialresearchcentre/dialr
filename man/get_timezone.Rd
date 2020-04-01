@@ -14,7 +14,7 @@ phone numbers are replaced with \code{NA}.}
 }
 \value{
 A character vector of time zones to which each phone number belongs,
-separated by \code{;}, or the default unknown time zone \code{"Etc/Unknown"} if no
+separated by \verb{;}, or the default unknown time zone \code{"Etc/Unknown"} if no
 other time zone was found.
 }
 \description{

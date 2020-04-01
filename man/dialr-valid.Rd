@@ -77,9 +77,12 @@ region.
   is_possible(x, detailed = TRUE, type = "MOBILE")
 }
 \seealso{
-Other phone functions: \code{\link{dialr-example}},
-  \code{\link{dialr-match}}, \code{\link{dialr-phone}},
-  \code{\link{dialr-region}}, \code{\link{dialr-type}},
-  \code{\link{dialr}}
+Other phone functions: 
+\code{\link{dialr-example}},
+\code{\link{dialr-match}},
+\code{\link{dialr-phone}},
+\code{\link{dialr-region}},
+\code{\link{dialr-type}},
+\code{\link{dialr}}
 }
 \concept{phone functions}

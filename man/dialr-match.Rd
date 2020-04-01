@@ -5,8 +5,7 @@
 \alias{is_match}
 \title{Phone number equality checks}
 \usage{
-is_match(e1, e2, detailed = FALSE, strict = TRUE,
-  not_number_na = TRUE)
+is_match(e1, e2, detailed = FALSE, strict = TRUE, not_number_na = TRUE)
 }
 \arguments{
 \item{e1}{A \link{phone} or character vector.}
@@ -52,8 +51,8 @@ and the other does not.
 \item \code{"NO_MATCH"}: All others.
 }
 
-For example, the numbers \code{+1 345 657 1234} and \code{657 1234} are a
-\code{"SHORT_NSN_MATCH"}. The numbers \code{+1 345 657 1234} and \code{345 657} are a
+For example, the numbers \verb{+1 345 657 1234} and \verb{657 1234} are a
+\code{"SHORT_NSN_MATCH"}. The numbers \verb{+1 345 657 1234} and \verb{345 657} are a
 \code{"NO_MATCH"}.
 }
 \section{libphonenumber reference}{
@@ -76,9 +75,12 @@ is_match(phone("0412345678", "AU"), "0412345678", detailed = TRUE)
 is_match(phone("+61412345678", "AU"), "+61412345678", detailed = TRUE)
 }
 \seealso{
-Other phone functions: \code{\link{dialr-example}},
-  \code{\link{dialr-phone}}, \code{\link{dialr-region}},
-  \code{\link{dialr-type}}, \code{\link{dialr-valid}},
-  \code{\link{dialr}}
+Other phone functions: 
+\code{\link{dialr-example}},
+\code{\link{dialr-phone}},
+\code{\link{dialr-region}},
+\code{\link{dialr-type}},
+\code{\link{dialr-valid}},
+\code{\link{dialr}}
 }
 \concept{phone functions}

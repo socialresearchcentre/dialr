@@ -4,8 +4,7 @@
 \alias{get_geocode}
 \title{Phone number geographical information}
 \usage{
-get_geocode(x, home = NULL, strict = FALSE,
-  locale = getOption("dialr.locale"))
+get_geocode(x, home = NULL, strict = FALSE, locale = getOption("dialr.locale"))
 }
 \arguments{
 \item{x}{A \link{phone} vector.}
