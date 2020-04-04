@@ -1,8 +1,8 @@
 ## Test environments
-* local: win install, R 3.5.1
-* local: ubuntu 18.04 install, R 3.6.0
-* travis ubuntu 14.04: 3.2, 3.3, 3.4, oldrel, release, devel
-* travis osx 10.13.3: release
+* local: win install, R 3.6.0
+* local: ubuntu 19.10 install, R 3.6.1
+* travis ubuntu 16.04: 3.2, 3.3, 3.4, oldrel, release, devel
+* travis osx 10.13.6: release
 * win-builder: windows-x86_64-devel
 
 ## R CMD check results

@@ -1,8 +1,10 @@
-# dialr (development version)
+# dialr 0.3.1
 
-* Changes to treatment of list based classes in tibble 3.0.0 broke `phone` vectors in tibbles (#12). All `phone` vectors now also have the `list` class as recommended by the [tibble changelog](https://tibble.tidyverse.org/news/index.html).
+This release fixes a bug introduced by changes to the treatment of list based classes in tibble 3.0.0 that broke `phone` vectors in tibbles (#12). All `phone` vectors now also have the `list` class as recommended by the [tibble changelog](https://tibble.tidyverse.org/news/index.html).
 
-* The libphonenumber repo has moved from <https://github.com/googlei18n/libphonenumber/> to <https://github.com/google/libphonenumber/>. Docs have been updated accordingly (#11).
+In the future dialr may use the vctrs package to implement the `phone` class once vctrs is a bit more stable.
+
+The libphonenumber repo moved from <https://github.com/googlei18n/libphonenumber/> to <https://github.com/google/libphonenumber/> a little while ago. Docs have been updated accordingly (#11).
 
 # dialr 0.3.0
 
