@@ -18,5 +18,5 @@ is_vector_s3.phone <- function(x) TRUE
 
 # Dynamically exported, see zzz.R
 obj_sum.phone <- function(x) {
-  rep("phone", length(x))
+  paste0("phone [", length(x), "]")
 }

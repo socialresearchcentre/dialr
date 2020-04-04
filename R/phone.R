@@ -111,7 +111,7 @@ new_phone <- function(x, region) {
       x, region,
       SIMPLIFY = FALSE
     ),
-    class = "phone"
+    class = c("phone", "list")
   )
   if (show_pb) close(pb)
   
@@ -163,7 +163,7 @@ is.phone <- function(x) inherits(x, "phone")
 
 #' @export
 `[.phone` <- function(x, ...) {
-  structure(NextMethod(), class = "phone")
+  structure(NextMethod(), class = c("phone", "list"))
 }
 
 #' @export
@@ -205,7 +205,7 @@ is.phone <- function(x) inherits(x, "phone")
 
 #' @export
 `length<-.phone` <- function(x, value) {
-  structure(NextMethod(), class = "phone")
+  structure(NextMethod(), class = c("phone", "list"))
 }
 
 #' @export
@@ -228,12 +228,12 @@ c.phone <- function(..., recursive = FALSE) {
     value
   })
   
-  structure(unlist(c(lapply(out, unclass)), recursive = FALSE), class = "phone")
+  structure(unlist(c(lapply(out, unclass)), recursive = FALSE), class = c("phone", "list"))
 }
 
 #' @export
 rep.phone <- function(x, ...) {
-  structure(NextMethod(), class = "phone")
+  structure(NextMethod(), class = c("phone", "list"))
 }
 
 #' @rdname dialr-phone

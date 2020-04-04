@@ -1,5 +1,7 @@
 # dialr (development version)
 
+* Changes to treatment of list based classes in tibble 3.0.0 broke `phone` vectors in tibbles (#12). All `phone` vectors now also have the `list` class as recommended by the [tibble changelog](https://tibble.tidyverse.org/news/index.html).
+
 # dialr 0.3.0
 
 ## New functions
