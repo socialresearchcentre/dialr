@@ -20,7 +20,7 @@ library(dialr)
 library(dplyr, warn.conflicts = FALSE)
 ```
 
-dialr is an R interface to [Google's libphonenumber java library](https://github.com/googlei18n/libphonenumber).
+dialr is an R interface to [Google's libphonenumber java library](https://github.com/google/libphonenumber).
 
 libphonenumber defines the `PhoneNumberUtil` class, a set of functions for extracting information from and performing processing on a parsed `Phonenumber` object. A phone number must be parsed before any other operations (e.g. checking phone number validity, formatting) can be performed.
 
@@ -153,11 +153,11 @@ y %>%
 
 ### libphonenumber
 
-[GitHub](https://github.com/googlei18n/libphonenumber)
+[GitHub](https://github.com/google/libphonenumber)
 
-[Frequently Asked Questions](https://github.com/googlei18n/libphonenumber/blob/master/FAQ.md)
+[Frequently Asked Questions](https://github.com/google/libphonenumber/blob/master/FAQ.md)
 
-[Falsehoods Programmers Believe About Phone Numbers](https://github.com/googlei18n/libphonenumber/blob/master/FALSEHOODS.md)
+[Falsehoods Programmers Believe About Phone Numbers](https://github.com/google/libphonenumber/blob/master/FALSEHOODS.md)
 
 [javadocs](https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/)
 

@@ -19,12 +19,12 @@ status](https://codecov.io/gh/socialresearchcentre/dialr/branch/master/graph/bad
 ## Overview
 
 dialr is an R interface to [Google’s libphonenumber
-library](https://github.com/googlei18n/libphonenumber). It uses the java
+library](https://github.com/google/libphonenumber). It uses the java
 implementation of libphonenumber via rJava for all phone number
 processing.
 
 For a full rundown of libphonenumber see their
-[GitHub](https://github.com/googlei18n/libphonenumber) and
+[GitHub](https://github.com/google/libphonenumber) and
 [javadocs](https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/).
 
 ## Installation
@@ -64,8 +64,7 @@ get_type(x)     # Is the phone number a fixed line, mobile etc.
 #> [1] NA                     "UNKNOWN"              "MOBILE"              
 #> [4] "MOBILE"               "FIXED_LINE_OR_MOBILE"
 format(x)
-#> [1] NA             "+61123"       "+61404753123" "+61410123817"
-#> [5] "+12015550123"
+#> [1] NA             "+61123"       "+61404753123" "+61410123817" "+12015550123"
 format(x, home = "AU")
 #> [1] NA                "123"             "0404753123"      "0410123817"     
 #> [5] "001112015550123"

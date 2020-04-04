@@ -10,7 +10,7 @@
 
 Parse, format, and validate international phone
     numbers using Google's 'libphonenumber' java library,
-    <https://github.com/googlei18n/libphonenumber>.
+    <https://github.com/google/libphonenumber>.
 }
 \section{Options}{
 
@@ -33,7 +33,7 @@ Useful links:
   \item \url{https://socialresearchcentre.github.io/dialr}
   \item \url{https://github.com/socialresearchcentre/dialr}
   \item \url{https://github.com/socialresearchcentre/dialrjars}
-  \item \url{https://github.com/googlei18n/libphonenumber}
+  \item \url{https://github.com/google/libphonenumber}
   \item Report bugs at \url{https://github.com/socialresearchcentre/dialr/issues}
 }
 
