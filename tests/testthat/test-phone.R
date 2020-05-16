@@ -18,7 +18,6 @@ test_that("phone vector created successfully", {
                                                        }),
                                                 class = "phone")))
   
-  skip_equal()
   expect_equal(phone(ph_raw, "AU"), ph)
   expect_equal(dialr:::validate_phone(ph), ph)
 })
@@ -82,7 +81,6 @@ test_that("summary", {
 test_that("phone subset", {
   expect_error(ph$a)
   
-  skip_equal()
   expect_equal(ph[1], phone(ph_raw[1], "AU"))
   expect_equal(ph[1:3], phone(ph_raw[1:3], "AU"))
   
@@ -97,7 +95,6 @@ test_that("phone subset assignments", {
   expect_error(ph[[1]] <- as.list(ph_raw[1]))
   expect_error(ph$a <- 1)
   
-  skip_equal()
   expect_equal({ph[1] <- phone(ph_raw[1], "AU"); ph}, ph)
   expect_equal({ph[1:3] <- phone(ph_raw[1:3], "AU"); ph}, ph)
   
@@ -119,7 +116,6 @@ test_that("phone concatenation", {
   expect_warning(c(ph, ph_raw))
   expect_warning(c(ph, as.list(ph_raw)))
   
-  skip_equal()
   expect_equal(c(ph, ph), phone(c(ph_raw, ph_raw), "AU"))
   
   expect_equal(suppressWarnings(c(ph, ph_raw)),
@@ -132,7 +128,6 @@ test_that("phone concatenation", {
 })
 
 test_that("length assignment", {
-  skip_equal()
   expect_equal({length(ph) <- 3; ph}, ph[1:3])
 })
 

@@ -25,8 +25,3 @@ regions <- regions[regions != "MF"]
   
 types <- get_types_for_region(regions)
 names(types) <- regions
-
-# Pre R 3.2.0 there is an issue with equality checks for external pointers.
-skip_equal <- function() {
-  skip_if(getRversion() < "3.2.0", "skip expect_equal tests pre R 3.2.0 - avoid 'cannot unclass an external pointer' error.")
-}
