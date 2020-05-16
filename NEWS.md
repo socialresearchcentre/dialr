@@ -2,6 +2,8 @@
 
 * Bump minimum supported version following R 4.0.0 release.
 
+* Make tests for timezone, geocoder and carrier functions less dependant on existing values to avoid changes in libphonenumber data breaking tests (#14).
+
 # dialr 0.3.1
 
 This release fixes a bug introduced by changes to the treatment of list based classes in tibble 3.0.0 that broke `phone` vectors in tibbles (#12). All `phone` vectors now also have the `list` class as recommended by the [tibble changelog](https://tibble.tidyverse.org/news/index.html).

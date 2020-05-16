@@ -5,17 +5,17 @@ ph_raw_types <- c(NA, "UNKNOWN", "MOBILE", "MOBILE", "FIXED_LINE", "FIXED_LINE_O
 
 ph_raw_timezone <-
   c(NA,
-    "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos",
-    "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos",
-    "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos",
+    "Australia/Sydney",
+    "Australia/Sydney",
+    "Australia/Sydney",
     "Australia/Sydney",
     "America/New_York")
 
 ph_raw_timezone_strict <-
   c(NA,
     NA,
-    "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos",
-    "Australia/Adelaide;Australia/Eucla;Australia/Lord_Howe;Australia/Perth;Australia/Sydney;Indian/Christmas;Indian/Cocos",
+    "Australia/Sydney",
+    "Australia/Sydney",
     "Australia/Sydney",
     "America/New_York")
 
