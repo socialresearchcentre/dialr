@@ -6,19 +6,26 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Introduction to dialr • dialr</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to dialr">
-<meta property="og:description" content="">
+<meta property="og:description" content="dialr">
 <meta property="og:image" content="https://socialresearchcentre.github.io/dialr/logo.png">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
       </span>
     </div>
 
@@ -39,7 +46,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -67,8 +74,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/socialresearchcentre/dialr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/socialresearchcentre/dialr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -81,10 +88,11 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Introduction to dialr</h1>
+      <h1 data-toc-skip>Introduction to dialr</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/socialresearchcentre/dialr/blob/master/vignettes/dialr.Rmd"><code>vignettes/dialr.Rmd</code></a></small>
@@ -94,7 +102,7 @@
 
     
     
-<p>dialr is an R interface to <a href="https://github.com/googlei18n/libphonenumber">Google’s libphonenumber java library</a>.</p>
+<p>dialr is an R interface to <a href="https://github.com/google/libphonenumber">Google’s libphonenumber java library</a>.</p>
 <p>libphonenumber defines the <code>PhoneNumberUtil</code> class, a set of functions for extracting information from and performing processing on a parsed <code>Phonenumber</code> object. A phone number must be parsed before any other operations (e.g. checking phone number validity, formatting) can be performed.</p>
 <p>dialr provides an interface to these functions to easily parse and process phone numbers in R.</p>
 <div id="parsing-phone-numbers" class="section level2">
@@ -102,146 +110,139 @@
 <a href="#parsing-phone-numbers" class="anchor"></a>Parsing phone numbers</h2>
 <p>A phone class vector stores a parsed java <code>Phonenumber</code> object for further processing alongside the original raw text phone number and default region. This “default region” is required to determine the processing context for non-international numbers.</p>
 <p>To create a phone vector, use the <code><a href="../reference/dialr-phone.html">phone()</a></code> function. This takes a character vector of phone numbers to parse and a default region for phone numbers not stored in an international format (i.e. with a leading “+”).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dialr)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co"># Parse phone number vector</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>, <span class="st">"+12015550123"</span>)</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(x, <span class="st">"AU"</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw"><a href="../reference/dialr-phone.html">is.phone</a></span>(x)</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; [1] TRUE</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(x)</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; # Parsed phone numbers: 5 total, 4 successfully parsed</span></a>
-<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="co">#&gt; [1] 0            123          0404 753 123 61410123817  +12015550123</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dialr</span>)
+
+<span class="co"># Parse phone number vector</span>
+<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>, <span class="st">"+12015550123"</span>)
+<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="no">x</span>, <span class="st">"AU"</span>)
+
+<span class="fu"><a href="../reference/dialr-phone.html">is.phone</a></span>(<span class="no">x</span>)
+<span class="co">#&gt; [1] TRUE</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="no">x</span>)
+<span class="co">#&gt; # Parsed phone numbers: 5 total, 4 successfully parsed</span>
+<span class="co">#&gt; [1] 0            123          0404 753 123 61410123817  +12015550123</span></pre></body></html></div>
 </div>
 <div id="basic-phone-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-phone-functions" class="anchor"></a>Basic phone functions</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/dialr-valid.html">is_parsed</a></span>(x)    <span class="co"># Was the phone number successfully parsed?</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; [1] FALSE  TRUE  TRUE  TRUE  TRUE</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="../reference/dialr-valid.html">is_valid</a></span>(x)     <span class="co"># Is the phone number valid?</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw"><a href="../reference/dialr-valid.html">is_possible</a></span>(x)  <span class="co"># Is the phone number possible?</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw"><a href="../reference/dialr-region.html">get_region</a></span>(x)   <span class="co"># What region (ISO country code) is the phone number from?</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; [1] NA   NA   "AU" "AU" "US"</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw"><a href="../reference/dialr-type.html">get_type</a></span>(x)     <span class="co"># Is the phone number a fixed line, mobile etc.</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; [1] NA                     "UNKNOWN"              "MOBILE"              </span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; [4] "MOBILE"               "FIXED_LINE_OR_MOBILE"</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/dialr-valid.html">is_parsed</a></span>(<span class="no">x</span>)    <span class="co"># Was the phone number successfully parsed?</span>
+<span class="co">#&gt; [1] FALSE  TRUE  TRUE  TRUE  TRUE</span>
+<span class="fu"><a href="../reference/dialr-valid.html">is_valid</a></span>(<span class="no">x</span>)     <span class="co"># Is the phone number valid?</span>
+<span class="co">#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</span>
+<span class="fu"><a href="../reference/dialr-valid.html">is_possible</a></span>(<span class="no">x</span>)  <span class="co"># Is the phone number possible?</span>
+<span class="co">#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</span>
+<span class="fu"><a href="../reference/dialr-region.html">get_region</a></span>(<span class="no">x</span>)   <span class="co"># What region (ISO country code) is the phone number from?</span>
+<span class="co">#&gt; [1] NA   NA   "AU" "AU" "US"</span>
+<span class="fu"><a href="../reference/dialr-type.html">get_type</a></span>(<span class="no">x</span>)     <span class="co"># Is the phone number a fixed line, mobile etc.</span>
+<span class="co">#&gt; [1] NA                     "UNKNOWN"              "MOBILE"              </span>
+<span class="co">#&gt; [4] "MOBILE"               "FIXED_LINE_OR_MOBILE"</span></pre></body></html></div>
 </div>
 <div id="comparing-phone-numbers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#comparing-phone-numbers" class="anchor"></a>Comparing phone numbers</h2>
 <p>Equality comparisons for phone numbers ignore formatting differences and compare the underlying phone number.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>) <span class="op">==</span><span class="st"> </span><span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"+61404753123"</span>, <span class="st">"US"</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; [1] TRUE</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>) <span class="op">==</span><span class="st"> </span><span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"US"</span>)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; [1] FALSE</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>) <span class="op">!=</span><span class="st"> </span><span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"US"</span>)</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>) <span class="kw">==</span> <span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"+61404753123"</span>, <span class="st">"US"</span>)
+<span class="co">#&gt; [1] TRUE</span>
+<span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>) <span class="kw">==</span> <span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"US"</span>)
+<span class="co">#&gt; [1] FALSE</span>
+<span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>) <span class="kw">!=</span> <span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"US"</span>)
+<span class="co">#&gt; [1] TRUE</span></pre></body></html></div>
 <p>Parsed phone numbers can also be compared to character phone numbers stored in an international format.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>) <span class="op">==</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"+61404753123"</span>, <span class="st">"0404 753 123"</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; [1]  TRUE FALSE</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>) <span class="kw">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"+61404753123"</span>, <span class="st">"0404 753 123"</span>)
+<span class="co">#&gt; [1]  TRUE FALSE</span></pre></body></html></div>
 <p>Use <code><a href="../reference/dialr-match.html">is_match()</a></code> for more customisable comparisons.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/dialr-match.html">is_match</a></span>(<span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"+61404753123"</span>, <span class="st">"0404753123"</span>, <span class="st">"1234"</span>))</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; [1]  TRUE FALSE FALSE</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="../reference/dialr-match.html">is_match</a></span>(<span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"+61404753123"</span>, <span class="st">"0404753123"</span>, <span class="st">"1234"</span>), <span class="dt">detailed =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; [1] "EXACT_MATCH" "NSN_MATCH"   "NO_MATCH"</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw"><a href="../reference/dialr-match.html">is_match</a></span>(<span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"+61404753123"</span>, <span class="st">"0404753123"</span>, <span class="st">"1234"</span>), <span class="dt">strict =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; [1]  TRUE  TRUE FALSE</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/dialr-match.html">is_match</a></span>(<span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>), <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"+61404753123"</span>, <span class="st">"0404753123"</span>, <span class="st">"1234"</span>))
+<span class="co">#&gt; [1]  TRUE FALSE FALSE</span>
+<span class="fu"><a href="../reference/dialr-match.html">is_match</a></span>(<span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>), <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"+61404753123"</span>, <span class="st">"0404753123"</span>, <span class="st">"1234"</span>), <span class="kw">detailed</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="co">#&gt; [1] "EXACT_MATCH" "NSN_MATCH"   "NO_MATCH"</span>
+<span class="fu"><a href="../reference/dialr-match.html">is_match</a></span>(<span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="st">"0404 753 123"</span>, <span class="st">"AU"</span>), <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"+61404753123"</span>, <span class="st">"0404753123"</span>, <span class="st">"1234"</span>), <span class="kw">strict</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="co">#&gt; [1]  TRUE  TRUE FALSE</span></pre></body></html></div>
 </div>
 <div id="formatting-phone-numbers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#formatting-phone-numbers" class="anchor"></a>Formatting phone numbers</h2>
-<p>The phone class has a <code><a href="https://www.rdocumentation.org/packages/base/topics/format">format()</a></code> method implementing libphonenumber’s core formatting functionality.</p>
+<p>The phone class has a <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> method implementing libphonenumber’s core formatting functionality.</p>
 <p>There are four phone number formats used by libphonenumber (see “Further reading” for details): <code>"E164"</code>, <code>"NATIONAL"</code>, <code>"INTERNATIONAL"</code> and<code>"RFC3966"</code>. These can be specified by the <code>format</code> argument, or a default can be specifed in option <code>dialr.format</code>.</p>
-<p>If <code>clean = TRUE</code>, all non-numeric characters are removed except for a leading <code>+</code>. <code>clean = TRUE</code> by default.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>, <span class="st">"+12015550123"</span>), <span class="st">"AU"</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">format =</span> <span class="st">"RFC3966"</span>)</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817"</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; [5] "+12015550123"</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">format =</span> <span class="st">"RFC3966"</span>, <span class="dt">clean =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; [1] NA                    "tel:+61-123"         "tel:+61-404-753-123"</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; [4] "tel:+61-410-123-817" "tel:+1-201-555-0123"</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">format =</span> <span class="st">"E164"</span>, <span class="dt">clean =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817"</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; [5] "+12015550123"</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">format =</span> <span class="st">"NATIONAL"</span>, <span class="dt">clean =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; [1] NA               "123"            "0404 753 123"   "0410 123 817"  </span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; [5] "(201) 555-0123"</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">format =</span> <span class="st">"INTERNATIONAL"</span>, <span class="dt">clean =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; [1] NA                "+61 123"         "+61 404 753 123" "+61 410 123 817"</span></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; [5] "+1 201-555-0123"</span></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">format =</span> <span class="st">"RFC3966"</span>, <span class="dt">clean =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; [1] NA                    "tel:+61-123"         "tel:+61-404-753-123"</span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; [4] "tel:+61-410-123-817" "tel:+1-201-555-0123"</span></a>
-<a class="sourceLine" id="cb6-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co"># Change the default</span></a>
-<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">getOption</a></span>(<span class="st">"dialr.format"</span>)</a>
-<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt; [1] "E164"</span></a>
-<a class="sourceLine" id="cb6-26" data-line-number="26"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x)</a>
-<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817"</span></a>
-<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="co">#&gt; [5] "+12015550123"</span></a>
-<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">dialr.format =</span> <span class="st">"NATIONAL"</span>)</a>
-<a class="sourceLine" id="cb6-30" data-line-number="30"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x)</a>
-<a class="sourceLine" id="cb6-31" data-line-number="31"><span class="co">#&gt; [1] NA           "123"        "0404753123" "0410123817" "2015550123"</span></a>
-<a class="sourceLine" id="cb6-32" data-line-number="32"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">dialr.format =</span> <span class="st">"E164"</span>)</a></code></pre></div>
+<p>If <code>clean = TRUE</code>, all non-numeric characters are removed except for a leading <code><a href="https://rdrr.io/r/base/Arithmetic.html">+</a></code>. <code>clean = TRUE</code> by default.</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>, <span class="st">"+12015550123"</span>), <span class="st">"AU"</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"RFC3966"</span>)
+<span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817" "+12015550123"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"RFC3966"</span>, <span class="kw">clean</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="co">#&gt; [1] NA                    "tel:+61-123"         "tel:+61-404-753-123"</span>
+<span class="co">#&gt; [4] "tel:+61-410-123-817" "tel:+1-201-555-0123"</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"E164"</span>, <span class="kw">clean</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817" "+12015550123"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"NATIONAL"</span>, <span class="kw">clean</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="co">#&gt; [1] NA               "123"            "0404 753 123"   "0410 123 817"  </span>
+<span class="co">#&gt; [5] "(201) 555-0123"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"INTERNATIONAL"</span>, <span class="kw">clean</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="co">#&gt; [1] NA                "+61 123"         "+61 404 753 123" "+61 410 123 817"</span>
+<span class="co">#&gt; [5] "+1 201-555-0123"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>, <span class="kw">format</span> <span class="kw">=</span> <span class="st">"RFC3966"</span>, <span class="kw">clean</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="co">#&gt; [1] NA                    "tel:+61-123"         "tel:+61-404-753-123"</span>
+<span class="co">#&gt; [4] "tel:+61-410-123-817" "tel:+1-201-555-0123"</span>
+
+<span class="co"># Change the default</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span>(<span class="st">"dialr.format"</span>)
+<span class="co">#&gt; [1] "E164"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>)
+<span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817" "+12015550123"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">dialr.format</span> <span class="kw">=</span> <span class="st">"NATIONAL"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>)
+<span class="co">#&gt; [1] NA           "123"        "0404753123" "0410123817" "2015550123"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span>(<span class="kw">dialr.format</span> <span class="kw">=</span> <span class="st">"E164"</span>)</pre></body></html></div>
 <p>If the <code>home</code> argument is supplied, the phone number is formatted for dialling from the specified country.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">home =</span> <span class="st">"AU"</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; [1] NA                "123"             "0404753123"      "0410123817"     </span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; [5] "001112015550123"</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">home =</span> <span class="st">"US"</span>)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; [1] NA               "01161123"       "01161404753123" "01161410123817"</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt; [5] "12015550123"</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">home =</span> <span class="st">"JP"</span>)</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; [1] NA               "01061123"       "01061404753123" "01061410123817"</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; [5] "01012015550123"</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>, <span class="kw">home</span> <span class="kw">=</span> <span class="st">"AU"</span>)
+<span class="co">#&gt; [1] NA                "123"             "0404753123"      "0410123817"     </span>
+<span class="co">#&gt; [5] "001112015550123"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>, <span class="kw">home</span> <span class="kw">=</span> <span class="st">"US"</span>)
+<span class="co">#&gt; [1] NA               "01161123"       "01161404753123" "01161410123817"</span>
+<span class="co">#&gt; [5] "12015550123"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>, <span class="kw">home</span> <span class="kw">=</span> <span class="st">"JP"</span>)
+<span class="co">#&gt; [1] NA               "01061123"       "01061404753123" "01061410123817"</span>
+<span class="co">#&gt; [5] "01012015550123"</span></pre></body></html></div>
 <p>If <code>strict = TRUE</code>, invalid phone numbers (determined using <code><a href="../reference/dialr-valid.html">is_valid()</a></code>) return <code>NA</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817"</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; [5] "+12015550123"</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">strict =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; [1] NA             NA             "+61404753123" "+61410123817"</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; [5] "+12015550123"</span></a></code></pre></div>
-<p>By default, <code><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character()</a></code> returns the raw text phone number. Use <code>raw = FALSE</code> to use the <code><a href="https://www.rdocumentation.org/packages/base/topics/format">format()</a></code> method instead.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(x)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; [1] "0"            "123"          "0404 753 123" "61410123817" </span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; [5] "+12015550123"</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(x, <span class="dt">raw =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817"</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; [5] "+12015550123"</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>)
+<span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817" "+12015550123"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>, <span class="kw">strict</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<span class="co">#&gt; [1] NA             NA             "+61404753123" "+61410123817" "+12015550123"</span></pre></body></html></div>
+<p>By default, <code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code> returns the raw text phone number. Use <code>raw = FALSE</code> to use the <code><a href="https://rdrr.io/r/base/format.html">format()</a></code> method instead.</p>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">x</span>)
+<span class="co">#&gt; [1] "0"            "123"          "0404 753 123" "61410123817"  "+12015550123"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">x</span>, <span class="kw">raw</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
+<span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817" "+12015550123"</span></pre></body></html></div>
 </div>
 <div id="use-with-dplyr" class="section level2">
 <h2 class="hasAnchor">
 <a href="#use-with-dplyr" class="anchor"></a>Use with dplyr</h2>
 <p>dialr functions are designed to work well in dplyr workflows.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># Use with dplyr</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">y &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">tibble</a></span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">            <span class="dt">phone1 =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>),</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">            <span class="dt">phone2 =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"03 9388 1234"</span>, <span class="dv">1234</span>, <span class="st">"+12015550123"</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">            <span class="dt">country =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span>))</a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9">y <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">matches</a></span>(<span class="st">"^phone"</span>)), <span class="op">~</span><span class="kw"><a href="../reference/dialr-phone.html">phone</a></span>(., country)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">matches</a></span>(<span class="st">"^phone"</span>)),</a>
-<a class="sourceLine" id="cb10-12" data-line-number="12">            <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">valid =</span> is_valid,</a>
-<a class="sourceLine" id="cb10-13" data-line-number="13">                 <span class="dt">region =</span> get_region,</a>
-<a class="sourceLine" id="cb10-14" data-line-number="14">                 <span class="dt">type =</span> get_type,</a>
-<a class="sourceLine" id="cb10-15" data-line-number="15">                 <span class="dt">clean =</span> format))</a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; # A tibble: 4 x 12</span></a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt;      id       phone1       phone2 country phone1_valid phone2_valid</span></a>
-<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt;   &lt;int&gt;      &lt;phone&gt;      &lt;phone&gt; &lt;chr&gt;   &lt;lgl&gt;        &lt;lgl&gt;       </span></a>
-<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; 1     1           NA +61393881234 AU      FALSE        TRUE        </span></a>
-<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt; 2     2       +61123      +611234 AU      FALSE        FALSE       </span></a>
-<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; 3     3 +61404753123 +12015550123 AU      TRUE         TRUE        </span></a>
-<a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt; 4     4 +61410123817           NA AU      TRUE         FALSE       </span></a>
-<a class="sourceLine" id="cb10-23" data-line-number="23"><span class="co">#&gt; # … with 6 more variables: phone1_region &lt;chr&gt;, phone2_region &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb10-24" data-line-number="24"><span class="co">#&gt; #   phone1_type &lt;chr&gt;, phone2_type &lt;chr&gt;, phone1_clean &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb10-25" data-line-number="25"><span class="co">#&gt; #   phone2_clean &lt;chr&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># Use with dplyr</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+
+<span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">tibble</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">4</span>,
+            <span class="kw">phone1</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>),
+            <span class="kw">phone2</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"03 9388 1234"</span>, <span class="fl">1234</span>, <span class="st">"+12015550123"</span>, <span class="fl">0</span>),
+            <span class="kw">country</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span>))
+
+<span class="no">y</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">matches</a></span>(<span class="st">"^phone"</span>)), ~<span class="fu"><a href="../reference/dialr-phone.html">phone</a></span>(<span class="no">.</span>, <span class="no">country</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">matches</a></span>(<span class="st">"^phone"</span>)),
+            <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">valid</span> <span class="kw">=</span> <span class="no">is_valid</span>,
+                 <span class="kw">region</span> <span class="kw">=</span> <span class="no">get_region</span>,
+                 <span class="kw">type</span> <span class="kw">=</span> <span class="no">get_type</span>,
+                 <span class="kw">clean</span> <span class="kw">=</span> <span class="no">format</span>))
+<span class="co">#&gt; # A tibble: 4 x 12</span>
+<span class="co">#&gt;      id       phone1       phone2 country phone1_valid phone2_valid</span>
+<span class="co">#&gt;   &lt;int&gt;      &lt;phone&gt;      &lt;phone&gt; &lt;chr&gt;   &lt;lgl&gt;        &lt;lgl&gt;       </span>
+<span class="co">#&gt; 1     1           NA +61393881234 AU      FALSE        TRUE        </span>
+<span class="co">#&gt; 2     2       +61123      +611234 AU      FALSE        FALSE       </span>
+<span class="co">#&gt; 3     3 +61404753123 +12015550123 AU      TRUE         TRUE        </span>
+<span class="co">#&gt; 4     4 +61410123817           NA AU      TRUE         FALSE       </span>
+<span class="co">#&gt; # … with 6 more variables: phone1_region &lt;chr&gt;, phone2_region &lt;chr&gt;,</span>
+<span class="co">#&gt; #   phone1_type &lt;chr&gt;, phone2_type &lt;chr&gt;, phone1_clean &lt;chr&gt;,</span>
+<span class="co">#&gt; #   phone2_clean &lt;chr&gt;</span></pre></body></html></div>
 </div>
 <div id="further-reading" class="section level2">
 <h2 class="hasAnchor">
@@ -249,9 +250,9 @@
 <div id="libphonenumber" class="section level3">
 <h3 class="hasAnchor">
 <a href="#libphonenumber" class="anchor"></a>libphonenumber</h3>
-<p><a href="https://github.com/googlei18n/libphonenumber">GitHub</a></p>
-<p><a href="https://github.com/googlei18n/libphonenumber/blob/master/FAQ.md">Frequently Asked Questions</a></p>
-<p><a href="https://github.com/googlei18n/libphonenumber/blob/master/FALSEHOODS.md">Falsehoods Programmers Believe About Phone Numbers</a></p>
+<p><a href="https://github.com/google/libphonenumber">GitHub</a></p>
+<p><a href="https://github.com/google/libphonenumber/blob/master/FAQ.md">Frequently Asked Questions</a></p>
+<p><a href="https://github.com/google/libphonenumber/blob/master/FALSEHOODS.md">Falsehoods Programmers Believe About Phone Numbers</a></p>
 <p><a href="https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/">javadocs</a></p>
 </div>
 <div id="phone-number-format-standards" class="section level3">
@@ -271,22 +272,14 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#parsing-phone-numbers">Parsing phone numbers</a></li>
-      <li><a href="#basic-phone-functions">Basic phone functions</a></li>
-      <li><a href="#comparing-phone-numbers">Comparing phone numbers</a></li>
-      <li><a href="#formatting-phone-numbers">Formatting phone numbers</a></li>
-      <li><a href="#use-with-dplyr">Use with dplyr</a></li>
-      <li><a href="#further-reading">Further reading</a></li>
-      </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
+
 
 
       <footer><div class="copyright">
@@ -294,12 +287,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
