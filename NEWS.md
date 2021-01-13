@@ -1,3 +1,7 @@
+# dialr (development version)
+
+* Move rJava initialisation to `.onLoad()` instead of `.onAttach()` (#16). Since dialr is a wrapper for a Java package, rJava has to initialise Java before it will work. Previously, users had to attach dialr with `library(dialr)` to properly initialise Java. Now rJava is initialised when the package is loaded/referenced, so dialr functions can now be used with the `::` notation (e.g. `dialr::phone()`) without a preceding call to `library()`.
+
 # dialr 0.3.2
 
 * Bump minimum supported version following R 4.0.0 release.

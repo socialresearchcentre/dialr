@@ -1,4 +1,5 @@
 # nocov start
+#' @import rJava
 .onLoad <- function(libname, pkgname) {
   op <- options()
   op.dialr <- list(
@@ -11,16 +12,13 @@
   toset <- !(names(op.dialr) %in% names(op))
   if (any(toset)) options(op.dialr[toset])
   
+  # Dynamically register S3 methods if pillar is installed
   register_s3_method("pillar", "pillar_shaft", "phone")
   register_s3_method("pillar", "type_sum", "phone")
   register_s3_method("pillar", "is_vector_s3", "phone")
   register_s3_method("pillar", "obj_sum", "phone")
   
-  invisible()
-}
-
-#' @import rJava
-.onAttach <- function(libname, pkgname) {
+  # initialise rJava
   rJava::.jpackage("dialrjars")
   rJava::.jpackage(pkgname, lib.loc = libname)  # needed to load RInterface.java
   
@@ -31,7 +29,13 @@
                ".  Need 1.6.0 or higher.", sep = ""))
   
   # initialise PhoneNumberUtil singleton
-  invisible(.get_phoneNumberUtil())
+  .get_phoneNumberUtil()
+  
+  invisible()
+}
+
+.onAttach <- function(libname, pkgname) {
+  invisible()
 }
 
 register_s3_method <- function(pkg, generic, class, fun = NULL) {
