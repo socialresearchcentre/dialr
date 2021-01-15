@@ -6,23 +6,30 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Parse, Format, and Validate International Phone Numbers • dialr</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Parse, Format, and Validate International Phone Numbers">
 <meta property="og:description" content="Parse, format, and validate international phone
-    numbers using Google's 'libphonenumber' java library,
-    &lt;https://github.com/googlei18n/libphonenumber&gt;.">
+    numbers using Googles libphonenumber' java library,
+    &lt;https://github.com/google/libphonenumber&gt;.">
 <meta property="og:image" content="https://socialresearchcentre.github.io/dialr/logo.png">
-<meta name="twitter:card" content="summary">
 <meta name="robots" content="noindex">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
-    <div class="container template-article">
+<body data-spy="scroll" data-target="#toc">
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -34,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dialr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.2.1.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.2.9000</span>
       </span>
     </div>
 
@@ -42,7 +49,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -70,8 +77,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/socialresearchcentre/dialr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/socialresearchcentre/dialr/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -84,97 +91,95 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
-  <div class="col-md-9 contents">
-    
 
-    
-    
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="dialr" class="section level1">
+      </header><div class="row">
+  <div class="contents col-md-9">
+<div id="dialr-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#dialr" class="anchor"></a>dialr <a href="https://socialresearchcentre.github.io/dialr"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<a href="#dialr-" class="anchor"></a>dialr <a href="https://socialresearchcentre.github.io/dialr"><img src="reference/figures/logo.png" align="right" height="139"></a>
 </h1></div>
 <!-- badges: start -->
 
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>dialr is an R interface to <a href="https://github.com/googlei18n/libphonenumber">Google’s libphonenumber library</a>. It uses the java implementation of libphonenumber via rJava for all phone number processing.</p>
-<p>For a full rundown of libphonenumber see their <a href="https://github.com/googlei18n/libphonenumber">GitHub</a> and <a href="https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/">javadocs</a>.</p>
+<p>dialr is an R interface to <a href="https://github.com/google/libphonenumber">Google’s libphonenumber library</a>. It uses the java implementation of libphonenumber via rJava for all phone number processing.</p>
+<p>For a full rundown of libphonenumber see their <a href="https://github.com/google/libphonenumber">GitHub</a> and <a href="https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/">javadocs</a>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version of dialr from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"dialr"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dialr"</span><span class="op">)</span></code></pre></div>
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"socialresearchcentre/dialr"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"socialresearchcentre/dialr"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dialr)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co"># Parse a character phone number vector</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">x &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>, <span class="st">"+12015550123"</span>)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">x &lt;-<span class="st"> </span><span class="kw"><a href="reference/dialr-phone.html">phone</a></span>(x, <span class="st">"AU"</span>)</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw"><a href="reference/dialr-valid.html">is_parsed</a></span>(x)    <span class="co"># Was the phone number successfully parsed?</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; [1] FALSE  TRUE  TRUE  TRUE  TRUE</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="kw"><a href="reference/dialr-valid.html">is_valid</a></span>(x)     <span class="co"># Is the phone number valid?</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw"><a href="reference/dialr-valid.html">is_possible</a></span>(x)  <span class="co"># Is the phone number possible?</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="kw"><a href="reference/dialr-region.html">get_region</a></span>(x)   <span class="co"># What region (ISO country code) is the phone number from?</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">#&gt; [1] NA   NA   "AU" "AU" "US"</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="kw"><a href="reference/dialr-type.html">get_type</a></span>(x)     <span class="co"># Is the phone number a fixed line, mobile etc.</span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; [1] NA                     "UNKNOWN"              "MOBILE"              </span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; [4] "MOBILE"               "FIXED_LINE_OR_MOBILE"</span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x)</a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817"</span></a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt; [5] "+12015550123"</span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(x, <span class="dt">home =</span> <span class="st">"AU"</span>)</a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt; [1] NA                "123"             "0404753123"      "0410123817"     </span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt; [5] "001112015550123"</span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co"># Use with dplyr</span></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28">y &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">tibble</a></span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,</a>
-<a class="sourceLine" id="cb3-29" data-line-number="29">            <span class="dt">phone1 =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>),</a>
-<a class="sourceLine" id="cb3-30" data-line-number="30">            <span class="dt">phone2 =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"03 9388 1234"</span>, <span class="dv">1234</span>, <span class="st">"+12015550123"</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb3-31" data-line-number="31">            <span class="dt">country =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span>))</a>
-<a class="sourceLine" id="cb3-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb3-33" data-line-number="33">y <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-34" data-line-number="34"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">matches</a></span>(<span class="st">"^phone"</span>)), <span class="op">~</span><span class="kw"><a href="reference/dialr-phone.html">phone</a></span>(., country)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-35" data-line-number="35"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">matches</a></span>(<span class="st">"^phone"</span>)),</a>
-<a class="sourceLine" id="cb3-36" data-line-number="36">            <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">valid =</span> is_valid,</a>
-<a class="sourceLine" id="cb3-37" data-line-number="37">                 <span class="dt">region =</span> get_region,</a>
-<a class="sourceLine" id="cb3-38" data-line-number="38">                 <span class="dt">type =</span> get_type,</a>
-<a class="sourceLine" id="cb3-39" data-line-number="39">                 <span class="dt">clean =</span> format))</a>
-<a class="sourceLine" id="cb3-40" data-line-number="40"><span class="co">#&gt; # A tibble: 4 x 12</span></a>
-<a class="sourceLine" id="cb3-41" data-line-number="41"><span class="co">#&gt;      id       phone1       phone2 country phone1_valid phone2_valid</span></a>
-<a class="sourceLine" id="cb3-42" data-line-number="42"><span class="co">#&gt;   &lt;int&gt;      &lt;phone&gt;      &lt;phone&gt; &lt;chr&gt;   &lt;lgl&gt;        &lt;lgl&gt;       </span></a>
-<a class="sourceLine" id="cb3-43" data-line-number="43"><span class="co">#&gt; 1     1           NA +61393881234 AU      FALSE        TRUE        </span></a>
-<a class="sourceLine" id="cb3-44" data-line-number="44"><span class="co">#&gt; 2     2       +61123      +611234 AU      FALSE        FALSE       </span></a>
-<a class="sourceLine" id="cb3-45" data-line-number="45"><span class="co">#&gt; 3     3 +61404753123 +12015550123 AU      TRUE         TRUE        </span></a>
-<a class="sourceLine" id="cb3-46" data-line-number="46"><span class="co">#&gt; 4     4 +61410123817           NA AU      TRUE         FALSE       </span></a>
-<a class="sourceLine" id="cb3-47" data-line-number="47"><span class="co">#&gt; # … with 6 more variables: phone1_region &lt;chr&gt;, phone2_region &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb3-48" data-line-number="48"><span class="co">#&gt; #   phone1_type &lt;chr&gt;, phone2_type &lt;chr&gt;, phone1_clean &lt;chr&gt;,</span></a>
-<a class="sourceLine" id="cb3-49" data-line-number="49"><span class="co">#&gt; #   phone2_clean &lt;chr&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://socialresearchcentre.github.io/dialr">dialr</a></span><span class="op">)</span>
+
+<span class="co"># Parse a character phone number vector</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>, <span class="st">"+12015550123"</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/dialr-phone.html">phone</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"AU"</span><span class="op">)</span>
+
+<span class="fu"><a href="reference/dialr-valid.html">is_parsed</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>    <span class="co"># Was the phone number successfully parsed?</span>
+<span class="co">#&gt; [1] FALSE  TRUE  TRUE  TRUE  TRUE</span>
+<span class="fu"><a href="reference/dialr-valid.html">is_valid</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>     <span class="co"># Is the phone number valid?</span>
+<span class="co">#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</span>
+<span class="fu"><a href="reference/dialr-valid.html">is_possible</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>  <span class="co"># Is the phone number possible?</span>
+<span class="co">#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</span>
+<span class="fu"><a href="reference/dialr-region.html">get_region</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>   <span class="co"># What region (ISO country code) is the phone number from?</span>
+<span class="co">#&gt; [1] NA   NA   "AU" "AU" "US"</span>
+<span class="fu"><a href="reference/dialr-type.html">get_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>     <span class="co"># Is the phone number a fixed line, mobile etc.</span>
+<span class="co">#&gt; [1] NA                     "UNKNOWN"              "MOBILE"              </span>
+<span class="co">#&gt; [4] "MOBILE"               "FIXED_LINE_OR_MOBILE"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+<span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817" "+12015550123"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">x</span>, home <span class="op">=</span> <span class="st">"AU"</span><span class="op">)</span>
+<span class="co">#&gt; [1] NA                "123"             "0404753123"      "0410123817"     </span>
+<span class="co">#&gt; [5] "001112015550123"</span>
+
+<span class="co"># Use with dplyr</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,
+            phone1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span><span class="op">)</span>,
+            phone2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"03 9388 1234"</span>, <span class="fl">1234</span>, <span class="st">"+12015550123"</span>, <span class="fl">0</span><span class="op">)</span>,
+            country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span><span class="op">)</span><span class="op">)</span>
+
+<span class="va">y</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"^phone"</span><span class="op">)</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="reference/dialr-phone.html">phone</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">country</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"^phone"</span><span class="op">)</span><span class="op">)</span>,
+            <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>valid <span class="op">=</span> <span class="va">is_valid</span>,
+                 region <span class="op">=</span> <span class="va">get_region</span>,
+                 type <span class="op">=</span> <span class="va">get_type</span>,
+                 clean <span class="op">=</span> <span class="va">format</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 4 x 12</span>
+<span class="co">#&gt;      id       phone1       phone2 country phone1_valid phone2_valid</span>
+<span class="co">#&gt;   &lt;int&gt;      &lt;phone&gt;      &lt;phone&gt; &lt;chr&gt;   &lt;lgl&gt;        &lt;lgl&gt;       </span>
+<span class="co">#&gt; 1     1           NA +61393881234 AU      FALSE        TRUE        </span>
+<span class="co">#&gt; 2     2       +61123      +611234 AU      FALSE        FALSE       </span>
+<span class="co">#&gt; 3     3 +61404753123 +12015550123 AU      TRUE         TRUE        </span>
+<span class="co">#&gt; 4     4 +61410123817           NA AU      TRUE         FALSE       </span>
+<span class="co">#&gt; # … with 6 more variables: phone1_region &lt;chr&gt;, phone2_region &lt;chr&gt;,</span>
+<span class="co">#&gt; #   phone1_type &lt;chr&gt;, phone2_type &lt;chr&gt;, phone1_clean &lt;chr&gt;,</span>
+<span class="co">#&gt; #   phone2_clean &lt;chr&gt;</span></code></pre></div>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=dialr">https://​cloud.r-project.org/​package=dialr</a>
 </li>
-<li>Browse source code at <br><a href="https://github.com/socialresearchcentre/dialr">https://​github.com/​socialresearchcentre/​dialr</a>
+<li>Browse source code at <br><a href="https://github.com/socialresearchcentre/dialr/">https://​github.com/​socialresearchcentre/​dialr/​</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/socialresearchcentre/dialr/issues">https://​github.com/​socialresearchcentre/​dialr/​issues</a>
 </li>
@@ -195,18 +200,16 @@
 </ul>
 </div>
 
-      <div class="dev-status">
+  <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></li>
 <li><a href="https://cran.r-project.org/package=dialr"><img src="https://www.r-pkg.org/badges/version/dialr" alt="CRAN status"></a></li>
-<li><a href="https://travis-ci.org/socialresearchcentre/dialr"><img src="https://travis-ci.org/socialresearchcentre/dialr.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://ci.appveyor.com/project/gorcha/dialr"><img src="https://ci.appveyor.com/api/projects/status/github/socialresearchcentre/dialr?branch=master&amp;svg=true" alt="AppVeyor build status"></a></li>
+<li><a href="https://github.com/socialresearchcentre/dialr/actions"><img src="https://github.com/socialresearchcentre/dialr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://codecov.io/github/socialresearchcentre/dialr?branch=master"><img src="https://codecov.io/gh/socialresearchcentre/dialr/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 </ul>
 </div>
 </div>
-
 </div>
 
 
@@ -215,12 +218,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
