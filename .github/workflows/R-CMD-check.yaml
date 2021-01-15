@@ -86,7 +86,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          remotes::install_deps(dependencies = TRUE, build_opts = c("--no-resave-data", "--no-manual", "--no-build-vignettes", Sys.getenv("R_MULTIARCH")))
+          options(install.packages.check.source = "no")
+          remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
