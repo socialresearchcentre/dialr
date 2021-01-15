@@ -1,8 +1,6 @@
 ^\.covrignore$
 ^codecov\.yml$
 ^cran-comments\.md$
-^appveyor\.yml$
-^\.travis\.yml$
 ^FUNCTIONS\.md$
 ^scratch$
 ^data-raw$
@@ -17,3 +15,4 @@
 ^README\.Rmd$
 ^CRAN-RELEASE$
 ^revdep$
+^\.github$
