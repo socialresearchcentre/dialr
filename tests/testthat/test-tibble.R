@@ -20,5 +20,5 @@ test_that("tibbles print successfully", {
   
   ph_tbl <- tibble(ph)
   
-  expect_known_output(print(ph_tbl), "phone_print_tibble.txt")
+  expect_known_output(ph_tbl, "phone_print_tibble.txt", print = TRUE)
 })
