@@ -16,9 +16,9 @@ test_that("subsetting works in tibbles", {
 })
 
 test_that("tibbles print successfully", {
-  skip_on_cran()
+  local_edition(3)
   
   ph_tbl <- tibble(ph)
   
-  expect_known_output(ph_tbl, "phone_print_tibble.txt", print = TRUE)
+  expect_snapshot_output(print(ph_tbl))
 })

@@ -133,9 +133,10 @@ test_that("length assignment", {
 
 
 test_that("phone print", {
-  expect_known_output(print(ph), file = "phone_print.txt")
-  expect_known_output(print(rep(ph, 5)), file = "phone_print_n10.txt")
-  expect_known_output(print(rep(ph, 5), n = 20), file = "phone_print_n20.txt")
+  local_edition(3)
+  expect_snapshot_output(print(ph))
+  expect_snapshot_output(print(rep(ph, 5)))
+  expect_snapshot_output(print(rep(ph, 5), n = 20))
 })
 
 
