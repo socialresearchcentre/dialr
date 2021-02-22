@@ -14,9 +14,6 @@ pillar_shaft.phone <- function(x, ...) {
 }
 
 # Dynamically exported, see zzz.R
-is_vector_s3.phone <- function(x) TRUE
-
-# Dynamically exported, see zzz.R
 obj_sum.phone <- function(x) {
   paste0("phone [", length(x), "]")
 }
