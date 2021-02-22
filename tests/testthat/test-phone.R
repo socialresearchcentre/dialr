@@ -134,6 +134,8 @@ test_that("length assignment", {
 
 test_that("phone print", {
   local_edition(3)
+  local_reproducible_output()
+  
   expect_snapshot_output(print(ph))
   expect_snapshot_output(print(rep(ph, 5)))
   expect_snapshot_output(print(rep(ph, 5), n = 20))

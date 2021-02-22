@@ -17,6 +17,7 @@ test_that("subsetting works in tibbles", {
 
 test_that("tibbles print successfully", {
   local_edition(3)
+  local_reproducible_output()
   
   ph_tbl <- tibble(ph)
   
