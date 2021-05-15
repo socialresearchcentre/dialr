@@ -142,6 +142,7 @@
 <a href="#dialr-development-version" class="anchor"></a>dialr (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li><p>Change minimum R version to 3.6 to match the rJava package (<a href='https://github.com/socialresearchcentre/dialr/issues/21'>#21</a>).</p></li>
 <li><p>Move rJava initialisation to <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onLoad()</a></code> instead of <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onAttach()</a></code> (<a href='https://github.com/socialresearchcentre/dialr/issues/16'>#16</a>). Since dialr is a wrapper for a Java package, rJava has to initialise Java before it will work. Previously, users had to attach dialr with <code><a href="https://socialresearchcentre.github.io/dialr">library(dialr)</a></code> to properly initialise Java. Now rJava is initialised when the package is loaded/referenced, so dialr functions can now be used with the <code><a href="https://rdrr.io/r/base/ns-dblcolon.html">::</a></code> notation (e.g. <code><a href="../reference/dialr-phone.html">dialr::phone()</a></code>) without a preceding call to <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>.</p></li>
 <li><p>Remove <code>is_vector_s3()</code> method at the pillar maintainer’s request (<a href='https://github.com/socialresearchcentre/dialr/issues/19'>#19</a>).</p></li>
 </ul>
