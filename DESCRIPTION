@@ -12,7 +12,7 @@ Description: Parse, format, and validate international phone
     numbers using Google's 'libphonenumber' java library,
     <https://github.com/google/libphonenumber>.
 License: GPL-3
-URL: https://socialresearchcentre.github.io/dialr,
+URL: https://socialresearchcentre.github.io/dialr/,
     https://github.com/socialresearchcentre/dialr,
     https://github.com/socialresearchcentre/dialrjars,
     https://github.com/google/libphonenumber

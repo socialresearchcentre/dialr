@@ -30,7 +30,7 @@ progress bar? (default: \code{TRUE}).
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://socialresearchcentre.github.io/dialr}
+  \item \url{https://socialresearchcentre.github.io/dialr/}
   \item \url{https://github.com/socialresearchcentre/dialr}
   \item \url{https://github.com/socialresearchcentre/dialrjars}
   \item \url{https://github.com/google/libphonenumber}

@@ -51,7 +51,7 @@ If \code{NA} or \code{""}, numbers written in international format (with a leadi
 \item \code{"RFC3966"}: "tel" URI syntax from the IETF \href{https://datatracker.ietf.org/doc/rfc3966/}{tel URI for Telephone Numbers}
 }
 
-See notes from the \href{https://static.javadoc.io/com.googlecode.libphonenumber/libphonenumber/8.10.10/index.html?com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html}{libphonenumber javadocs}
+See notes from the \href{https://www.javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/latest/com/google/i18n/phonenumbers/PhoneNumberUtil.PhoneNumberFormat.html}{libphonenumber javadocs}
 for more details.
 
 \code{format} defaults to \code{"E164"}. The default can be set in option

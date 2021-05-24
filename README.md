@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# dialr <a href='https://socialresearchcentre.github.io/dialr'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# dialr <a href='https://socialresearchcentre.github.io/dialr/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
