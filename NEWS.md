@@ -1,8 +1,12 @@
-# dialr (development version)
+# dialr 0.4.0
 
-* Change minimum R version to 3.6 to match the rJava package (#21).
+## Major changes
 
-* The old one-shot phone processing functions have been hard deprecated and will now throw an error (#22).
+* Update R dependency to R >= 3.6.0 to match the rJava package (#21).
+
+* The old one-shot phone processing functions have been hard deprecated and will now throw an error (#22). These will be removed entirely in the next major release.
+
+## Minor changes
 
 * Move rJava initialisation to `.onLoad()` instead of `.onAttach()` (#16). Since dialr is a wrapper for a Java package, rJava has to initialise Java before it will work. Previously, users had to attach dialr with `library(dialr)` to properly initialise Java. Now rJava is initialised when the package is loaded/referenced, so dialr functions can now be used with the `::` notation (e.g. `dialr::phone()`) without a preceding call to `library()`.
 

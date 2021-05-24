@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Lifecycle:
-maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/dialr)](https://cran.r-project.org/package=dialr)
 [![R-CMD-check](https://github.com/socialresearchcentre/dialr/workflows/R-CMD-check/badge.svg)](https://github.com/socialresearchcentre/dialr/actions)
