@@ -82,7 +82,7 @@ necessary if a vector of length 1 is provided." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@ necessary if a vector of length 1 is provided." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,18 +100,6 @@ necessary if a vector of length 1 is provided." />
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/oneshot.html">One shot methods</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="../news/index.html">Changelog</a>
 </li>
@@ -119,7 +107,7 @@ necessary if a vector of length 1 is provided." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/socialresearchcentre/dialr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -147,7 +135,7 @@ necessary if a vector of length 1 is provided." />
 necessary if a vector of length 1 is provided.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_example</span>(<span class='no'>region</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>valid</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>get_example</span><span class='op'>(</span><span class='va'>region</span>, type <span class='op'>=</span> <span class='cn'>NULL</span>, valid <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,21 +183,26 @@ an example invalid number, and <code>type</code> is ignored.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Get a basic example number</span>
-<span class='fu'>get_example</span>(<span class='st'>"AU"</span>)</div><div class='output co'>#&gt; # Parsed phone numbers: 1 total, 1 successfully parsed
+<span class='fu'>get_example</span><span class='op'>(</span><span class='st'>"AU"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # Parsed phone numbers: 1 total, 1 successfully parsed
 #&gt; [1] +61212345678</div><div class='input'>
 <span class='co'># Get an example mobile number</span>
-<span class='fu'>get_example</span>(<span class='st'>"AU"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"MOBILE"</span>)</div><div class='output co'>#&gt; # Parsed phone numbers: 1 total, 1 successfully parsed
+<span class='fu'>get_example</span><span class='op'>(</span><span class='st'>"AU"</span>, type <span class='op'>=</span> <span class='st'>"MOBILE"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # Parsed phone numbers: 1 total, 1 successfully parsed
 #&gt; [1] +61412345678</div><div class='input'>
 <span class='co'># Example phone number for an invalid type</span>
-<span class='fu'>get_example</span>(<span class='st'>"AU"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"VOICEMAIL"</span>)</div><div class='output co'>#&gt; # Parsed phone numbers: 1 total, 0 successfully parsed
+<span class='fu'>get_example</span><span class='op'>(</span><span class='st'>"AU"</span>, type <span class='op'>=</span> <span class='st'>"VOICEMAIL"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # Parsed phone numbers: 1 total, 0 successfully parsed
 #&gt; [1] &lt;NA&gt;</div><div class='input'>
 <span class='co'># Get an example invalid number</span>
-<span class='fu'>get_example</span>(<span class='st'>"AU"</span>, <span class='kw'>valid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; # Parsed phone numbers: 1 total, 1 successfully parsed
+<span class='fu'>get_example</span><span class='op'>(</span><span class='st'>"AU"</span>, valid <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # Parsed phone numbers: 1 total, 1 successfully parsed
 #&gt; [1] +6121234567</div><div class='input'>
 <span class='co'># Get a combination of the previous examples</span>
-<span class='fu'>get_example</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"AU"</span>, <span class='st'>"AU"</span>,     <span class='st'>"AU"</span>,        <span class='st'>"AU"</span> ),
-            <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>,   <span class='st'>"MOBILE"</span>, <span class='st'>"VOICEMAIL"</span>, <span class='fl'>NA</span>   ),
-            <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>TRUE</span>, <span class='fl'>TRUE</span>,     <span class='fl'>TRUE</span>,        <span class='fl'>FALSE</span>))</div><div class='output co'>#&gt; # Parsed phone numbers: 4 total, 3 successfully parsed
+<span class='fu'>get_example</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"AU"</span>, <span class='st'>"AU"</span>,     <span class='st'>"AU"</span>,        <span class='st'>"AU"</span> <span class='op'>)</span>,
+            <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>NA</span>,   <span class='st'>"MOBILE"</span>, <span class='st'>"VOICEMAIL"</span>, <span class='cn'>NA</span>   <span class='op'>)</span>,
+            <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='cn'>TRUE</span>, <span class='cn'>TRUE</span>,     <span class='cn'>TRUE</span>,        <span class='cn'>FALSE</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; # Parsed phone numbers: 4 total, 3 successfully parsed
 #&gt; [1] +61212345678 +61412345678 &lt;NA&gt;         +6121234567 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -226,7 +219,7 @@ an example invalid number, and <code>type</code> is ignored.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

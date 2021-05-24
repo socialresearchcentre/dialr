@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dialr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.0</span>
       </span>
     </div>
 
@@ -48,7 +48,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -58,18 +58,6 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/oneshot.html">One shot methods</a>
-    </li>
-  </ul>
-</li>
 <li>
   <a href="news/index.html">Changelog</a>
 </li>
@@ -77,7 +65,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/socialresearchcentre/dialr/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -93,9 +81,9 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="dialr" class="section level1">
+<div id="dialr-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#dialr" class="anchor"></a>dialr <a href="https://socialresearchcentre.github.io/dialr"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<a href="#dialr-" class="anchor"></a>dialr <a href="https://socialresearchcentre.github.io/dialr/"><img src="reference/figures/logo.png" align="right" height="139"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -109,52 +97,55 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version of dialr from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"dialr"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"dialr"</span><span class="op">)</span></code></pre></div>
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"socialresearchcentre/dialr"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"socialresearchcentre/dialr"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dialr</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://socialresearchcentre.github.io/dialr/">dialr</a></span><span class="op">)</span>
 
 <span class="co"># Parse a character phone number vector</span>
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>, <span class="st">"+12015550123"</span>)
-<span class="no">x</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/dialr-phone.html">phone</a></span>(<span class="no">x</span>, <span class="st">"AU"</span>)
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>, <span class="st">"+12015550123"</span><span class="op">)</span>
+<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/dialr-phone.html">phone</a></span><span class="op">(</span><span class="va">x</span>, <span class="st">"AU"</span><span class="op">)</span>
 
-<span class="fu"><a href="reference/dialr-valid.html">is_parsed</a></span>(<span class="no">x</span>)    <span class="co"># Was the phone number successfully parsed?</span>
+<span class="fu"><a href="reference/dialr-valid.html">is_parsed</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>    <span class="co"># Was the phone number successfully parsed?</span>
 <span class="co">#&gt; [1] FALSE  TRUE  TRUE  TRUE  TRUE</span>
-<span class="fu"><a href="reference/dialr-valid.html">is_valid</a></span>(<span class="no">x</span>)     <span class="co"># Is the phone number valid?</span>
+<span class="fu"><a href="reference/dialr-valid.html">is_valid</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>     <span class="co"># Is the phone number valid?</span>
 <span class="co">#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</span>
-<span class="fu"><a href="reference/dialr-valid.html">is_possible</a></span>(<span class="no">x</span>)  <span class="co"># Is the phone number possible?</span>
+<span class="fu"><a href="reference/dialr-valid.html">is_possible</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>  <span class="co"># Is the phone number possible?</span>
 <span class="co">#&gt; [1] FALSE FALSE  TRUE  TRUE  TRUE</span>
-<span class="fu"><a href="reference/dialr-region.html">get_region</a></span>(<span class="no">x</span>)   <span class="co"># What region (ISO country code) is the phone number from?</span>
+<span class="fu"><a href="reference/dialr-region.html">get_region</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>   <span class="co"># What region (ISO country code) is the phone number from?</span>
 <span class="co">#&gt; [1] NA   NA   "AU" "AU" "US"</span>
-<span class="fu"><a href="reference/dialr-type.html">get_type</a></span>(<span class="no">x</span>)     <span class="co"># Is the phone number a fixed line, mobile etc.</span>
+<span class="fu"><a href="reference/dialr-type.html">get_type</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>     <span class="co"># Is the phone number a fixed line, mobile etc.</span>
 <span class="co">#&gt; [1] NA                     "UNKNOWN"              "MOBILE"              </span>
 <span class="co">#&gt; [4] "MOBILE"               "FIXED_LINE_OR_MOBILE"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
 <span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817" "+12015550123"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span>(<span class="no">x</span>, <span class="kw">home</span> <span class="kw">=</span> <span class="st">"AU"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">x</span>, home <span class="op">=</span> <span class="st">"AU"</span><span class="op">)</span>
 <span class="co">#&gt; [1] NA                "123"             "0404753123"      "0410123817"     </span>
 <span class="co">#&gt; [5] "001112015550123"</span>
 
 <span class="co"># Use with dplyr</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 
-<span class="no">y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">tibble</a></span>(<span class="kw">id</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">4</span>,
-            <span class="kw">phone1</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>),
-            <span class="kw">phone2</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"03 9388 1234"</span>, <span class="fl">1234</span>, <span class="st">"+12015550123"</span>, <span class="fl">0</span>),
-            <span class="kw">country</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span>))
+<span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,
+            phone1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span><span class="op">)</span>,
+            phone2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"03 9388 1234"</span>, <span class="fl">1234</span>, <span class="st">"+12015550123"</span>, <span class="fl">0</span><span class="op">)</span>,
+            country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span>, <span class="st">"AU"</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">y</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">matches</a></span>(<span class="st">"^phone"</span>)), ~<span class="fu"><a href="reference/dialr-phone.html">phone</a></span>(<span class="no">.</span>, <span class="no">country</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span>(<span class="fu"><a href="https://dplyr.tidyverse.org/reference/reexports.html">matches</a></span>(<span class="st">"^phone"</span>)),
-            <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">valid</span> <span class="kw">=</span> <span class="no">is_valid</span>,
-                 <span class="kw">region</span> <span class="kw">=</span> <span class="no">get_region</span>,
-                 <span class="kw">type</span> <span class="kw">=</span> <span class="no">get_type</span>,
-                 <span class="kw">clean</span> <span class="kw">=</span> <span class="no">format</span>))
+<span class="va">y</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"^phone"</span><span class="op">)</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="reference/dialr-phone.html">phone</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">country</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate_all.html">mutate_at</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/vars.html">vars</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">matches</a></span><span class="op">(</span><span class="st">"^phone"</span><span class="op">)</span><span class="op">)</span>,
+            <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>valid <span class="op">=</span> <span class="va">is_valid</span>,
+                 region <span class="op">=</span> <span class="va">get_region</span>,
+                 type <span class="op">=</span> <span class="va">get_type</span>,
+                 clean <span class="op">=</span> <span class="va">format</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 4 x 12</span>
 <span class="co">#&gt;      id       phone1       phone2 country phone1_valid phone2_valid</span>
 <span class="co">#&gt;   &lt;int&gt;      &lt;phone&gt;      &lt;phone&gt; &lt;chr&gt;   &lt;lgl&gt;        &lt;lgl&gt;       </span>
@@ -164,7 +155,7 @@
 <span class="co">#&gt; 4     4 +61410123817           NA AU      TRUE         FALSE       </span>
 <span class="co">#&gt; # … with 6 more variables: phone1_region &lt;chr&gt;, phone2_region &lt;chr&gt;,</span>
 <span class="co">#&gt; #   phone1_type &lt;chr&gt;, phone2_type &lt;chr&gt;, phone1_clean &lt;chr&gt;,</span>
-<span class="co">#&gt; #   phone2_clean &lt;chr&gt;</span></pre></div>
+<span class="co">#&gt; #   phone2_clean &lt;chr&gt;</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -199,10 +190,9 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://cran.r-project.org/package=dialr"><img src="https://www.r-pkg.org/badges/version/dialr" alt="CRAN status"></a></li>
-<li><a href="https://travis-ci.org/socialresearchcentre/dialr"><img src="https://travis-ci.org/socialresearchcentre/dialr.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://ci.appveyor.com/project/gorcha/dialr"><img src="https://ci.appveyor.com/api/projects/status/github/socialresearchcentre/dialr?branch=master&amp;svg=true" alt="AppVeyor build status"></a></li>
+<li><a href="https://github.com/socialresearchcentre/dialr/actions"><img src="https://github.com/socialresearchcentre/dialr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://codecov.io/github/socialresearchcentre/dialr?branch=master"><img src="https://codecov.io/gh/socialresearchcentre/dialr/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 </ul>
 </div>
@@ -215,7 +205,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
