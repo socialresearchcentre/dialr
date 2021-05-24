@@ -17,15 +17,6 @@ reference:
     - get_geocode
     - get_timezone
   
-  - title: One shot methods
-    contents:
-    - ph_example
-    - ph_format
-    - ph_possible
-    - ph_region
-    - ph_type
-    - ph_valid
-    
   - title: Country code helpers
     contents:
     - get_cc
