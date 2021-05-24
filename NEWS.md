@@ -20,7 +20,7 @@ This release fixes a bug introduced by changes to the treatment of list based cl
 
 In the future dialr may use the vctrs package to implement the `phone` class once vctrs is a bit more stable.
 
-The libphonenumber repo moved from <https://github.com/googlei18n/libphonenumber/> to <https://github.com/google/libphonenumber/> a little while ago. Docs have been updated accordingly (#11).
+The libphonenumber repo moved to <https://github.com/google/libphonenumber/> a little while ago. Docs have been updated accordingly (#11).
 
 # dialr 0.3.0
 
