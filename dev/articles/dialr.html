@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.2.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.0.9000</span>
       </span>
     </div>
 
@@ -56,18 +56,6 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/oneshot.html">One shot methods</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -112,7 +100,7 @@
 <p>A phone class vector stores a parsed java <code>Phonenumber</code> object for further processing alongside the original raw text phone number and default region. This “default region” is required to determine the processing context for non-international numbers.</p>
 <p>To create a phone vector, use the <code><a href="../reference/dialr-phone.html">phone()</a></code> function. This takes a character vector of phone numbers to parse and a default region for phone numbers not stored in an international format (i.e. with a leading “+”).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://socialresearchcentre.github.io/dialr">dialr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://socialresearchcentre.github.io/dialr/">dialr</a></span><span class="op">)</span>
 
 <span class="co"># Parse phone number vector</span>
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>, <span class="st">"+12015550123"</span><span class="op">)</span>

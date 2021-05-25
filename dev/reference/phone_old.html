@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Phone number carrier information — get_carrier • dialr</title>
+<title>Old one shot phone functions — phone_old • dialr</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,23 @@
 
 
 
-<meta property="og:title" content="Phone number carrier information — get_carrier" />
-<meta property="og:description" content="Returns a carrier name for each phone number, in the language provided
-in locale." />
+<meta property="og:title" content="Old one shot phone functions — phone_old" />
+<meta property="og:description" content="This set of methods is a relic of the early development of dialr. They are
+significantly slower than the current approach. They were soft deprecated in
+0.2.0, hard deprecated in 0.4.0 and will be entirely removed in the next
+major release.
+All functions have a corresponding function in the current version of dialr.
+Due to the changes in approach, the new versions of each function are not
+drop-in replacements and most need a parsed phone vector as input. See the
+introductory vignette or the phone class documentation for more detail.
+ph_valid() -&amp;gt; is_valid()
+ph_region() -&amp;gt; get_region()
+ph_possible() -&amp;gt; is_possible()
+ph_format() -&amp;gt; format.phone()
+ph_type() -&amp;gt; get_type()
+ph_example() -&amp;gt; get_example()
+
+" />
 <meta property="og:image" content="https://socialresearchcentre.github.io/dialr/logo.png" />
 
 
@@ -123,73 +137,44 @@ in locale." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Phone number carrier information</h1>
-    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/carrier.R'><code>R/carrier.R</code></a></small>
-    <div class="hidden name"><code>get_carrier.Rd</code></div>
+    <h1>Old one shot phone functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/socialresearchcentre/dialr/blob/master/R/deprec-phone_old.R'><code>R/deprec-phone_old.R</code></a></small>
+    <div class="hidden name"><code>phone_old.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns a carrier name for each phone number, in the language provided
-in <code>locale</code>.</p>
+    <p>This set of methods is a relic of the early development of dialr. They are
+significantly slower than the current approach. They were soft deprecated in
+0.2.0, hard deprecated in 0.4.0 and will be entirely removed in the next
+major release.</p>
+<p>All functions have a corresponding function in the current version of dialr.
+Due to the changes in approach, the new versions of each function are not
+drop-in replacements and most need a parsed phone vector as input. See the
+introductory vignette or the <a href='dialr-phone.html'>phone</a> class documentation for more detail.</p><ul>
+<li><p><code>ph_valid()</code> -&gt; <code><a href='dialr-valid.html'>is_valid()</a></code></p></li>
+<li><p><code>ph_region()</code> -&gt; <code><a href='dialr-region.html'>get_region()</a></code></p></li>
+<li><p><code>ph_possible()</code> -&gt; <code><a href='dialr-valid.html'>is_possible()</a></code></p></li>
+<li><p><code>ph_format()</code> -&gt; <code><a href='dialr-phone.html'>format.phone()</a></code></p></li>
+<li><p><code>ph_type()</code> -&gt; <code><a href='dialr-type.html'>get_type()</a></code></p></li>
+<li><p><code>ph_example()</code> -&gt; <code><a href='dialr-example.html'>get_example()</a></code></p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>get_carrier</span><span class='op'>(</span>
-  <span class='va'>x</span>,
-  strict <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  safe <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  locale <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"dialr.locale"</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ph_valid</span><span class='op'>(</span><span class='va'>phone</span>, <span class='va'>country</span>, strict <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>A <a href='dialr-phone.html'>phone</a> vector.</p></td>
-    </tr>
-    <tr>
-      <th>strict</th>
-      <td><p>Should invalid phone numbers be removed? If <code>TRUE</code>, invalid
-phone numbers are replaced with <code>NA</code>.</p></td>
-    </tr>
-    <tr>
-      <th>safe</th>
-      <td><p>If <code>TRUE</code>, gets the name of the carrier for a given phone
-number only when it is 'safe' to display to users. A carrier name is
-considered safe if the number is valid and for a region that doesn't
-support mobile number portability. All other phone numbers return <code>""</code>.</p></td>
-    </tr>
-    <tr>
-      <th>locale</th>
-      <td><p>The <a href='https://docs.oracle.com/javase/8/docs/api/java/util/Locale.html'>Java locale</a>
-used to retrieve localised results. The default is set in option
-<code>dialr.locale</code>.</p></td>
-    </tr>
-    </table>
+<span class='fu'>ph_region</span><span class='op'>(</span><span class='va'>phone</span>, <span class='va'>country</span><span class='op'>)</span>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+<span class='fu'>ph_possible</span><span class='op'>(</span><span class='va'>phone</span>, <span class='va'>country</span>, detailed <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-    <p>A carrier name for each phone number for the given locale, or <code>""</code> if
-the number is invalid.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+<span class='fu'>ph_format</span><span class='op'>(</span><span class='va'>phone</span>, <span class='va'>country</span>, format <span class='op'>=</span> <span class='st'>"NATIONAL"</span>, home <span class='op'>=</span> <span class='cn'>NULL</span>, clean <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
-    <p>The carrier name is the one the number was originally allocated to, however
-if the country supports mobile number portability the number might not belong
-to the returned carrier anymore. If no mapping is found <code>""</code> is returned.</p>
-    <h2 class="hasAnchor" id="libphonenumber-reference"><a class="anchor" href="#libphonenumber-reference"></a>libphonenumber reference</h2>
+<span class='fu'>ph_type</span><span class='op'>(</span><span class='va'>phone</span>, <span class='va'>country</span><span class='op'>)</span>
 
-    
+<span class='fu'>ph_example</span><span class='op'>(</span><span class='va'>country</span>, type <span class='op'>=</span> <span class='cn'>NULL</span>, home <span class='op'>=</span> <span class='cn'>NULL</span>, clean <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
 
-<p><code><a href='get_geocode.html'>get_geocode()</a></code>: <code>PhoneNumberToCarrierMapper.getNameForValidNumber()</code> by
-default, or <code>PhoneNumberToCarrierMapper.getSafeDisplayName()</code> if <code>safe = TRUE</code>.</p>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='dialr-phone.html'>phone</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0123</span>, <span class='st'>"0412 345 678"</span>, <span class='st'>"61412987654"</span>, <span class='st'>"03 9123 4567"</span>, <span class='st'>"+12015550123"</span><span class='op'>)</span>, <span class='st'>"AU"</span><span class='op'>)</span>
-<span class='fu'>get_carrier</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] NA      ""      "Optus" "Optus" ""      ""     </div><div class='input'><span class='fu'>get_carrier</span><span class='op'>(</span><span class='va'>x</span>, strict <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] NA      NA      "Optus" "Optus" ""      ""     </div><div class='input'><span class='fu'>get_carrier</span><span class='op'>(</span><span class='va'>x</span>, safe <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] NA NA "" "" "" ""</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

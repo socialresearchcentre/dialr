@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.3.2.9001</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.0.9000</span>
       </span>
     </div>
 
@@ -96,18 +96,6 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/oneshot.html">One shot methods</a>
-    </li>
-  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -141,11 +129,27 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#dialr-development-version" class="anchor"></a>dialr (development version)<small> Unreleased </small>
 </h1>
+</div>
+    <div id="dialr-040" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.0">
+<a href="#dialr-040" class="anchor"></a>dialr 0.4.0<small> 2021-05-24 </small>
+</h1>
+<div id="major-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-changes" class="anchor"></a>Major changes</h2>
 <ul>
-<li><p>Change minimum R version to 3.6 to match the rJava package (<a href='https://github.com/socialresearchcentre/dialr/issues/21'>#21</a>).</p></li>
-<li><p>Move rJava initialisation to <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onLoad()</a></code> instead of <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onAttach()</a></code> (<a href='https://github.com/socialresearchcentre/dialr/issues/16'>#16</a>). Since dialr is a wrapper for a Java package, rJava has to initialise Java before it will work. Previously, users had to attach dialr with <code><a href="https://socialresearchcentre.github.io/dialr">library(dialr)</a></code> to properly initialise Java. Now rJava is initialised when the package is loaded/referenced, so dialr functions can now be used with the <code><a href="https://rdrr.io/r/base/ns-dblcolon.html">::</a></code> notation (e.g. <code><a href="../reference/dialr-phone.html">dialr::phone()</a></code>) without a preceding call to <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>.</p></li>
+<li><p>Update R dependency to R &gt;= 3.6.0 to match the rJava package (<a href='https://github.com/socialresearchcentre/dialr/issues/21'>#21</a>).</p></li>
+<li><p>The old one-shot phone processing functions have been hard deprecated and will now throw an error (<a href='https://github.com/socialresearchcentre/dialr/issues/22'>#22</a>). These will be removed entirely in the next major release.</p></li>
+</ul>
+</div>
+<div id="minor-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes" class="anchor"></a>Minor changes</h2>
+<ul>
+<li><p>Move rJava initialisation to <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onLoad()</a></code> instead of <code><a href="https://rdrr.io/r/base/ns-hooks.html">.onAttach()</a></code> (<a href='https://github.com/socialresearchcentre/dialr/issues/16'>#16</a>). Since dialr is a wrapper for a Java package, rJava has to initialise Java before it will work. Previously, users had to attach dialr with <code><a href="https://socialresearchcentre.github.io/dialr/">library(dialr)</a></code> to properly initialise Java. Now rJava is initialised when the package is loaded/referenced, so dialr functions can now be used with the <code><a href="https://rdrr.io/r/base/ns-dblcolon.html">::</a></code> notation (e.g. <code><a href="../reference/dialr-phone.html">dialr::phone()</a></code>) without a preceding call to <code><a href="https://rdrr.io/r/base/library.html">library()</a></code>.</p></li>
 <li><p>Remove <code>is_vector_s3()</code> method at the pillar maintainer’s request (<a href='https://github.com/socialresearchcentre/dialr/issues/19'>#19</a>).</p></li>
 </ul>
+</div>
 </div>
     <div id="dialr-032" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.2">
@@ -162,7 +166,7 @@
 </h1>
 <p>This release fixes a bug introduced by changes to the treatment of list based classes in tibble 3.0.0 that broke <code>phone</code> vectors in tibbles (<a href='https://github.com/socialresearchcentre/dialr/issues/12'>#12</a>). All <code>phone</code> vectors now also have the <code>list</code> class as recommended by the <a href="https://tibble.tidyverse.org/news/index.html">tibble changelog</a>.</p>
 <p>In the future dialr may use the vctrs package to implement the <code>phone</code> class once vctrs is a bit more stable.</p>
-<p>The libphonenumber repo moved from <a href="https://github.com/googlei18n/libphonenumber/" class="uri">https://github.com/googlei18n/libphonenumber/</a> to <a href="https://github.com/google/libphonenumber/" class="uri">https://github.com/google/libphonenumber/</a> a little while ago. Docs have been updated accordingly (<a href='https://github.com/socialresearchcentre/dialr/issues/11'>#11</a>).</p>
+<p>The libphonenumber repo moved to <a href="https://github.com/google/libphonenumber/" class="uri">https://github.com/google/libphonenumber/</a> a little while ago. Docs have been updated accordingly (<a href='https://github.com/socialresearchcentre/dialr/issues/11'>#11</a>).</p>
 </div>
     <div id="dialr-030" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.0">
@@ -176,9 +180,9 @@
 <li><p>Add geocoding functions <code><a href="../reference/get_geocode.html">get_geocode()</a></code> and <code><a href="../reference/get_timezone.html">get_timezone()</a></code> (<a href='https://github.com/socialresearchcentre/dialr/issues/5'>#5</a>).</p></li>
 </ul>
 </div>
-<div id="minor-changes" class="section level2">
+<div id="minor-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-1" class="anchor"></a>Minor changes</h2>
 <ul>
 <li><p><code><a href="../reference/dialr-example.html">get_example()</a></code> returns an empty phone number if the provided type is invalid for the provided region (<a href='https://github.com/socialresearchcentre/dialr/issues/8'>#8</a>).</p></li>
 <li><p><code><a href="../reference/dialr-phone.html">phone()</a></code> constructor now supports parsing phone numbers in international format without a default region by specifying <code>NA</code> or <code>""</code> in the <code>region</code> argument (<a href='https://github.com/socialresearchcentre/dialr/issues/4'>#4</a>).</p></li>
@@ -196,16 +200,16 @@
 <a href="#performance-improvements" class="anchor"></a>Performance improvements</h2>
 <p>Code calling libphonenumber methods via rJava has been tweaked for performance, including using more efficient rJava acess methods and caching commonly used static values. Most operations are now approx. 10 times faster.</p>
 </div>
-<div id="major-changes" class="section level2">
+<div id="major-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#major-changes" class="anchor"></a>Major changes</h2>
+<a href="#major-changes-1" class="anchor"></a>Major changes</h2>
 <ul>
 <li>Updated R dependency to R &gt;= 3.2.3. R 3.6.0 just came out and highr, a dependency of knitr, requires &gt;= 3.2.3 so build fails on 3.1.x.</li>
 </ul>
 </div>
-<div id="minor-changes-1" class="section level2">
+<div id="minor-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-1" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-2" class="anchor"></a>Minor changes</h2>
 <ul>
 <li><p>New introductory <code><a href="../articles/dialr.html">vignette("dialr")</a></code>.</p></li>
 <li><p>New <code><a href="../reference/dialr-match.html">is_match()</a></code> function supports proper <code>phone</code> equality checks. <code><a href="https://rdrr.io/r/base/Comparison.html">==</a></code> and <code><a href="https://rdrr.io/r/base/Comparison.html">!=</a></code> now use <code><a href="../reference/dialr-match.html">is_match()</a></code> for <code>phone</code> vectors. (<a href='https://github.com/socialresearchcentre/dialr/issues/1'>#1</a>)</p></li>
