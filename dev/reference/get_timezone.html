@@ -133,7 +133,11 @@ to which a phone number belongs." />
 to which a phone number belongs.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_timezone</span><span class='op'>(</span><span class='va'>x</span>, strict <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_timezone</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  strict <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  show_progress <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"dialr.show_progress"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -146,6 +150,11 @@ to which a phone number belongs.</p>
       <th>strict</th>
       <td><p>Should invalid phone numbers be removed? If <code>TRUE</code>, invalid
 phone numbers are replaced with <code>NA</code>.</p></td>
+    </tr>
+    <tr>
+      <th>show_progress</th>
+      <td><p>Should a progress bar be displayed? Defaults to the
+option <code>dialr.show_progress</code>.</p></td>
     </tr>
     </table>
 

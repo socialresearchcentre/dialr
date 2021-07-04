@@ -133,7 +133,7 @@ and further processing." />
 and further processing.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>phone</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>region</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>phone</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>region</span>, show_progress <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"dialr.show_progress"</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='fu'>phone_reparse</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
 
@@ -169,6 +169,11 @@ the default region for each phone number in <code>x</code>. A <code>region</code
 length 1 will be recycled to the length of <code>x</code>.</p>
 <p>If <code>NA</code> or <code>""</code>, numbers written in international format (with a leading
 <code><a href='https://rdrr.io/r/base/Arithmetic.html'>+</a></code>) will be parsed without a default region.</p></td>
+    </tr>
+    <tr>
+      <th>show_progress</th>
+      <td><p>Should a progress bar be displayed? Defaults to the
+option <code>dialr.show_progress</code>.</p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -227,8 +232,9 @@ required to determine the processing context for non-international numbers.</p>
 persist between R sessions. In case of issues, use <code>phone_reparse()</code> to
 recreate the phone vector from the original phone number and region.</p>
 <p>Phone number parsing functions display a progress bar in interactive sessions
-by default. This can be disabled by setting option <code>dialr.show_progress</code> to
-<code>FALSE</code>.</p>
+by default. This can be disabled globally by setting option
+<code>dialr.show_progress</code> to <code>FALSE</code>, or locally using the <code>show_progress</code>
+function argument.</p>
     <h2 class="hasAnchor" id="libphonenumber-reference"><a class="anchor" href="#libphonenumber-reference"></a>libphonenumber reference</h2>
 
     

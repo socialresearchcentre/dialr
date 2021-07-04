@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   dialr: dialr.html
-last_built: 2021-05-25T03:34Z
+last_built: 2021-07-04T03:21Z
 urls:
   reference: https://socialresearchcentre.github.io/dialr/reference
   article: https://socialresearchcentre.github.io/dialr/articles
