@@ -16,8 +16,9 @@
 #' recreate the phone vector from the original phone number and region.
 #'
 #' Phone number parsing functions display a progress bar in interactive sessions
-#' by default. This can be disabled by setting option `dialr.show_progress` to
-#' `FALSE`.
+#' by default. This can be disabled globally by setting option
+#' `dialr.show_progress` to `FALSE`, or locally using the `show_progress`
+#' function argument.
 #'
 #' @section libphonenumber reference:
 #'
@@ -36,6 +37,8 @@
 #'   
 #'   If `NA` or `""`, numbers written in international format (with a leading
 #'   `+`) will be parsed without a default region.
+#' @param show_progress Should a progress bar be displayed? Defaults to the
+#'   option `dialr.show_progress`.
 #' @examples
 #'   # Create a phone vector
 #'   x <- phone(c(0, 0123, "0412 345 678", "61412987654", "03 9123 4567", "+12015550123"), "AU")
@@ -57,7 +60,7 @@
 #' @name dialr-phone
 #' @family phone functions
 #' @export
-phone <- function(x, region) {
+phone <- function(x, region, show_progress = getOption("dialr.show_progress")) {
   if (!is.atomic(x))  stop("`x` must be an atomic vector.", call. = FALSE)
   if (length(x) == 0)  stop("`x` must not be empty.", call. = FALSE)
   if (length(x) > 1 & length(region) == 1) region <- rep(region, length(x))
@@ -67,13 +70,13 @@ phone <- function(x, region) {
   validate_phone_region(region[!is.na(region)])
 
   x <- as.character(x)
-  validate_phone(new_phone(x, region))
+  validate_phone(new_phone(x, region, show_progress = show_progress))
 }
 
 #' @importFrom utils txtProgressBar
 #' @importFrom utils getTxtProgressBar
 #' @importFrom utils setTxtProgressBar
-new_phone <- function(x, region) {
+new_phone <- function(x, region, show_progress = getOption("dialr.show_progress")) {
   stopifnot(is.character(x))
   stopifnot(is.character(region))
   stopifnot(length(x) == length(region))
@@ -87,7 +90,7 @@ new_phone <- function(x, region) {
            r)
   }
   
-  show_pb <- isTRUE(getOption("dialr.show_progress")) && interactive()
+  show_pb <- isTRUE(show_progress) && interactive()
   
   if (show_pb) pb <- txtProgressBar(min = 0, max = length(x), style = 3)
   out <- structure(
@@ -338,8 +341,8 @@ as.character.phone <- function(x, raw = TRUE, ...) {
   }
 }
 
-phone_apply <- function(x, fun, fun.value, progress = FALSE) {
-  show_pb <- isTRUE(progress) && isTRUE(getOption("dialr.show_progress")) && interactive()
+phone_apply <- function(x, fun, fun.value, show_progress = FALSE) {
+  show_pb <- isTRUE(show_progress) && interactive()
   if (show_pb) pb <- txtProgressBar(min = 0, max = length(x), style = 3)
   
   out <- vapply(unclass(x), function(d) {

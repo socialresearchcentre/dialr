@@ -10,7 +10,7 @@
 \alias{as.character.phone}
 \title{Phone number parsing and formatting}
 \usage{
-phone(x, region)
+phone(x, region, show_progress = getOption("dialr.show_progress"))
 
 phone_reparse(x)
 
@@ -38,6 +38,9 @@ length 1 will be recycled to the length of \code{x}.
 
 If \code{NA} or \code{""}, numbers written in international format (with a leading
 \code{+}) will be parsed without a default region.}
+
+\item{show_progress}{Should a progress bar be displayed? Defaults to the
+option \code{dialr.show_progress}.}
 
 \item{n}{Number of elements to print.}
 
@@ -87,8 +90,9 @@ persist between R sessions. In case of issues, use \code{phone_reparse()} to
 recreate the phone vector from the original phone number and region.
 
 Phone number parsing functions display a progress bar in interactive sessions
-by default. This can be disabled by setting option \code{dialr.show_progress} to
-\code{FALSE}.
+by default. This can be disabled globally by setting option
+\code{dialr.show_progress} to \code{FALSE}, or locally using the \code{show_progress}
+function argument.
 }
 \section{libphonenumber reference}{
 

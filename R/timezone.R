@@ -19,6 +19,8 @@
 #' @param x A [phone] vector.
 #' @param strict Should invalid phone numbers be removed? If `TRUE`, invalid
 #'   phone numbers are replaced with `NA`.
+#' @param show_progress Should a progress bar be displayed? Defaults to the
+#'   option `dialr.show_progress`.
 #' @return A character vector of time zones to which each phone number belongs,
 #'   separated by `;`, or the default unknown time zone `"Etc/Unknown"` if no
 #'   other time zone was found.
@@ -30,7 +32,8 @@
 #' # Return a list
 #' strsplit(get_timezone(x), ";")
 #' @export
-get_timezone <- function(x, strict = FALSE) {
+get_timezone <- function(x, strict = FALSE,
+                         show_progress = getOption("dialr.show_progress")) {
   if (!is.phone(x)) stop("`x` must be a vector of class `phone`.", call. = FALSE)
   timezone_mapper <- .get_phoneNumberToTimeZonesMapper()
   
@@ -45,7 +48,7 @@ get_timezone <- function(x, strict = FALSE) {
         ),
         collapse = ";")
     ifelse(is.null(res), NA_character_, res)
-  }, character(1), progress = TRUE)
+  }, character(1), show_progress = show_progress)
   if (strict) out[!is_valid(x)] <- NA_character_
   
   out

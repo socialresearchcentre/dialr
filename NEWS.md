@@ -1,5 +1,7 @@
 # dialr (development version)
 
+* `show_progress` is now a function argument for `phone()` and `get_timezone()`. Previously progress bar visibility could only be set package wide using the `dialr.show_progress` option. Now it can be set locally using the `show_progress` function parameter.
+
 # dialr 0.4.0
 
 ## Major changes

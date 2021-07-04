@@ -4,13 +4,20 @@
 \alias{get_timezone}
 \title{Phone number time zone}
 \usage{
-get_timezone(x, strict = FALSE)
+get_timezone(
+  x,
+  strict = FALSE,
+  show_progress = getOption("dialr.show_progress")
+)
 }
 \arguments{
 \item{x}{A \link{phone} vector.}
 
 \item{strict}{Should invalid phone numbers be removed? If \code{TRUE}, invalid
 phone numbers are replaced with \code{NA}.}
+
+\item{show_progress}{Should a progress bar be displayed? Defaults to the
+option \code{dialr.show_progress}.}
 }
 \value{
 A character vector of time zones to which each phone number belongs,
