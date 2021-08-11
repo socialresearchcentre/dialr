@@ -47,7 +47,7 @@ Other phone functions:
 \code{\link{dialr-valid}}
 }
 \author{
-\strong{Maintainer}: Danny Smith \email{danny@gorcha.org}
+\strong{Maintainer}: Danny Smith \email{danny@gorcha.org} [copyright holder]
 
 Other contributors:
 \itemize{
