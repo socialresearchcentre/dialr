@@ -90,28 +90,36 @@ new_phone <- function(x, region, show_progress = getOption("dialr.show_progress"
            r)
   }
   
+  # create vector of "valid" numbers based on the regex in Java
+  valid_regex <- paste0("^", .jfield(phone_util, "S", "VALID_PHONE_NUMBER"), "$")
+  x_valid <- grepl(valid_regex, x, perl = TRUE)
+  
   show_pb <- isTRUE(show_progress) && interactive()
   
   if (show_pb) pb <- txtProgressBar(min = 0, max = length(x), style = 3)
   out <- structure(
     mapply(
-      function(p, r) {
+      function(p, r, v) {
         if (show_pb) setTxtProgressBar(pb, getTxtProgressBar(pb) + 1)
-        pn <- tryCatch({
-          jfunc(p, r)
-        }, error = function(e) {
-          return(NULL)
-        })
-        if (is.null(pn))
+        if (!v) {
           pn <- NA
-        else
-          .jcache(pn)
+        } else {
+          pn <- tryCatch({
+            jfunc(p, r)
+          }, error = function(e) {
+            return(NULL)
+          })
+          if (is.null(pn))
+            pn <- NA
+          else
+            .jcache(pn)
+        }
         
         list(raw = p,
              region = r,
              jobj = pn)
       },
-      x, region,
+      x, region, x_valid,
       SIMPLIFY = FALSE
     ),
     class = c("phone", "list")
