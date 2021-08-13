@@ -60,11 +60,17 @@
 #' @name dialr-phone
 #' @family phone functions
 #' @export
-phone <- function(x, region, show_progress = getOption("dialr.show_progress")) {
-  if (!is.atomic(x))  stop("`x` must be an atomic vector.", call. = FALSE)
-  if (length(x) == 0)  stop("`x` must not be empty.", call. = FALSE)
+phone <- function(x = character(), region = character(),
+                  show_progress = getOption("dialr.show_progress")) {
+  
+  if (!is.atomic(x)) stop("`x` must be an atomic vector.", call. = FALSE)
+
+  # if (length(x) >= 1 & length(region) == 0) region <- NA_character_
+  if (length(region) == 0 && length(x) != 0)
+    stop("`region` must be provided. Use `NA` or `\"\"` to parse without a default region.", call. = FALSE)
   if (length(x) > 1 & length(region) == 1) region <- rep(region, length(x))
-  if (length(x) != length(region)) stop("`x` and `region` vectors must be the same length.", call. = FALSE)
+  if (length(x) != length(region) && length(x) != 0)
+    stop("`x` and `region` vectors must be the same length.", call. = FALSE)
   
   region[!is.na(region) & region == ""] <- NA_character_
   validate_phone_region(region[!is.na(region)])
@@ -79,8 +85,11 @@ phone <- function(x, region, show_progress = getOption("dialr.show_progress")) {
 new_phone <- function(x, region, show_progress = getOption("dialr.show_progress")) {
   stopifnot(is.character(x))
   stopifnot(is.character(region))
-  stopifnot(length(x) == length(region))
+  stopifnot(length(x) == length(region) || length(x) == 0)
 
+  if (length(x) == 0)
+    return(structure(list(), class = c("phone", "list")))
+  
   phone_util <- .get_phoneNumberUtil()
   jfunc <- function(p, r) {
     .jcall(phone_util,

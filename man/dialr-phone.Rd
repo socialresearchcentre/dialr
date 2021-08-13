@@ -10,7 +10,11 @@
 \alias{as.character.phone}
 \title{Phone number parsing and formatting}
 \usage{
-phone(x, region, show_progress = getOption("dialr.show_progress"))
+phone(
+  x = character(),
+  region = character(),
+  show_progress = getOption("dialr.show_progress")
+)
 
 phone_reparse(x)
 

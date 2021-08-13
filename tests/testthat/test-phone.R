@@ -4,7 +4,6 @@ ph <- phone(ph_raw, "AU")
 
 test_that("phone vector created successfully", {
   expect_error(phone(as.list(ph_raw), "AU"))
-  expect_error(phone(character(0), "AU"))
   expect_error(phone(ph_raw, c("AU", "AU")))
   expect_error(phone(ph_raw, "ERROR"))
   
@@ -22,6 +21,14 @@ test_that("phone vector created successfully", {
   expect_equal(dialr:::validate_phone(ph), ph)
 })
 
+test_that("empty phone vector created successfully", {
+  expect_true(is.phone(phone()))
+  expect_equal(length(phone()), 0)
+  
+  expect_true(is.phone(phone(region = "AU")))
+  expect_equal(length(phone(region = "AU")), 0)
+})
+
 test_that("empty region parses correctly", {
   expect_true(is_parsed(phone("+61412345678", NA)))
   expect_true(is_possible(phone("+61412345678", NA)))
@@ -33,6 +40,8 @@ test_that("empty region parses correctly", {
   
   expect_equal(phone("+61412345678", NA),
                phone("+61412345678", ""))
+  
+  expect_error(phone("+61412345678"))
 })
 
 test_that("phone_reparse", {
