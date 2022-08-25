@@ -1,4 +1,4 @@
-# dialr (development version)
+# dialr 0.4.1
 
 * `phone()` now pre-processes values that are considered "not a number" to avoid running them through the Java parser. This massively speeds up phone number parsing for `""`, `NA` and similar values, and fixes an issue where Java would freeze after seeing a large amount of invalid phone number values (#27).
 
