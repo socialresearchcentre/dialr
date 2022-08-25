@@ -43,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dialr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.1.9000</span>
       </span>
     </div>
 
@@ -142,16 +142,16 @@
 <span>                 region <span class="op">=</span> <span class="va">get_region</span>,</span>
 <span>                 type <span class="op">=</span> <span class="va">get_type</span>,</span>
 <span>                 clean <span class="op">=</span> <span class="va">format</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 4 x 12</span></span>
-<span><span class="co">#&gt;      id       phone1       phone2 country phone1_valid phone2_valid</span></span>
-<span><span class="co">#&gt;   &lt;int&gt;      &lt;phone&gt;      &lt;phone&gt; &lt;chr&gt;   &lt;lgl&gt;        &lt;lgl&gt;       </span></span>
-<span><span class="co">#&gt; 1     1           NA +61393881234 AU      FALSE        TRUE        </span></span>
-<span><span class="co">#&gt; 2     2       +61123      +611234 AU      FALSE        FALSE       </span></span>
-<span><span class="co">#&gt; 3     3 +61404753123 +12015550123 AU      TRUE         TRUE        </span></span>
-<span><span class="co">#&gt; 4     4 +61410123817           NA AU      TRUE         FALSE       </span></span>
-<span><span class="co">#&gt; # … with 6 more variables: phone1_region &lt;chr&gt;, phone2_region &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   phone1_type &lt;chr&gt;, phone2_type &lt;chr&gt;, phone1_clean &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   phone2_clean &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 4 × 12</span></span>
+<span><span class="co">#&gt;      id       phone1       phone2 country phone1_valid phone2_…¹ phone…² phone…³</span></span>
+<span><span class="co">#&gt;   &lt;int&gt;      &lt;phone&gt;      &lt;phone&gt; &lt;chr&gt;   &lt;lgl&gt;        &lt;lgl&gt;     &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span><span class="co">#&gt; 1     1           NA +61393881234 AU      FALSE        TRUE      &lt;NA&gt;    AU     </span></span>
+<span><span class="co">#&gt; 2     2       +61123      +611234 AU      FALSE        FALSE     &lt;NA&gt;    &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt; 3     3 +61404753123 +12015550123 AU      TRUE         TRUE      AU      US     </span></span>
+<span><span class="co">#&gt; 4     4 +61410123817           NA AU      TRUE         FALSE     AU      &lt;NA&gt;   </span></span>
+<span><span class="co">#&gt; # … with 4 more variables: phone1_type &lt;chr&gt;, phone2_type &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   phone1_clean &lt;chr&gt;, phone2_clean &lt;chr&gt;, and abbreviated variable names</span></span>
+<span><span class="co">#&gt; #   ¹​phone2_valid, ²​phone1_region, ³​phone2_region</span></span></code></pre></div>
 </div>
 </div>
   </div>

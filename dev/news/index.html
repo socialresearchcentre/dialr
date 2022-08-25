@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dialr</a>
-        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.0.9000</span>
+        <span class="version label label-danger" data-toggle="tooltip" data-placement="bottom" title="In-development version">0.4.1.9000</span>
       </span>
     </div>
 
@@ -50,8 +50,9 @@
       <small>Source: <a href="https://github.com/socialresearchcentre/dialr/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2"><h2 class="page-header" data-toc-text="development version" id="dialr-development-version">dialr (development version)<a class="anchor" aria-label="anchor" href="#dialr-development-version"></a></h2></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="development version" id="dialr-development-version">dialr (development version)<a class="anchor" aria-label="anchor" href="#dialr-development-version"></a></h2>
+<h2 class="page-header" data-toc-text="0.4.1" id="dialr-041">dialr 0.4.1<a class="anchor" aria-label="anchor" href="#dialr-041"></a></h2>
 <ul><li><p><code><a href="../reference/dialr-phone.html">phone()</a></code> now pre-processes values that are considered “not a number” to avoid running them through the Java parser. This massively speeds up phone number parsing for <code>""</code>, <code>NA</code> and similar values, and fixes an issue where Java would freeze after seeing a large amount of invalid phone number values (<a href="https://github.com/socialresearchcentre/dialr/issues/27" class="external-link">#27</a>).</p></li>
 <li><p>It is now possible to create empty <code><a href="../reference/dialr-phone.html">phone()</a></code> vectors (<a href="https://github.com/socialresearchcentre/dialr/issues/28" class="external-link">#28</a>).</p></li>
 <li><p><code>show_progress</code> is now a function argument for <code><a href="../reference/dialr-phone.html">phone()</a></code> and <code><a href="../reference/get_timezone.html">get_timezone()</a></code>. Previously progress bar visibility could only be set package wide using the <code>dialr.show_progress</code> option. Now it can be set locally using the <code>show_progress</code> function parameter (<a href="https://github.com/socialresearchcentre/dialr/issues/25" class="external-link">#25</a>).</p></li>
