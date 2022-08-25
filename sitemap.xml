@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://socialresearchcentre.github.io/dialr/404.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/dialr/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/dialr/articles/dialr.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/dialr/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/dialr/authors.html</loc>
+  </url>
+  <url>
     <loc>https://socialresearchcentre.github.io/dialr/index.html</loc>
+  </url>
+  <url>
+    <loc>https://socialresearchcentre.github.io/dialr/news/index.html</loc>
   </url>
   <url>
     <loc>https://socialresearchcentre.github.io/dialr/reference/check_cc.html</loc>
@@ -40,9 +58,9 @@
     <loc>https://socialresearchcentre.github.io/dialr/reference/get_timezone.html</loc>
   </url>
   <url>
-    <loc>https://socialresearchcentre.github.io/dialr/reference/phone_old.html</loc>
+    <loc>https://socialresearchcentre.github.io/dialr/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://socialresearchcentre.github.io/dialr/articles/dialr.html</loc>
+    <loc>https://socialresearchcentre.github.io/dialr/reference/phone_old.html</loc>
   </url>
 </urlset>
