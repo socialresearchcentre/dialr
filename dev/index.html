@@ -83,6 +83,7 @@
 <a class="anchor" aria-label="anchor" href="#dialr-"></a>
 </h1></div>
 <!-- badges: start -->
+
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -143,15 +144,15 @@
 <span>                 type <span class="op">=</span> <span class="va">get_type</span>,</span>
 <span>                 clean <span class="op">=</span> <span class="va">format</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 4 × 12</span></span>
-<span><span class="co">#&gt;      id       phone1       phone2 country phone1_valid phone2_…¹ phone…² phone…³</span></span>
-<span><span class="co">#&gt;   &lt;int&gt;      &lt;phone&gt;      &lt;phone&gt; &lt;chr&gt;   &lt;lgl&gt;        &lt;lgl&gt;     &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span><span class="co">#&gt; 1     1           NA +61393881234 AU      FALSE        TRUE      &lt;NA&gt;    AU     </span></span>
-<span><span class="co">#&gt; 2     2       +61123      +611234 AU      FALSE        FALSE     &lt;NA&gt;    &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt; 3     3 +61404753123 +12015550123 AU      TRUE         TRUE      AU      US     </span></span>
-<span><span class="co">#&gt; 4     4 +61410123817           NA AU      TRUE         FALSE     AU      &lt;NA&gt;   </span></span>
-<span><span class="co">#&gt; # … with 4 more variables: phone1_type &lt;chr&gt;, phone2_type &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   phone1_clean &lt;chr&gt;, phone2_clean &lt;chr&gt;, and abbreviated variable names</span></span>
-<span><span class="co">#&gt; #   ¹​phone2_valid, ²​phone1_region, ³​phone2_region</span></span></code></pre></div>
+<span><span class="co">#&gt;      id       phone1       phone2 country phone1_valid phone2_valid</span></span>
+<span><span class="co">#&gt;   &lt;int&gt;      &lt;phone&gt;      &lt;phone&gt; &lt;chr&gt;   &lt;lgl&gt;        &lt;lgl&gt;       </span></span>
+<span><span class="co">#&gt; 1     1           NA +61393881234 AU      FALSE        TRUE        </span></span>
+<span><span class="co">#&gt; 2     2       +61123      +611234 AU      FALSE        FALSE       </span></span>
+<span><span class="co">#&gt; 3     3 +61404753123 +12015550123 AU      TRUE         TRUE        </span></span>
+<span><span class="co">#&gt; 4     4 +61410123817           NA AU      TRUE         FALSE       </span></span>
+<span><span class="co">#&gt; # ℹ 6 more variables: phone1_region &lt;chr&gt;, phone2_region &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   phone1_type &lt;chr&gt;, phone2_type &lt;chr&gt;, phone1_clean &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   phone2_clean &lt;chr&gt;</span></span></code></pre></div>
 </div>
 </div>
   </div>
@@ -195,7 +196,7 @@
 <ul class="list-unstyled">
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle: stable"></a></li>
 <li><a href="https://cran.r-project.org/package=dialr" class="external-link"><img src="https://www.r-pkg.org/badges/version/dialr" alt="CRAN status"></a></li>
-<li><a href="https://github.com/socialresearchcentre/dialr/actions" class="external-link"><img src="https://github.com/socialresearchcentre/dialr/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/socialresearchcentre/dialr/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/socialresearchcentre/dialr/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://codecov.io/github/socialresearchcentre/dialr?branch=master" class="external-link"><img src="https://codecov.io/gh/socialresearchcentre/dialr/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 </ul>
 </div>
@@ -211,7 +212,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

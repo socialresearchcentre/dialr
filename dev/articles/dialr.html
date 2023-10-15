@@ -74,7 +74,7 @@
 
       
 
-      </header><script src="dialr_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to dialr</h1>
@@ -87,14 +87,26 @@
 
     
     
-<p>dialr is an R interface to <a href="https://github.com/google/libphonenumber" class="external-link">Google’s libphonenumber java library</a>.</p>
-<p>libphonenumber defines the <code>PhoneNumberUtil</code> class, a set of functions for extracting information from and performing processing on a parsed <code>Phonenumber</code> object. A phone number must be parsed before any other operations (e.g. checking phone number validity, formatting) can be performed.</p>
-<p>dialr provides an interface to these functions to easily parse and process phone numbers in R.</p>
+<p>dialr is an R interface to <a href="https://github.com/google/libphonenumber" class="external-link">Google’s libphonenumber
+java library</a>.</p>
+<p>libphonenumber defines the <code>PhoneNumberUtil</code> class, a set
+of functions for extracting information from and performing processing
+on a parsed <code>Phonenumber</code> object. A phone number must be
+parsed before any other operations (e.g. checking phone number validity,
+formatting) can be performed.</p>
+<p>dialr provides an interface to these functions to easily parse and
+process phone numbers in R.</p>
 <div class="section level2">
 <h2 id="parsing-phone-numbers">Parsing phone numbers<a class="anchor" aria-label="anchor" href="#parsing-phone-numbers"></a>
 </h2>
-<p>A phone class vector stores a parsed java <code>Phonenumber</code> object for further processing alongside the original raw text phone number and default region. This “default region” is required to determine the processing context for non-international numbers.</p>
-<p>To create a phone vector, use the <code><a href="../reference/dialr-phone.html">phone()</a></code> function. This takes a character vector of phone numbers to parse and a default region for phone numbers not stored in an international format (i.e. with a leading “+”).</p>
+<p>A phone class vector stores a parsed java <code>Phonenumber</code>
+object for further processing alongside the original raw text phone
+number and default region. This “default region” is required to
+determine the processing context for non-international numbers.</p>
+<p>To create a phone vector, use the <code><a href="../reference/dialr-phone.html">phone()</a></code> function. This
+takes a character vector of phone numbers to parse and a default region
+for phone numbers not stored in an international format (i.e. with a
+leading “+”).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://socialresearchcentre.github.io/dialr/">dialr</a></span><span class="op">)</span></span>
 <span></span>
@@ -127,7 +139,8 @@
 <div class="section level2">
 <h2 id="comparing-phone-numbers">Comparing phone numbers<a class="anchor" aria-label="anchor" href="#comparing-phone-numbers"></a>
 </h2>
-<p>Equality comparisons for phone numbers ignore formatting differences and compare the underlying phone number.</p>
+<p>Equality comparisons for phone numbers ignore formatting differences
+and compare the underlying phone number.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/dialr-phone.html">phone</a></span><span class="op">(</span><span class="st">"0404 753 123"</span>, <span class="st">"AU"</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="../reference/dialr-phone.html">phone</a></span><span class="op">(</span><span class="st">"+61404753123"</span>, <span class="st">"US"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span>
@@ -135,7 +148,8 @@
 <span><span class="co">#&gt; [1] FALSE</span></span>
 <span><span class="fu"><a href="../reference/dialr-phone.html">phone</a></span><span class="op">(</span><span class="st">"0404 753 123"</span>, <span class="st">"AU"</span><span class="op">)</span> <span class="op">!=</span> <span class="fu"><a href="../reference/dialr-phone.html">phone</a></span><span class="op">(</span><span class="st">"0404 753 123"</span>, <span class="st">"US"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
-<p>Parsed phone numbers can also be compared to character phone numbers stored in an international format.</p>
+<p>Parsed phone numbers can also be compared to character phone numbers
+stored in an international format.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/dialr-phone.html">phone</a></span><span class="op">(</span><span class="st">"0404 753 123"</span>, <span class="st">"AU"</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"+61404753123"</span>, <span class="st">"0404 753 123"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1]  TRUE FALSE</span></span></code></pre></div>
@@ -151,9 +165,17 @@
 <div class="section level2">
 <h2 id="formatting-phone-numbers">Formatting phone numbers<a class="anchor" aria-label="anchor" href="#formatting-phone-numbers"></a>
 </h2>
-<p>The phone class has a <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> method implementing libphonenumber’s core formatting functionality.</p>
-<p>There are four phone number formats used by libphonenumber (see “Further reading” for details): <code>"E164"</code>, <code>"NATIONAL"</code>, <code>"INTERNATIONAL"</code> and<code>"RFC3966"</code>. These can be specified by the <code>format</code> argument, or a default can be specifed in option <code>dialr.format</code>.</p>
-<p>If <code>clean = TRUE</code>, all non-numeric characters are removed except for a leading <code>+</code>. <code>clean = TRUE</code> by default.</p>
+<p>The phone class has a <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> method implementing
+libphonenumber’s core formatting functionality.</p>
+<p>There are four phone number formats used by libphonenumber (see
+“Further reading” for details): <code>"E164"</code>,
+<code>"NATIONAL"</code>, <code>"INTERNATIONAL"</code>
+and<code>"RFC3966"</code>. These can be specified by the
+<code>format</code> argument, or a default can be specifed in option
+<code>dialr.format</code>.</p>
+<p>If <code>clean = TRUE</code>, all non-numeric characters are removed
+except for a leading <code>+</code>. <code>clean = TRUE</code> by
+default.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/dialr-phone.html">phone</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0123</span>, <span class="st">"0404 753 123"</span>, <span class="st">"61410123817"</span>, <span class="st">"+12015550123"</span><span class="op">)</span>, <span class="st">"AU"</span><span class="op">)</span></span>
 <span></span>
@@ -184,7 +206,8 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] NA           "123"        "0404753123" "0410123817" "2015550123"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>dialr.format <span class="op">=</span> <span class="st">"E164"</span><span class="op">)</span></span></code></pre></div>
-<p>If the <code>home</code> argument is supplied, the phone number is formatted for dialling from the specified country.</p>
+<p>If the <code>home</code> argument is supplied, the phone number is
+formatted for dialling from the specified country.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, home <span class="op">=</span> <span class="st">"AU"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] NA                "123"             "0404753123"      "0410123817"     </span></span>
@@ -195,13 +218,16 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, home <span class="op">=</span> <span class="st">"JP"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] NA               "01061123"       "01061404753123" "01061410123817"</span></span>
 <span><span class="co">#&gt; [5] "01012015550123"</span></span></code></pre></div>
-<p>If <code>strict = TRUE</code>, invalid phone numbers (determined using <code><a href="../reference/dialr-valid.html">is_valid()</a></code>) return <code>NA</code>.</p>
+<p>If <code>strict = TRUE</code>, invalid phone numbers (determined
+using <code><a href="../reference/dialr-valid.html">is_valid()</a></code>) return <code>NA</code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] NA             "+61123"       "+61404753123" "+61410123817" "+12015550123"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">x</span>, strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] NA             NA             "+61404753123" "+61410123817" "+12015550123"</span></span></code></pre></div>
-<p>By default, <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code> returns the raw text phone number. Use <code>raw = FALSE</code> to use the <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code> method instead.</p>
+<p>By default, <code><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character()</a></code> returns the raw text phone
+number. Use <code>raw = FALSE</code> to use the <code><a href="https://rdrr.io/r/base/format.html" class="external-link">format()</a></code>
+method instead.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "0"            "123"          "0404 753 123" "61410123817"  "+12015550123"</span></span>
@@ -229,15 +255,15 @@
 <span>                 type <span class="op">=</span> <span class="va">get_type</span>,</span>
 <span>                 clean <span class="op">=</span> <span class="va">format</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 12</span></span></span>
-<span><span class="co">#&gt;      id       phone1       phone2 country phone1_valid phone2_…¹ phone…² phone…³</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;phone&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;phone&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1           <span style="color: #BB0000;">NA</span> +61393881234 AU      FALSE        TRUE      <span style="color: #BB0000;">NA</span>      AU     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2       <span style="color: #BB0000;">+61123</span>      <span style="color: #BB0000;">+611234</span> AU      FALSE        FALSE     <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 +61404753123 +12015550123 AU      TRUE         TRUE      AU      US     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 +61410123817           <span style="color: #BB0000;">NA</span> AU      TRUE         FALSE     AU      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 more variables: phone1_type &lt;chr&gt;, phone2_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone1_clean &lt;chr&gt;, phone2_clean &lt;chr&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​phone2_valid, ²​phone1_region, ³​phone2_region</span></span></span></code></pre></div>
+<span><span class="co">#&gt;      id       phone1       phone2 country phone1_valid phone2_valid</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;phone&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;phone&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1           <span style="color: #BB0000;">NA</span> +61393881234 AU      FALSE        TRUE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2       <span style="color: #BB0000;">+61123</span>      <span style="color: #BB0000;">+611234</span> AU      FALSE        FALSE       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 +61404753123 +12015550123 AU      TRUE         TRUE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 +61410123817           <span style="color: #BB0000;">NA</span> AU      TRUE         FALSE       </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 6 more variables: phone1_region &lt;chr&gt;, phone2_region &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone1_type &lt;chr&gt;, phone2_type &lt;chr&gt;, phone1_clean &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone2_clean &lt;chr&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
@@ -246,22 +272,30 @@
 <h3 id="libphonenumber">libphonenumber<a class="anchor" aria-label="anchor" href="#libphonenumber"></a>
 </h3>
 <p><a href="https://github.com/google/libphonenumber" class="external-link">GitHub</a></p>
-<p><a href="https://github.com/google/libphonenumber/blob/master/FAQ.md" class="external-link">Frequently Asked Questions</a></p>
-<p><a href="https://github.com/google/libphonenumber/blob/master/FALSEHOODS.md" class="external-link">Falsehoods Programmers Believe About Phone Numbers</a></p>
+<p><a href="https://github.com/google/libphonenumber/blob/master/FAQ.md" class="external-link">Frequently
+Asked Questions</a></p>
+<p><a href="https://github.com/google/libphonenumber/blob/master/FALSEHOODS.md" class="external-link">Falsehoods
+Programmers Believe About Phone Numbers</a></p>
 <p><a href="https://javadoc.io/doc/com.googlecode.libphonenumber/libphonenumber/" class="external-link">javadocs</a></p>
 </div>
 <div class="section level3">
 <h3 id="phone-number-format-standards">Phone number format standards<a class="anchor" aria-label="anchor" href="#phone-number-format-standards"></a>
 </h3>
-<p><code>"E164"</code>: general format for international telephone numbers from <a href="https://en.wikipedia.org/wiki/E.164" class="external-link">ITU-T Recommendation E.164</a></p>
-<p><code>"NATIONAL"</code>: national notation from <a href="https://en.wikipedia.org/wiki/E.123" class="external-link">ITU-T Recommendation E.123</a></p>
-<p><code>"INTERNATIONAL"</code>: international notation from <a href="https://en.wikipedia.org/wiki/E.123" class="external-link">ITU-T Recommendation E.123</a></p>
-<p><code>"RFC3966"</code>: “tel” URI syntax from the IETF <a href="https://datatracker.ietf.org/doc/rfc3966/" class="external-link">tel URI for Telephone Numbers</a></p>
+<p><code>"E164"</code>: general format for international telephone
+numbers from <a href="https://en.wikipedia.org/wiki/E.164" class="external-link">ITU-T
+Recommendation E.164</a></p>
+<p><code>"NATIONAL"</code>: national notation from <a href="https://en.wikipedia.org/wiki/E.123" class="external-link">ITU-T Recommendation
+E.123</a></p>
+<p><code>"INTERNATIONAL"</code>: international notation from <a href="https://en.wikipedia.org/wiki/E.123" class="external-link">ITU-T Recommendation
+E.123</a></p>
+<p><code>"RFC3966"</code>: “tel” URI syntax from the IETF <a href="https://datatracker.ietf.org/doc/rfc3966/" class="external-link">tel URI for Telephone
+Numbers</a></p>
 </div>
 <div class="section level3">
 <h3 id="iso-country-codes">ISO country codes<a class="anchor" aria-label="anchor" href="#iso-country-codes"></a>
 </h3>
-<p><a href="https://www.iso.org/iso-3166-country-codes.html" class="external-link">ISO 3166</a></p>
+<p><a href="https://www.iso.org/iso-3166-country-codes.html" class="external-link">ISO
+3166</a></p>
 <p><a href="https://en.wikipedia.org/wiki/ISO_3166-1" class="external-link">Wikipedia</a></p>
 </div>
 </div>
@@ -284,7 +318,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
