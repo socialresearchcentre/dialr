@@ -1,4 +1,4 @@
-# dialr (development version)
+# dialr 0.4.2
 
 * Fix test failure on MacOS 14.
 

@@ -11,7 +11,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 status](https://www.r-pkg.org/badges/version/dialr)](https://cran.r-project.org/package=dialr)
 [![R-CMD-check](https://github.com/socialresearchcentre/dialr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/socialresearchcentre/dialr/actions/workflows/R-CMD-check.yaml)
 [![Coverage
-status](https://codecov.io/gh/socialresearchcentre/dialr/branch/master/graph/badge.svg)](https://codecov.io/github/socialresearchcentre/dialr?branch=master)
+status](https://app.codecov.io/github/socialresearchcentre/dialr?branch=master)](https://app.codecov.io/github/socialresearchcentre/dialr?branch=master)
 <!-- badges: end -->
 
 ## Overview

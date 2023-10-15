@@ -1,4 +1,4 @@
-This release fixes the HTML validation NOTEs in CRAN package check results.
+This release fixes CRAN package check failures for MacOS 14.
 
 ## R CMD check results
 
