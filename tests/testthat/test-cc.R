@@ -1,7 +1,7 @@
 context("cc functions")
 
 # remove non-ASCII
-cc_lkp <- dialr:::cc_lookup[!grepl("I_WAS_NOT_ASCII", iconv(names(dialr:::cc_lookup), "UTF-8", "ASCII", sub = "I_WAS_NOT_ASCII"))]
+cc_lkp <- cc_lookup[!grepl("[^ -~]", names(cc_lookup))]
 
 cc <- data.frame(country = names(cc_lkp),
                  region  = cc_lkp,
